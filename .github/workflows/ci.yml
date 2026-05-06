@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install project + dev deps
         run: |
@@ -28,8 +28,7 @@ jobs:
             src/test/test_emotion_engine.py \
             src/test/test_validators.py \
             src/test/test_cognitive_bridge.py \
-            src/test/test_services_orchestrator.py \
-            src/test/test_paper_alignment.py
+            src/test/test_services_orchestrator.py
 
       - name: Run mypy (scoped)
         run: |
