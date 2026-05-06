@@ -1,0 +1,94 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.12, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0\python.exe
+cachedir: .pytest_cache
+rootdir: D:\IAAC BARCELONA\MAA02\THESIS\Machine Learning\Predictive Atmospheres_Mark 3
+configfile: pyproject.toml
+plugins: anyio-4.12.1
+collecting ... collected 28 items
+
+src/test/test_cache.py::test_load_data_returns_expected_shapes PASSED    [  3%]
+src/test/test_cache.py::test_load_data_uses_cached_result_when_available PASSED [  7%]
+src/test/test_cognitive_bridge.py::test_bridge_loads_default_13_category_coordinates PASSED [ 10%]
+src/test/test_cognitive_bridge.py::test_bridge_trajectory_output_shape_for_vector_input PASSED [ 14%]
+src/test/test_cognitive_bridge.py::test_bridge_rejects_out_of_bounds_coordinates PASSED [ 17%]
+src/test/test_emotion_engine.py::test_process_eeg_emotion_engine_basic PASSED [ 21%]
+src/test/test_emotion_engine.py::test_process_eeg_emotion_engine_nan_input_raises PASSED [ 25%]
+src/test/test_emotion_engine.py::test_process_eeg_emotion_engine_short_signal_raises PASSED [ 28%]
+src/test/test_emotion_engine.py::test_emotion_distribution_sums_to_100 PASSED [ 32%]
+src/test/test_full_feature_training.py::test_spatial_mlp_accepts_dynamic_input_dim PASSED [ 35%]
+src/test/test_full_feature_training.py::test_full_feature_builder_and_targets FAILED [ 39%]
+src/test/test_literature_workflow.py::test_literature_sources_are_loaded_and_filtered PASSED [ 42%]
+src/test/test_literature_workflow.py::test_knowledge_base_uses_literature_sources_for_insights PASSED [ 46%]
+src/test/test_paper_alignment.py::test_imports PASSED                    [ 50%]
+src/test/test_paper_alignment.py::test_cnn_forward PASSED                [ 53%]
+src/test/test_paper_alignment.py::test_mlp_forward PASSED                [ 57%]
+src/test/test_paper_alignment.py::test_preprocessing PASSED              [ 60%]
+src/test/test_paper_alignment.py::test_band_analysis_has_delta PASSED    [ 64%]
+src/test/test_paper_alignment.py::test_emotion_engine PASSED             [ 67%]
+src/test/test_paper_alignment.py::test_synthetic_data PASSED             [ 71%]
+src/test/test_services_orchestrator.py::test_service_container_updates_services_model_reference PASSED [ 75%]
+src/test/test_services_orchestrator.py::test_orchestrator_analyze_and_optimize_runs PASSED [ 78%]
+src/test/test_space_capability_service.py::test_feature_vector_shape_and_values PASSED [ 82%]
+src/test/test_space_eval_integration.py::test_space_eval_heuristics PASSED [ 85%]
+src/test/test_validators.py::test_room_dimensions_valid PASSED           [ 89%]
+src/test/test_validators.py::test_room_dimensions_invalid_height PASSED  [ 92%]
+src/test/test_validators.py::test_eeg_signal_valid_1d PASSED             [ 96%]
+src/test/test_validators.py::test_eeg_signal_invalid_all_nan PASSED      [100%]
+
+================================== FAILURES ===================================
+____________________ test_full_feature_builder_and_targets ____________________
+
+    def test_full_feature_builder_and_targets():
+        trainer = Trainer(model_type='Random Forest', feature_mode='full')
+    
+        df = pd.DataFrame(
+            {
+                'Subject_ID': ['S1', 'S2', 'S3'],
+                'Room_ID': ['R1', 'R2', 'R3'],
+                'EEG_Filename': ['a.csv', 'b.csv', 'c.csv'],
+                'Valence Score by Subject (0-10)': [8.0, 5.0, 6.0],
+                'Arousal Score by Subject (0-10)': [3.0, 6.0, 7.0],
+                'Length (meter)': [8.0, 10.0, 12.0],
+                'Width (meter)': [4.0, 5.0, 6.0],
+                'Height (meter)': [3.0, 3.2, 3.4],
+                'Illuminance (lux)': [150, 500, 900],
+                'Day or Night': ['Night', 'Day', 'Day'],
+                '__experiment': ['experiment_02', 'experiment_02', 'experiment_01'],
+            }
+        )
+    
+>       y = trainer._extract_targets(df)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+src\test\test_full_feature_training.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <src.models.train.Trainer object at 0x000001B2105BEA50>
+df =   Subject_ID Room_ID  ... Day or Night   __experiment
+0         S1      R1  ...        Night  experiment_02
+1         S2      R2  ...          Day  experiment_02
+2         S3      R3  ...          Day  experiment_01
+
+[3 rows x 11 columns]
+
+    def _extract_targets(self, df: pd.DataFrame) -> pd.DataFrame:
+        val_col = 'Valence Score by Subject (0-10)'
+        aro_col = 'Arousal Score by Subject (0-10)'
+        score_col = 'Score by Subject_(0-10)'
+    
+        val = pd.to_numeric(df.get(val_col), errors='coerce')
+        aro = pd.to_numeric(df.get(aro_col), errors='coerce')
+        score = pd.to_numeric(df.get(score_col), errors='coerce')
+    
+        # Use the legacy score as valence fallback if split labels are unavailable.
+        val = val.fillna(score)
+        # For experiment 01 that lacks arousal scores, derive from score
+        # Map: score 0-10 \u2192 arousal -0.99 to 0.99, with moderate default
+>       aro = aro.fillna(score.apply(lambda s: s if not pd.isna(s) else np.nan))
+                         ^^^^^^^^^^^
+E       AttributeError: 'numpy.float64' object has no attribute 'apply'
+
+src\models\train.py:344: AttributeError
+=========================== short test summary info ===========================
+FAILED src/test/test_full_feature_training.py::test_full_feature_builder_and_targets
+======================== 1 failed, 27 passed in 6.68s =========================

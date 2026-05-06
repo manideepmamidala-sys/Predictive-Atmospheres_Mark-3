@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  test-and-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install project + dev deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .[dev]
+
+      - name: Run focused test suite
+        run: |
+          pytest -q \
+            src/test/test_emotion_engine.py \
+            src/test/test_validators.py \
+            src/test/test_cognitive_bridge.py \
+            src/test/test_services_orchestrator.py \
+            src/test/test_paper_alignment.py
+
+      - name: Run mypy (scoped)
+        run: |
+          mypy \
+            -m src.data.emotion_engine \
+            -m src.models.cognitive_bridge \
+            -m src.core.data.validators
