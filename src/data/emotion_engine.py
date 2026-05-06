@@ -11,7 +11,7 @@ Pipeline:
 """
 import numpy as np
 import scipy.signal
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from src.data.preprocessing import temporal_truncation, zscore_normalize, analyze_ecg
 from src.config import get_config
 
@@ -41,8 +41,8 @@ def process_emotion_engine(
     signal_left: np.ndarray, 
     signal_ecg: np.ndarray,
     fs: int = 256,
-    global_mean_r: float = None, global_std_r: float = None,
-    global_mean_l: float = None, global_std_l: float = None,
+    global_mean_r: Optional[float] = None, global_std_r: Optional[float] = None,
+    global_mean_l: Optional[float] = None, global_std_l: Optional[float] = None,
     apply_truncation: bool = True
 ) -> Dict[str, Dict[str, Any]]:
     """
