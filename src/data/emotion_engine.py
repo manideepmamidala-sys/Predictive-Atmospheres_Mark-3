@@ -102,8 +102,9 @@ def _detect_r_peaks(ecg: np.ndarray, fs: int = FS) -> np.ndarray:
     # Min distance = 0.3 s between peaks (max ~200 bpm)
     min_dist = max(int(fs * 0.3), 1)
     height_threshold = np.percentile(np.abs(filtered), 75)
+    from typing import cast
     peaks, _ = scipy.signal.find_peaks(filtered, distance=min_dist, height=height_threshold)
-    return peaks
+    return cast(np.ndarray, peaks)
 
 
 def _compute_rmssd(ecg: np.ndarray, fs: int = FS) -> float:
@@ -197,22 +198,32 @@ def _fuse(
 
     If Subjective scores are NaN, α is forced to 1.0 (100% objective).
     """
-    has_subjective = (subj_valence is not None) and (subj_arousal is not None)
-
-    if has_subjective:
-        alpha_used = alpha
-        fused_v = alpha_used * obj_valence + (1.0 - alpha_used) * subj_valence
-        fused_a = alpha_used * obj_arousal + (1.0 - alpha_used) * subj_arousal
+    import math
+    if subj_valence is None or math.isnan(subj_valence):
+        target_v = obj_valence
+        alpha_used_v = 1.0
+        delta_v = None
+    else:
+        target_v = (alpha * obj_valence) + ((1.0 - alpha) * subj_valence)
+        alpha_used_v = alpha
         delta_v = obj_valence - subj_valence
+
+    if subj_arousal is None or math.isnan(subj_arousal):
+        target_a = obj_arousal
+        alpha_used_a = 1.0
+        delta_a = None
+    else:
+        target_a = (alpha * obj_arousal) + ((1.0 - alpha) * subj_arousal)
+        alpha_used_a = alpha
         delta_a = obj_arousal - subj_arousal
+
+    alpha_used = alpha_used_v  # Assuming alpha_used is the same for both if valid
+    fused_v = target_v
+    fused_a = target_a
+
+    if delta_v is not None and delta_a is not None:
         euclidean = float(np.sqrt(delta_v ** 2 + delta_a ** 2))
     else:
-        # Fallback: Experiment 01 — no subjective data
-        alpha_used = 1.0
-        fused_v = obj_valence
-        fused_a = obj_arousal
-        delta_v = None
-        delta_a = None
         euclidean = None
 
     return {

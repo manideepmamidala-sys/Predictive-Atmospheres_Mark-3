@@ -87,14 +87,29 @@ class PredictionService:
             feature_names: Ordered feature names the model was trained on
             scaler: StandardScaler used during training
         """
-        self._model = model
+        self._model = None
         self._config = config or get_config()
         self._emotion_centroids = self._config.emotion.centroids
         self._feature_names = feature_names or []
         self._scaler = scaler
+        
+        if model is not None:
+            self.set_model(model)
 
     def set_model(self, model: Any) -> None:
-        """Set or update the trained model."""
+        """Set or update the trained model, automatically wrapping it in an adapter if needed."""
+        if model is not None and not hasattr(model, 'predict'):
+            model_type = type(model).__module__ if hasattr(type(model), '__module__') else ""
+            from src.models.adapters import PyTorchAdapter, SKLearnAdapter
+            if 'torch' in model_type or 'src.models' in model_type:
+                model = PyTorchAdapter(model)
+            elif 'sklearn' in model_type:
+                model = SKLearnAdapter(model)
+            else:
+                try:
+                    model = PyTorchAdapter(model)
+                except Exception as e:
+                    raise ValueError(f"Unknown model type {model_type} that cannot be auto-wrapped. Error: {e}")
         self._model = model
 
     def set_feature_config(
@@ -245,22 +260,8 @@ class PredictionService:
         """
         Run model prediction, delegating to the BaseModelAdapter.
         """
-        if not hasattr(self._model, 'predict'):
-            import logging
-            logger = logging.getLogger(__name__)
-            logger.warning("Model is not wrapped in BaseModelAdapter. Attempting automatic wrapping.")
-            model_type = type(self._model).__module__ if hasattr(type(self._model), '__module__') else ""
-            from src.models.adapters import PyTorchAdapter, SKLearnAdapter
-            if 'torch' in model_type or 'src.models' in model_type:
-                self._model = PyTorchAdapter(self._model)
-            elif 'sklearn' in model_type:
-                self._model = SKLearnAdapter(self._model)
-            else:
-                try:
-                    self._model = PyTorchAdapter(self._model)
-                except Exception as e:
-                    raise ValueError(f"Unknown model type {model_type} that cannot be auto-wrapped. Error: {e}")
-                
+        if self._model is None:
+            raise ValueError("Model is not set.")
         return self._model.predict(input_data, batch=batch)
 
     def _compute_emotion_weights(self, valence: float, arousal: float) -> Dict[str, float]:
