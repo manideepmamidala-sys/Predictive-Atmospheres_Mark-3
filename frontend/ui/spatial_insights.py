@@ -17,6 +17,8 @@ class SpatialInsightsVis(BaseVisualization):
         self.df_spatial = load_parquet_data()
 
     def process_data(self):
+        if 'fused_valence' not in self.df_spatial.columns:
+            raise ValueError("Missing required column 'fused_valence' in spatial data")
         self.df_spatial['NeuroScore'] = (self.df_spatial['fused_valence'] + 1.0) / 2.0
 
     def _plot_reg(self, x_col, y_col='NeuroScore'):
@@ -60,7 +62,7 @@ class SpatialInsightsVis(BaseVisualization):
         return fig
 
     def build_charts(self):
-        # 12 Independent spatial features
+        # 11 Independent spatial features
         numeric_cols = [
             "Length_m", "Width_m", "Height_m", "Num_Doors", "Door_Area_m2", 
             "Num_Windows", "Window_Area_m2", "Daylight_Factor_pct", "Illuminance_lux", 

@@ -387,6 +387,13 @@ def process_emotion_engine(
     Legacy shim: compute FAA + RMSSD from raw arrays (no CSV I/O).
     Returns a dict compatible with old callers.
     """
+    if np.any(np.isnan(signal_right)) or np.any(np.isnan(signal_left)) or np.any(np.isnan(signal_ecg)):
+        raise ValueError("Input signals contain NaN values.")
+
+    expected_len = 50 * fs
+    if len(signal_right) < expected_len or len(signal_left) < expected_len or len(signal_ecg) < expected_len:
+        raise ValueError(f"Signals must be at least {expected_len} samples (50 seconds at {fs} Hz).")
+
     sig_r = _truncate_50s(signal_right, fs) if apply_truncation else signal_right
     sig_l = _truncate_50s(signal_left, fs) if apply_truncation else signal_left
     sig_e = _truncate_50s(signal_ecg, fs) if apply_truncation else signal_ecg

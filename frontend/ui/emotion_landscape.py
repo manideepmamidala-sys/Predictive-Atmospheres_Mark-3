@@ -27,8 +27,6 @@ def render_page(services: Optional[ServiceContainer] = None):
 
     if "Length_m" in df.columns and "Width_m" in df.columns and "Height_m" in df.columns:
         df["Volume_m3"] = df["Length_m"] * df["Width_m"] * df["Height_m"]
-    else:
-        df["Volume_m3"] = 0.0
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Samples", len(df))

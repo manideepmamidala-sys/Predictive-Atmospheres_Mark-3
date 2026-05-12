@@ -73,7 +73,7 @@ def main():
 
         # --- Auto-Train on Startup ---
         if not st.session_state.trained:
-            result = train_models_logic()
+            train_models_logic()
             st.session_state.services.set_model(st.session_state.spatial_model)
             # Update services with feature config + scaler
             st.session_state.services.set_feature_config(
@@ -97,7 +97,6 @@ def main():
             "Emotion Landscape",
             "Design Benchmark",
             "Model Training",
-            "---",
             "Affective Fusion",
             "Spatial Correlator",
             "Demographic Insights",

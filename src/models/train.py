@@ -143,6 +143,11 @@ class Trainer:
         if self.feature_mode == 'baseline':
             baseline_features = ['Length_m', 'Width_m', 'Height_m']
             baseline_idx = [feature_names.index(f) for f in baseline_features if f in feature_names]
+            if len(baseline_idx) != 3:
+                raise RuntimeError(
+                    f"Baseline mode requires all 3 dimensions (Length_m, Width_m, Height_m), "
+                    f"but only found {len(baseline_idx)} in feature set."
+                )
             X_spatial = X_spatial[:, baseline_idx]
             feature_names = baseline_features
             scaler = None # We do not use the full scaler for baseline
@@ -314,7 +319,7 @@ class Trainer:
         """Build the feature matrix enforcing strict independent/derived/categorical separation."""
         feature_df = pd.DataFrame(index=df.index)
 
-        # 12 Independent spatial features
+        # 11 Independent spatial features
         numeric_cols = [
             "Length_m", "Width_m", "Height_m", "Num_Doors", "Door_Area_m2", 
             "Num_Windows", "Window_Area_m2", "Daylight_Factor_pct", "Illuminance_lux", 

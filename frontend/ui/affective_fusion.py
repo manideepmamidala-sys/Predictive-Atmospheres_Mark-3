@@ -10,14 +10,29 @@ def render_page():
     
     df = load_parquet_data()
     
+    if df is None or df.empty:
+        st.error("Unable to load data. Please check the data source.")
+        st.stop()
+    
+    required_columns = ["delta_valence", "delta_arousal", "subjective_valence", "subjective_arousal", 
+                        "objective_valence", "objective_arousal", "fused_valence", "fused_arousal"]
+    missing_columns = [col for col in required_columns if col not in df.columns]
+    if missing_columns:
+        st.error(f"Missing required columns: {', '.join(missing_columns)}")
+        st.stop()
+    
     avg_delta_v = df["delta_valence"].mean()
     avg_delta_a = df["delta_arousal"].mean()
     
     col1, col2 = st.columns(2)
     with col1:
         st.markdown(f'<div class="metric-card"><div class="metric-card-title">Average Δ Valence</div><div class="metric-card-val">{avg_delta_v:.3f}</div></div>', unsafe_allow_html=True)
+        val_display = f"{avg_delta_v:.3f}" if not pd.isna(avg_delta_v) else "N/A"
+        st.markdown(f'<div class="metric-card"><div class="metric-card-title">Average Δ Valence</div><div class="metric-card-val">{val_display}</div></div>', unsafe_allow_html=True)
     with col2:
         st.markdown(f'<div class="metric-card"><div class="metric-card-title">Average Δ Arousal</div><div class="metric-card-val">{avg_delta_a:.3f}</div></div>', unsafe_allow_html=True)
+        aro_display = f"{avg_delta_a:.3f}" if not pd.isna(avg_delta_a) else "N/A"
+        st.markdown(f'<div class="metric-card"><div class="metric-card-title">Average Δ Arousal</div><div class="metric-card-val">{aro_display}</div></div>', unsafe_allow_html=True)
         
     panel_header("Point A to Point B Variance Analysis", "Circumplex")
     fig = go.Figure()

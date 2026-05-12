@@ -186,40 +186,28 @@ class PredictionService:
     ) -> Dict[str, float]:
         """Compute a full feature dict from basic geometry using defaults for unknowns.
 
-        Computes all derived features server-side. The frontend NEVER supplies derived values.
+        Computes all independent features. Derived features are removed.
         """
         config = self._config.spatial_features
 
         features: Dict[str, float] = {}
 
-        # Set defaults for all independent features
-        for name, feat_def in config.independent_features.items():
+        # Set defaults for all independent features directly from flattened config
+        for name in config.get_independent_feature_names():
+            feat_def = getattr(config, name)
             features[name] = feat_def['default']
 
         # Override core geometry with actual values
-        features['Length (meter)'] = length
-        features['Width (meter)'] = width
-        features['Height (meter)'] = height
-
-        # Compute derived features
-        floor_area = length * max(width, 0.01)
-        wall_area = 2 * (length + width) * height
-        walkable = features.get('Walkable Floor Area (sq.meter)', floor_area)
-
-        features['Length to Width Ratio'] = length / max(width, 0.01)
-        features['Floor Area (sq.meter)'] = floor_area
-        features['Wall Area (sq.meter)'] = wall_area
-        features['Volume (cubic.meter)'] = floor_area * height
-        features['Door Area to Wall Area Ratio'] = features.get('Door Area (sq.meter)', 1.8) / max(wall_area, 0.01)
-        features['Window Area to Wall Area Ratio'] = features.get('Window Area (sq.meter)', 5.0) / max(wall_area, 0.01)
-        features['Walkable Floor to Total Floor Ratio'] = walkable / max(floor_area, 0.01)
+        features['Length_m'] = length
+        features['Width_m'] = width
+        features['Height_m'] = height
 
         # Handle categorical one-hot features
         for name in self._feature_names:
-            if name.startswith('Day or Night_'):
-                features[name] = 1.0 if name == 'Day or Night_Day' else 0.0
-            elif name.startswith('Type of Space_'):
-                features[name] = 0.0  # Default to no specific space type
+            if name.startswith('Day_or_Night_'):
+                features[name] = 1.0 if name == 'Day_or_Night_Day' else 0.0
+            elif name.startswith('Type_of_Space_'):
+                features[name] = 1.0 if name == 'Type_of_Space_Living Room' else 0.0
 
         return features
 

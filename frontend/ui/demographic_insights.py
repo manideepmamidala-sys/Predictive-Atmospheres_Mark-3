@@ -9,9 +9,26 @@ def render_page():
     st.markdown("Distribution of target Valence and Arousal segmented by Age, Gender, and Sleep patterns.")
     
     df = load_parquet_data()
-    dem_df = df.copy()
+    if df is None or df.empty:
+        st.error("No data available to display demographic insights.")
+        return
     
-    # Process Gender
+    required_cols = ["age", "Sleep_Hours", "fused_valence", "fused_arousal"]
+    missing_cols = [col for col in required_cols if col not in df.columns]
+    if missing_cols:
+        st.error(f"Missing required columns: {', '.join(missing_cols)}")
+        return
+    
+    dem_df = df.copy()
+    # Process Sleep Bracket
+    dem_df["Sleep Bracket"] = pd.cut(
+        dem_df["Sleep_Hours"].clip(lower=0, upper=24),
+        bins=[0, 6, 8, 24],
+        labels=["<6 hrs", "6-8 hrs", ">8 hrs"],
+        include_lowest=True
+    )
+    if dem_df["Sleep Bracket"].isna().any():
+        st.warning(f"Warning: {dem_df['Sleep Bracket'].isna().sum()} records have missing or invalid sleep hour values.")
     if "gender_Male" in dem_df.columns and "gender_Female" in dem_df.columns:
         dem_df["Gender"] = dem_df.apply(lambda r: "Male" if r["gender_Male"]==1 else ("Female" if r["gender_Female"]==1 else "Unknown"), axis=1)
     else:

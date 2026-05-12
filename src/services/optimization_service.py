@@ -224,13 +224,14 @@ class OptimizationService:
         for name in self._feature_names:
             if name in fixed:
                 continue
-            if name.startswith('Day or Night_'):
+            if name.startswith('Day_or_Night_') or name.startswith('Day or Night_'):
                 opt_features.append(name)
                 opt_bounds.append((0.0, 1.0))
-            elif name in spatial_config.features:
-                feat = spatial_config.features[name]
-                opt_features.append(name)
-                opt_bounds.append((feat['min'], feat['max']))
+            elif hasattr(spatial_config, name):
+                feat = getattr(spatial_config, name)
+                if isinstance(feat, dict) and 'min' in feat and 'max' in feat:
+                    opt_features.append(name)
+                    opt_bounds.append((feat['min'], feat['max']))
             else:
                 opt_features.append(name)
                 opt_bounds.append((0.0, 1.0))
@@ -261,9 +262,9 @@ class OptimizationService:
             best_pred = self._prediction_service.predict_full(best_features)
 
             return OptimizationResult(
-                length=best_features.get('Length (meter)', 10.0),
-                width=best_features.get('Width (meter)', 8.0),
-                height=best_features.get('Height (meter)', 3.5),
+                length=best_features.get('Length_m', 10.0),
+                width=best_features.get('Width_m', 8.0),
+                height=best_features.get('Height_m', 3.5),
                 predicted_valence=best_pred.valence,
                 predicted_arousal=best_pred.arousal,
                 target_achieved=max(0.0, 1.0 - abs(best_pred.valence - target_valence)),

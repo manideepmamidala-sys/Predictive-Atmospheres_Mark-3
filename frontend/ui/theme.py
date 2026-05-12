@@ -21,7 +21,8 @@ def apply_global_theme() -> None:
     st.markdown(
         f"""
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Google+Sans+Flex&display=swap');
+            /* Consider self-hosting or using system fonts */
+            @import url('https://fonts.bunny.net/css2?family=Cutive+Mono&family=Google+Sans+Flex&display=swap');
             
             :root {{
                 --bg: {PALETTE['bg']};

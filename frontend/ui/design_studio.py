@@ -334,9 +334,12 @@ def render_page(services: Optional[ServiceContainer] = None):
                 values = []
                 for fname, fval in sorted(display_features.items()):
                     if hasattr(config.spatial_features, fname):
-                        fmax = getattr(config.spatial_features, fname)['max']
-                        labels.append(fname.replace('_m2', ' (m²)').replace('_m', ' (m)').replace('_pct', ' (%)').replace('_lux', ' (lux)').replace('_K', ' (K)'))
-                        values.append(float(fval) / max(fmax, 1e-6))
+                        feat_cfg = getattr(config.spatial_features, fname)
+                        if isinstance(feat_cfg, dict) and 'max' in feat_cfg:
+                            fmax = feat_cfg['max']
+                            label = fname.replace('_m2', ' (m²)').replace('_m', ' (m)').replace('_pct', ' (%)').replace('_lux', ' (lux)').replace('_K', ' (K)')
+                            labels.append(label)
+                            values.append(float(fval) / max(fmax, 1e-6))
 
                 if labels:
                     fig_radar = go.Figure()

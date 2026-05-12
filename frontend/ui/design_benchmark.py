@@ -28,7 +28,11 @@ def render_page(services: Optional[ServiceContainer] = None):
     config = get_config()
     df = load_parquet_data()
 
-    df["NeuroScore"] = (df["fused_valence"] + 1.0) / 2.0
+    if "fused_valence" in df.columns:
+        df["NeuroScore"] = (df["fused_valence"] + 1.0) / 2.0
+    else:
+        st.error("Required column 'fused_valence' not found in dataset.")
+        return
 
     if "Length_m" in df.columns and "Width_m" in df.columns and "Height_m" in df.columns:
         df["Volume_m3"] = df["Length_m"] * df["Width_m"] * df["Height_m"]

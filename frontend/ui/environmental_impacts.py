@@ -12,8 +12,12 @@ def render_page():
     env_df = df.copy()
     
     def get_dn(r):
-        if r.get("Day_or_Night_Day", 0) == 1: return "Day"
-        if r.get("Day_or_Night_Night", 0) == 1: return "Night"
+        day_val = r.get("Day_or_Night_Day", 0)
+        night_val = r.get("Day_or_Night_Night", 0)
+        if day_val == 1 and night_val == 1:
+            return "Invalid"  # or raise ValueError("Both Day and Night indicators are set")
+        if day_val == 1: return "Day"
+        if night_val == 1: return "Night"
         return "Unspecified"
     env_df["Time of Day"] = env_df.apply(get_dn, axis=1)
     

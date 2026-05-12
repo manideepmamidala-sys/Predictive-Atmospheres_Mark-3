@@ -23,6 +23,12 @@ class HumanMetricsVis(BaseVisualization):
     def load_data(self):
         self.df_metadata = load_parquet_data()
         
+        if self.df_metadata is None or self.df_metadata.empty:
+            raise FileNotFoundError("No parquet metadata found.")
+        
+        if 'EEG_Filename' not in self.df_metadata.columns:
+            raise ValueError("Parquet metadata missing required 'EEG_Filename' column.")
+        
         # Deduplicate on EEG_Filename so we don't compute the same file twice (since 1 file can be mapped to multiple rooms in Exp 01/02)
         self.unique_sessions = self.df_metadata.drop_duplicates(subset=['EEG_Filename']).copy()
         
