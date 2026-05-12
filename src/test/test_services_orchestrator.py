@@ -23,8 +23,8 @@ def test_service_container_updates_services_model_reference():
     replacement_model = DummyModel()
     services.set_model(replacement_model)
 
-    assert services.prediction_service._model is replacement_model
-    assert services.optimization_service._prediction_service._model is replacement_model
+    assert services.prediction_service._model.model is replacement_model
+    assert services.optimization_service._prediction_service._model.model is replacement_model
 
 
 def test_orchestrator_analyze_and_optimize_runs():
