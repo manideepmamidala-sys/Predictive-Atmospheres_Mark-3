@@ -13,7 +13,10 @@ from frontend.ui import (
     model_training,
     emotion_landscape,
     design_benchmark,
-    affective_fusion_analysis,
+    affective_fusion,
+    spatial_correlator,
+    demographic_insights,
+    environmental_impacts
 )
 from frontend.ui.theme import apply_global_theme, render_hero
 from src.services import ServiceContainer
@@ -24,7 +27,6 @@ from src.config import get_config
 def _load_ml_backend():
     from src.models.architectures import SpatialMLP, SpatialFFNN
     from src.models.train import train_models_logic
-
     return SpatialMLP, SpatialFFNN, train_models_logic
 
 def main():
@@ -35,6 +37,7 @@ def main():
         initial_sidebar_state="expanded",
     )
     apply_global_theme()
+    
     render_hero(
         "Emotion-Aware Spatial Intelligence",
         "Machine learning framework to infer human emotional states from architectural space and embed affective intelligence into design decisions.",
@@ -62,24 +65,29 @@ def main():
 
     config = get_config()
 
-    if 'services' not in st.session_state:
-        st.session_state.services = ServiceContainer(config=config, model=st.session_state.spatial_model)
-    else:
-        st.session_state.services.set_model(st.session_state.spatial_model)
+    try:
+        if 'services' not in st.session_state:
+            st.session_state.services = ServiceContainer(config=config, model=st.session_state.spatial_model)
+        else:
+            st.session_state.services.set_model(st.session_state.spatial_model)
 
-    # --- Auto-Train on Startup ---
-    if not st.session_state.trained:
-        result = train_models_logic()
-        st.session_state.services.set_model(st.session_state.spatial_model)
-        # Update services with feature config + scaler
-        st.session_state.services.set_feature_config(
-            feature_names=st.session_state.get('feature_names', []),
-            scaler=st.session_state.get('scaler', None),
-        )
+        # --- Auto-Train on Startup ---
+        if not st.session_state.trained:
+            result = train_models_logic()
+            st.session_state.services.set_model(st.session_state.spatial_model)
+            # Update services with feature config + scaler
+            st.session_state.services.set_feature_config(
+                feature_names=st.session_state.get('feature_names', []),
+                scaler=st.session_state.get('scaler', None),
+            )
+    except Exception as exc:
+        st.error(f"Backend initialization failed: {exc}")
+        st.stop()
     
     # Sidebar Navigation
     st.sidebar.markdown("### Predictive Atmospheres")
     st.sidebar.caption("Workspace Navigation")
+    
     mode = st.sidebar.radio(
         "Select workspace section",
         [
@@ -88,8 +96,12 @@ def main():
             "Spatial Insights",
             "Emotion Landscape",
             "Design Benchmark",
-            "Affective Fusion",
             "Model Training",
+            "---",
+            "Affective Fusion",
+            "Spatial Correlator",
+            "Demographic Insights",
+            "Environmental Impacts"
         ],
         label_visibility="collapsed",
     )
@@ -107,7 +119,13 @@ def main():
     elif mode == "Design Benchmark":
         design_benchmark.render_page(st.session_state.services)
     elif mode == "Affective Fusion":
-        affective_fusion_analysis.render_page()
+        affective_fusion.render_page()
+    elif mode == "Spatial Correlator":
+        spatial_correlator.render_page()
+    elif mode == "Demographic Insights":
+        demographic_insights.render_page()
+    elif mode == "Environmental Impacts":
+        environmental_impacts.render_page()
 
 if __name__ == "__main__":
     if st.runtime.exists():

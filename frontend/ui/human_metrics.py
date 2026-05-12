@@ -5,10 +5,10 @@ import plotly.graph_objects as go
 import numpy as np
 import scipy.signal
 from src.data.preprocessing import analyze_ecg, analyze_eeg_bands
-from src.data.experiment_registry import discover_experiments
 from frontend.ui.base_visualization import BaseVisualization
 from src.config import get_config
 from frontend.ui.theme import style_figure, panel_header
+from frontend.ui.data_utils import load_parquet_data
 
 config = get_config()
 DATA_DIR = config.paths.data_dir
@@ -21,37 +21,16 @@ class HumanMetricsVis(BaseVisualization):
         )
 
     def load_data(self):
-        experiments = discover_experiments()
-        self.experiment_data = {}
-        self.all_files = []
-
-        for exp in experiments:
-            data_dir = exp.raw_dir
-            if not os.path.exists(data_dir):
-                continue
-            files = [f for f in os.listdir(data_dir) if f.endswith('.csv') and f.startswith('Subj_')]
-            if files:
-                self.experiment_data[exp.name] = {
-                    'dir': data_dir,
-                    'files': files,
-                    'biometric_csv': exp.biometric_csv,
-                }
-                for f in files:
-                    self.all_files.append((exp.name, data_dir, f))
-
-        if not self.all_files:
-            # Fallback to legacy experiment_01 directory
-            legacy_dir = os.path.join(DATA_DIR, 'raw', 'experiment_01')
-            if os.path.exists(legacy_dir):
-                files = [f for f in os.listdir(legacy_dir) if f.endswith('.csv') and f.startswith('Subj_')]
-                for f in files:
-                    self.all_files.append(('experiment_01', legacy_dir, f))
-
-        if not self.all_files:
-            raise FileNotFoundError("No recording files (Subj_*.csv) found in any experiment directory.")
+        self.df_metadata = load_parquet_data()
+        
+        # Deduplicate on EEG_Filename so we don't compute the same file twice (since 1 file can be mapped to multiple rooms in Exp 01/02)
+        self.unique_sessions = self.df_metadata.drop_duplicates(subset=['EEG_Filename']).copy()
+        
+        if len(self.unique_sessions) == 0:
+            raise FileNotFoundError("No recording files found in parquet metadata.")
 
     def process_data(self):
-        with st.spinner(f"Analyzing {len(self.all_files)} biometric sessions across {len(self.experiment_data)} experiments..."):
+        with st.spinner(f"Analyzing {len(self.unique_sessions)} unique biometric sessions..."):
             all_metrics = []
 
             eeg_psd_sum = None
@@ -59,12 +38,23 @@ class HumanMetricsVis(BaseVisualization):
             psd_count = 0
             freqs = None
 
-            for exp_name, data_dir, f in self.all_files:
+            for _, row in self.unique_sessions.iterrows():
+                f = row['EEG_Filename']
+                exp_id = row.get('experiment_id', 1)
+                subject_id = row['Subject_ID']
+                
+                if pd.isna(f) or not str(f).endswith('.csv'):
+                    continue
+                    
+                # Format experiment folder name
+                exp_folder = f"experiment_{int(exp_id):02d}"
+                file_path = os.path.join(DATA_DIR, 'raw', exp_folder, str(f))
+                
+                if not os.path.exists(file_path):
+                    continue
+
                 try:
-                    parts = f.replace('.csv', '').split('-')
-                    subject_id = parts[0].split('_')[1] if len(parts) > 0 and '_' in parts[0] else "Unknown"
-                    timestamp = f"{parts[1]}-{parts[2]}" if len(parts) >= 3 else "Unknown"
-                    df = pd.read_csv(os.path.join(data_dir, f))
+                    df = pd.read_csv(file_path)
                     fs = config.eeg.sample_rate
 
                     s1, f1, pxx1 = analyze_eeg_bands(df['Channel1'].values, fs)
@@ -89,25 +79,17 @@ class HumanMetricsVis(BaseVisualization):
                         ecg_psd_sum += pxx_ecg
                         psd_count += 1
 
-                    # Try to load Day/Night condition from biometric metadata
-                    day_night = "Unknown"
-                    if exp_name in self.experiment_data:
-                        try:
-                            bio_csv = self.experiment_data[exp_name]['biometric_csv']
-                            bio_df = pd.read_csv(bio_csv)
-                            if 'Day or Night' in bio_df.columns and 'Subject_ID' in bio_df.columns:
-                                match = bio_df[bio_df['Subject_ID'].astype(str).str.contains(subject_id, na=False)]
-                                if len(match) > 0:
-                                    day_night = str(match.iloc[0].get('Day or Night', 'Unknown'))
-                        except Exception:
-                            pass
+                    # Recover Day/Night from parquet
+                    day_night = "Unspecified"
+                    if row.get('Day_or_Night_Day', 0) == 1: day_night = "Day"
+                    elif row.get('Day_or_Night_Night', 0) == 1: day_night = "Night"
 
                     all_metrics.append({
                         "Session": f,
                         "Subject": subject_id,
-                        "Experiment": exp_name,
+                        "Experiment": f"Exp {int(exp_id):02d}",
                         "Day/Night": day_night,
-                        "Timestamp": timestamp,
+                        "Age": row.get('age', None),
                         "Delta Power": avg_delta,
                         "Alpha Power": avg_alpha,
                         "Beta Power": avg_beta,
@@ -129,7 +111,6 @@ class HumanMetricsVis(BaseVisualization):
                 self.avg_ecg_psd = ecg_psd_sum / psd_count
 
     def build_charts(self):
-        # Experiment filter
         experiments = sorted(self.df_res['Experiment'].unique())
         if len(experiments) > 1:
             selected_exp = st.multiselect(
@@ -174,10 +155,8 @@ class HumanMetricsVis(BaseVisualization):
 
         with col_plots2:
             st.markdown("#### Heart Rate vs HRV")
-            stress_vals = df_filtered["Beta/Alpha (Stress)"]
             fig_hr = go.Figure()
-            # Color by experiment
-            exp_colors = {"experiment_01": "#8B7CFF", "experiment_02": "#2FD4C8"}
+            exp_colors = {"Exp 01": "#8B7CFF", "Exp 02": "#2FD4C8", "Exp 03": "#FF6B8A"}
             for exp in sorted(df_filtered['Experiment'].unique()):
                 exp_data = df_filtered[df_filtered['Experiment'] == exp]
                 fig_hr.add_trace(go.Scatter(
@@ -188,7 +167,7 @@ class HumanMetricsVis(BaseVisualization):
                     name=exp,
                     marker=dict(
                         size=12,
-                        color=exp_colors.get(exp, "#FF6B8A"),
+                        color=exp_colors.get(exp, "#4287C6"),
                         line=dict(color="rgba(9,11,18,0.8)", width=1),
                     ),
                     hovertemplate="Session: %{text}<br>HR: %{x:.2f} BPM<br>HRV: %{y:.2f} ms<extra></extra>",
@@ -197,7 +176,6 @@ class HumanMetricsVis(BaseVisualization):
             fig_hr.update_layout(xaxis_title="Heart Rate (BPM)", yaxis_title="HRV (ms)")
             st.plotly_chart(fig_hr, width="stretch")
 
-        # Day/Night breakdown
         if 'Day/Night' in df_filtered.columns and df_filtered['Day/Night'].nunique() > 1:
             panel_header("Day/Night Condition Breakdown", "Condition Analysis")
             dn_col1, dn_col2 = st.columns(2)

@@ -1,30 +1,31 @@
 import streamlit as st
 from typing import Optional
 
-
 PALETTE = {
-    "bg": "#070912",
-    "surface": "#0D1120",
-    "surface_alt": "#141A2E",
-    "border": "#232A44",
-    "text": "#EAF0FF",
-    "muted": "#9FAACC",
-    "accent": "#8D66FF",
-    "accent_2": "#33D4FF",
+    "bg": "#041122",          # Deepest Navy
+    "surface": "#0A2240",     # Elevated Navy
+    "accent": "#1C5B99",      # Mid-tone Blue
+    "accent_2": "#4287C6",    # Bright Blue
+    "accent_3": "#11365E",    # Dark Blue
+    "text": "#F4F8FC",        # Ice Blue / Off-White
+    "muted": "#8AA4C1",       # Muted Blue-Gray
+    "border": "#0F2D53",      # Dividers/Gridlines
+    "target": "#FFFFFF",      # Fused Point
+    # Additional semantic colors mapped roughly to the same vibe
     "success": "#38D39F",
     "warning": "#F6C76D",
     "danger": "#FF6B8A",
 }
 
-
 def apply_global_theme() -> None:
     st.markdown(
         f"""
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Google+Sans+Flex&display=swap');
+            
             :root {{
                 --bg: {PALETTE['bg']};
                 --surface: {PALETTE['surface']};
-                --surface-alt: {PALETTE['surface_alt']};
                 --border: {PALETTE['border']};
                 --text: {PALETTE['text']};
                 --muted: {PALETTE['muted']};
@@ -32,17 +33,23 @@ def apply_global_theme() -> None:
                 --accent-2: {PALETTE['accent_2']};
             }}
 
+            h1, h2, h3, p, span, div, label, .stMarkdown, .stTab, .stSelectbox, .stTextInput {{
+                font-family: 'Google Sans Flex', sans-serif !important;
+            }}
+
+            .cutive-mono, .metric-value, [data-testid="stMetricValue"], table, th, td {{
+                font-family: 'Cutive Mono', monospace !important;
+            }}
+
             .stApp {{
-                background:
-                    radial-gradient(1200px 620px at 4% -8%, rgba(141,102,255,0.24), transparent 56%),
-                    radial-gradient(1000px 520px at 104% -6%, rgba(51,212,255,0.14), transparent 52%),
-                    var(--bg);
+                background-color: var(--bg) !important;
+                background-image: none !important;
                 color: var(--text);
             }}
 
             [data-testid="stSidebar"] {{
-                background: linear-gradient(180deg, #0B0F1A 0%, #090D18 100%);
-                border-right: 1px solid var(--border);
+                background: var(--surface) !important;
+                border-right: 1px solid var(--border) !important;
             }}
 
             [data-testid="stSidebar"] .block-container {{
@@ -62,7 +69,7 @@ def apply_global_theme() -> None:
             }}
 
             .hero-wrap {{
-                background: linear-gradient(130deg, rgba(141,102,255,0.18), rgba(14,18,34,0.94));
+                background: var(--surface);
                 border: 1px solid var(--border);
                 border-radius: 14px;
                 padding: 0.66rem 0.88rem;
@@ -109,16 +116,16 @@ def apply_global_theme() -> None:
             }}
 
             div[data-testid="metric-container"] {{
-                background: linear-gradient(180deg, rgba(20,26,46,0.82), rgba(12,17,32,0.88));
+                background: var(--surface);
                 border: 1px solid var(--border);
                 border-radius: 12px;
                 padding: 0.35rem 0.62rem;
-                box-shadow: inset 0 0 0 1px rgba(141,102,255,0.08);
             }}
 
             div[data-testid="metric-container"] [data-testid="stMetricValue"] {{
                 font-size: 1.35rem;
                 line-height: 1.1;
+                color: var(--accent-2);
             }}
 
             div[data-testid="metric-container"] label {{
@@ -132,7 +139,7 @@ def apply_global_theme() -> None:
             }}
 
             .stTabs [data-baseweb="tab"] {{
-                background: rgba(20,26,46,0.76);
+                background: var(--surface);
                 border: 1px solid var(--border);
                 border-radius: 999px;
                 color: var(--muted);
@@ -141,52 +148,42 @@ def apply_global_theme() -> None:
             }}
 
             .stTabs [aria-selected="true"] {{
-                color: var(--text);
-                border-color: rgba(141,102,255,0.74);
-                box-shadow: 0 0 0 1px rgba(141,102,255,0.28) inset;
-                background: linear-gradient(180deg, rgba(141,102,255,0.22), rgba(20,26,46,0.84));
+                color: var(--text) !important;
+                border-color: var(--accent) !important;
+                background: var(--surface) !important;
             }}
 
             .stButton button {{
                 border-radius: 10px;
                 border: 1px solid var(--border);
-                background: linear-gradient(180deg, #181F36 0%, #10172B 100%);
+                background: var(--surface);
                 color: var(--text);
                 min-height: 2.25rem;
                 padding: 0.35rem 0.75rem;
             }}
 
             .stButton button:hover {{
-                border-color: rgba(141,102,255,0.8);
-                color: #FFFFFF;
+                border-color: var(--accent);
+                color: var(--text);
             }}
 
             .stSlider [data-baseweb="slider"] > div > div {{
-                background: linear-gradient(90deg, rgba(141,102,255,0.95), rgba(51,212,255,0.9));
+                background: var(--accent);
             }}
 
             .stSlider [role="slider"] {{
-                border: 2px solid rgba(141,102,255,0.9);
-                box-shadow: 0 0 0 4px rgba(141,102,255,0.15);
-            }}
-
-            .stRadio > div {{
-                gap: 0.28rem;
-            }}
-
-            .stRadio [role="radiogroup"] label {{
-                padding-top: 0.18rem;
-                padding-bottom: 0.18rem;
+                border: 2px solid var(--accent-2);
             }}
 
             .stTextInput input, .stSelectbox [data-baseweb="select"] > div {{
-                background: rgba(13,17,32,0.9);
+                background: var(--surface);
                 border: 1px solid var(--border);
                 border-radius: 10px;
+                color: var(--text);
             }}
 
             .panel {{
-                background: linear-gradient(180deg, rgba(18,23,40,0.9), rgba(11,15,28,0.92));
+                background: var(--surface);
                 border: 1px solid var(--border);
                 border-radius: 12px;
                 padding: 0.62rem 0.75rem;
@@ -213,26 +210,13 @@ def apply_global_theme() -> None:
                 margin-bottom: 0.4rem;
             }}
 
-            h2, h3 {{
-                margin-top: 0.22rem;
-                margin-bottom: 0.28rem;
-            }}
-
-            h1 {{
-                margin-top: 0;
-                margin-bottom: 0.18rem;
-            }}
-
             .stPlotlyChart > div {{
                 border-radius: 12px;
                 overflow: hidden;
-                border: 1px solid rgba(35,42,68,0.72);
-                background: rgba(11,15,28,0.34);
+                border: 1px solid var(--border);
+                background: transparent;
             }}
 
-            p {{
-                margin-bottom: 0.4rem;
-            }}
         </style>
         """,
         unsafe_allow_html=True,
@@ -261,11 +245,14 @@ def render_hero(
 def style_figure(fig, title: Optional[str] = None, height: int = 360):
     fig.update_layout(
         title=title,
-        template="plotly_dark",
         height=height,
         paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(16,20,34,0.70)",
-        font={"color": PALETTE["text"], "size": 12},
+        plot_bgcolor="rgba(0,0,0,0)",
+        font={"color": PALETTE["text"], "size": 12, "family": "Google Sans Flex"},
+        title_font_family="Google Sans Flex",
+        xaxis_title_font_family="Google Sans Flex",
+        yaxis_title_font_family="Google Sans Flex",
+        hoverlabel_font_family="Cutive Mono",
         legend={
             "bgcolor": "rgba(0,0,0,0)",
             "bordercolor": "rgba(0,0,0,0)",
@@ -275,14 +262,18 @@ def style_figure(fig, title: Optional[str] = None, height: int = 360):
         margin={"l": 30, "r": 30, "t": 45, "b": 30},
     )
     fig.update_xaxes(
-        gridcolor="rgba(167,177,203,0.18)",
-        zerolinecolor="rgba(167,177,203,0.20)",
-        linecolor="rgba(167,177,203,0.30)",
+        gridcolor=PALETTE["border"],
+        zerolinecolor=PALETTE["border"],
+        linecolor=PALETTE["border"],
+        showgrid=True,
+        tickfont_family="Cutive Mono"
     )
     fig.update_yaxes(
-        gridcolor="rgba(167,177,203,0.18)",
-        zerolinecolor="rgba(167,177,203,0.20)",
-        linecolor="rgba(167,177,203,0.30)",
+        gridcolor=PALETTE["border"],
+        zerolinecolor=PALETTE["border"],
+        linecolor=PALETTE["border"],
+        showgrid=True,
+        tickfont_family="Cutive Mono"
     )
     return fig
 

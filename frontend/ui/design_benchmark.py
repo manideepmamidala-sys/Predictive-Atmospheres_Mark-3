@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 
 from typing import Optional
 from src.config import get_config
-from src.data.data_loader import load_data
+from frontend.ui.data_utils import load_parquet_data
 from src.services.container import ServiceContainer
 from frontend.ui.theme import render_hero, style_figure, panel_header
 from frontend.ui.state_utils import get_current_features_from_state
@@ -26,30 +26,14 @@ def render_page(services: Optional[ServiceContainer] = None):
     )
 
     config = get_config()
-    # Prefer full-feature training data from session state
-    if hasattr(st, 'session_state') and 'train_X' in st.session_state:
-        X = st.session_state.train_X
-        y_va = st.session_state.train_y_va
-    else:
-        X, y_va, _ = load_data()
-    feature_names = st.session_state.get('feature_names', [])
+    df = load_parquet_data()
 
-    if feature_names and len(feature_names) == X.shape[1]:
-        df = pd.DataFrame(X, columns=feature_names)
-    elif X.shape[1] == 3:
-        df = pd.DataFrame(X, columns=["Length (meter)", "Width (meter)", "Height (meter)"])
-    else:
-        df = pd.DataFrame(X, columns=[f"Feature_{i}" for i in range(X.shape[1])])
+    df["NeuroScore"] = (df["fused_valence"] + 1.0) / 2.0
 
-    df["NeuroScore"] = (y_va[:, 0] + 1.0) / 2.0
-
-    # Compute volume
-    if "Length (meter)" in df.columns and "Width (meter)" in df.columns and "Height (meter)" in df.columns:
-        df["Volume"] = df["Length (meter)"] * df["Width (meter)"] * df["Height (meter)"]
-    elif "Volume (cubic.meter)" in df.columns:
-        df["Volume"] = df["Volume (cubic.meter)"]
+    if "Length_m" in df.columns and "Width_m" in df.columns and "Height_m" in df.columns:
+        df["Volume_m3"] = df["Length_m"] * df["Width_m"] * df["Height_m"]
     else:
-        df["Volume"] = 0.0
+        df["Volume_m3"] = 0.0
 
     if "L" not in st.session_state:
         st.session_state["L"] = config.room.default_length
@@ -59,37 +43,40 @@ def render_page(services: Optional[ServiceContainer] = None):
         st.session_state["H"] = config.room.default_height
 
     current = {
-        "Length (meter)": float(st.session_state["L"]),
-        "Width (meter)": float(st.session_state["W"]),
-        "Height (meter)": float(st.session_state["H"]),
+        "Length_m": float(st.session_state["L"]),
+        "Width_m": float(st.session_state["W"]),
+        "Height_m": float(st.session_state["H"]),
     }
-    current["Volume"] = current["Length (meter)"] * current["Width (meter)"] * current["Height (meter)"]
+    current["Volume_m3"] = current["Length_m"] * current["Width_m"] * current["Height_m"]
 
     current_score = None
     if services is not None and "spatial_model" in st.session_state and st.session_state.get("trained", False):
-        config = get_config()
         full_features = get_current_features_from_state(config)
         feature_names = st.session_state.get('feature_names', [])
         if feature_names and len(feature_names) > 3:
             prediction = services.prediction_service.predict_full(full_features)
         else:
             prediction = services.prediction_service.predict(
-                current["Length (meter)"], current["Width (meter)"], current["Height (meter)"]
+                current["Length_m"], current["Width_m"], current["Height_m"]
             )
         current_score = (prediction.valence + 1.0) / 2.0
-        # merge full features for radar chart
-        current.update({k: v for k, v in full_features.items() if k not in current})
+        
+        if 'Daylight Factor (%)' in full_features:
+            current['Daylight_Factor_pct'] = full_features['Daylight Factor (%)']
+        if 'Illuminance (lux)' in full_features:
+            current['Illuminance_lux'] = full_features['Illuminance (lux)']
+        if 'Walkable Floor Area (sq.meter)' in full_features:
+            current['Walkable_Floor_Area_m2'] = full_features['Walkable Floor Area (sq.meter)']
 
-    # Percentile metrics for key features
     key_dims = []
-    for col in ["Length (meter)", "Width (meter)", "Height (meter)", "Volume"]:
+    for col in ["Length_m", "Width_m", "Height_m", "Volume_m3"]:
         if col in df.columns and col in current:
             key_dims.append(col)
 
     if key_dims:
         cols = st.columns(len(key_dims))
         for idx, dim in enumerate(key_dims):
-            short_name = dim.replace(' (meter)', '').replace(' (cubic.meter)', '').replace(' (sq.meter)', '')
+            short_name = dim.replace('_m3', ' m³').replace('_m', ' m')
             cols[idx].metric(f"{short_name} Percentile", f"{_percentile_rank(df[dim].values, current.get(dim, 0.0)):.1f}%")
 
     if current_score is not None:
@@ -99,19 +86,19 @@ def render_page(services: Optional[ServiceContainer] = None):
     left, right = st.columns(2)
 
     with left:
-        # Radar chart with all numeric features from the dataset
         numeric_cols = [c for c in df.columns
-                        if c not in ('NeuroScore', 'Volume')
+                        if c not in ('NeuroScore', 'Volume_m3', 'Subject_ID', 'Room_ID', 'EEG_Filename', 'experiment_id')
                         and df[c].dtype.kind in 'biufc'
                         and df[c].nunique() > 1
-                        and not c.startswith('Day or Night_')]
+                        and not c.startswith('Day_or_Night_')
+                        and not c.startswith('Type_of_Space_')
+                        and not c.startswith('gender_')]
 
-        # If too many features, select top correlated ones
         if len(numeric_cols) > 8:
             corr = df[numeric_cols + ['NeuroScore']].corr()['NeuroScore'].drop('NeuroScore').abs()
             numeric_cols = corr.nlargest(8).index.tolist()
 
-        dims = numeric_cols + ["Volume"] if "Volume" in df.columns and df["Volume"].sum() > 0 else numeric_cols
+        dims = numeric_cols + ["Volume_m3"] if "Volume_m3" in df.columns and df["Volume_m3"].sum() > 0 else numeric_cols
         dims = [d for d in dims if d in df.columns]
 
         med = df[dims].median()
@@ -127,7 +114,7 @@ def render_page(services: Optional[ServiceContainer] = None):
         med_norm = np.clip(med.values / denom, 0, 1.25)
         q3_norm = np.ones_like(cur_norm)
 
-        short_dims = [d.replace(' (meter)', '').replace(' (sq.meter)', ' m²').replace(' (cubic.meter)', ' m³').replace(' (%)', '%')[:20] for d in dims]
+        short_dims = [d.replace('_m2', ' m²').replace('_m3', ' m³').replace('_m', ' m').replace('_pct', ' %').replace('_lux', ' lux').replace('_K', ' K')[:20] for d in dims]
         theta = short_dims + [short_dims[0]]
 
         fig_radar = go.Figure()
@@ -163,26 +150,26 @@ def render_page(services: Optional[ServiceContainer] = None):
         style_figure(fig_radar, "Design Position vs Dataset Baselines", height=430)
         fig_radar.update_layout(
             polar=dict(
-                radialaxis=dict(range=[0, 1.25], gridcolor="rgba(167,177,203,0.20)", linecolor="rgba(167,177,203,0.3)"),
-                bgcolor="rgba(17,22,37,0.70)",
+                radialaxis=dict(range=[0, 1.25], gridcolor="rgba(15,45,83,0.5)", linecolor="rgba(15,45,83,0.8)"),
+                bgcolor="rgba(0,0,0,0)",
             )
         )
         st.plotly_chart(fig_radar, width="stretch")
 
     with right:
-        if df["Volume"].sum() > 0:
+        if df["Volume_m3"].sum() > 0:
             fig_scatter = go.Figure()
             fig_scatter.add_trace(
                 go.Scatter(
-                    x=df["Volume"],
+                    x=df["Volume_m3"],
                     y=df["NeuroScore"],
                     mode="markers",
                     marker=dict(
                         size=9,
-                        color=df.get("Height (meter)", df["NeuroScore"]),
+                        color=df.get("Height_m", df["NeuroScore"]),
                         colorscale="Viridis",
                         opacity=0.68,
-                        colorbar=dict(title="Height" if "Height (meter)" in df.columns else "Score"),
+                        colorbar=dict(title="Height" if "Height_m" in df.columns else "Score"),
                     ),
                     name="Dataset",
                     hovertemplate="Volume: %{x:.2f}<br>Neuro-Score: %{y:.2f}<extra></extra>",
@@ -192,7 +179,7 @@ def render_page(services: Optional[ServiceContainer] = None):
             if current_score is not None:
                 fig_scatter.add_trace(
                     go.Scatter(
-                        x=[current["Volume"]],
+                        x=[current["Volume_m3"]],
                         y=[current_score],
                         mode="markers",
                         marker=dict(size=14, color="#E8ECF7", symbol="diamond", line=dict(color="#0B0F18", width=2)),

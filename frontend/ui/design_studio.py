@@ -114,32 +114,32 @@ def _collect_full_features(config) -> Dict[str, float]:
     features: Dict[str, float] = {}
 
     # Core geometry
-    features['Length (meter)'] = float(st.session_state.get('L', config.room.default_length))
-    features['Width (meter)'] = float(st.session_state.get('W', config.room.default_width))
-    features['Height (meter)'] = float(st.session_state.get('H', config.room.default_height))
+    features['Length_m'] = float(st.session_state.get('L', config.room.default_length))
+    features['Width_m'] = float(st.session_state.get('W', config.room.default_width))
+    features['Height_m'] = float(st.session_state.get('H', config.room.default_height))
 
     # Openings (independent only — ratios computed server-side)
-    features['Number of Door'] = float(st.session_state.get('num_doors', 1.0))
-    features['Door Area (sq.meter)'] = float(st.session_state.get('door_area', 1.8))
-    features['Number of Windows'] = float(st.session_state.get('num_windows', 2.0))
-    features['Window Area (sq.meter)'] = float(st.session_state.get('window_area', 5.0))
+    features['Num_Doors'] = float(st.session_state.get('num_doors', 1.0))
+    features['Door_Area_m2'] = float(st.session_state.get('door_area', 1.8))
+    features['Num_Windows'] = float(st.session_state.get('num_windows', 2.0))
+    features['Window_Area_m2'] = float(st.session_state.get('window_area', 5.0))
 
     # Daylight (UDI, sDA, ASE permanently purged)
-    features['Daylight Factor (%)'] = float(st.session_state.get('daylight_factor', 2.0))
-    features['Illuminance (lux)'] = float(st.session_state.get('illuminance', 300.0))
-    features['Correlated Color Temperature (Kelvin)'] = float(st.session_state.get('cct', 4000.0))
+    features['Daylight_Factor_pct'] = float(st.session_state.get('daylight_factor', 2.0))
+    features['Illuminance_lux'] = float(st.session_state.get('illuminance', 300.0))
+    features['CCT_K'] = float(st.session_state.get('cct', 4000.0))
 
     # Walkable Floor Area
-    features['Walkable Floor Area (sq.meter)'] = float(st.session_state.get('walkable_floor', 60.0))
+    features['Walkable_Floor_Area_m2'] = float(st.session_state.get('walkable_floor', 60.0))
 
     # Condition (Day/Night) – one-hot encoded
     is_day = st.session_state.get('is_day', True)
     feature_names = st.session_state.get('feature_names', [])
     for name in feature_names:
-        if name.startswith('Day or Night_'):
-            if name == 'Day or Night_Day':
+        if name.startswith('Day_or_Night_'):
+            if name == 'Day_or_Night_Day':
                 features[name] = 1.0 if is_day else 0.0
-            elif name == 'Day or Night_Night':
+            elif name == 'Day_or_Night_Night':
                 features[name] = 0.0 if is_day else 1.0
             else:
                 features[name] = 0.0
@@ -147,8 +147,8 @@ def _collect_full_features(config) -> Dict[str, float]:
     # Type of Space – one-hot encoded
     selected_space = st.session_state.get('space_type', 'Living Room')
     for name in feature_names:
-        if name.startswith('Type of Space_'):
-            space_label = name.replace('Type of Space_', '')
+        if name.startswith('Type_of_Space_'):
+            space_label = name.replace('Type_of_Space_', '')
             features[name] = 1.0 if space_label == selected_space else 0.0
 
     return features
@@ -327,16 +327,15 @@ def render_page(services: Optional[ServiceContainer] = None):
                 # Show radar chart of current feature values
                 display_features = {
                     k: v for k, v in features.items()
-                    if not k.startswith('Day or Night_') and v != 0.0
+                    if not k.startswith('Day_or_Night_') and not k.startswith('Type_of_Space_') and v != 0.0
                 }
                 # Normalize for radar display
-                sf_config = config.spatial_features.features
                 labels = []
                 values = []
                 for fname, fval in sorted(display_features.items()):
-                    if fname in sf_config:
-                        fmax = sf_config[fname]['max']
-                        labels.append(fname.replace(' (meter)', ' (m)').replace(' (sq.meter)', ' (m²)').replace(' (cubic.meter)', ' (m³)'))
+                    if hasattr(config.spatial_features, fname):
+                        fmax = getattr(config.spatial_features, fname)['max']
+                        labels.append(fname.replace('_m2', ' (m²)').replace('_m', ' (m)').replace('_pct', ' (%)').replace('_lux', ' (lux)').replace('_K', ' (K)'))
                         values.append(float(fval) / max(fmax, 1e-6))
 
                 if labels:

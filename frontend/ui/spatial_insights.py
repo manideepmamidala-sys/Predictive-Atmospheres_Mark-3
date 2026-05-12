@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
-from src.data.data_loader import load_data
 from frontend.ui.base_visualization import BaseVisualization
 from frontend.ui.theme import style_figure, panel_header
+from frontend.ui.data_utils import load_parquet_data
 
 class SpatialInsightsVis(BaseVisualization):
     def __init__(self):
@@ -14,29 +14,10 @@ class SpatialInsightsVis(BaseVisualization):
         )
 
     def load_data(self):
-        # Prefer full-feature training data from session state
-        if hasattr(st, 'session_state') and 'train_X' in st.session_state:
-            self.X = st.session_state.train_X
-            self.y_va_data = st.session_state.train_y_va
-        else:
-            self.X, self.y_va_data, _ = load_data()
-        self.feature_names = st.session_state.get('feature_names', [])
+        self.df_spatial = load_parquet_data()
 
     def process_data(self):
-        if self.feature_names and len(self.feature_names) == self.X.shape[1]:
-            self.df_spatial = pd.DataFrame(self.X, columns=self.feature_names)
-        elif self.X.shape[1] == 3:
-            self.df_spatial = pd.DataFrame(self.X, columns=['Length (meter)', 'Width (meter)', 'Height (meter)'])
-        else:
-            self.df_spatial = pd.DataFrame(self.X, columns=[f"Feature_{i}" for i in range(self.X.shape[1])])
-
-        y_stress = []
-        for va in self.y_va_data:
-            v = va[0]
-            stress_val = 1.0 - ((v + 1.0) / 2.0)
-            y_stress.append(stress_val)
-
-        self.df_spatial['NeuroScore'] = 1.0 - np.array(y_stress)
+        self.df_spatial['NeuroScore'] = (self.df_spatial['fused_valence'] + 1.0) / 2.0
 
     def _plot_reg(self, x_col, y_col='NeuroScore'):
         x_vals = self.df_spatial[x_col]
@@ -73,18 +54,19 @@ class SpatialInsightsVis(BaseVisualization):
                 )
             )
 
-        short_name = x_col.replace(' (meter)', '').replace(' (sq.meter)', '').replace(' (%)', '')
+        short_name = x_col.replace('_m2', ' m²').replace('_m', ' m').replace('_pct', ' %').replace('_lux', ' lux').replace('_K', ' K')
         style_figure(fig, f"{short_name} vs Neuro-Score", height=320)
-        fig.update_layout(xaxis_title=x_col, yaxis_title='Neuro Score')
+        fig.update_layout(xaxis_title=short_name, yaxis_title='Neuro Score')
         return fig
 
     def build_charts(self):
-        # Filter out categorical one-hot columns for numeric correlation analysis
-        numeric_cols = [c for c in self.df_spatial.columns
-                        if c != 'NeuroScore'
-                        and not c.startswith('Day or Night_')
-                        and self.df_spatial[c].dtype.kind in 'biufc'
-                        and self.df_spatial[c].nunique() > 1]
+        # 12 Independent spatial features
+        numeric_cols = [
+            "Length_m", "Width_m", "Height_m", "Num_Doors", "Door_Area_m2", 
+            "Num_Windows", "Window_Area_m2", "Daylight_Factor_pct", "Illuminance_lux", 
+            "CCT_K", "Walkable_Floor_Area_m2"
+        ]
+        numeric_cols = [c for c in numeric_cols if c in self.df_spatial.columns]
 
         analysis_df = self.df_spatial[numeric_cols + ['NeuroScore']].copy()
 
@@ -108,7 +90,6 @@ class SpatialInsightsVis(BaseVisualization):
         target_corr = corr['NeuroScore'].drop(labels=['NeuroScore'])
         impact = target_corr.abs().sort_values(ascending=False)
 
-        # Dynamic colors
         n_features = len(impact)
         colors = ['#2FD4C8' if i < n_features // 3
                   else '#8B7CFF' if i < 2 * n_features // 3
@@ -131,16 +112,12 @@ class SpatialInsightsVis(BaseVisualization):
 
         panel_header("Feature Analysis", "Dimension-wise")
 
-        # For many features, use a selector
-        if len(numeric_cols) > 6:
-            selected_features = st.multiselect(
-                "Select features to visualize",
-                numeric_cols,
-                default=numeric_cols[:6],
-                key="spatial_feature_select"
-            )
-        else:
-            selected_features = numeric_cols
+        selected_features = st.multiselect(
+            "Select features to visualize",
+            numeric_cols,
+            default=numeric_cols[:6],
+            key="spatial_feature_select"
+        )
 
         if selected_features:
             n_cols = min(3, len(selected_features))

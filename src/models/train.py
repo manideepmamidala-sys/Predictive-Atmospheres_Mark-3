@@ -37,8 +37,6 @@ from sklearn.preprocessing import StandardScaler
 from src.config import get_config, Config
 from src.models.architectures import SpatialMLP, SpatialFFNN
 from src.models.sklearn_models import get_random_forest_model, get_ridge_model
-from src.data.data_loader import load_data, load_data_standalone, _first_existing_column
-from src.data.experiment_registry import discover_experiments
 
 logger = logging.getLogger(__name__)
 
@@ -140,13 +138,16 @@ class Trainer:
 
     def train(self) -> TrainResult:
         """Run training and return a TrainResult."""
+        X_spatial, y_va, feature_names, artifacts, scaler = self._load_data()
+
         if self.feature_mode == 'baseline':
-            X_spatial, y_va, bio_sequences = self._load()
-            feature_names = ['Length (meter)', 'Width (meter)', 'Height (meter)']
-            artifacts: Dict[str, str] = {}
-            scaler = None
+            baseline_features = ['Length_m', 'Width_m', 'Height_m']
+            baseline_idx = [feature_names.index(f) for f in baseline_features if f in feature_names]
+            X_spatial = X_spatial[:, baseline_idx]
+            feature_names = baseline_features
+            scaler = None # We do not use the full scaler for baseline
+            bio_sequences = None
         elif self.feature_mode == 'full':
-            X_spatial, y_va, feature_names, artifacts, scaler = self._load_full_feature_dataset()
             bio_sequences = None
         else:
             raise ValueError(f"Unknown feature_mode: {self.feature_mode}")
@@ -193,11 +194,6 @@ class Trainer:
         )
 
     # ----- internal helpers -----
-    def _load(self):
-        if self._use_streamlit_loader:
-            return load_data()
-        return load_data_standalone()
-
     def _split(self, X: np.ndarray, y: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         return train_test_split(X, y, test_size=0.2, random_state=42)
 
@@ -288,26 +284,13 @@ class Trainer:
 
         return model, loss_history, final_lr
 
-    def _load_full_feature_dataset(self) -> Tuple[np.ndarray, np.ndarray, List[str], Dict[str, str], Any]:
-        """Load and build the full-feature dataset from all experiments."""
-        experiments = discover_experiments(self.config.paths.data_dir)
-        frames: List[pd.DataFrame] = []
+    def _load_data(self) -> Tuple[np.ndarray, np.ndarray, List[str], Dict[str, str], Any]:
+        """Load and build the full-feature dataset from fusion_analysis.parquet."""
+        df = pd.read_parquet(self._repo_root / 'data' / 'processed' / 'fusion_analysis.parquet')
+        
+        y = df[['fused_valence', 'fused_arousal']].to_numpy(dtype=np.float32)
 
-        for exp in experiments:
-            bio = pd.read_csv(exp.biometric_csv)
-            spatial = pd.read_csv(exp.spatial_csv)
-            merged = bio.merge(spatial, on='Room_ID', how='left')
-            merged['__experiment'] = exp.name
-            frames.append(merged)
-
-        if not frames:
-            raise RuntimeError("No experiments found for full-feature mode.")
-
-        df = pd.concat(frames, ignore_index=True)
-
-        y = self._extract_targets(df)
-        df = df.loc[y.index].copy()
-
+        # Build feature set
         x_df, feature_names = self._build_features(df)
 
         # Apply StandardScaler for heterogeneous feature ranges
@@ -325,169 +308,43 @@ class Trainer:
         logger.info(f"Full-feature dataset: {X_scaled.shape[0]} rows, {X_scaled.shape[1]} features")
         logger.info(f"Features: {feature_names}")
 
-        return X_scaled, y.to_numpy(dtype=np.float32), feature_names, artifacts, scaler
-
-    def _extract_targets(self, df: pd.DataFrame) -> pd.DataFrame:
-        """Extract V/A targets using multimodal affective fusion.
-
-        Combines subjective self-reported scores with objective biometric
-        scores (when available) using a configurable alpha weight.
-
-        Fusion: Target = alpha × Objective + (1 - alpha) × Subjective
-
-        Exposes raw objective, subjective, delta, and Euclidean distance
-        columns alongside the fused targets.
-        """
-        alpha = self.config.fusion.alpha
-
-        def get_col(col_name):
-            if col_name in df.columns:
-                return pd.to_numeric(df[col_name], errors='coerce')
-            return pd.Series(np.nan, index=df.index, dtype=float)
-
-        # Subjective scores
-        val_col = 'Valence Score by Subject ' if 'Valence Score by Subject ' in df.columns else 'Valence Score by Subject'
-        aro_col = 'Arousal Score by Subject ' if 'Arousal Score by Subject ' in df.columns else 'Arousal Score by Subject'
-        sub_v = get_col(val_col)
-        sub_a = get_col(aro_col)
-
-        # Both subjective V and A must be present for fusion
-        mask = (~sub_v.isna()) & (~sub_a.isna())
-
-        out = pd.DataFrame(index=df.index[mask])
-        out['subjective_valence'] = sub_v[mask].astype(float)
-        out['subjective_arousal'] = sub_a[mask].astype(float)
-
-        # Objective scores (FAA / RMSSD) — use as-is if present, else NaN
-        obj_v_col = _first_existing_column(list(df.columns), ['Objective_Valence', 'FAA_Valence'])
-        obj_a_col = _first_existing_column(list(df.columns), ['Objective_Arousal', 'RMSSD_Arousal'])
-
-        if obj_v_col is not None and obj_a_col is not None:
-            out['objective_valence'] = pd.to_numeric(df.loc[mask, obj_v_col], errors='coerce').astype(float)
-            out['objective_arousal'] = pd.to_numeric(df.loc[mask, obj_a_col], errors='coerce').astype(float)
-        else:
-            # No objective columns in merged CSV — use subjective as both
-            out['objective_valence'] = out['subjective_valence']
-            out['objective_arousal'] = out['subjective_arousal']
-
-        # Fusion
-        out['valence'] = alpha * out['objective_valence'] + (1.0 - alpha) * out['subjective_valence']
-        out['arousal'] = alpha * out['objective_arousal'] + (1.0 - alpha) * out['subjective_arousal']
-
-        # Variance metrics
-        out['delta_valence'] = out['objective_valence'] - out['subjective_valence']
-        out['delta_arousal'] = out['objective_arousal'] - out['subjective_arousal']
-        out['euclidean_distance'] = np.sqrt(out['delta_valence'] ** 2 + out['delta_arousal'] ** 2)
-
-        return out
+        return X_scaled, y, feature_names, artifacts, scaler
 
     def _build_features(self, df: pd.DataFrame) -> Tuple[pd.DataFrame, List[str]]:
-        """Build the feature matrix enforcing strict independent/derived/categorical separation.
-
-        Independent inputs (from experiment data):
-            Length, Width, Height, Door count, Door area, Window count, Window area,
-            Daylight Factor, Illuminance, CCT, Walkable Floor Area
-
-        Derived (computed here, NEVER from CSV):
-            L:W Ratio, Floor Area, Wall Area, Volume,
-            Door/Wall Ratio, Window/Wall Ratio, Walkable/Floor Ratio
-
-        Categorical (one-hot):
-            Day or Night, Type of Space
-        """
-        # Purged metrics — NEVER allowed into the feature matrix
-        PURGED = {
-            'UDI-Useful Daylight Illuminance (%)', 'sDA-Spatial Daylight Autonomy (%)',
-            'Annual Sunlight Exposure (%)', 'UDI (%)', 'sDA (%)',
-            'Door to Wall Ratio (%)', 'Window to Wall Ratio (%)',
-            'Length to Width Ratio', 'Floor Area (sq.meter)', 'Wall Area (sq.meter)',
-            'Volume (cubic.meter)',
-        }
-
-        df.columns = df.columns.str.strip()
-        spatial_config = self.config.spatial_features
-        known_independent = set(spatial_config.independent_features.keys())
-
+        """Build the feature matrix enforcing strict independent/derived/categorical separation."""
         feature_df = pd.DataFrame(index=df.index)
 
-        # --- 1. Extract independent features with alias handling ---
-        alias_map = {
-            'Length (meter)': ['Length (meter)', 'Length (m)'],
-            'Width (meter)': ['Width (meter)', 'Width (m)'],
-            'Height (meter)': ['Height (meter)', 'Height (m)'],
-            'Walkable Floor Area (sq.meter)': ['Walkable Floor Area (sq.meter)', 'Walkable Floor Area (m2)'],
-        }
-        for std_name in sorted(known_independent):
-            aliases = alias_map.get(std_name, [std_name])
-            value = pd.Series(np.nan, index=df.index, dtype=float)
-            for col in aliases:
-                if col in df.columns:
-                    value = value.fillna(pd.to_numeric(df[col], errors='coerce'))
-            # Use config default if the column is entirely missing
-            feat_def = spatial_config.independent_features[std_name]
-            feature_df[std_name] = value.fillna(feat_def['default'])
-
-        # --- 2. Compute derived features from independent geometry ---
-        L = feature_df['Length (meter)']
-        W = feature_df['Width (meter)']
-        H = feature_df['Height (meter)']
-        floor_area = L * W
-        wall_area = 2 * (L + W) * H
-        walkable = feature_df['Walkable Floor Area (sq.meter)']
-
-        feature_df['Length to Width Ratio'] = L / W.clip(lower=0.01)
-        feature_df['Floor Area (sq.meter)'] = floor_area
-        feature_df['Wall Area (sq.meter)'] = wall_area
-        feature_df['Volume (cubic.meter)'] = floor_area * H
-        feature_df['Door Area to Wall Area Ratio'] = feature_df['Door Area (sq.meter)'] / wall_area.clip(lower=0.01)
-        feature_df['Window Area to Wall Area Ratio'] = feature_df['Window Area (sq.meter)'] / wall_area.clip(lower=0.01)
-        feature_df['Walkable Floor to Total Floor Ratio'] = walkable / floor_area.clip(lower=0.01)
-
-        # --- 3. One-hot encode Day or Night ---
-        for col in spatial_config.condition_features:
+        # 12 Independent spatial features
+        numeric_cols = [
+            "Length_m", "Width_m", "Height_m", "Num_Doors", "Door_Area_m2", 
+            "Num_Windows", "Window_Area_m2", "Daylight_Factor_pct", "Illuminance_lux", 
+            "CCT_K", "Walkable_Floor_Area_m2"
+        ]
+        
+        for col in numeric_cols:
             if col in df.columns:
-                filled = df[col].astype(str).str.strip().replace({'nan': 'Unknown'}).fillna('Unknown')
-                dummies = pd.get_dummies(filled, prefix=col)
-                feature_df = pd.concat([feature_df, dummies], axis=1)
-
-        # --- 4. One-hot encode Type of Space ---
-        for col in spatial_config.categorical_features:
-            if col in df.columns:
-                filled = df[col].astype(str).str.strip().replace({'nan': 'Unknown'}).fillna('Unknown')
-                dummies = pd.get_dummies(filled, prefix=col)
-                feature_df = pd.concat([feature_df, dummies], axis=1)
+                feature_df[col] = df[col]
             else:
-                # Create zero columns for all known space types
-                for st in spatial_config.space_types:
-                    feature_df[f'{col}_{st}'] = 0.0
+                feature_df[col] = 0.0
 
-        # --- 5. Clean and order ---
-        # Drop any purged columns that may have leaked in
-        for purged_col in PURGED:
-            if purged_col in feature_df.columns:
-                feature_df = feature_df.drop(columns=[purged_col], errors='ignore')
+        # One-hot encode Day/Night
+        feature_df['Day_or_Night_Day'] = df.get('Day_or_Night_Day', 0.0)
+        feature_df['Day_or_Night_Night'] = df.get('Day_or_Night_Night', 0.0)
 
-        for col in feature_df.columns:
-            if feature_df[col].dtype.kind in 'biufc':
-                feature_df[col] = feature_df[col].astype(float)
-                median = float(feature_df[col].median()) if feature_df[col].notna().any() else 0.0
-                feature_df[col] = feature_df[col].fillna(median)
+        # One-hot encode Space Type
+        space_types = ["Bedroom", "Living Room", "Workplace", "Classroom", "Cafeteria"]
+        for st in space_types:
+            col_name = f'Type_of_Space_{st}'
+            feature_df[col_name] = df.get(col_name, 0.0)
 
-        feature_df = feature_df.replace([np.inf, -np.inf], np.nan).fillna(0.0)
         ordered = sorted(feature_df.columns)
         return feature_df[ordered], ordered
 
     def _write_data_quality_report(self, df: pd.DataFrame) -> Path:
         self._reports_dir.mkdir(parents=True, exist_ok=True)
-        experiment_02_df = df[df['__experiment'] == 'experiment_02'] if '__experiment' in df.columns else df
         report = {
             'rows_total': int(len(df)),
-            'rows_experiment_01': int(len(df[df['__experiment'] == 'experiment_01'])) if '__experiment' in df.columns else 0,
-            'rows_experiment_02': int(len(experiment_02_df)),
-            'null_counts': {k: int(v) for k, v in experiment_02_df.isna().sum().to_dict().items()},
-            'duplicate_room_ids': int(experiment_02_df.duplicated(subset=['Room_ID']).sum()) if 'Room_ID' in experiment_02_df.columns else 0,
-            'duplicate_eeg_filenames': int(experiment_02_df.duplicated(subset=['EEG_Filename']).sum()) if 'EEG_Filename' in experiment_02_df.columns else 0,
-            'experiments_present': sorted(df['__experiment'].dropna().astype(str).unique().tolist()) if '__experiment' in df.columns else [],
+            'null_counts': {k: int(v) for k, v in df.isna().sum().to_dict().items()},
         }
         out = self._reports_dir / 'data_quality_report.json'
         out.write_text(json.dumps(report, indent=2), encoding='utf-8')
@@ -514,14 +371,13 @@ class Trainer:
     ) -> Dict[str, str]:
         self._reports_dir.mkdir(parents=True, exist_ok=True)
 
-        baseline_features = ['Length (meter)', 'Width (meter)', 'Height (meter)']
+        baseline_features = ['Length_m', 'Width_m', 'Height_m']
         baseline_idx = [feature_names.index(f) for f in baseline_features if f in feature_names]
         if len(baseline_idx) != 3:
             raise RuntimeError("Full-feature dataset is missing one or more baseline dimensions.")
 
         X_base = X_full[:, baseline_idx]
         Xb_train, Xb_val, yb_train, yb_val = self._split(X_base, y_full)
-        # Train a simple MLP baseline for comparison
         old_model_type = self.model_type
         self.model_type = 'PyTorch MLP'
         base_model, _, _ = self._fit(
@@ -554,7 +410,7 @@ class Trainer:
         comparison_path.write_text(json.dumps(comparison, indent=2), encoding='utf-8')
 
         findings_lines = [
-            "# Training Findings (Experiment 01 + 02 Combined)",
+            "# Training Findings",
             "",
             f"Model type: {self.model_type}",
             f"Full feature count: {len(feature_names)}",
@@ -571,15 +427,6 @@ class Trainer:
         ]
         for item in importance[:10]:
             findings_lines.append(f"- {item['feature']}: {item['importance_mean']:.6f}")
-
-        findings_lines.extend(
-            [
-                "",
-                "## Notes",
-                "- Importance values are permutation-based and represent average absolute impact on prediction quality.",
-                "- Results should be interpreted as directional insights due to limited sample size per experiment.",
-            ]
-        )
 
         findings_path = self._reports_dir / 'training_findings.md'
         findings_path.write_text("\n".join(findings_lines), encoding='utf-8')

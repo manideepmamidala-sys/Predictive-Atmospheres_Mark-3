@@ -74,41 +74,23 @@ class SpatialFeatureConfig:
 
     Each independent feature has: (min_value, max_value, default_value, unit, category).
     """
-    # Independent features — raw inputs only
-    independent_features: Dict[str, Dict[str, Any]] = field(default_factory=lambda: {
-        # Core geometry
-        'Length (meter)': {'min': 2.0, 'max': 50.0, 'default': 10.0, 'unit': 'm', 'category': 'geometry'},
-        'Width (meter)': {'min': 2.0, 'max': 50.0, 'default': 8.0, 'unit': 'm', 'category': 'geometry'},
-        'Height (meter)': {'min': 2.0, 'max': 10.0, 'default': 3.5, 'unit': 'm', 'category': 'geometry'},
-        # Openings
-        'Number of Door': {'min': 0.0, 'max': 10.0, 'default': 1.0, 'unit': '', 'category': 'openings'},
-        'Door Area (sq.meter)': {'min': 0.0, 'max': 30.0, 'default': 1.8, 'unit': 'm²', 'category': 'openings'},
-        'Number of Windows': {'min': 0.0, 'max': 30.0, 'default': 2.0, 'unit': '', 'category': 'openings'},
-        'Window Area (sq.meter)': {'min': 0.0, 'max': 250.0, 'default': 5.0, 'unit': 'm²', 'category': 'openings'},
-        # Daylight
-        'Daylight Factor (%)': {'min': 0.0, 'max': 20.0, 'default': 2.0, 'unit': '%', 'category': 'daylight'},
-        'Illuminance (lux)': {'min': 0.0, 'max': 2000.0, 'default': 300.0, 'unit': 'lux', 'category': 'daylight'},
-        'Correlated Color Temperature (Kelvin)': {'min': 2000.0, 'max': 10000.0, 'default': 4000.0, 'unit': 'K', 'category': 'daylight'},
-        # Floor
-        'Walkable Floor Area (sq.meter)': {'min': 0.0, 'max': 500.0, 'default': 60.0, 'unit': 'm²', 'category': 'geometry'},
-    })
-
-    # Derived features — computed by backend from independent features, NEVER supplied by frontend
-    derived_features: List[str] = field(default_factory=lambda: [
-        'Length to Width Ratio',
-        'Floor Area (sq.meter)',
-        'Wall Area (sq.meter)',
-        'Volume (cubic.meter)',
-        'Door Area to Wall Area Ratio',
-        'Window Area to Wall Area Ratio',
-        'Walkable Floor to Total Floor Ratio',
-    ])
+    Length_m: Dict[str, Any] = field(default_factory=lambda: {'min': 2.0, 'max': 50.0, 'default': 10.0, 'unit': 'm', 'category': 'geometry'})
+    Width_m: Dict[str, Any] = field(default_factory=lambda: {'min': 2.0, 'max': 50.0, 'default': 8.0, 'unit': 'm', 'category': 'geometry'})
+    Height_m: Dict[str, Any] = field(default_factory=lambda: {'min': 2.0, 'max': 10.0, 'default': 3.5, 'unit': 'm', 'category': 'geometry'})
+    Num_Doors: Dict[str, Any] = field(default_factory=lambda: {'min': 0.0, 'max': 10.0, 'default': 1.0, 'unit': '', 'category': 'openings'})
+    Door_Area_m2: Dict[str, Any] = field(default_factory=lambda: {'min': 0.0, 'max': 30.0, 'default': 1.8, 'unit': 'm²', 'category': 'openings'})
+    Num_Windows: Dict[str, Any] = field(default_factory=lambda: {'min': 0.0, 'max': 30.0, 'default': 2.0, 'unit': '', 'category': 'openings'})
+    Window_Area_m2: Dict[str, Any] = field(default_factory=lambda: {'min': 0.0, 'max': 250.0, 'default': 5.0, 'unit': 'm²', 'category': 'openings'})
+    Daylight_Factor_pct: Dict[str, Any] = field(default_factory=lambda: {'min': 0.0, 'max': 20.0, 'default': 2.0, 'unit': '%', 'category': 'daylight'})
+    Illuminance_lux: Dict[str, Any] = field(default_factory=lambda: {'min': 0.0, 'max': 2000.0, 'default': 300.0, 'unit': 'lux', 'category': 'daylight'})
+    CCT_K: Dict[str, Any] = field(default_factory=lambda: {'min': 2000.0, 'max': 10000.0, 'default': 4000.0, 'unit': 'K', 'category': 'daylight'})
+    Walkable_Floor_Area_m2: Dict[str, Any] = field(default_factory=lambda: {'min': 0.0, 'max': 500.0, 'default': 60.0, 'unit': 'm²', 'category': 'geometry'})
 
     # Condition categorical (one-hot encoded)
-    condition_features: List[str] = field(default_factory=lambda: ['Day or Night'])
+    condition_features: List[str] = field(default_factory=lambda: ['Day_or_Night'])
 
     # Space type categorical (one-hot encoded)
-    categorical_features: List[str] = field(default_factory=lambda: ['Type of Space'])
+    categorical_features: List[str] = field(default_factory=lambda: ['Type_of_Space'])
 
     # Valid categories for Type of Space
     space_types: List[str] = field(default_factory=lambda: [
@@ -117,15 +99,11 @@ class SpatialFeatureConfig:
 
     def get_independent_feature_names(self) -> List[str]:
         """Return ordered list of independent numeric feature names."""
-        return sorted(self.independent_features.keys())
-
-    def get_all_feature_names(self) -> List[str]:
-        """Return ordered list of all numeric features (independent + derived)."""
-        return sorted(list(self.independent_features.keys()) + self.derived_features)
-
-    def get_by_category(self, category: str) -> Dict[str, Dict[str, Any]]:
-        """Return independent features filtered by category."""
-        return {k: v for k, v in self.independent_features.items() if v.get('category') == category}
+        return sorted([
+            'Length_m', 'Width_m', 'Height_m', 'Num_Doors', 'Door_Area_m2', 
+            'Num_Windows', 'Window_Area_m2', 'Daylight_Factor_pct', 
+            'Illuminance_lux', 'CCT_K', 'Walkable_Floor_Area_m2'
+        ])
 
 
 @dataclass

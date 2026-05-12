@@ -4,10 +4,11 @@ import pandas as pd
 import plotly.graph_objects as go
 
 from typing import Optional
-from src.data.data_loader import load_data
+from frontend.ui.data_utils import load_parquet_data
 from src.services.container import ServiceContainer
 from frontend.ui.theme import render_hero, style_figure, panel_header
 from frontend.ui.state_utils import get_current_features_from_state
+from src.config import get_config
 
 
 def render_page(services: Optional[ServiceContainer] = None):
@@ -18,32 +19,16 @@ def render_page(services: Optional[ServiceContainer] = None):
         compact=True,
     )
 
-    # Load training data — prefer full-feature data from session state
-    if hasattr(st, 'session_state') and 'train_X' in st.session_state:
-        X = st.session_state.train_X
-        y_va = st.session_state.train_y_va
-    else:
-        X, y_va, _ = load_data()
-    feature_names = st.session_state.get('feature_names', [])
-
-    if feature_names and len(feature_names) == X.shape[1]:
-        df = pd.DataFrame(X, columns=feature_names)
-    elif X.shape[1] == 3:
-        df = pd.DataFrame(X, columns=["Length (meter)", "Width (meter)", "Height (meter)"])
-    else:
-        df = pd.DataFrame(X, columns=[f"Feature_{i}" for i in range(X.shape[1])])
-
-    df["Valence"] = y_va[:, 0]
-    df["Arousal"] = y_va[:, 1]
+    df = load_parquet_data()
+    
+    df["Valence"] = df["fused_valence"]
+    df["Arousal"] = df["fused_arousal"]
     df["NeuroScore"] = (df["Valence"] + 1.0) / 2.0
 
-    # Compute volume from available columns
-    if "Length (meter)" in df.columns and "Width (meter)" in df.columns and "Height (meter)" in df.columns:
-        df["Volume"] = df["Length (meter)"] * df["Width (meter)"] * df["Height (meter)"]
-    elif "Volume (cubic.meter)" in df.columns:
-        df["Volume"] = df["Volume (cubic.meter)"]
+    if "Length_m" in df.columns and "Width_m" in df.columns and "Height_m" in df.columns:
+        df["Volume_m3"] = df["Length_m"] * df["Width_m"] * df["Height_m"]
     else:
-        df["Volume"] = 0.0
+        df["Volume_m3"] = 0.0
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Samples", len(df))
@@ -51,18 +36,18 @@ def render_page(services: Optional[ServiceContainer] = None):
     c3.metric("Mean Valence", f"{df['Valence'].mean():.2f}")
     c4.metric("Mean Arousal", f"{df['Arousal'].mean():.2f}")
 
-    # --- 3D Spatial Distribution with Axis Selector ---
     panel_header("Spatial Distribution", "Dataset")
 
-    # Allow axis selection for any feature
     numeric_features = [c for c in df.columns
-                        if c not in ('Valence', 'Arousal', 'NeuroScore', 'Volume')
+                        if c not in ('Valence', 'Arousal', 'NeuroScore', 'Volume_m3', 'Subject_ID', 'Room_ID', 'EEG_Filename', 'experiment_id', 'fused_valence', 'fused_arousal', 'objective_valence', 'objective_arousal', 'subjective_valence', 'subjective_arousal', 'delta_valence', 'delta_arousal', 'euclidean_distance', 'alpha_used')
                         and df[c].dtype.kind in 'biufc'
                         and df[c].nunique() > 1
-                        and not c.startswith('Day or Night_')]
+                        and not c.startswith('Day_or_Night_')
+                        and not c.startswith('Type_of_Space_')
+                        and not c.startswith('gender_')]
 
     default_axes = []
-    for preferred in ["Length (meter)", "Width (meter)", "Height (meter)"]:
+    for preferred in ["Length_m", "Width_m", "Height_m"]:
         if preferred in numeric_features:
             default_axes.append(preferred)
     while len(default_axes) < 3 and len(numeric_features) > len(default_axes):
@@ -73,7 +58,7 @@ def render_page(services: Optional[ServiceContainer] = None):
 
     col_ax1, col_ax2, col_ax3 = st.columns(3)
     with col_ax1:
-        x_axis = st.selectbox("X Axis", numeric_features, index=numeric_features.index(default_axes[0]) if default_axes[0] in numeric_features else 0, key="el_x_axis")
+        x_axis = st.selectbox("X Axis", numeric_features, index=numeric_features.index(default_axes[0]) if default_axes and default_axes[0] in numeric_features else 0, key="el_x_axis")
     with col_ax2:
         y_axis = st.selectbox("Y Axis", numeric_features, index=numeric_features.index(default_axes[1]) if len(default_axes) > 1 and default_axes[1] in numeric_features else min(1, len(numeric_features)-1), key="el_y_axis")
     with col_ax3:
@@ -105,12 +90,19 @@ def render_page(services: Optional[ServiceContainer] = None):
     )
 
     if services is not None and "L" in st.session_state and "W" in st.session_state and "H" in st.session_state:
-        # Use full feature set for current design point
         config = get_config()
         full_features = get_current_features_from_state(config)
-        # Determine which of the selected axes are available in the full feature dict
-        design_point = {axis: full_features.get(axis, None) for axis in (x_axis, y_axis, z_axis)}
-        # Filter out None values
+        
+        design_point = {}
+        for axis in (x_axis, y_axis, z_axis):
+            if axis == 'Length_m': design_point[axis] = full_features.get('Length (meter)')
+            elif axis == 'Width_m': design_point[axis] = full_features.get('Width (meter)')
+            elif axis == 'Height_m': design_point[axis] = full_features.get('Height (meter)')
+            elif axis == 'Daylight_Factor_pct': design_point[axis] = full_features.get('Daylight Factor (%)')
+            elif axis == 'Illuminance_lux': design_point[axis] = full_features.get('Illuminance (lux)')
+            elif axis == 'Walkable_Floor_Area_m2': design_point[axis] = full_features.get('Walkable Floor Area (sq.meter)')
+            else: design_point[axis] = None
+            
         if all(v is not None for v in design_point.values()):
             fig_space.add_trace(
                 go.Scatter3d(
@@ -130,7 +122,7 @@ def render_page(services: Optional[ServiceContainer] = None):
             xaxis_title=x_axis,
             yaxis_title=y_axis,
             zaxis_title=z_axis,
-            bgcolor="rgba(17,22,37,0.86)",
+            bgcolor="rgba(0,0,0,0)",
         )
     )
     st.plotly_chart(fig_space, width="stretch")
@@ -169,9 +161,9 @@ def render_page(services: Optional[ServiceContainer] = None):
         st.plotly_chart(fig_va, width="stretch")
 
     with right:
-        if df["Volume"].sum() > 0:
+        if df["Volume_m3"].sum() > 0:
             df_bin = df.copy()
-            bins = pd.qcut(df_bin["Volume"], q=4, duplicates="drop")
+            bins = pd.qcut(df_bin["Volume_m3"], q=4, duplicates="drop")
             summary = df_bin.groupby(bins, observed=True)["NeuroScore"].mean().reset_index()
             summary["VolumeBin"] = summary.iloc[:, 0].astype(str)
 

@@ -46,11 +46,8 @@ src/test/test_cache.py
 src/test/test_cognitive_bridge.py
 src/test/test_emotion_engine.py
 src/test/test_full_feature_training.py
-src/test/test_literature_workflow.py
-src/test/test_paper_alignment.py
 src/test/test_services_orchestrator.py
 src/test/test_space_capability_service.py
-src/test/test_space_eval_integration.py
 src/test/test_validators.py
 src/utils/cache_manager.py
 src/utils/rendering.py
