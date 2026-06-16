@@ -32,6 +32,8 @@ class PredictionResult:
     atmosphere: str = "Neutral"
     emotion_weights: Dict[str, float] = field(default_factory=dict)
     categories: Optional[np.ndarray] = None  # For CognitiveMapMLP
+    confidence_score: float = 0.0
+    uncertainty: float = 0.0
 
     def __post_init__(self):
         """Compute derived fields."""
@@ -55,7 +57,9 @@ class PredictionResult:
             'arousal': float(self.arousal),
             'neuro_score': float(self.neuro_score),
             'atmosphere': self.atmosphere,
-            'emotion_weights': self.emotion_weights
+            'emotion_weights': self.emotion_weights,
+            'confidence_score': float(self.confidence_score),
+            'uncertainty': float(self.uncertainty)
         }
 
 
@@ -90,7 +94,16 @@ class PredictionService:
         self._model = None
         self._config = config or get_config()
         self._emotion_centroids = self._config.emotion.centroids
-        self._feature_names = feature_names or []
+        self._feature_names = feature_names or [
+            'Length_m', 'Width_m', 'Height_m', 'Num_Doors', 'Door_Area_m2',
+            'Num_Windows', 'Window_Area_m2', 'Daylight_Factor_pct', 'Illuminance_lux',
+            'CCT_K', 'Walkable_Floor_Area_m2',
+            'Day_or_Night_Day', 'Day_or_Night_Night',
+            'Type_of_Space_Bedroom', 'Type_of_Space_Living Room', 'Type_of_Space_Workplace',
+            'Type_of_Space_Classroom', 'Type_of_Space_Cafeteria',
+            'Length_to_Width_Ratio', 'Floor_Area_m2', 'Wall_Area_m2', 'Volume_m3',
+            'Door_to_Wall_Ratio', 'Window_to_Wall_Ratio', 'Walkable_to_Floor_Ratio'
+        ]
         self._scaler = scaler
         
         if model is not None:
@@ -99,15 +112,15 @@ class PredictionService:
     def set_model(self, model: Any) -> None:
         """Set or update the trained model, automatically wrapping it in an adapter if needed."""
         if model is not None and not hasattr(model, 'predict'):
+            from src.models.adapter import ModelAdapter
             model_type = type(model).__module__ if hasattr(type(model), '__module__') else ""
-            from src.models.adapters import PyTorchAdapter, SKLearnAdapter
             if 'torch' in model_type or 'src.models' in model_type:
-                model = PyTorchAdapter(model)
+                model = ModelAdapter(model, framework='pytorch')
             elif 'sklearn' in model_type:
-                model = SKLearnAdapter(model)
+                model = ModelAdapter(model, framework='sklearn')
             else:
                 try:
-                    model = PyTorchAdapter(model)
+                    model = ModelAdapter(model, framework='pytorch')
                 except Exception as e:
                     raise ValueError(f"Unknown model type {model_type} that cannot be auto-wrapped. Error: {e}")
         self._model = model
@@ -195,6 +208,35 @@ class PredictionService:
             arousal=float(arousal),
             emotion_weights=emotion_weights
         )
+
+    def predict_mc_dropout(self, features_dict: Dict[str, float], n_passes: int = 50) -> PredictionResult:
+        """Run prediction using MC Dropout for uncertainty bounds and confidence scoring."""
+        if not isinstance(n_passes, int) or n_passes <= 0:
+            raise ValueError(f"n_passes must be an integer > 0, got {n_passes}")
+        if self._model is None or not self._feature_names:
+            raise ValueError("Model and feature names must be set.")
+            
+        input_values = [float(features_dict.get(name, 0.0)) for name in self._feature_names]
+        input_data = np.array([input_values], dtype=np.float32)
+        if self._scaler is not None:
+            input_data = self._scaler.transform(input_data)
+            
+        from src.models.adapter import ModelAdapter
+        if not isinstance(self._model, ModelAdapter) or self._model.framework != 'pytorch':
+            raise ValueError("MC Dropout requires a PyTorch model adapter.")
+            
+        (valence, arousal), uncertainty, confidence = self._model.predict_mc_dropout(input_data, n_passes)
+        emotion_weights = self._compute_emotion_weights(valence, arousal)
+        
+        return PredictionResult(
+            valence=valence,
+            arousal=arousal,
+            emotion_weights=emotion_weights,
+            confidence_score=confidence,
+            uncertainty=uncertainty
+        )
+
+
 
     def _build_features_from_geometry(
         self, length: float, width: float, height: float

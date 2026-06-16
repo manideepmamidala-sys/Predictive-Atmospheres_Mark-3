@@ -4,7 +4,7 @@ Source of Truth: instructions/01_backend_data_pipeline.md §3–4
                  instructions/03_execution_roadmap.md Phase 2
 
 Pipeline per trial:
-  1. Load raw EEG/ECG CSV → truncate to 50-second window (strict)
+  1. Load raw EEG/ECG CSV → truncate to T+10s–T+60s window (drops orienting reflex)
   2. Compute FAA (Frontal Alpha Asymmetry) → Objective Valence
   3. Compute RMSSD from R-peak intervals → Objective Arousal (mapped to [-1,1])
   4. Apply Multimodal Affective Fusion with α=0.6 (fallback α=1.0 when
@@ -23,6 +23,7 @@ from typing import Dict, Any, Optional, Tuple
 import numpy as np
 import pandas as pd
 import scipy.signal
+from src.config import get_config
 
 logger = logging.getLogger(__name__)
 
@@ -30,9 +31,7 @@ logger = logging.getLogger(__name__)
 # Constants
 # ---------------------------------------------------------------------------
 FS: int = 256                    # EEG/ECG sampling rate (Hz)
-ALPHA_DEFAULT: float = 0.6       # Fusion weight for objective biometric layer
-WINDOW_50S: int = FS * 50        # 50-second truncation window (samples)
-RMSSD_BASELINE_MS: float = 50.0  # Neutral RMSSD reference for Arousal mapping
+WINDOW_50S: int = FS * 50        # 50-second analysis window length (samples); applied T+10s to T+60s
 
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 _RAW_DIR = _PROJECT_ROOT / "data" / "raw"
@@ -58,11 +57,19 @@ def _load_eeg_csv(path: Path) -> Optional[pd.DataFrame]:
 
 def _truncate_50s(signal: np.ndarray, fs: int = FS) -> np.ndarray:
     """
-    Strict 50-second truncation window as required by the manifest.
-    Takes samples [0 : 50*fs].  Signals shorter than 50 s are returned as-is.
+    50-second analysis window: T+10s to T+60s.
+
+    The first 10 seconds are discarded to exclude the VR orienting reflex
+    (initial novelty response that contaminates baseline affective state).
+    This matches the temporal_truncation() window in preprocessing.py,
+    ensuring training ground-truth and live inference operate on the same
+    signal segment.
+
+    Signals shorter than 60 s are returned from start_idx to end of signal.
     """
-    max_samples = fs * 50
-    return signal[:max_samples]
+    start_idx = 10 * fs   # drop first 10 s — orienting artifact
+    end_idx = 60 * fs     # keep next 50 s (T+10s to T+60s)
+    return signal[start_idx:end_idx]
 
 
 def _compute_faa(signal_right: np.ndarray, signal_left: np.ndarray, fs: int = FS) -> float:
@@ -70,60 +77,96 @@ def _compute_faa(signal_right: np.ndarray, signal_left: np.ndarray, fs: int = FS
     Frontal Alpha Asymmetry: FAA = ln(α_right) - ln(α_left)
 
     Uses Welch's PSD to estimate alpha band power (8–13 Hz) for both
-    hemispheres.  Result is clipped to [-1, 1].
+    hemispheres. Result is clipped to [-1, 1].
     """
-    alpha_band = (8.0, 13.0)
+    # 1.0 Hz High-pass filter to remove slow physical movement artifacts
+    b, a = scipy.signal.butter(4, 1.0 / (0.5 * fs), btype='high')
+    filtered_right = scipy.signal.filtfilt(b, a, signal_right)
+    filtered_left = scipy.signal.filtfilt(b, a, signal_left)
 
-    def _alpha_power(sig: np.ndarray) -> float:
+    bands = {
+        "Delta": (2.0, 4),
+        "Theta": (4, 8),
+        "Alpha": (8, 13),
+        "Beta": (13, 30),
+        "Gamma": (30, 100)
+    }
+
+    def _relative_alpha_power(sig: np.ndarray) -> float:
         nperseg = min(fs, len(sig))
         if nperseg < 4:
             return 1e-6
         f, Pxx = scipy.signal.welch(sig, fs=fs, nperseg=nperseg)
-        mask = (f >= alpha_band[0]) & (f <= alpha_band[1])
-        power = float(np.trapezoid(Pxx[mask], f[mask])) if np.any(mask) else 0.0
-        return max(float(np.nan_to_num(power, nan=0.0, posinf=0.0, neginf=0.0)), 1e-6)
+        
+        valid_idx = f >= 2.0
+        f_clean = f[valid_idx]
+        Pxx_clean = Pxx[valid_idx]
+        
+        powers = {}
+        for band, (low, high) in bands.items():
+            mask = (f_clean >= low) & (f_clean <= high)
+            powers[band] = float(np.trapezoid(Pxx_clean[mask], f_clean[mask])) if np.any(mask) else 0.0
+            
+        total_power = sum(powers.values())
+        if total_power > 0:
+            return max(powers["Alpha"] / total_power, 1e-6)
+        return 1e-6
 
-    alpha_r = _alpha_power(signal_right)
-    alpha_l = _alpha_power(signal_left)
+    alpha_r = _relative_alpha_power(filtered_right)
+    alpha_l = _relative_alpha_power(filtered_left)
     faa = np.log(alpha_r) - np.log(alpha_l)
+    
     return float(np.clip(faa, -1.0, 1.0))
 
 
 def _detect_r_peaks(ecg: np.ndarray, fs: int = FS) -> np.ndarray:
     """Simple R-peak detector using scipy.signal.find_peaks on filtered ECG."""
-    # Band-pass 5–40 Hz to isolate QRS complex
+    # Band-pass 0.5-5.0 Hz to isolate QRS complex and remove wander
     nyq = fs / 2.0
     try:
-        sos = scipy.signal.butter(4, [5.0 / nyq, 40.0 / nyq], btype="band", output="sos")
+        sos = scipy.signal.butter(4, [0.5 / nyq, 5.0 / nyq], btype="band", output="sos")
         filtered = scipy.signal.sosfiltfilt(sos, ecg)
     except Exception:
         filtered = ecg  # fallback: unfiltered
 
-    # Min distance = 0.3 s between peaks (max ~200 bpm)
-    min_dist = max(int(fs * 0.3), 1)
+    # Min distance = 0.4 s between peaks (max 150 bpm)
+    min_distance = int(fs * 0.4)
     height_threshold = np.percentile(np.abs(filtered), 75)
     from typing import cast
-    peaks, _ = scipy.signal.find_peaks(filtered, distance=min_dist, height=height_threshold)
+    peaks, _ = scipy.signal.find_peaks(filtered, distance=min_distance, height=height_threshold)
     return cast(np.ndarray, peaks)
 
 
 def _compute_rmssd(ecg: np.ndarray, fs: int = FS) -> float:
     """
     RMSSD from successive R-R interval differences (time-domain HRV).
-    Returns RMSSD in milliseconds.  Returns RMSSD_BASELINE_MS on failure.
+    Returns RMSSD in milliseconds. Returns RMSSD reference on failure.
     """
+    baseline = get_config().emotion.rmssd_baseline_ms
     try:
         peaks = _detect_r_peaks(ecg, fs=fs)
         if len(peaks) < 2:
             logger.warning("Fewer than 2 R-peaks detected — using RMSSD baseline.")
-            return RMSSD_BASELINE_MS
-        rr_intervals_ms = np.diff(peaks) / fs * 1000.0  # convert to ms
-        successive_diffs = np.diff(rr_intervals_ms)
-        rmssd = float(np.sqrt(np.mean(successive_diffs ** 2)))
+            return baseline
+        rr_intervals_sec = np.diff(peaks) / fs
+        rr_intervals_ms = rr_intervals_sec * 1000.0  # convert to ms
+        
+        valid_rr = np.array([rr for rr in rr_intervals_ms if 300 <= rr <= 1200])
+        if len(valid_rr) < 2:
+            logger.warning("Valid RR intervals < 2 after mask — using RMSSD baseline.")
+            return baseline
+            
+        successive_diffs = np.diff(valid_rr)
+        valid_diffs = successive_diffs[np.abs(successive_diffs) < 150]
+        
+        if len(valid_diffs) == 0:
+            return 0.0
+            
+        rmssd = float(np.sqrt(np.mean(valid_diffs ** 2)))
         return max(rmssd, 0.0)
     except Exception as exc:
         logger.warning("RMSSD computation failed: %s. Using baseline.", exc)
-        return RMSSD_BASELINE_MS
+        return baseline
 
 
 def _rmssd_to_arousal(rmssd_ms: float) -> float:
@@ -133,7 +176,8 @@ def _rmssd_to_arousal(rmssd_ms: float) -> float:
     Higher HRV (high RMSSD) → parasympathetic dominance → lower arousal.
     Formula: Arousal = 1.0 - (RMSSD / BASELINE), clipped to [-1, 1].
     """
-    return float(np.clip(1.0 - (rmssd_ms / RMSSD_BASELINE_MS), -1.0, 1.0))
+    baseline = get_config().emotion.rmssd_baseline_ms
+    return float(np.clip(1.0 - (rmssd_ms / baseline), -1.0, 1.0))
 
 
 # ---------------------------------------------------------------------------
@@ -161,9 +205,9 @@ def _extract_biometrics(eeg_filename: str, experiment_id: int) -> Tuple[float, f
         logger.warning("Missing required channels in %s — skipping.", raw_path.name)
         return 0.0, 0.0
 
-    ch_right = _truncate_50s(df["Channel1"].values.astype(float), fs=FS)
-    ch_left  = _truncate_50s(df["Channel2"].values.astype(float), fs=FS)
-    ch_ecg   = _truncate_50s(df["Channel3"].values.astype(float), fs=FS)
+    ch_right = _truncate_50s(np.asarray(df["Channel1"], dtype=float), fs=FS)
+    ch_left  = _truncate_50s(np.asarray(df["Channel2"], dtype=float), fs=FS)
+    ch_ecg   = _truncate_50s(np.asarray(df["Channel3"], dtype=float), fs=FS)
 
     # Minimum length guard: at least 5 seconds of signal required
     min_samples = FS * 5
@@ -188,7 +232,7 @@ def _fuse(
     obj_arousal: float,
     subj_valence: Optional[float],
     subj_arousal: Optional[float],
-    alpha: float = ALPHA_DEFAULT,
+    alpha: Optional[float] = None,
 ) -> Dict[str, Any]:
     """
     Multimodal Affective Fusion.
@@ -198,6 +242,8 @@ def _fuse(
 
     If Subjective scores are NaN, α is forced to 1.0 (100% objective).
     """
+    if alpha is None:
+        alpha = get_config().fusion.alpha
     import math
     if subj_valence is None or math.isnan(subj_valence):
         target_v = obj_valence
@@ -253,18 +299,18 @@ def _add_derived_features(df: pd.DataFrame) -> pd.DataFrame:
     eps = 1e-9
 
     # Core dimensions
-    L = df.get("Length_m", pd.Series(np.zeros(len(df))))
-    W = df.get("Width_m",  pd.Series(np.zeros(len(df))))
-    H = df.get("Height_m", pd.Series(np.zeros(len(df))))
+    L = df.get("Length_m", pd.Series(0.0, index=df.index))
+    W = df.get("Width_m",  pd.Series(0.0, index=df.index))
+    H = df.get("Height_m", pd.Series(0.0, index=df.index))
 
     df["Length_to_Width_Ratio"]       = L / (W + eps)
     df["Floor_Area_m2"]               = L * W
     df["Wall_Area_m2"]                = 2.0 * (L + W) * H
     df["Volume_m3"]                   = L * W * H
 
-    door_area  = df.get("Door_Area_m2",     pd.Series(np.zeros(len(df))))
-    window_area = df.get("Window_Area_m2",  pd.Series(np.zeros(len(df))))
-    walkable    = df.get("Walkable_Floor_Area_m2", pd.Series(np.zeros(len(df))))
+    door_area  = df.get("Door_Area_m2",     pd.Series(0.0, index=df.index))
+    window_area = df.get("Window_Area_m2",  pd.Series(0.0, index=df.index))
+    walkable    = df.get("Walkable_Floor_Area_m2", pd.Series(0.0, index=df.index))
 
     wall_area_safe  = df["Wall_Area_m2"].replace(0, eps)
     floor_area_safe = df["Floor_Area_m2"].replace(0, eps)
@@ -321,7 +367,7 @@ def run_fusion_pipeline(merged_df: pd.DataFrame) -> pd.DataFrame:
         sub_v = float(raw_sub_v) if raw_sub_v is not None and not pd.isna(raw_sub_v) else None
         sub_a = float(raw_sub_a) if raw_sub_a is not None and not pd.isna(raw_sub_a) else None
 
-        fusion = _fuse(obj_v, obj_a, sub_v, sub_a, alpha=ALPHA_DEFAULT)
+        fusion = _fuse(obj_v, obj_a, sub_v, sub_a)
 
         record = {
             "Subject_ID":    row.get("Subject_ID"),

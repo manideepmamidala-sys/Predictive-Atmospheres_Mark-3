@@ -48,19 +48,10 @@ class ModelConfig:
     ffnn_use_batch_norm: bool = True
     ffnn_use_residual: bool = True
 
-    # CognitiveMapMLP
-    cognitive_shared_sizes: List[int] = field(default_factory=lambda: [32, 64])
-    cognitive_num_categories: int = 13
 
-    # MultiScaleEEGCNN
-    eeg_in_channels: int = 3
-    eeg_temporal_len: int = 500
-    eeg_num_t_filters: int = 8
-    eeg_ratios: List[float] = field(default_factory=lambda: [0.5, 0.25, 0.125, 0.0625, 0.03125])
-    eeg_dropout: float = 0.3
 
     # Default model type for training
-    default_model_type: str = 'PyTorch FFNN'
+    default_model_type: str = 'Random Forest'
 
 
 @dataclass
@@ -117,6 +108,10 @@ class TrainingConfig:
     convergence_window: int = 20
     default_feature_mode: str = 'full'
 
+    # Train/validation split
+    val_split: float = 0.2
+    split_random_state: int = 42
+
     # scikit-learn alternatives
     sklearn_hidden_layers: tuple = (64, 32)
     sklearn_max_iter: int = 500
@@ -171,6 +166,9 @@ class OptimizationConfig:
 @dataclass
 class EmotionConfig:
     """Emotion centroids for MDS space mapping."""
+    # Frontal Alpha Asymmetry expansion factor to stretch the variance of Objective Valence
+    faa_scalar: float = 10.0
+
     # Reference centroids in V-A space
     centroids: Dict[str, List[float]] = field(default_factory=lambda: {
         'Anger': [-0.7, 0.7],
@@ -194,6 +192,9 @@ class EmotionConfig:
     # Atmosphere classification thresholds
     positive_threshold: float = 0.3
     negative_threshold: float = -0.3
+
+    # Neutral RMSSD reference for Arousal mapping
+    rmssd_baseline_ms: float = 50.0
 
 
 @dataclass

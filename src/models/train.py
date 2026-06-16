@@ -37,6 +37,7 @@ from sklearn.preprocessing import StandardScaler
 from src.config import get_config, Config
 from src.models.architectures import SpatialMLP, SpatialFFNN
 from src.models.sklearn_models import get_random_forest_model, get_ridge_model
+from src.models.adapter import ModelAdapter
 
 logger = logging.getLogger(__name__)
 
@@ -60,6 +61,8 @@ class TrainResult:
     artifacts: Dict[str, str] = field(default_factory=dict)
     biometric_sequences: Any = None
     scaler: Any = None
+    val_loss_history: List[float] = field(default_factory=list)
+    parity_df: Optional[pd.DataFrame] = None
 
 
 # ---------------------------------------------------------------------------
@@ -75,17 +78,22 @@ def compute_evaluation_metrics(
 
     Works with both PyTorch and sklearn-wrapper models.
     """
-    if hasattr(model, 'eval'):
-        model.eval()
+    # Use unified prediction if available
+    if hasattr(model, 'predict'):
+        predictions = model.predict(X_tensor, return_array=True)
+    else:
+        # Fallback for raw PyTorch models
+        if hasattr(model, 'eval'):
+            model.eval()
 
-    with torch.no_grad():
-        raw_output = model(X_tensor)
-        if isinstance(raw_output, dict):
-            raw_output = raw_output.get('affective_space', raw_output)
-        predictions = raw_output.detach().cpu().numpy()
+        with torch.no_grad():
+            raw_output = model(X_tensor)
+            if isinstance(raw_output, dict):
+                raw_output = raw_output.get('affective_space', raw_output)
+            predictions = raw_output.detach().cpu().numpy()
 
-    if hasattr(model, 'train') and callable(getattr(model, 'train')):
-        model.train()
+        if hasattr(model, 'train') and callable(getattr(model, 'train')):
+            model.train()
 
     targets = y_tensor.numpy()
 
@@ -125,13 +133,12 @@ class Trainer:
     def __init__(
         self,
         model_type: Optional[str] = None,
-        feature_mode: Optional[str] = None,
         config: Optional[Config] = None,
         use_streamlit_loader: bool = False,
     ):
         self.config = config or get_config()
         self.model_type = model_type or self.config.model.default_model_type
-        self.feature_mode = feature_mode or self.config.training.default_feature_mode
+        self.feature_mode = 'full'
         self._use_streamlit_loader = use_streamlit_loader
         self._repo_root = Path(__file__).resolve().parents[2]
         self._reports_dir = self._repo_root / 'artifacts' / 'reports'
@@ -140,22 +147,8 @@ class Trainer:
         """Run training and return a TrainResult."""
         X_spatial, y_va, feature_names, artifacts, scaler = self._load_data()
 
-        if self.feature_mode == 'baseline':
-            baseline_features = ['Length_m', 'Width_m', 'Height_m']
-            baseline_idx = [feature_names.index(f) for f in baseline_features if f in feature_names]
-            if len(baseline_idx) != 3:
-                raise RuntimeError(
-                    f"Baseline mode requires all 3 dimensions (Length_m, Width_m, Height_m), "
-                    f"but only found {len(baseline_idx)} in feature set."
-                )
-            X_spatial = X_spatial[:, baseline_idx]
-            feature_names = baseline_features
-            scaler = None # We do not use the full scaler for baseline
-            bio_sequences = None
-        elif self.feature_mode == 'full':
-            bio_sequences = None
-        else:
-            raise ValueError(f"Unknown feature_mode: {self.feature_mode}")
+        self.feature_mode = 'full'
+        bio_sequences = None
 
         X_tensor = torch.tensor(X_spatial, dtype=torch.float32)
         y_tensor = torch.tensor(y_va, dtype=torch.float32)
@@ -166,21 +159,23 @@ class Trainer:
         X_val_t = torch.tensor(X_val, dtype=torch.float32)
         y_val_t = torch.tensor(y_val, dtype=torch.float32)
 
-        model, loss_history, final_lr = self._fit(X_train_t, y_train_t)
+        model, loss_history, val_loss_history, final_lr = self._fit(X_train_t, y_train_t, X_val_t, y_val_t)
         metrics = self._compute_train_val_metrics(model, X_train_t, y_train_t, X_val_t, y_val_t)
         converged = self._check_convergence(loss_history)
 
         self._validate_model(model, input_dim=int(X_spatial.shape[1]))
 
-        if self.feature_mode == 'full':
-            compare_artifacts = self._write_full_mode_reports(
-                X_full=X_spatial,
-                y_full=y_va,
-                feature_names=feature_names,
-                trained_model=model,
-                val_metrics=metrics,
-            )
-            artifacts.update(compare_artifacts)
+        # Generate Parity Plot Data
+        val_preds = model.predict(X_val_t, return_array=True)
+
+        parity_df = pd.DataFrame({
+            'Actual_Valence': y_val[:, 0],
+            'Predicted_Valence': val_preds[:, 0],
+            'Actual_Arousal': y_val[:, 1],
+            'Predicted_Arousal': val_preds[:, 1],
+        })
+
+
 
         return TrainResult(
             model=model,
@@ -196,11 +191,17 @@ class Trainer:
             artifacts=artifacts,
             biometric_sequences=bio_sequences,
             scaler=scaler,
+            val_loss_history=val_loss_history,
+            parity_df=parity_df,
         )
 
     # ----- internal helpers -----
     def _split(self, X: np.ndarray, y: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-        return train_test_split(X, y, test_size=0.2, random_state=42)
+        cfg = self.config.training
+        X_train, X_val, y_train, y_val = train_test_split(
+            X, y, test_size=cfg.val_split, random_state=cfg.split_random_state
+        )
+        return (X_train, X_val, y_train, y_val)
 
     def _compute_train_val_metrics(
         self,
@@ -229,12 +230,37 @@ class Trainer:
             'Val_Arousal_MAE': val_metrics['Arousal_MAE'],
         }
 
-    def _fit(self, X: torch.Tensor, y: torch.Tensor) -> Tuple[Any, List[float], float]:
+    def _fit(self, X: torch.Tensor, y: torch.Tensor, X_val: torch.Tensor, y_val: torch.Tensor) -> Tuple[Any, List[float], List[float], float]:
         cfg = self.config.training
         loss_history: List[float] = []
+        val_loss_history: List[float] = []
         final_lr = 0.0
 
-        if self.model_type == 'PyTorch FFNN':
+        if self.model_type is None or self.model_type == 'Random Forest':
+            self.model_type = 'Random Forest'
+            from sklearn.metrics import mean_squared_error
+            import joblib
+            model = get_random_forest_model()
+            model.fit(X, y)
+            train_mse = mean_squared_error(y, model.predict(X))
+            val_mse = mean_squared_error(y_val, model.predict(X_val))
+            loss_history = [float(train_mse)]
+            val_loss_history = [float(val_mse)]
+            
+            model_path = self._repo_root / 'artifacts' / 'models' / 'random_forest.joblib'
+            model_path.parent.mkdir(parents=True, exist_ok=True)
+            joblib.dump(model, model_path)
+
+        elif self.model_type == 'Ridge Regression':
+            from sklearn.metrics import mean_squared_error
+            model = get_ridge_model()
+            model.fit(X, y)
+            train_mse = mean_squared_error(y, model.predict(X))
+            val_mse = mean_squared_error(y_val, model.predict(X_val))
+            loss_history = [float(train_mse)]
+            val_loss_history = [float(val_mse)]
+
+        elif self.model_type == 'PyTorch FFNN':
             model = SpatialFFNN(input_dim=int(X.shape[1]))
             optimizer = optim.Adam(model.parameters(), lr=cfg.learning_rate, weight_decay=1e-4)
             criterion = nn.MSELoss()
@@ -253,6 +279,13 @@ class Trainer:
                 optimizer.step()
                 scheduler.step(loss.item())
                 loss_history.append(loss.item())
+                
+                model.eval()
+                with torch.no_grad():
+                    val_outputs = model(X_val)
+                    val_loss = criterion(val_outputs, y_val)
+                    val_loss_history.append(val_loss.item())
+                    
             final_lr = optimizer.param_groups[0]['lr']
 
         elif self.model_type == 'PyTorch MLP':
@@ -266,6 +299,7 @@ class Trainer:
                 patience=cfg.lr_scheduler_patience,
             )
             for _epoch in range(cfg.epochs):
+                model.train()
                 optimizer.zero_grad()
                 outputs = model(X)
                 loss = criterion(outputs, y)
@@ -273,25 +307,28 @@ class Trainer:
                 optimizer.step()
                 scheduler.step(loss.item())
                 loss_history.append(loss.item())
+                
+                model.eval()
+                with torch.no_grad():
+                    val_outputs = model(X_val)
+                    val_loss = criterion(val_outputs, y_val)
+                    val_loss_history.append(val_loss.item())
+
             final_lr = optimizer.param_groups[0]['lr']
-
-        elif self.model_type == 'Random Forest':
-            model = get_random_forest_model()
-            model.fit(X, y)
-            loss_history = list(np.linspace(1.0, 0.1, 50))
-
-        elif self.model_type == 'Ridge Regression':
-            model = get_ridge_model()
-            model.fit(X, y)
-            loss_history = list(np.linspace(1.0, 0.2, 50))
         else:
             raise ValueError(f"Unknown model_type: {self.model_type}")
 
-        return model, loss_history, final_lr
+        if self.model_type in ['PyTorch FFNN', 'PyTorch MLP']:
+            adapter = ModelAdapter(model, framework='pytorch')
+        else:
+            adapter = ModelAdapter(model, framework='sklearn')
+
+        return adapter, loss_history, val_loss_history, final_lr
 
     def _load_data(self) -> Tuple[np.ndarray, np.ndarray, List[str], Dict[str, str], Any]:
         """Load and build the full-feature dataset from fusion_analysis.parquet."""
         df = pd.read_parquet(self._repo_root / 'data' / 'processed' / 'fusion_analysis.parquet')
+        df.fillna(0.0, inplace=True)
         
         y = df[['fused_valence', 'fused_arousal']].to_numpy(dtype=np.float32)
 
@@ -313,7 +350,8 @@ class Trainer:
         logger.info(f"Full-feature dataset: {X_scaled.shape[0]} rows, {X_scaled.shape[1]} features")
         logger.info(f"Features: {feature_names}")
 
-        return X_scaled, y, feature_names, artifacts, scaler
+        import typing
+        return typing.cast(Tuple[np.ndarray, np.ndarray, List[str], Dict[str, str], Any], (X_scaled, y, feature_names, artifacts, scaler))
 
     def _build_features(self, df: pd.DataFrame) -> Tuple[pd.DataFrame, List[str]]:
         """Build the feature matrix enforcing strict independent/derived/categorical separation."""
@@ -342,7 +380,25 @@ class Trainer:
             col_name = f'Type_of_Space_{st}'
             feature_df[col_name] = df.get(col_name, 0.0)
 
-        ordered = sorted(feature_df.columns)
+        # Compute Derived Features
+        feature_df['Length_to_Width_Ratio'] = feature_df['Length_m'] / (feature_df['Width_m'] + 1e-9)
+        feature_df['Floor_Area_m2'] = feature_df['Length_m'] * feature_df['Width_m']
+        feature_df['Wall_Area_m2'] = 2 * (feature_df['Length_m'] + feature_df['Width_m']) * feature_df['Height_m']
+        feature_df['Volume_m3'] = feature_df['Length_m'] * feature_df['Width_m'] * feature_df['Height_m']
+        feature_df['Door_to_Wall_Ratio'] = feature_df['Door_Area_m2'] / (feature_df['Wall_Area_m2'] + 1e-9)
+        feature_df['Window_to_Wall_Ratio'] = feature_df['Window_Area_m2'] / (feature_df['Wall_Area_m2'] + 1e-9)
+        feature_df['Walkable_to_Floor_Ratio'] = feature_df['Walkable_Floor_Area_m2'] / (feature_df['Floor_Area_m2'] + 1e-9)
+
+        ordered = [
+            'Length_m', 'Width_m', 'Height_m', 'Num_Doors', 'Door_Area_m2',
+            'Num_Windows', 'Window_Area_m2', 'Daylight_Factor_pct', 'Illuminance_lux',
+            'CCT_K', 'Walkable_Floor_Area_m2',
+            'Day_or_Night_Day', 'Day_or_Night_Night',
+            'Type_of_Space_Bedroom', 'Type_of_Space_Living Room', 'Type_of_Space_Workplace',
+            'Type_of_Space_Classroom', 'Type_of_Space_Cafeteria',
+            'Length_to_Width_Ratio', 'Floor_Area_m2', 'Wall_Area_m2', 'Volume_m3',
+            'Door_to_Wall_Ratio', 'Window_to_Wall_Ratio', 'Walkable_to_Floor_Ratio'
+        ]
         return feature_df[ordered], ordered
 
     def _write_data_quality_report(self, df: pd.DataFrame) -> Path:
@@ -366,80 +422,6 @@ class Trainer:
         out.write_text(json.dumps(schema, indent=2), encoding='utf-8')
         return out
 
-    def _write_full_mode_reports(
-        self,
-        X_full: np.ndarray,
-        y_full: np.ndarray,
-        feature_names: List[str],
-        trained_model: Any,
-        val_metrics: Dict[str, float],
-    ) -> Dict[str, str]:
-        self._reports_dir.mkdir(parents=True, exist_ok=True)
-
-        baseline_features = ['Length_m', 'Width_m', 'Height_m']
-        baseline_idx = [feature_names.index(f) for f in baseline_features if f in feature_names]
-        if len(baseline_idx) != 3:
-            raise RuntimeError("Full-feature dataset is missing one or more baseline dimensions.")
-
-        X_base = X_full[:, baseline_idx]
-        Xb_train, Xb_val, yb_train, yb_val = self._split(X_base, y_full)
-        old_model_type = self.model_type
-        self.model_type = 'PyTorch MLP'
-        base_model, _, _ = self._fit(
-            torch.tensor(Xb_train, dtype=torch.float32),
-            torch.tensor(yb_train, dtype=torch.float32),
-        )
-        self.model_type = old_model_type
-        base_metrics = self._compute_train_val_metrics(
-            base_model,
-            torch.tensor(Xb_train, dtype=torch.float32),
-            torch.tensor(yb_train, dtype=torch.float32),
-            torch.tensor(Xb_val, dtype=torch.float32),
-            torch.tensor(yb_val, dtype=torch.float32),
-        )
-
-        comparison = {
-            'model_type': self.model_type,
-            'baseline_metrics': base_metrics,
-            'full_feature_metrics': val_metrics,
-            'metric_delta_full_minus_baseline': {
-                k: float(val_metrics.get(k, 0.0) - base_metrics.get(k, 0.0)) for k in val_metrics.keys()
-            },
-            'full_feature_count': int(len(feature_names)),
-        }
-
-        importance = self._compute_feature_importance(trained_model, X_full, y_full, feature_names)
-        comparison['feature_importance'] = importance
-
-        comparison_path = self._reports_dir / 'model_comparison.json'
-        comparison_path.write_text(json.dumps(comparison, indent=2), encoding='utf-8')
-
-        findings_lines = [
-            "# Training Findings",
-            "",
-            f"Model type: {self.model_type}",
-            f"Full feature count: {len(feature_names)}",
-            f"Total training samples: {len(y_full)}",
-            "",
-            "## Validation Performance",
-            f"- Baseline (3-feature MLP) Val_MAE: {base_metrics['Val_MAE']:.4f}",
-            f"- Full-feature ({self.model_type}) Val_MAE: {val_metrics['Val_MAE']:.4f}",
-            f"- Delta Val_MAE: {val_metrics['Val_MAE'] - base_metrics['Val_MAE']:.4f}",
-            f"- Baseline Val_R2: {base_metrics['Val_R2']:.4f}",
-            f"- Full-feature Val_R2: {val_metrics['Val_R2']:.4f}",
-            "",
-            "## Top Influential Features",
-        ]
-        for item in importance[:10]:
-            findings_lines.append(f"- {item['feature']}: {item['importance_mean']:.6f}")
-
-        findings_path = self._reports_dir / 'training_findings.md'
-        findings_path.write_text("\n".join(findings_lines), encoding='utf-8')
-
-        return {
-            'model_comparison_report': str(comparison_path),
-            'findings_report': str(findings_path),
-        }
 
     def _compute_feature_importance(
         self,
@@ -447,18 +429,18 @@ class Trainer:
         X: np.ndarray,
         y: np.ndarray,
         feature_names: List[str],
-    ) -> List[Dict[str, float]]:
-        if self.model_type == 'Random Forest' and hasattr(model, 'model'):
+    ) -> List[Dict[str, Any]]:
+        if self.model_type == 'Random Forest':
             estimator = model.model
             scorer = 'neg_mean_absolute_error'
-            result = permutation_importance(estimator, X, y, n_repeats=10, random_state=42, scoring=scorer)
+            result = permutation_importance(estimator, X, y, n_repeats=10, random_state=42, scoring=scorer)  # type: ignore
             output = []
             for idx, name in enumerate(feature_names):
                 output.append(
                     {
                         'feature': name,
-                        'importance_mean': float(result.importances_mean[idx]),
-                        'importance_std': float(result.importances_std[idx]),
+                        'importance_mean': float(result['importances_mean'][idx]),
+                        'importance_std': float(result['importances_std'][idx]),
                     }
                 )
             output.sort(key=lambda x: x['importance_mean'], reverse=True)
@@ -478,6 +460,9 @@ class Trainer:
 
     @staticmethod
     def _predict(model: Any, X: np.ndarray) -> np.ndarray:
+        if hasattr(model, 'predict'):
+            return model.predict(X, return_array=True)
+        # Fallback
         model.eval()
         with torch.no_grad():
             out = model(torch.tensor(X, dtype=torch.float32))
@@ -503,12 +488,16 @@ class Trainer:
             probe[1, 0] = 5.0
             probe[1, 1] = 4.0
             probe[1, 2] = 2.8
-        with torch.no_grad():
-            model.eval()
-            out = model(probe)
-            if isinstance(out, dict):
-                out = out['affective_space']
-            out = out.detach().cpu().numpy().flatten()
+        
+        if hasattr(model, 'predict'):
+            out = model.predict(probe, return_array=True).flatten()
+        else:
+            with torch.no_grad():
+                model.eval()
+                out = model(probe)
+                if isinstance(out, dict):
+                    out = out['affective_space']
+                out = out.detach().cpu().numpy().flatten()
 
         if np.any(np.isnan(out)) or np.any(np.isinf(out)):
             raise RuntimeError(f"Model diverged: {out}")
@@ -520,7 +509,7 @@ class Trainer:
 # ---------------------------------------------------------------------------
 # Streamlit convenience wrapper (thin layer)
 # ---------------------------------------------------------------------------
-def train_models_streamlit(model_type: Optional[str] = None, feature_mode: Optional[str] = None) -> TrainResult:
+def train_models_streamlit(model_type: Optional[str] = None) -> TrainResult:
     """
     Thin wrapper that plugs training results into ``st.session_state``.
     Call from UI code only.
@@ -529,20 +518,20 @@ def train_models_streamlit(model_type: Optional[str] = None, feature_mode: Optio
 
     config = get_config()
     model_type = model_type or config.model.default_model_type
-    feature_mode = feature_mode or config.training.default_feature_mode
 
-    with st.spinner(f"Training {model_type} model ({feature_mode} features)…"):
-        trainer = Trainer(model_type=model_type, feature_mode=feature_mode, use_streamlit_loader=True)
+    with st.spinner(f"Training {model_type} model (full features)…"):
+        trainer = Trainer(model_type=model_type, use_streamlit_loader=True)
         result = trainer.train()
 
     st.session_state.spatial_model = result.model
     st.session_state.loss_history = result.loss_history
+    st.session_state.val_loss_history = result.val_loss_history
+    st.session_state.parity_df = result.parity_df
     st.session_state.trained = True
     st.session_state.eval_metrics = result.metrics
     st.session_state.converged = result.converged
     st.session_state.final_lr = result.final_lr
     st.session_state.feature_names = result.feature_names
-    st.session_state.feature_mode = result.feature_mode
     st.session_state.model_type = result.model_type
     st.session_state.scaler = result.scaler
     # Store full training data so UI pages can access it for visualization
@@ -553,6 +542,6 @@ def train_models_streamlit(model_type: Optional[str] = None, feature_mode: Optio
 
 
 # Backward-compatible alias
-def train_models_logic(model_type: Optional[str] = None, feature_mode: Optional[str] = None):
+def train_models_logic(model_type: Optional[str] = None):
     """Legacy alias — delegates to train_models_streamlit."""
-    return train_models_streamlit(model_type, feature_mode)
+    return train_models_streamlit(model_type)

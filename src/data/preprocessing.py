@@ -103,23 +103,36 @@ def analyze_eeg_bands(signal_data, fs=256):
         f: frequency axis from Welch
         Pxx: power spectral density from Welch
     """
+    # 1.0 Hz High-pass filter to remove slow physical movement artifacts
+    b, a = scipy.signal.butter(4, 1.0 / (0.5 * fs), btype='high')
+    filtered_signal = scipy.signal.filtfilt(b, a, signal_data)
+
     bands = {
-        "Delta": (0.5, 4),
+        "Delta": (2.0, 4),
         "Theta": (4, 8),
         "Alpha": (8, 13),
         "Beta": (13, 30),
         "Gamma": (30, 100)
     }
 
-    f, Pxx = scipy.signal.welch(signal_data, fs=fs, nperseg=fs * 2)
+    f, Pxx = scipy.signal.welch(filtered_signal, fs=fs, nperseg=fs * 2)
+
+    valid_idx = f >= 2.0
+    f_clean = f[valid_idx]
+    Pxx_clean = Pxx[valid_idx]
 
     powers = {}
     for band, (low, high) in bands.items():
-        mask = (f >= low) & (f <= high)
+        mask = (f_clean >= low) & (f_clean <= high)
         if np.any(mask):
-            powers[band] = np.trapezoid(Pxx[mask], f[mask])
+            powers[band] = np.trapezoid(Pxx_clean[mask], f_clean[mask])
         else:
             powers[band] = 0.0
+
+    # Convert to Relative Power
+    total_power = sum(powers[band] for band in bands.keys())
+    for band in bands.keys():
+        powers[band] = powers[band] / (total_power + 1e-9)
 
     # Ratios (used for V/A mapping)
     powers['Beta/Alpha'] = powers['Beta'] / (powers['Alpha'] + 1e-6)
@@ -169,9 +182,9 @@ def analyze_ecg(signal_data, fs=256, apply_truncation=True):
     if len(signal_trunc) != expected_samples:
         raise ValueError(f"ECG signal length post-truncation must be exactly 50 seconds ({expected_samples} samples), but got {len(signal_trunc)} samples.")
 
-    # 1. Bandpass Filter (0.5Hz - 40Hz)
+    # 1. Bandpass Filter (0.5Hz - 5.0Hz) to strip baseline wander and high-frequency noise
     try:
-        filtered_signal = butter_bandpass_filter(signal_trunc, 0.5, 40.0, fs, order=4)
+        filtered_signal = butter_bandpass_filter(signal_trunc, 0.5, 5.0, fs, order=4)
         clean_signal = filtered_signal
     except Exception:
         clean_signal = signal_trunc  # Fallback
@@ -179,22 +192,32 @@ def analyze_ecg(signal_data, fs=256, apply_truncation=True):
     # 2. Peak Detection (Z-score normalize for consistent thresholding)
     sig_norm = zscore_normalize(clean_signal)
 
-    # Find R-peaks
-    peaks, _ = scipy.signal.find_peaks(sig_norm, height=1.5, distance=fs * 0.4)
+    # Find R-peaks with strict biological constraints
+    # Max HR 150 BPM = 400ms minimum gap
+    min_distance = int(fs * 0.4)
+    peaks, _ = scipy.signal.find_peaks(sig_norm, height=0.5, distance=min_distance, prominence=0.5)
 
     if len(peaks) < 2:
         return {"BPM": 0, "HRV": 0}, peaks, clean_signal
 
-    # Calculate RR intervals in seconds
-    rr_intervals = np.diff(peaks) / fs
+    # 3. Time Scaling
+    # Calculate RR intervals in seconds, then explicitly scale to milliseconds
+    rr_intervals_sec = np.diff(peaks) / fs
+    rr_intervals_ms = rr_intervals_sec * 1000.0
 
-    bpm = 60 / np.mean(rr_intervals)
+    valid_rr = np.array([rr for rr in rr_intervals_ms if 300 <= rr <= 1200])
+    if len(valid_rr) < 2:
+        return {"BPM": 0, "HRV": 0}, peaks, clean_signal
+
+    bpm = 60000.0 / np.mean(valid_rr)
     
     # Calculate RMSSD (Root Mean Square of Successive Differences) for Arousal
-    if len(rr_intervals) > 1:
-        diff_rr = np.diff(rr_intervals)
-        hrv = np.sqrt(np.mean(diff_rr**2)) * 1000  # RMSSD in ms
-    else:
+    diff_rr_ms = np.diff(valid_rr)
+    valid_diffs = diff_rr_ms[np.abs(diff_rr_ms) < 150]
+    
+    if len(valid_diffs) == 0:
         hrv = 0.0
+    else:
+        hrv = float(np.sqrt(np.mean(valid_diffs**2)))  # RMSSD natively in ms
 
     return {"BPM": bpm, "HRV": hrv}, peaks, clean_signal

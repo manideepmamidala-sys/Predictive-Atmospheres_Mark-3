@@ -10,7 +10,7 @@
 
 **Predictive Atmospheres** (v0.2.0) is a machine learning system that maps architectural spatial parameters to predicted human emotional states, expressed as Valence (pleasant ↔ unpleasant) and Arousal (calm ↔ excited) on Russell's Circumplex Model. The system ingests raw EEG and ECG biometric recordings collected from human subjects inside physical rooms, processes these signals through a multi-stage pipeline (temporal truncation, Z-score normalization, Welch's PSD, Frontal Alpha Asymmetry for Valence, RMSSD for Arousal), and derives ground-truth emotional targets. A trained neural network then learns to predict these emotional targets from the room's physical features alone — enabling spatial designers to anticipate the affective quality of an unbuilt space without requiring any biometric hardware at inference time.
 
-The application is delivered as a **Streamlit web dashboard** with six interactive pages (Design Studio, Human Metrics, Spatial Insights, Emotion Landscape, Design Benchmark, Model Training) and a parallel **CLI** for headless training and prediction. The Design Studio page provides interactive sliders for 20+ spatial features (geometry, openings, daylight, condition), live affective predictions, and an inverse-design optimizer (differential evolution) that finds room configurations matching a target emotional score. The system supports multiple model architectures (PyTorch FFNN/MLP, scikit-learn Random Forest/Ridge), auto-discovers experimental datasets via a registry pattern, and includes a service-oriented backend decoupled from the UI (making it theoretically portable to Rhino, APIs, or other interfaces).
+The application is delivered as a **Streamlit web dashboard** with eight interactive pages (Design Studio, Human Metrics, Spatial Insights, Emotion Landscape, Affective Fusion, Demographic Insights, Environmental Impacts, Model Training) and a parallel **CLI** for headless training and prediction. The Design Studio page provides interactive sliders for 20+ spatial features (geometry, openings, daylight, condition), live affective predictions, and an inverse-design optimizer (differential evolution) that finds room configurations matching a target emotional score. The system supports multiple model architectures (PyTorch FFNN/MLP, scikit-learn Random Forest/Ridge/SVR), auto-discovers experimental datasets via a registry pattern, and includes a service-oriented backend decoupled from the UI (making it theoretically portable to Rhino, APIs, or other interfaces).
 
 ---
 
@@ -32,9 +32,7 @@ Predictive Atmospheres_Mark 3/
 │   │   ├── experiment_02/            # Raw EEG CSV recordings (Subj_*.csv)
 │   │   └── experiment_03/            # Raw EEG CSV recordings (Subj_*.csv)
 │   ├── processed/                    # Cached tensors (cached_data.pt, synthetic_data_fallback.pt)
-│   ├── paper_data/                   # MDS coordinates for CognitiveBridge
-│   ├── knowledge/                    # Extracted literature data
-│   └── SpaCE-Eval/                   # SpaCE-Eval benchmark data
+│   └── paper_data/                   # MDS coordinates for CognitiveBridge
 │
 ├── src/
 │   ├── app.py                        # Streamlit entry point. Boots ML backend, auto-trains, renders 6 pages.
@@ -53,8 +51,9 @@ Predictive Atmospheres_Mark 3/
 │   │   ├── architectures.py          # MultiScaleEEGCNN, SpatialMLP, SpatialFFNN, CognitiveMapMLP definitions.
 │   │   ├── train.py                  # Trainer class (FFNN/MLP/RF/Ridge). Full-feature dataset builder. Reports. Streamlit wrapper.
 │   │   ├── cognitive_bridge.py       # MDS-space trajectory mapping. 13-category cognitive map. TEM grid discretization.
-│   │   ├── sklearn_models.py         # SklearnModelWrapper (RandomForest, Ridge) with PyTorch-like interface.
-│   │   └── adapters.py              # BaseModelAdapter ABC + PyTorchAdapter, SKLearnAdapter, ONNXAdapter.
+│   │   ├── sklearn_models.py         # SklearnModelWrapper (RandomForest, Ridge, SVR) with PyTorch-like interface.
+│   │   ├── adapter.py                # ModelAdapter wrapping PyTorch and scikit-learn interfaces (MC Dropout, SHAP).
+│   │   └── adapters.py               # Legacy model adapters (deprecated).
 │   │
 │   ├── services/
 │   │   ├── __init__.py               # Public API exports.
@@ -63,23 +62,21 @@ Predictive Atmospheres_Mark 3/
 │   │   ├── prediction_service.py     # predict(L,W,H) and predict_full(features_dict). Emotion weight computation.
 │   │   ├── optimization_service.py   # Differential evolution, Monte Carlo, gradient-based room optimization.
 │   │   ├── neural_processing_service.py  # Wraps emotion_engine + preprocessing for EEG/ECG processing.
-│   │   ├── space_capability_service.py   # SpaCE capability model (SR/CK/EI) from pickled sklearn model.
-│   │   └── space_eval_integration.py     # Deterministic heuristic evaluator for SpaCE-Eval capabilities.
+│   │   └── space_capability_service.py   # SpaCE capability model (SR/CK/EI) from pickled sklearn model.
 │   │
 │   ├── ui/
 │   │   ├── theme.py                  # Dark-mode CSS, PALETTE dict, style_figure helper, render_hero/panel_header components.
 │   │   ├── state_utils.py            # Centralized full-feature extraction from st.session_state.
 │   │   ├── base_visualization.py     # ABC for visualization pages (load_data → process_data → build_charts).
+│   │   ├── data_utils.py             # Data loading and formatting utilities.
 │   │   ├── design_studio.py          # Interactive room design + live prediction + inverse optimization + affective map.
 │   │   ├── human_metrics.py          # Population-level EEG/ECG biometric analytics (stress, HR, HRV, PSD).
 │   │   ├── spatial_insights.py       # Correlation analysis: feature vs NeuroScore scatterplots + heatmap.
 │   │   ├── emotion_landscape.py      # 3D spatial distribution, V-A density field, volume quartile analysis.
-│   │   ├── design_benchmark.py       # Radar chart benchmark of current design vs dataset distribution.
+│   │   ├── affective_fusion.py       # Multimodal affective fusion visualization (EEG/ECG vs Subjective).
+│   │   ├── demographic_insights.py   # Analysis of demographic features (e.g., Gender, Sleep Hours).
+│   │   ├── environmental_impacts.py  # Environmental metric evaluation.
 │   │   └── model_training.py         # Training convergence viewer, architecture info, retrain controls.
-│   │
-│   ├── knowledge/
-│   │   ├── theory.py                 # NeuroKnowledgeBase: qualitative heuristics (ceiling height, volume, proportions).
-│   │   └── literature.py             # Literature source loader with quality-scored references.
 │   │
 │   ├── core/
 │   │   └── data/
@@ -90,18 +87,6 @@ Predictive Atmospheres_Mark 3/
 │   │   └── rendering.py              # 3D room cuboid renderer + 2D affective map (quadrant chart) in Plotly.
 │   │
 │   └── test/                         # 10 test files covering emotion engine, cognitive bridge, validators, services, etc.
-│
-├── scripts/
-│   └── data_ingestion/               # Data ingestion scripts (directory present, contents not audited)
-│
-├── docs/
-│   ├── adr-0001-architecture.md      # Architecture Decision Record
-│   ├── data-flow.md                  # Data flow documentation
-│   ├── deployment-guide.md           # Deployment instructions
-│   ├── paper-alignment.md            # Paper alignment notes
-│   ├── research-workflow.md          # Research workflow
-│   ├── space-eval-import.md          # SpaCE-Eval import guide
-│   └── project planning docs/       # Project planning materials
 │
 ├── artifacts/                        # Generated reports (model_comparison.json, training_findings.md, etc.)
 ├── pyproject.toml                    # Package definition, dependencies, mypy/pytest config
@@ -284,7 +269,8 @@ Feature Categories (from SpatialFeatureConfig):
     Geometry:  Length, Width, Height, L:W Ratio, Wall Area, Floor Area, Volume
     Openings:  Door count, Door area, Door ratio, Window count, Window area, Window ratio
     Daylight:  Daylight Factor, Illuminance, UDI, sDA, ASE, CCT
-    Condition: Day or Night (one-hot)
+    Condition: Day or Night, Type of Space (one-hot)
+    Demographics: Gender (one-hot)
 ```
 
 ---
@@ -408,12 +394,9 @@ Probe: Two fixed input vectors passed through the model.
 Check: No NaN/Inf outputs. All outputs within [-2.0, 2.0] range.
 ```
 
-### 4.7 Model Adapters (in `adapters.py`)
+### 4.7 Model Adapters (in `adapter.py`)
 ```
-BaseModelAdapter (ABC) → predict(input, batch) → (valence, arousal)
-├── PyTorchAdapter     — wraps nn.Module, supports_gradients=True
-├── SKLearnAdapter     — wraps sklearn pipeline
-└── ONNXAdapter        — wraps onnxruntime InferenceSession (DEFINED but no ONNX export code exists)
+ModelAdapter — Unified wrapper for PyTorch and scikit-learn models. Provides `predict`, `predict_mc_dropout` (for uncertainty and confidence scoring), and `explain_prediction` (via SHAP).
 ```
 
 ### 4.8 Optimization Algorithms (in `optimization_service.py`)
@@ -430,7 +413,7 @@ BaseModelAdapter (ABC) → predict(input, batch) → (valence, arousal)
 
 | Component | Status |
 |---|---|
-| **SpaCEEvalHeuristics** | IMPLEMENTED. Deterministic tanh-based heuristic mapping spatial features → SR/CK/EI scores. No ML. |
+| **SpaCEEvalHeuristics** | REMOVED. `space_eval_integration.py` was deleted during project recalibration to ML constraints. |
 | **SpaceCapabilityService** | IMPLEMENTED. Loads a pickled sklearn model from `artifacts/models/`. Model file may or may not exist at runtime. |
 
 ---
@@ -490,5 +473,5 @@ BaseModelAdapter (ABC) → predict(input, batch) → (valence, arousal)
 | 6 | The ECG `analyze_ecg()` function enforces **exactly 50 seconds** (12,800 samples) post-truncation and raises `ValueError` otherwise. |
 | 7 | Three experiment datasets exist (`experiment_01`, `experiment_02`, `experiment_03`) with paired biometric + spatial metadata CSVs. |
 | 8 | `state_utils.py` and `design_studio.py` both contain `_collect_full_features` / `get_current_features_from_state` with overlapping logic — the `state_utils.py` version is missing UDI, sDA, and ASE features that are present in `design_studio.py`. |
-| 9 | The `NeuroKnowledgeBase` (theory.py) provides qualitative heuristic analysis based on ceiling height, volume, and L:W ratio — this is purely rule-based, not ML-derived. |
+| 9 | `NeuroKnowledgeBase` and all documentation (`docs/`, `scripts/`, `knowledge/`) were recently purged from the codebase during recalibration to strict ML constraints. |
 | 10 | The default training mode is `full` features with `PyTorch FFNN`, auto-triggered on first Streamlit launch. |

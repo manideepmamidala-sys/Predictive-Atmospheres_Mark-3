@@ -10,13 +10,12 @@ from frontend.ui import (
     design_studio,
     human_metrics,
     spatial_insights,
-    model_training,
     emotion_landscape,
-    design_benchmark,
     affective_fusion,
-    spatial_correlator,
     demographic_insights,
-    environmental_impacts
+    environmental_impacts,
+    system_architecture,
+    model_training
 )
 from frontend.ui.theme import apply_global_theme, render_hero
 from src.services import ServiceContainer
@@ -36,15 +35,15 @@ def main():
         layout="wide",
         initial_sidebar_state="expanded",
     )
+    
+    import plotly.io as pio
+    # Force global font for all Plotly charts to preserve styling in static PNG downloads
+    current_default = pio.templates.default or "plotly_dark"
+    pio.templates[current_default].layout.font.family = "'Google Sans Flex'"
+    pio.templates.default = current_default
+    
     apply_global_theme()
     
-    render_hero(
-        "Emotion-Aware Spatial Intelligence",
-        "Machine learning framework to infer human emotional states from architectural space and embed affective intelligence into design decisions.",
-        kicker="Neuro-Architectural Design Platform",
-        compact=True,
-    )
-
     try:
         SpatialMLP, SpatialFFNN, train_models_logic = _load_ml_backend()
     except KeyboardInterrupt:
@@ -59,8 +58,7 @@ def main():
         st.session_state.spatial_model = None
         st.session_state.trained = False
         st.session_state.feature_names = []
-        st.session_state.feature_mode = 'full'
-        st.session_state.model_type = 'PyTorch FFNN'
+        st.session_state.model_type = 'Random Forest'
         st.session_state.scaler = None
 
     config = get_config()
@@ -95,18 +93,19 @@ def main():
             "Human Metrics",
             "Spatial Insights",
             "Emotion Landscape",
-            "Design Benchmark",
-            "Model Training",
             "Affective Fusion",
-            "Spatial Correlator",
             "Demographic Insights",
-            "Environmental Impacts"
+            "Environmental Impacts",
+            "System Architecture",
+            "Model Training"
         ],
         label_visibility="collapsed",
     )
 
     if mode == "Model Training":
         model_training.render_page(st.session_state.services)
+    elif mode == "System Architecture":
+        system_architecture.render_system_architecture()
     elif mode == "Design Studio":
         design_studio.render_page(st.session_state.services)
     elif mode == "Human Metrics":
@@ -115,12 +114,9 @@ def main():
         spatial_insights.render_page()
     elif mode == "Emotion Landscape":
         emotion_landscape.render_page(st.session_state.services)
-    elif mode == "Design Benchmark":
-        design_benchmark.render_page(st.session_state.services)
+
     elif mode == "Affective Fusion":
         affective_fusion.render_page()
-    elif mode == "Spatial Correlator":
-        spatial_correlator.render_page()
     elif mode == "Demographic Insights":
         demographic_insights.render_page()
     elif mode == "Environmental Impacts":

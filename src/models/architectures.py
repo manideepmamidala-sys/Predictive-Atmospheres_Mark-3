@@ -7,7 +7,7 @@ SpatialMLP:
   - ReLU hidden layers, Tanh output (maps to [-1, 1])
 
 SpatialFFNN:
-  - Extended spatial features (20+ parameters) → Valence, Arousal prediction
+  - Extended spatial features (25 parameters) → Valence, Arousal prediction
   - BatchNorm + Dropout + Residual connections for regularization
   - Tanh output maps to [-1, 1] for V/A space
 """
@@ -43,7 +43,7 @@ class SpatialMLP(nn.Module):
 class SpatialFFNN(nn.Module):
     """
     Feed-Forward Neural Network for predicting emotional response from
-    extended architectural spatial features (20+ parameters).
+    extended architectural spatial features (25 parameters).
 
     Designed for Experiment 02 data which includes geometry, openings,
     daylight metrics, and environmental conditions.
@@ -61,7 +61,7 @@ class SpatialFFNN(nn.Module):
       - Tanh output maps to [-1, 1] Valence/Arousal space
     """
 
-    def __init__(self, input_dim: int = 20) -> None:
+    def __init__(self, input_dim: int = 25) -> None:
         super(SpatialFFNN, self).__init__()
         self.input_dim = input_dim
 

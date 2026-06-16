@@ -133,7 +133,8 @@ def _collect_full_features(config) -> Dict[str, float]:
     features['Walkable_Floor_Area_m2'] = float(st.session_state.get('walkable_floor', 60.0))
 
     # Condition (Day/Night) – one-hot encoded
-    is_day = st.session_state.get('is_day', True)
+    condition = st.session_state.get('condition', 'Day')
+    is_day = (condition == 'Day')
     feature_names = st.session_state.get('feature_names', [])
     for name in feature_names:
         if name.startswith('Day_or_Night_'):
@@ -145,22 +146,36 @@ def _collect_full_features(config) -> Dict[str, float]:
                 features[name] = 0.0
 
     # Type of Space – one-hot encoded
-    selected_space = st.session_state.get('space_type', 'Living Room')
+    selected_space = st.session_state.get('space_type', 'Unspecified')
     for name in feature_names:
         if name.startswith('Type_of_Space_'):
             space_label = name.replace('Type_of_Space_', '')
-            features[name] = 1.0 if space_label == selected_space else 0.0
+            if selected_space == "Unspecified":
+                features[name] = 0.0
+            else:
+                features[name] = 1.0 if space_label == selected_space else 0.0
 
     return features
 
 
 def render_page(services: Optional[ServiceContainer] = None):
-    render_hero(
-        "Interactive Design Studio",
-        "Shape room geometry and architectural parameters, inspect predicted emotional response, and use inverse optimization to co-design toward target affect.",
-        kicker="Design + Predict",
-        compact=True,
-    )
+    st.markdown("""
+    <style>
+        .block-container { padding-top: 1rem; padding-bottom: 1rem; max-width: 100%; }
+        div[data-testid="stMetric"] { margin-bottom: -15px; }
+        .stSlider { padding-bottom: 0px; margin-bottom: -10px; }
+        div[data-testid="stExpander"] { border: none; }
+        /* Compress plotly charts slightly */
+        .js-plotly-plot { margin-top: -15px; }
+        /* Shrink standard metric values */
+        div[data-testid="stMetricValue"] { font-size: 1.6rem !important; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    col_title, col_metrics = st.columns([1.5, 1.5])
+    with col_title:
+        st.title("Interactive Design Studio")
+        st.caption("Shape room geometry and architectural parameters, inspect predicted emotional response, and use inverse optimization to co-design toward target affect.")
 
     if services is not None and "spatial_model" in st.session_state and st.session_state.spatial_model is not None:
         services.set_model(st.session_state.spatial_model)
@@ -172,192 +187,165 @@ def render_page(services: Optional[ServiceContainer] = None):
     ref_centroids = config.emotion.centroids
     emotion_weights = {}
 
-    col_ctrl, col_viz = st.columns([1.2, 2.8], gap="medium")
+    col_controls, col_visuals = st.columns([1, 2], gap="medium")
 
-    with col_ctrl:
-        # ---- Core Geometry ----
-        panel_header("Room Geometry", "Inputs")
-        if "L" not in st.session_state:
-            st.session_state["L"] = config.room.default_length
-        if "W" not in st.session_state:
-            st.session_state["W"] = config.room.default_width
-        if "H" not in st.session_state:
-            st.session_state["H"] = config.room.default_height
+    with col_controls:
+        input_left, input_right = st.columns(2)
+        
+        with input_left:
+            st.markdown("### Geometry")
+            if "L" not in st.session_state: st.session_state["L"] = config.room.default_length
+            if "W" not in st.session_state: st.session_state["W"] = config.room.default_width
+            if "H" not in st.session_state: st.session_state["H"] = config.room.default_height
 
-        length = st.slider("Length (m)", config.room.min_length, config.room.max_length, key="L")
-        width = st.slider("Width (m)", config.room.min_width, config.room.max_width, key="W")
-        height = st.slider("Height (m)", config.room.min_height, config.room.max_height, key="H")
+            length = st.slider("Length (m)", config.room.min_length, config.room.max_length, key="L")
+            width = st.slider("Width (m)", config.room.min_width, config.room.max_width, key="W")
+            height = st.slider("Height (m)", config.room.min_height, config.room.max_height, key="H")
 
-        footprint = float(length * width)
-        volume = float(length * width * height)
-        c_geom1, c_geom2 = st.columns(2)
-        c_geom1.metric("Footprint", f"{footprint:.1f} m²")
-        c_geom2.metric("Volume", f"{volume:.1f} m³")
+            prev_l = st.session_state.get("prev_L", length)
+            prev_w = st.session_state.get("prev_W", width)
+            prev_h = st.session_state.get("prev_H", height)
+            resized = (length != prev_l) or (width != prev_w) or (height != prev_h)
 
-        # ---- Openings ----
-        with st.expander("🚪 Openings", expanded=False):
+            footprint = float(length * width)
+            wall_area = float(2 * (length + width) * height)
+
+            if resized:
+                st.session_state["door_area"] = min(2.0, float(0.20 * wall_area))
+                st.session_state["window_area"] = min(1.5, float(0.60 * wall_area))
+                st.session_state["walkable_floor"] = float(0.30 * footprint)
+
+            st.markdown("### Openings")
             st.slider("Number of Doors", 0.0, 10.0, 1.0, step=1.0, key="num_doors")
-            st.slider("Door Area (m²)", 0.0, 30.0, 1.8, key="door_area")
+            max_door_area = float(0.20 * wall_area)
+            if "door_area" not in st.session_state: st.session_state["door_area"] = min(2.0, max_door_area)
+            door_area = st.slider("Door Area (m²)", 0.0, max_door_area, key="door_area")
+            
             st.slider("Number of Windows", 0.0, 30.0, 2.0, step=1.0, key="num_windows")
-            st.slider("Window Area (m²)", 0.0, 250.0, 5.0, key="window_area")
+            max_window_area = float(0.60 * wall_area)
+            if "window_area" not in st.session_state: st.session_state["window_area"] = min(1.5, max_window_area)
+            window_area = st.slider("Window Area (m²)", 0.0, max_window_area, key="window_area")
 
-        # ---- Daylight (UDI, sDA, ASE permanently purged) ----
-        with st.expander("☀️ Daylight & Lighting", expanded=False):
+        with input_right:
+            st.markdown("### Daylight")
             st.slider("Daylight Factor (%)", 0.0, 20.0, 2.0, key="daylight_factor")
             st.slider("Illuminance (lux)", 0.0, 2000.0, 300.0, key="illuminance")
             st.slider("CCT (Kelvin)", 2000.0, 10000.0, 4000.0, key="cct")
 
-        # ---- Floor ----
-        with st.expander("🏗️ Floor", expanded=False):
-            st.slider("Walkable Floor Area (m²)", 0.0, 500.0, 60.0, key="walkable_floor")
+            st.markdown("### Space Details")
+            max_walkable_area = float(footprint)
+            if "walkable_floor" not in st.session_state: st.session_state["walkable_floor"] = float(0.30 * footprint)
+            walkable_floor = st.slider("Walkable Floor Area (m²)", 0.0, max_walkable_area, key="walkable_floor")
+            
+            st.radio("Lighting Condition", ["Day", "Night"], horizontal=True, key="condition")
+            st.selectbox("Type of Space", ["Unspecified"] + config.spatial_features.space_types, index=0, key="space_type")
 
-        # ---- Condition ----
-        with st.expander("🌗 Experiment Condition", expanded=False):
-            st.toggle("Day (vs Night)", value=True, key="is_day")
-            st.caption("Controls the Day/Night condition under which the model evaluates the space.")
+            st.markdown("### AI Co-Design")
+            st.slider("Target Neuro-Score", 0.0, 1.0, 0.8, key="target_score")
+            button_disabled = (window_area + door_area) > wall_area
+            st.button("Auto-Design Room", on_click=optimize_room, args=(services,), use_container_width=True, disabled=button_disabled)
 
-        # ---- Type of Space ----
-        with st.expander("🏢 Space Type", expanded=False):
-            st.selectbox(
-                "Type of Space",
-                config.spatial_features.space_types,
-                index=1,  # Default: Living Room
-                key="space_type",
-            )
-            st.caption("Categorical variable one-hot encoded before model input.")
 
-        # ---- Optimization ----
-        panel_header("AI Co-Design", "Optimization")
-        st.caption("Set a target emotional score and run inverse design optimization.")
-        st.slider("Target Neuro-Score", 0.0, 1.0, 0.8, key="target_score")
-        st.button("Auto-Design Room", on_click=optimize_room, args=(services,), use_container_width=True)
 
-        if "last_opt_neuro_score" in st.session_state:
-            st.success(f"Optimized configuration reached Predicted Neuro-Score: {st.session_state.last_opt_neuro_score:.2f}")
-            del st.session_state["last_opt_neuro_score"]
+    # --- INFERENCE ---
+    confidence = None
+    if st.session_state.get('trained', False):
+        features = _collect_full_features(config)
+        feature_names = st.session_state.get('feature_names', [])
 
-        # ---- Model Inference ----
-        panel_header("Model Inference", "Live Prediction")
-
-        if st.session_state.get('trained', False):
-            features = _collect_full_features(config)
-            feature_names = st.session_state.get('feature_names', [])
-
-            if services is not None:
-                ref_centroids = services.prediction_service.get_reference_centroids()
-                if feature_names and len(feature_names) > 3:
+        if services is not None:
+            ref_centroids = services.prediction_service.get_reference_centroids()
+            if feature_names and len(feature_names) > 3:
+                try:
+                    pred_result = services.prediction_service.predict_mc_dropout(features)
+                    confidence = pred_result.confidence_score
+                except (ValueError, AttributeError):
                     pred_result = services.prediction_service.predict_full(features)
-                else:
-                    pred_result = services.prediction_service.predict(length, width, height)
-                pred_v = pred_result.valence
-                pred_a = pred_result.arousal
-                pred_va = np.array([pred_v, pred_a], dtype=float)
-                emotion_weights = pred_result.emotion_weights
             else:
-                model = st.session_state.spatial_model
-                if model is not None:
-                    if feature_names and len(feature_names) > 3:
-                        ps = PredictionService(
-                            config=config, model=model,
-                            feature_names=feature_names,
-                            scaler=st.session_state.get('scaler'),
-                        )
-                        pred_result = ps.predict_full(features)
-                        pred_v = pred_result.valence
-                        pred_a = pred_result.arousal
-                        pred_va = np.array([pred_v, pred_a], dtype=float)
-                        emotion_weights = pred_result.emotion_weights
-                    else:
-                        input_tensor = torch.tensor([[length, width, height]], dtype=torch.float32)
-                        with torch.no_grad():
-                            output = model(input_tensor)
-                            if isinstance(output, dict):
-                                output = output["affective_space"]
-                            pred_va = output.detach().cpu().numpy().flatten()
-                        pred_v = float(pred_va[0])
-                        pred_a = float(pred_va[1])
-                        ps = PredictionService(config=config)
-                        emotion_weights = ps._compute_emotion_weights(pred_v, pred_a)
-
-            if pred_v is not None:
-                neuro_score = (pred_v + 1.0) / 2.0
-                st.metric("Predicted Neuro-Score", f"{neuro_score:.2f}", help="0.0 = negative, 1.0 = positive")
-                c_val, c_aro = st.columns(2)
-                c_val.metric("Valence", f"{pred_v:.2f}")
-                c_aro.metric("Arousal", f"{pred_a:.2f}")
-
-                st.caption(f"Atmospheric Label: {_atmosphere_label(pred_v, config)}")
-
-
+                pred_result = services.prediction_service.predict(length, width, height)
+            pred_v = pred_result.valence
+            pred_a = pred_result.arousal
+            pred_va = np.array([pred_v, pred_a], dtype=float)
+            emotion_weights = pred_result.emotion_weights
         else:
-            st.info("Initializing models...")
+            model = st.session_state.spatial_model
+            if model is not None:
+                if feature_names and len(feature_names) > 3:
+                    ps = PredictionService(config=config, model=model, feature_names=feature_names, scaler=st.session_state.get('scaler'))
+                    pred_result = ps.predict_full(features)
+                    pred_v = pred_result.valence
+                    pred_a = pred_result.arousal
+                    pred_va = np.array([pred_v, pred_a], dtype=float)
+                    emotion_weights = pred_result.emotion_weights
+                else:
+                    input_tensor = torch.tensor([[length, width, height]], dtype=torch.float32)
+                    with torch.no_grad():
+                        output = model(input_tensor)
+                        if isinstance(output, dict): output = output["affective_space"]
+                        pred_va = output.detach().cpu().numpy().flatten()
+                    pred_v = float(pred_va[0])
+                    pred_a = float(pred_va[1])
+                    ps = PredictionService(config=config)
+                    emotion_weights = ps._compute_emotion_weights(pred_v, pred_a)
 
-    with col_viz:
+    # --- TOP METRICS ---
+    with col_metrics:
+        if pred_v is not None and pred_a is not None:
+            neuro_score = (pred_v + 1.0) / 2.0
+            m1, m2, m3, m4, m5 = st.columns([1.2, 1, 1, 1, 1.2])
+            neuro_score_value = f"{neuro_score:.2f}"
+            m1.markdown(f"""
+                <div style="line-height: 1.2; margin-top: -8px;">
+                    <span style="font-size: 0.9rem; color: #A0AAB2;">Predicted Neuro-Score</span><br>
+                    <span style="font-size: 2.8rem; font-weight: 700; color: #FAFAFA;">{neuro_score_value}</span>
+                </div>
+            """, unsafe_allow_html=True)
+            m2.metric("Valence", f"{pred_v:.2f}")
+            m3.metric("Arousal", f"{pred_a:.2f}")
+            if confidence is not None:
+                m4.metric("Confidence", f"{confidence:.1f}%")
+            else:
+                m4.metric("Confidence", "N/A")
+            m5.metric("Atmospheric Label", _atmosphere_label(pred_v, config))
+            
+            if "last_opt_neuro_score" in st.session_state:
+                st.success(f"Optimized to Neuro-Score: {st.session_state.last_opt_neuro_score:.2f}")
+                del st.session_state["last_opt_neuro_score"]
+
+
+    # --- VISUALS ---
+    with col_visuals:
         fig = render_3d_room(length, width, height, pred_v)
-        st.plotly_chart(fig, width="stretch")
+        fig.update_layout(height=350, margin=dict(l=10, r=10, t=30, b=10))
+        st.plotly_chart(fig, use_container_width=True)
 
-        tab_map, tab_profile, tab_reference, tab_features = st.tabs([
-            "Affective Map", "Emotion Profile", "Reference Alignment", "Feature Radar"
-        ])
+        tab_map, tab_profile, tab_alignment = st.tabs(["Affective Map", "Emotion Profile", "Reference Alignment"])
 
         with tab_map:
-            if pred_va is not None:
+            if pred_v is not None and pred_a is not None:
                 fig_vad_map = render_2d_affective_map(pred_v, pred_a, ref_centroids)
-                st.plotly_chart(fig_vad_map, width="stretch")
+                fig_vad_map.update_layout(height=350, margin=dict(l=10, r=10, t=30, b=10))
+                st.plotly_chart(fig_vad_map, use_container_width=True)
             else:
                 st.info("Affective map will appear after model initialization.")
-
+                
         with tab_profile:
             if pred_va is not None and emotion_weights:
                 fig_profile = _emotion_profile_chart(emotion_weights)
-                st.plotly_chart(fig_profile, width="stretch")
+                fig_profile.update_layout(height=350, margin=dict(l=10, r=10, t=30, b=10))
+                st.plotly_chart(fig_profile, use_container_width=True)
             else:
                 st.info("Emotion profile will appear after model initialization.")
 
-        with tab_reference:
-            if pred_va is not None and ref_centroids:
+        with tab_alignment:
+            if pred_v is not None and pred_a is not None and ref_centroids:
                 fig_distance = _centroid_distance_chart(pred_v, pred_a, ref_centroids)
-                st.plotly_chart(fig_distance, width="stretch")
+                fig_distance.update_layout(height=350, margin=dict(l=10, r=10, t=30, b=10))
+                st.plotly_chart(fig_distance, use_container_width=True)
             else:
                 st.info("Reference alignment chart will appear after model initialization.")
 
-        with tab_features:
-            if pred_va is not None:
-                features = _collect_full_features(config)
-                # Show radar chart of current feature values
-                display_features = {
-                    k: v for k, v in features.items()
-                    if not k.startswith('Day_or_Night_') and not k.startswith('Type_of_Space_') and v != 0.0
-                }
-                # Normalize for radar display
-                labels = []
-                values = []
-                for fname, fval in sorted(display_features.items()):
-                    if hasattr(config.spatial_features, fname):
-                        feat_cfg = getattr(config.spatial_features, fname)
-                        if isinstance(feat_cfg, dict) and 'max' in feat_cfg:
-                            fmax = feat_cfg['max']
-                            label = fname.replace('_m2', ' (m²)').replace('_m', ' (m)').replace('_pct', ' (%)').replace('_lux', ' (lux)').replace('_K', ' (K)')
-                            labels.append(label)
-                            values.append(float(fval) / max(fmax, 1e-6))
-
-                if labels:
-                    fig_radar = go.Figure()
-                    fig_radar.add_trace(go.Scatterpolar(
-                        r=values + [values[0]],
-                        theta=labels + [labels[0]],
-                        fill='toself',
-                        name='Current Config',
-                        line=dict(color='#2FD4C8', width=2),
-                        fillcolor='rgba(47,212,200,0.20)',
-                    ))
-                    style_figure(fig_radar, "Spatial Feature Profile", height=400)
-                    fig_radar.update_layout(
-                        polar=dict(
-                            radialaxis=dict(range=[0, 1.1], gridcolor="rgba(167,177,203,0.20)"),
-                            bgcolor="rgba(17,22,37,0.70)",
-                        )
-                    )
-                    st.plotly_chart(fig_radar, width="stretch")
-            else:
-                st.info("Feature radar will appear after model initialization.")
+    st.session_state["prev_L"] = length
+    st.session_state["prev_W"] = width
+    st.session_state["prev_H"] = height
+    st.session_state["prev_W"] = width

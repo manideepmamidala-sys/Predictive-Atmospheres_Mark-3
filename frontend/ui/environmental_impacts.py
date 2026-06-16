@@ -1,12 +1,16 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from frontend.ui.theme import style_figure, panel_header, PALETTE
+from frontend.ui.theme import style_figure, panel_header, PALETTE, render_hero
 from frontend.ui.data_utils import load_parquet_data
 
 def render_page():
-    st.title("Environmental Impacts")
-    st.markdown("Comparisons of emotional targets grouped strictly by Time of Day and Type of Space.")
+    render_hero(
+        "Environmental Impacts",
+        "Comparisons of emotional targets grouped strictly by Time of Day and Type of Space.",
+        kicker="Environment",
+        compact=True
+    )
     
     df = load_parquet_data()
     env_df = df.copy()
@@ -29,12 +33,23 @@ def render_page():
         return "Unspecified"
     env_df["Type of Space"] = env_df.apply(get_space, axis=1)
     
-    panel_header("Valence vs Environment", "Condition Analysis")
-    fig4_v = px.box(env_df, x="Type of Space", y="fused_valence", color="Time of Day", color_discrete_sequence=[PALETTE["accent"], PALETTE["accent_2"], PALETTE["muted"]])
-    style_figure(fig4_v, "Target Valence grouped by Time & Space Type", height=500)
-    st.plotly_chart(fig4_v, use_container_width=True)
+    custom_order = ['Bedroom', 'Living Room', 'Workplace', 'Classroom', 'Cafeteria', 'Unspecified']
     
-    panel_header("Arousal vs Environment", "Condition Analysis")
-    fig4_a = px.box(env_df, x="Type of Space", y="fused_arousal", color="Time of Day", color_discrete_sequence=[PALETTE["accent"], PALETTE["accent_2"], PALETTE["muted"]])
-    style_figure(fig4_a, "Target Arousal grouped by Time & Space Type", height=500)
-    st.plotly_chart(fig4_a, use_container_width=True)
+    # Task 3: Layout Optimization
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        panel_header("Valence vs Environment", "Condition Analysis")
+        # Task 1: Remove the Broken Grouping
+        fig4_v = px.box(env_df, x="Type of Space", y="fused_valence", color_discrete_sequence=[PALETTE["accent"]])
+        style_figure(fig4_v, "Target Valence by Space Type", height=450)
+        fig4_v.update_xaxes(categoryorder='array', categoryarray=custom_order)
+        st.plotly_chart(fig4_v, use_container_width=True)
+        
+    with col2:
+        panel_header("Arousal vs Environment", "Condition Analysis")
+        # Task 1: Remove the Broken Grouping
+        fig4_a = px.box(env_df, x="Type of Space", y="fused_arousal", color_discrete_sequence=[PALETTE["accent_2"]])
+        style_figure(fig4_a, "Target Arousal by Space Type", height=450)
+        fig4_a.update_xaxes(categoryorder='array', categoryarray=custom_order)
+        st.plotly_chart(fig4_a, use_container_width=True)

@@ -119,7 +119,7 @@ class OptimizationService:
 
         bounds = [l_range, w_range, h_range]
 
-        target_valence = target_score * 1.99 - 0.99
+        target_valence = (target_score * 2.0) - 1.0
 
         def objective(dims: np.ndarray) -> float:
             pred = self._prediction_service.predict(float(dims[0]), float(dims[1]), float(dims[2]))
@@ -216,7 +216,7 @@ class OptimizationService:
 
         spatial_config = self._config.spatial_features
         fixed = fixed_features or {}
-        target_valence = target_score * 1.99 - 0.99
+        target_valence = (target_score * 2.0) - 1.0
 
         # Build bounds for optimizable features
         opt_features = []
@@ -358,7 +358,7 @@ class OptimizationService:
             logger.warning("gradient_optimize is deprecated for non-PyTorch models. Using fallback or rejecting.")
             raise ValueError("gradient_optimize requires a PyTorchAdapter.")
 
-        target_valence = target_score * 1.99 - 0.99
+        target_valence = (target_score * 2.0) - 1.0
 
         dims = torch.tensor([initial_dims], dtype=torch.float32, requires_grad=True)
         optimizer = torch.optim.Adam([dims], lr=learning_rate)

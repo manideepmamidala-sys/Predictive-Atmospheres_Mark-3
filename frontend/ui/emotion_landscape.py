@@ -3,11 +3,10 @@ import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 
-from typing import Optional
+from typing import Optional, Dict
 from frontend.ui.data_utils import load_parquet_data
 from src.services.container import ServiceContainer
 from frontend.ui.theme import render_hero, style_figure, panel_header
-from frontend.ui.state_utils import get_current_features_from_state
 from src.config import get_config
 
 
@@ -89,17 +88,27 @@ def render_page(services: Optional[ServiceContainer] = None):
 
     if services is not None and "L" in st.session_state and "W" in st.session_state and "H" in st.session_state:
         config = get_config()
-        full_features = get_current_features_from_state(config)
+        state_mapping = {
+            'Length_m': ('L', config.room.default_length),
+            'Width_m': ('W', config.room.default_width),
+            'Height_m': ('H', config.room.default_height),
+            'Num_Doors': ('num_doors', 1.0),
+            'Door_Area_m2': ('door_area', 1.8),
+            'Num_Windows': ('num_windows', 2.0),
+            'Window_Area_m2': ('window_area', 5.0),
+            'Daylight_Factor_pct': ('daylight_factor', 2.0),
+            'Illuminance_lux': ('illuminance', 300.0),
+            'CCT_K': ('cct', 4000.0),
+            'Walkable_Floor_Area_m2': ('walkable_floor', 60.0)
+        }
         
-        design_point = {}
+        design_point: Dict[str, Optional[float]] = {}
         for axis in (x_axis, y_axis, z_axis):
-            if axis == 'Length_m': design_point[axis] = full_features.get('Length (meter)')
-            elif axis == 'Width_m': design_point[axis] = full_features.get('Width (meter)')
-            elif axis == 'Height_m': design_point[axis] = full_features.get('Height (meter)')
-            elif axis == 'Daylight_Factor_pct': design_point[axis] = full_features.get('Daylight Factor (%)')
-            elif axis == 'Illuminance_lux': design_point[axis] = full_features.get('Illuminance (lux)')
-            elif axis == 'Walkable_Floor_Area_m2': design_point[axis] = full_features.get('Walkable Floor Area (sq.meter)')
-            else: design_point[axis] = None
+            if axis in state_mapping:
+                key, default = state_mapping[axis]
+                design_point[axis] = float(st.session_state.get(key, default))
+            else:
+                design_point[axis] = None
             
         if all(v is not None for v in design_point.values()):
             fig_space.add_trace(

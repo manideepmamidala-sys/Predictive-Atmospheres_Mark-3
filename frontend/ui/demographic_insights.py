@@ -1,12 +1,16 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from frontend.ui.theme import style_figure, panel_header, PALETTE
+from frontend.ui.theme import style_figure, panel_header, PALETTE, render_hero
 from frontend.ui.data_utils import load_parquet_data
 
 def render_page():
-    st.title("Demographic Insights")
-    st.markdown("Distribution of target Valence and Arousal segmented by Age, Gender, and Sleep patterns.")
+    render_hero(
+        "Demographic Insights",
+        "Distribution of target Valence and Arousal segmented by Age, Gender, and Sleep patterns.",
+        kicker="Demographics",
+        compact=True
+    )
     
     df = load_parquet_data()
     if df is None or df.empty:
@@ -40,38 +44,28 @@ def render_page():
     # Process Sleep Bracket
     dem_df["Sleep Bracket"] = pd.cut(dem_df["Sleep_Hours"], bins=[0, 6, 8, 24], labels=["<6 hrs", "6-8 hrs", ">8 hrs"])
     
+    demographic_filter = st.radio("Select Demographic Segment:", ["Gender", "Age Bracket", "Sleep Bracket"], horizontal=True)
+    
     col1, col2 = st.columns(2)
     
     with col1:
         panel_header("Valence Distribution", "Demographics")
-        fig_v_gen = px.violin(dem_df, x="Gender", y="fused_valence", color="Gender", box=True, color_discrete_sequence=[PALETTE["accent"], PALETTE["accent_2"], PALETTE["muted"]])
-        style_figure(fig_v_gen, "Target Valence by Gender", height=380)
-        fig_v_gen.update_layout(showlegend=False)
-        st.plotly_chart(fig_v_gen, use_container_width=True)
-        
-        fig_v_age = px.violin(dem_df, x="Age Bracket", y="fused_valence", color="Age Bracket", box=True, color_discrete_sequence=[PALETTE["accent"], PALETTE["accent_2"], PALETTE["muted"], PALETTE["border"]])
-        style_figure(fig_v_age, "Target Valence by Age", height=380)
-        fig_v_age.update_layout(showlegend=False)
-        st.plotly_chart(fig_v_age, use_container_width=True)
-        
-        fig_v_sleep = px.violin(dem_df, x="Sleep Bracket", y="fused_valence", color="Sleep Bracket", box=True, color_discrete_sequence=[PALETTE["accent"], PALETTE["accent_2"], PALETTE["muted"]])
-        style_figure(fig_v_sleep, "Target Valence by Sleep", height=380)
-        fig_v_sleep.update_layout(showlegend=False)
-        st.plotly_chart(fig_v_sleep, use_container_width=True)
+        fig_v = px.violin(
+            dem_df, x=demographic_filter, y="fused_valence", 
+            color=demographic_filter, box=True, points="all",
+            color_discrete_sequence=[PALETTE["accent"], PALETTE["accent_2"], PALETTE["muted"], PALETTE["border"]]
+        )
+        style_figure(fig_v, f"Target Valence by {demographic_filter}", height=450)
+        fig_v.update_layout(showlegend=False)
+        st.plotly_chart(fig_v, use_container_width=True)
         
     with col2:
         panel_header("Arousal Distribution", "Demographics")
-        fig_a_gen = px.violin(dem_df, x="Gender", y="fused_arousal", color="Gender", box=True, color_discrete_sequence=[PALETTE["accent"], PALETTE["accent_2"], PALETTE["muted"]])
-        style_figure(fig_a_gen, "Target Arousal by Gender", height=380)
-        fig_a_gen.update_layout(showlegend=False)
-        st.plotly_chart(fig_a_gen, use_container_width=True)
-        
-        fig_a_age = px.violin(dem_df, x="Age Bracket", y="fused_arousal", color="Age Bracket", box=True, color_discrete_sequence=[PALETTE["accent"], PALETTE["accent_2"], PALETTE["muted"], PALETTE["border"]])
-        style_figure(fig_a_age, "Target Arousal by Age", height=380)
-        fig_a_age.update_layout(showlegend=False)
-        st.plotly_chart(fig_a_age, use_container_width=True)
-        
-        fig_a_sleep = px.violin(dem_df, x="Sleep Bracket", y="fused_arousal", color="Sleep Bracket", box=True, color_discrete_sequence=[PALETTE["accent"], PALETTE["accent_2"], PALETTE["muted"]])
-        style_figure(fig_a_sleep, "Target Arousal by Sleep", height=380)
-        fig_a_sleep.update_layout(showlegend=False)
-        st.plotly_chart(fig_a_sleep, use_container_width=True)
+        fig_a = px.violin(
+            dem_df, x=demographic_filter, y="fused_arousal", 
+            color=demographic_filter, box=True, points="all",
+            color_discrete_sequence=[PALETTE["accent"], PALETTE["accent_2"], PALETTE["muted"], PALETTE["border"]]
+        )
+        style_figure(fig_a, f"Target Arousal by {demographic_filter}", height=450)
+        fig_a.update_layout(showlegend=False)
+        st.plotly_chart(fig_a, use_container_width=True)

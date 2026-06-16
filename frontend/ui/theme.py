@@ -2,24 +2,24 @@ import streamlit as st
 from typing import Optional
 
 PALETTE = {
-    "bg": "#041122",          # Deepest Navy
-    "surface": "#0A2240",     # Elevated Navy
-    "accent": "#1C5B99",      # Mid-tone Blue
-    "accent_2": "#4287C6",    # Bright Blue
-    "accent_3": "#11365E",    # Dark Blue
-    "text": "#F4F8FC",        # Ice Blue / Off-White
-    "muted": "#8AA4C1",       # Muted Blue-Gray
-    "border": "#0F2D53",      # Dividers/Gridlines
-    "target": "#FFFFFF",      # Fused Point
-    # Additional semantic colors mapped roughly to the same vibe
-    "success": "#38D39F",
-    "warning": "#F6C76D",
-    "danger": "#FF6B8A",
+    "bg": "#131314",
+    "surface": "#1E1F20",
+    "accent": "#4F8BF9",
+    "accent_2": "#4F8BF9",
+    "accent_3": "#4F8BF9",
+    "text": "#FAFAFA",
+    "muted": "#A0AAB2",
+    "border": "#A0AAB2",
+    "target": "#FAFAFA",
+    "success": "#09AB3B",
+    "warning": "#FF4B4B",
+    "danger": "#FF4B4B",
 }
 
 def apply_global_theme() -> None:
     st.markdown(
         f"""
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
         <style>
             /* Consider self-hosting or using system fonts */
             @import url('https://fonts.bunny.net/css2?family=Cutive+Mono&family=Google+Sans+Flex&display=swap');
@@ -34,7 +34,7 @@ def apply_global_theme() -> None:
                 --accent-2: {PALETTE['accent_2']};
             }}
 
-            h1, h2, h3, p, span, div, label, .stMarkdown, .stTab, .stSelectbox, .stTextInput {{
+            h1, h2, h3, h4, h5, h6, p, label, .stMarkdown, .stText {{
                 font-family: 'Google Sans Flex', sans-serif !important;
             }}
 
@@ -48,9 +48,13 @@ def apply_global_theme() -> None:
                 color: var(--text);
             }}
 
-            [data-testid="stSidebar"] {{
-                background: var(--surface) !important;
-                border-right: 1px solid var(--border) !important;
+            section[data-testid="stSidebar"] {{
+                background-color: #1E1F20 !important;
+                border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }}
+
+            section[data-testid="stSidebar"]::after {{
+                border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
             }}
 
             [data-testid="stSidebar"] .block-container {{
@@ -70,152 +74,172 @@ def apply_global_theme() -> None:
             }}
 
             .hero-wrap {{
-                background: var(--surface);
-                border: 1px solid var(--border);
-                border-radius: 14px;
-                padding: 0.66rem 0.88rem;
-                margin-bottom: 0.45rem;
-                box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                padding: 0.5rem 0;
+                margin-bottom: 0.75rem;
+                box-shadow: none;
             }}
 
             .hero-wrap.compact {{
-                padding: 0.45rem 0.75rem;
-                border-radius: 12px;
-                margin-bottom: 0.32rem;
+                padding: 0.35rem 0;
+                margin-bottom: 0.5rem;
             }}
 
             .hero-kicker {{
-                font-size: 0.7rem;
-                letter-spacing: 0.08em;
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
                 text-transform: uppercase;
-                color: var(--muted);
-                margin-bottom: 0.16rem;
+                color: #75b6da;
+                margin-bottom: 0.25rem;
             }}
 
             .hero-title {{
-                font-size: 1.38rem;
-                font-weight: 700;
+                font-size: 2.2rem;
+                font-weight: 800;
                 color: var(--text);
                 margin: 0;
+                letter-spacing: -0.02em;
             }}
 
             .hero-wrap.compact .hero-title {{
-                font-size: 1.12rem;
-                font-weight: 650;
+                font-size: 1.75rem;
+                font-weight: 700;
             }}
 
             .hero-desc {{
                 color: var(--muted);
-                margin-top: 0.26rem;
+                margin-top: 0.5rem;
                 margin-bottom: 0;
-                font-size: 0.92rem;
+                font-size: 1.05rem;
+                max-width: 800px;
+                line-height: 1.5;
             }}
 
             .hero-wrap.compact .hero-desc {{
-                margin-top: 0.15rem;
-                font-size: 0.84rem;
+                margin-top: 0.25rem;
+                font-size: 0.95rem;
             }}
 
             div[data-testid="metric-container"] {{
-                background: var(--surface);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                padding: 0.35rem 0.62rem;
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                padding: 0;
             }}
 
             div[data-testid="metric-container"] [data-testid="stMetricValue"] {{
-                font-size: 1.35rem;
-                line-height: 1.1;
-                color: var(--accent-2);
+                font-size: 2.2rem;
+                font-weight: 700;
+                line-height: 1;
+                color: var(--text);
             }}
 
             div[data-testid="metric-container"] label {{
                 color: var(--muted) !important;
-                letter-spacing: 0.01em;
+                font-size: 0.85rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
             }}
 
             .stTabs [data-baseweb="tab-list"] {{
-                gap: 0.35rem;
-                margin-bottom: 0.2rem;
+                gap: 2rem;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--border);
             }}
 
             .stTabs [data-baseweb="tab"] {{
-                background: var(--surface);
-                border: 1px solid var(--border);
-                border-radius: 999px;
+                background: transparent;
+                border: none;
+                border-radius: 0;
                 color: var(--muted);
-                padding: 0.32rem 0.78rem;
-                min-height: 34px;
+                padding: 0.5rem 0;
+                min-height: 40px;
             }}
 
             .stTabs [aria-selected="true"] {{
-                color: var(--text) !important;
-                border-color: var(--accent) !important;
-                background: var(--surface) !important;
+                color: var(--accent-2) !important;
+                background: transparent !important;
+                border-bottom: 2px solid var(--accent-2) !important;
             }}
 
             .stButton button {{
-                border-radius: 10px;
-                border: 1px solid var(--border);
-                background: var(--surface);
+                border-radius: 6px;
+                border: 1px solid var(--accent);
+                background: transparent;
                 color: var(--text);
-                min-height: 2.25rem;
-                padding: 0.35rem 0.75rem;
+                min-height: 2.5rem;
+                padding: 0.5rem 1.5rem;
+                font-weight: 600;
+                transition: all 0.2s ease;
             }}
 
             .stButton button:hover {{
-                border-color: var(--accent);
-                color: var(--text);
-            }}
-
-            .stSlider [data-baseweb="slider"] > div > div {{
                 background: var(--accent);
-            }}
-
-            .stSlider [role="slider"] {{
-                border: 2px solid var(--accent-2);
+                color: white;
+                border-color: var(--accent);
             }}
 
             .stTextInput input, .stSelectbox [data-baseweb="select"] > div {{
-                background: var(--surface);
+                background: rgba(255, 255, 255, 0.03);
                 border: 1px solid var(--border);
-                border-radius: 10px;
+                border-radius: 6px;
                 color: var(--text);
             }}
 
             .panel {{
-                background: var(--surface);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                padding: 0.62rem 0.75rem;
-                margin-bottom: 0.42rem;
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                padding: 0.75rem 0;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--border);
             }}
 
             .panel-title {{
                 color: var(--text);
-                font-weight: 600;
-                font-size: 0.92rem;
-                margin-bottom: 0.2rem;
+                font-weight: 700;
+                font-size: 1.1rem;
+                margin-bottom: 0.25rem;
+                letter-spacing: -0.01em;
             }}
 
             .panel-kicker {{
-                color: var(--muted);
-                font-size: 0.73rem;
+                color: #75b6da;
+                font-size: 0.75rem;
                 text-transform: uppercase;
-                letter-spacing: 0.05em;
-                margin-bottom: 0.14rem;
+                letter-spacing: 0.1em;
+                margin-bottom: 0.25rem;
             }}
 
             div.stDivider {{
-                margin-top: 0.4rem;
-                margin-bottom: 0.4rem;
+                margin-top: 1.5rem;
+                margin-bottom: 1.5rem;
+                opacity: 0.3;
             }}
 
             .stPlotlyChart > div {{
-                border-radius: 12px;
-                overflow: hidden;
-                border: 1px solid var(--border);
+                border-radius: 0;
+                overflow: visible;
+                border: none;
                 background: transparent;
+            }}
+            /* Force Button Background and Border */
+            div.stButton > button {{
+                background-color: #75b6da !important;
+                border-color: #75b6da !important;
+                color: #0E1117 !important; /* Dark text for contrast against the blue */
+            }}
+
+            /* Force Active Tab Text Color */
+            button[data-baseweb="tab"][aria-selected="true"] div[data-testid="stMarkdownContainer"] p {{
+                color: #75b6da !important;
+            }}
+
+            /* Force Active Tab Underline / Highlight */
+            div[data-baseweb="tab-highlight"] {{
+                background-color: #75b6da !important;
             }}
 
         </style>
@@ -249,11 +273,7 @@ def style_figure(fig, title: Optional[str] = None, height: int = 360):
         height=height,
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font={"color": PALETTE["text"], "size": 12, "family": "Google Sans Flex"},
-        title_font_family="Google Sans Flex",
-        xaxis_title_font_family="Google Sans Flex",
-        yaxis_title_font_family="Google Sans Flex",
-        hoverlabel_font_family="Cutive Mono",
+        font={"color": PALETTE["text"], "size": 12},
         legend={
             "bgcolor": "rgba(0,0,0,0)",
             "bordercolor": "rgba(0,0,0,0)",
@@ -263,18 +283,18 @@ def style_figure(fig, title: Optional[str] = None, height: int = 360):
         margin={"l": 30, "r": 30, "t": 45, "b": 30},
     )
     fig.update_xaxes(
-        gridcolor=PALETTE["border"],
-        zerolinecolor=PALETTE["border"],
-        linecolor=PALETTE["border"],
-        showgrid=True,
-        tickfont_family="Cutive Mono"
+        showgrid=True, 
+        gridwidth=1, 
+        gridcolor='rgba(255, 255, 255, 0.1)',
+        zeroline=True,
+        zerolinewidth=1,
+        zerolinecolor='rgba(255, 255, 255, 0.2)'
     )
     fig.update_yaxes(
-        gridcolor=PALETTE["border"],
-        zerolinecolor=PALETTE["border"],
-        linecolor=PALETTE["border"],
-        showgrid=True,
-        tickfont_family="Cutive Mono"
+        showgrid=True, 
+        gridwidth=1, 
+        gridcolor='rgba(255, 255, 255, 0.1)', 
+        zeroline=False
     )
     return fig
 

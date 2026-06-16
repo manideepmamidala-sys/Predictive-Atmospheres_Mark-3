@@ -81,7 +81,7 @@ def render_3d_room(length, width, height, valence=None):
                 y=[y[a], y[b]],
                 z=[z[a], z[b]],
                 mode="lines",
-                line=dict(color="rgba(232,236,247,0.55)", width=5),
+                line=dict(color="#4F8BF9", width=5),
                 hoverinfo="skip",
                 showlegend=False,
             )
@@ -99,7 +99,7 @@ def render_3d_room(length, width, height, valence=None):
                 y=[0, grid_limit],
                 z=[0, 0],
                 mode="lines",
-                line=dict(color="rgba(167,177,203,0.10)", width=2),
+                line=dict(color="rgba(255, 255, 255, 0.1)", width=1),
                 hoverinfo="skip",
                 showlegend=False,
             )
@@ -111,7 +111,7 @@ def render_3d_room(length, width, height, valence=None):
                 y=[gy, gy],
                 z=[0, 0],
                 mode="lines",
-                line=dict(color="rgba(167,177,203,0.10)", width=2),
+                line=dict(color="rgba(255, 255, 255, 0.1)", width=1),
                 hoverinfo="skip",
                 showlegend=False,
             )
@@ -122,31 +122,34 @@ def render_3d_room(length, width, height, valence=None):
     limit_z = max(height * 1.45, 6.0)
 
     fig.update_layout(
-        title={"text": score_label, "x": 0.02, "font": {"size": 16}},
+        title={"text": score_label, "x": 0.02, "font": {"size": 16, "color": "#FAFAFA"}},
         scene=dict(
             xaxis=dict(
                 range=[-0.8, grid_limit],
-                title="Length (m)",
+                title=dict(text="Length (m)", font=dict(color="#FAFAFA")),
                 showbackground=True,
-                backgroundcolor="rgba(17,22,37,0.86)",
-                gridcolor="rgba(167,177,203,0.15)",
-                zerolinecolor="rgba(167,177,203,0.25)",
+                backgroundcolor="rgba(0,0,0,0)",
+                gridcolor="rgba(255, 255, 255, 0.1)",
+                zerolinecolor="rgba(255, 255, 255, 0.2)",
+                tickfont=dict(color="#FAFAFA"),
             ),
             yaxis=dict(
                 range=[-0.8, grid_limit],
-                title="Width (m)",
+                title=dict(text="Width (m)", font=dict(color="#FAFAFA")),
                 showbackground=True,
-                backgroundcolor="rgba(17,22,37,0.86)",
-                gridcolor="rgba(167,177,203,0.15)",
-                zerolinecolor="rgba(167,177,203,0.25)",
+                backgroundcolor="rgba(0,0,0,0)",
+                gridcolor="rgba(255, 255, 255, 0.1)",
+                zerolinecolor="rgba(255, 255, 255, 0.2)",
+                tickfont=dict(color="#FAFAFA"),
             ),
             zaxis=dict(
                 range=[0, limit_z],
-                title="Height (m)",
+                title=dict(text="Height (m)", font=dict(color="#FAFAFA")),
                 showbackground=True,
-                backgroundcolor="rgba(17,22,37,0.86)",
-                gridcolor="rgba(167,177,203,0.15)",
-                zerolinecolor="rgba(167,177,203,0.25)",
+                backgroundcolor="rgba(0,0,0,0)",
+                gridcolor="rgba(255, 255, 255, 0.1)",
+                zerolinecolor="rgba(255, 255, 255, 0.2)",
+                tickfont=dict(color="#FAFAFA"),
             ),
             aspectmode="manual",
             aspectratio=dict(
@@ -157,7 +160,8 @@ def render_3d_room(length, width, height, valence=None):
             camera=dict(eye=dict(x=1.45, y=1.55, z=0.85)),
         ),
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(color="#E8ECF7"),
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#FAFAFA"),
         margin=dict(r=0, l=0, b=0, t=0),
         showlegend=False,
         height=460,
@@ -199,8 +203,8 @@ def render_2d_affective_map(val, aro, centroids=None):
         )
 
     # Axes lines
-    fig.add_hline(y=0, line=dict(color="rgba(232,236,247,0.40)", width=1, dash="dot"))
-    fig.add_vline(x=0, line=dict(color="rgba(232,236,247,0.40)", width=1, dash="dot"))
+    fig.add_hline(y=0, line=dict(color="rgba(255, 255, 255, 0.2)", width=1, dash="dot"))
+    fig.add_vline(x=0, line=dict(color="rgba(255, 255, 255, 0.2)", width=1, dash="dot"))
 
     labels = [
         (1.16, 1.14, "Q1 • ENGAGED POSITIVE", "right", "top", "rgba(47,212,200,0.22)", "rgba(47,212,200,0.55)"),
@@ -249,7 +253,7 @@ def render_2d_affective_map(val, aro, centroids=None):
     # Plot Current (Final) Prediction
     fig.add_trace(go.Scatter(
         x=[val_list[-1]], y=[aro_list[-1]], mode='markers',
-        marker=dict(size=16, color='#2FD4C8', symbol='circle', line=dict(width=2, color='#0B0F18')),
+        marker=dict(size=16, color='#4F8BF9', symbol='circle', line=dict(width=2, color='#FAFAFA')),
         name='Result (End State)'
     ))
 
@@ -258,22 +262,28 @@ def render_2d_affective_map(val, aro, centroids=None):
         height=360,
         xaxis=dict(
             range=[-1.2, 1.2],
-            title="Valence",
+            title=dict(text="Valence", font=dict(color="#FAFAFA")),
             showgrid=True,
-            gridcolor="rgba(167,177,203,0.16)",
-            zeroline=False,
+            gridwidth=1,
+            gridcolor="rgba(255, 255, 255, 0.1)",
+            zeroline=True,
+            zerolinewidth=1,
+            zerolinecolor="rgba(255, 255, 255, 0.2)",
+            tickfont=dict(color="#FAFAFA"),
         ),
         yaxis=dict(
             range=[-1.2, 1.2],
-            title="Arousal",
+            title=dict(text="Arousal", font=dict(color="#FAFAFA")),
             showgrid=True,
-            gridcolor="rgba(167,177,203,0.16)",
+            gridwidth=1,
+            gridcolor="rgba(255, 255, 255, 0.1)",
             zeroline=False,
+            tickfont=dict(color="#FAFAFA"),
         ),
         margin=dict(l=10, r=10, t=10, b=10),
         showlegend=False,
-        plot_bgcolor='rgba(17,22,37,0.78)',
+        plot_bgcolor='rgba(0,0,0,0)',
         paper_bgcolor='rgba(0,0,0,0)',
-        font=dict(color='#E8ECF7')
+        font=dict(color='#FAFAFA')
     )
     return fig
