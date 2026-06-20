@@ -18,15 +18,7 @@ from frontend.ui import (
     model_training
 )
 from frontend.ui.theme import apply_global_theme, render_hero
-from src.services import ServiceContainer
 from src.config import get_config
-
-
-@st.cache_resource(show_spinner="Loading ML backend...")
-def _load_ml_backend():
-    from src.models.architectures import SpatialMLP, SpatialFFNN
-    from src.models.train import train_models_logic
-    return SpatialMLP, SpatialFFNN, train_models_logic
 
 def main():
     st.set_page_config(
@@ -44,43 +36,9 @@ def main():
     
     apply_global_theme()
     
-    try:
-        SpatialMLP, SpatialFFNN, train_models_logic = _load_ml_backend()
-    except KeyboardInterrupt:
-        st.error("PyTorch initialization was interrupted. Please run the app again and allow model backend loading to finish.")
-        st.stop()
-    except Exception as exc:
-        st.error(f"Failed to load ML backend: {exc}")
-        st.stop()
-    
-    # Initialize Session State for Models
-    if 'spatial_model' not in st.session_state:
-        st.session_state.spatial_model = None
-        st.session_state.trained = False
-        st.session_state.feature_names = []
-        st.session_state.model_type = 'Random Forest'
-        st.session_state.scaler = None
-
     config = get_config()
-
-    try:
-        if 'services' not in st.session_state:
-            st.session_state.services = ServiceContainer(config=config, model=st.session_state.spatial_model)
-        else:
-            st.session_state.services.set_model(st.session_state.spatial_model)
-
-        # --- Auto-Train on Startup ---
-        if not st.session_state.trained:
-            train_models_logic()
-            st.session_state.services.set_model(st.session_state.spatial_model)
-            # Update services with feature config + scaler
-            st.session_state.services.set_feature_config(
-                feature_names=st.session_state.get('feature_names', []),
-                scaler=st.session_state.get('scaler', None),
-            )
-    except Exception as exc:
-        st.error(f"Backend initialization failed: {exc}")
-        st.stop()
+    
+    st.session_state.trained = True # Assume backend API is running
     
     # Sidebar Navigation
     st.sidebar.markdown("### Predictive Atmospheres")
@@ -103,17 +61,17 @@ def main():
     )
 
     if mode == "Model Training":
-        model_training.render_page(st.session_state.services)
+        model_training.render_page(None)
     elif mode == "System Architecture":
         system_architecture.render_system_architecture()
     elif mode == "Design Studio":
-        design_studio.render_page(st.session_state.services)
+        design_studio.render_page(None)
     elif mode == "Human Metrics":
         human_metrics.render_page()
     elif mode == "Spatial Insights":
         spatial_insights.render_page()
     elif mode == "Emotion Landscape":
-        emotion_landscape.render_page(st.session_state.services)
+        emotion_landscape.render_page(None)
 
     elif mode == "Affective Fusion":
         affective_fusion.render_page()

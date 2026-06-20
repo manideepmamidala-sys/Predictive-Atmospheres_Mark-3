@@ -72,12 +72,9 @@ def _truncate_50s(signal: np.ndarray, fs: int = FS) -> np.ndarray:
     return signal[start_idx:end_idx]
 
 
-def _compute_faa(signal_right: np.ndarray, signal_left: np.ndarray, fs: int = FS) -> float:
+def _compute_eeg_features(signal_right: np.ndarray, signal_left: np.ndarray, fs: int = FS) -> Tuple[float, float]:
     """
-    Frontal Alpha Asymmetry: FAA = ln(α_right) - ln(α_left)
-
-    Uses Welch's PSD to estimate alpha band power (8–13 Hz) for both
-    hemispheres. Result is clipped to [-1, 1].
+    Computes objective Valence (FAA + FBA) and Arousal EEG component (Beta/Alpha ratio).
     """
     # 1.0 Hz High-pass filter to remove slow physical movement artifacts
     b, a = scipy.signal.butter(4, 1.0 / (0.5 * fs), btype='high')
@@ -92,10 +89,10 @@ def _compute_faa(signal_right: np.ndarray, signal_left: np.ndarray, fs: int = FS
         "Gamma": (30, 100)
     }
 
-    def _relative_alpha_power(sig: np.ndarray) -> float:
+    def _relative_powers(sig: np.ndarray) -> Tuple[float, float]:
         nperseg = min(fs, len(sig))
         if nperseg < 4:
-            return 1e-6
+            return 1e-6, 1e-6
         f, Pxx = scipy.signal.welch(sig, fs=fs, nperseg=nperseg)
         
         valid_idx = f >= 2.0
@@ -109,14 +106,22 @@ def _compute_faa(signal_right: np.ndarray, signal_left: np.ndarray, fs: int = FS
             
         total_power = sum(powers.values())
         if total_power > 0:
-            return max(powers["Alpha"] / total_power, 1e-6)
-        return 1e-6
+            return max(powers["Alpha"] / total_power, 1e-6), max(powers["Beta"] / total_power, 1e-6)
+        return 1e-6, 1e-6
 
-    alpha_r = _relative_alpha_power(filtered_right)
-    alpha_l = _relative_alpha_power(filtered_left)
-    faa = np.log(alpha_r) - np.log(alpha_l)
+    alpha_R, beta_R = _relative_powers(filtered_right)
+    alpha_L, beta_L = _relative_powers(filtered_left)
     
-    return float(np.clip(faa, -1.0, 1.0))
+    faa = np.log(alpha_R + 1e-9) - np.log(alpha_L + 1e-9)
+    fba = np.log(beta_R + 1e-9) - np.log(beta_L + 1e-9)
+    raw_valence = (0.6 * faa) + (0.4 * fba)
+    final_valence = float(np.clip(raw_valence, -1.0, 1.0))
+    
+    alpha_total = alpha_R + alpha_L
+    beta_total = beta_R + beta_L
+    arousal_eeg = float(np.log((beta_total + 1e-9) / (alpha_total + 1e-9)))
+    
+    return final_valence, arousal_eeg
 
 
 def _detect_r_peaks(ecg: np.ndarray, fs: int = FS) -> np.ndarray:
@@ -169,41 +174,30 @@ def _compute_rmssd(ecg: np.ndarray, fs: int = FS) -> float:
         return baseline
 
 
-def _rmssd_to_arousal(rmssd_ms: float) -> float:
-    """
-    Map RMSSD (ms) to arousal on [-1, 1].
-
-    Higher HRV (high RMSSD) → parasympathetic dominance → lower arousal.
-    Formula: Arousal = 1.0 - (RMSSD / BASELINE), clipped to [-1, 1].
-    """
-    baseline = get_config().emotion.rmssd_baseline_ms
-    return float(np.clip(1.0 - (rmssd_ms / baseline), -1.0, 1.0))
-
-
 # ---------------------------------------------------------------------------
 # Per-Trial Feature Extraction
 # ---------------------------------------------------------------------------
 
-def _extract_biometrics(eeg_filename: str, experiment_id: int) -> Tuple[float, float]:
+def _extract_biometrics(eeg_filename: str, experiment_id: int) -> Tuple[float, float, float]:
     """
-    Load the raw EEG/ECG file for a single trial and return (faa, arousal).
+    Load the raw EEG/ECG file for a single trial and return (valence, arousal, neuro_score).
 
     Channel mapping (consistent across all experiments):
       Channel1 → EEG Right Frontal (F4)
       Channel2 → EEG Left Frontal  (F3)
       Channel3 → ECG
 
-    Returns (0.0, 0.0) on any unrecoverable failure so the pipeline does not crash.
+    Returns (0.0, 0.0, 0.5) on any unrecoverable failure so the pipeline does not crash.
     """
     raw_path = _RAW_DIR / f"experiment_{experiment_id:02d}" / eeg_filename.strip()
     df = _load_eeg_csv(raw_path)
     if df is None:
-        return 0.0, 0.0
+        return 0.0, 0.0, 0.5
 
     required = ["Channel1", "Channel2", "Channel3"]
     if not all(c in df.columns for c in required):
         logger.warning("Missing required channels in %s — skipping.", raw_path.name)
-        return 0.0, 0.0
+        return 0.0, 0.0, 0.5
 
     ch_right = _truncate_50s(np.asarray(df["Channel1"], dtype=float), fs=FS)
     ch_left  = _truncate_50s(np.asarray(df["Channel2"], dtype=float), fs=FS)
@@ -214,13 +208,20 @@ def _extract_biometrics(eeg_filename: str, experiment_id: int) -> Tuple[float, f
     if len(ch_right) < min_samples or len(ch_left) < min_samples or len(ch_ecg) < min_samples:
         logger.warning("Signal too short in %s (%d samples) — skipping.",
                        raw_path.name, len(ch_right))
-        return 0.0, 0.0
+        return 0.0, 0.0, 0.5
 
-    faa = _compute_faa(ch_right, ch_left, fs=FS)
+    final_valence, arousal_eeg = _compute_eeg_features(ch_right, ch_left, fs=FS)
     rmssd_ms = _compute_rmssd(ch_ecg, fs=FS)
-    arousal = _rmssd_to_arousal(rmssd_ms)
+    
+    arousal_ecg = 1.0 - (rmssd_ms / 50.0)
+    raw_arousal = (0.5 * arousal_ecg) + (0.5 * arousal_eeg)
+    final_arousal = float(np.clip(raw_arousal, -1.0, 1.0))
 
-    return faa, arousal
+    v_scaled = (final_valence + 1.0) / 2.0
+    a_inverted_scaled = (1.0 - final_arousal) / 2.0
+    neuro_score = (v_scaled + a_inverted_scaled) / 2.0
+
+    return final_valence, final_arousal, float(neuro_score)
 
 
 # ---------------------------------------------------------------------------
@@ -355,7 +356,7 @@ def run_fusion_pipeline(merged_df: pd.DataFrame) -> pd.DataFrame:
             continue
 
         try:
-            obj_v, obj_a = _extract_biometrics(str(eeg_filename), int(experiment_id))
+            obj_v, obj_a, neuro_score = _extract_biometrics(str(eeg_filename), int(experiment_id))
         except Exception as exc:
             logger.error("Biometric extraction failed for row %d (%s): %s", idx, eeg_filename, exc)
             failed += 1
@@ -377,6 +378,7 @@ def run_fusion_pipeline(merged_df: pd.DataFrame) -> pd.DataFrame:
             "age":           row.get("age"),
             "occupation":    row.get("occupation"),
             "Sleep_Hours":   row.get("Sleep Hours"),
+            "NeuroScore":    neuro_score,
             # Raw spatial inputs
             "Length_m":            row.get("Length_m"),
             "Width_m":             row.get("Width_m"),
@@ -455,14 +457,17 @@ def process_emotion_engine(
     sig_l = _truncate_50s(signal_left, fs) if apply_truncation else signal_left
     sig_e = _truncate_50s(signal_ecg, fs) if apply_truncation else signal_ecg
 
-    faa = _compute_faa(sig_r.astype(float), sig_l.astype(float), fs)
+    final_valence, arousal_eeg = _compute_eeg_features(sig_r.astype(float), sig_l.astype(float), fs)
     rmssd_ms = _compute_rmssd(sig_e.astype(float), fs)
-    arousal = _rmssd_to_arousal(rmssd_ms)
+    
+    arousal_ecg = 1.0 - (rmssd_ms / 50.0)
+    raw_arousal = (0.5 * arousal_ecg) + (0.5 * arousal_eeg)
+    final_arousal = float(np.clip(raw_arousal, -1.0, 1.0))
 
     return {
         "MDS": {
-            "Valence_X": [faa],
-            "Arousal_Y": [arousal],
+            "Valence_X": [final_valence],
+            "Arousal_Y": [final_arousal],
         },
         "Bands": {},
         "Emotion_Distribution": {},

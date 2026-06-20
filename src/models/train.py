@@ -332,6 +332,21 @@ class Trainer:
         
         y = df[['fused_valence', 'fused_arousal']].to_numpy(dtype=np.float32)
 
+        # Calculate Historical Restorative Bounds
+        import pickle
+        v_norm = (df['fused_valence'] + 1.0) / 2.0
+        a_inv = (1.0 - df['fused_arousal']) / 2.0
+        df['Restorative_Base'] = (v_norm + a_inv) / 2.0
+        
+        ns_min = float(df['Restorative_Base'].min())
+        ns_max = float(df['Restorative_Base'].max())
+        
+        bounds = {'ns_min': ns_min, 'ns_max': ns_max}
+        bounds_path = self._repo_root / 'artifacts' / 'neuro_bounds.pkl'
+        bounds_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(bounds_path, 'wb') as f:
+            pickle.dump(bounds, f)
+
         # Build feature set
         x_df, feature_names = self._build_features(df)
 

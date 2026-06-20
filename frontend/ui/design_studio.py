@@ -1,12 +1,10 @@
 import streamlit as st
 import numpy as np
-import torch
 import plotly.graph_objects as go
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
+import requests
+
 from src.utils.rendering import render_3d_room, render_2d_affective_map
-from src.services.optimization_service import OptimizationService
-from src.services.prediction_service import PredictionService
-from src.services.container import ServiceContainer
 from src.config import get_config
 from frontend.ui.theme import render_hero, style_figure, panel_header
 
@@ -27,7 +25,7 @@ EMOTION_COLORS = {
     "WarmHeartedness": "#6DEAB6",
 }
 
-def optimize_room(services: Optional[ServiceContainer] = None):
+def optimize_room(services: Optional[Any] = None):
     """Callback to run inverse design optimization."""
     if not st.session_state.trained:
         st.error("Training in progress...")
@@ -35,21 +33,28 @@ def optimize_room(services: Optional[ServiceContainer] = None):
 
     target = st.session_state.target_score
 
-    if services is not None:
-        optimizer = services.optimization_service
-    else:
-        optimizer = OptimizationService(
-            model=st.session_state.spatial_model,
-            feature_names=st.session_state.get('feature_names', []),
-            scaler=st.session_state.get('scaler', None)
-        )
-    result = optimizer.optimize_for_target(target_score=float(target), method="differential_evolution")
+    try:
+        response = requests.post("http://127.0.0.1:8000/optimize", json={"target_neuro_score": target}, timeout=15)
+        response.raise_for_status()
+        result = response.json()
+    except requests.exceptions.ConnectionError:
+        st.error("Backend API is offline. Please run 'uvicorn api:app --reload' in your terminal.")
+        return
+    except Exception as e:
+        st.error(f"Optimization failed: {e}")
+        return
 
-    st.session_state["L"] = float(result.length)
-    st.session_state["W"] = float(result.width)
-    st.session_state["H"] = float(result.height)
-    opt_valence = float(result.predicted_valence)
-    st.session_state["last_opt_neuro_score"] = (opt_valence + 1.0) / 2.0
+    st.session_state["L"] = float(result["length"])
+    st.session_state["W"] = float(result["width"])
+    safe_height = max(3.0, float(result["height"]))
+    st.session_state["H"] = safe_height
+    st.session_state["last_opt_neuro_score"] = float(result["neuro_score"])
+    
+    # Sync all secondary expanded sliders from the full_features dictionary
+    for ui_key in ['num_doors', 'door_area', 'num_windows', 'window_area', 
+                   'daylight_factor', 'illuminance', 'cct', 'walkable_floor']:
+        if ui_key in result["full_features"]:
+            st.session_state[ui_key] = float(result["full_features"][ui_key])
 
 
 def _emotion_profile_chart(emotion_weights: dict) -> go.Figure:
@@ -116,7 +121,7 @@ def _collect_full_features(config) -> Dict[str, float]:
     # Core geometry
     features['Length_m'] = float(st.session_state.get('L', config.room.default_length))
     features['Width_m'] = float(st.session_state.get('W', config.room.default_width))
-    features['Height_m'] = float(st.session_state.get('H', config.room.default_height))
+    features['Height_m'] = float(st.session_state.get('H', max(3.0, float(config.room.default_height))))
 
     # Openings (independent only — ratios computed server-side)
     features['Num_Doors'] = float(st.session_state.get('num_doors', 1.0))
@@ -158,7 +163,7 @@ def _collect_full_features(config) -> Dict[str, float]:
     return features
 
 
-def render_page(services: Optional[ServiceContainer] = None):
+def render_page(services: Optional[Any] = None):
     st.markdown("""
     <style>
         .block-container { padding-top: 1rem; padding-bottom: 1rem; max-width: 100%; }
@@ -177,8 +182,7 @@ def render_page(services: Optional[ServiceContainer] = None):
         st.title("Interactive Design Studio")
         st.caption("Shape room geometry and architectural parameters, inspect predicted emotional response, and use inverse optimization to co-design toward target affect.")
 
-    if services is not None and "spatial_model" in st.session_state and st.session_state.spatial_model is not None:
-        services.set_model(st.session_state.spatial_model)
+    # Backend is now purely API, so we don't set models locally.
 
     config = get_config()
     pred_v = None
@@ -196,11 +200,11 @@ def render_page(services: Optional[ServiceContainer] = None):
             st.markdown("### Geometry")
             if "L" not in st.session_state: st.session_state["L"] = config.room.default_length
             if "W" not in st.session_state: st.session_state["W"] = config.room.default_width
-            if "H" not in st.session_state: st.session_state["H"] = config.room.default_height
+            if "H" not in st.session_state: st.session_state["H"] = max(3.0, float(config.room.default_height))
 
             length = st.slider("Length (m)", config.room.min_length, config.room.max_length, key="L")
             width = st.slider("Width (m)", config.room.min_width, config.room.max_width, key="W")
-            height = st.slider("Height (m)", config.room.min_height, config.room.max_height, key="H")
+            height = st.slider("Height (m)", 3.0, float(max(3.0, config.room.max_height)), key="H")
 
             prev_l = st.session_state.get("prev_L", length)
             prev_w = st.session_state.get("prev_W", width)
@@ -249,49 +253,29 @@ def render_page(services: Optional[ServiceContainer] = None):
 
     # --- INFERENCE ---
     confidence = None
+    pred_result = None
     if st.session_state.get('trained', False):
         features = _collect_full_features(config)
-        feature_names = st.session_state.get('feature_names', [])
-
-        if services is not None:
-            ref_centroids = services.prediction_service.get_reference_centroids()
-            if feature_names and len(feature_names) > 3:
-                try:
-                    pred_result = services.prediction_service.predict_mc_dropout(features)
-                    confidence = pred_result.confidence_score
-                except (ValueError, AttributeError):
-                    pred_result = services.prediction_service.predict_full(features)
-            else:
-                pred_result = services.prediction_service.predict(length, width, height)
-            pred_v = pred_result.valence
-            pred_a = pred_result.arousal
+        
+        try:
+            response = requests.post("http://127.0.0.1:8000/predict", json=features, timeout=5)
+            response.raise_for_status()
+            pred_result = response.json()
+            
+            pred_v = pred_result["Valence"]
+            pred_a = pred_result["Arousal"]
             pred_va = np.array([pred_v, pred_a], dtype=float)
-            emotion_weights = pred_result.emotion_weights
-        else:
-            model = st.session_state.spatial_model
-            if model is not None:
-                if feature_names and len(feature_names) > 3:
-                    ps = PredictionService(config=config, model=model, feature_names=feature_names, scaler=st.session_state.get('scaler'))
-                    pred_result = ps.predict_full(features)
-                    pred_v = pred_result.valence
-                    pred_a = pred_result.arousal
-                    pred_va = np.array([pred_v, pred_a], dtype=float)
-                    emotion_weights = pred_result.emotion_weights
-                else:
-                    input_tensor = torch.tensor([[length, width, height]], dtype=torch.float32)
-                    with torch.no_grad():
-                        output = model(input_tensor)
-                        if isinstance(output, dict): output = output["affective_space"]
-                        pred_va = output.detach().cpu().numpy().flatten()
-                    pred_v = float(pred_va[0])
-                    pred_a = float(pred_va[1])
-                    ps = PredictionService(config=config)
-                    emotion_weights = ps._compute_emotion_weights(pred_v, pred_a)
+            confidence = pred_result.get("Confidence")
+            emotion_weights = pred_result.get("EmotionWeights", {})
+        except requests.exceptions.ConnectionError:
+            st.error("Backend API is offline. Please run 'uvicorn api:app --reload' in your terminal.")
+        except Exception as e:
+            st.error(f"Prediction failed: {e}")
 
     # --- TOP METRICS ---
     with col_metrics:
-        if pred_v is not None and pred_a is not None:
-            neuro_score = (pred_v + 1.0) / 2.0
+        if pred_v is not None and pred_a is not None and pred_result is not None:
+            neuro_score = float(pred_result["NeuroScore"])
             m1, m2, m3, m4, m5 = st.columns([1.2, 1, 1, 1, 1.2])
             neuro_score_value = f"{neuro_score:.2f}"
             m1.markdown(f"""

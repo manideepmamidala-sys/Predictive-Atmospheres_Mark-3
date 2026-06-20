@@ -23,6 +23,15 @@ import numpy as np
 from src.config import get_config, Config
 
 
+def calculate_neuro_score(valence, arousal):
+    """
+    Calculate the definitive Neuro-Score, combining valence and arousal 
+    with a static stretch for the 0.0-1.0 UI range.
+    """
+    raw_score = (valence - arousal + 2.0) / 4.0
+    stretched = (raw_score - 0.32) / (0.58 - 0.32)
+    return np.clip(stretched, 0.0, 1.0)
+
 @dataclass
 class PredictionResult:
     """Result of a spatial prediction."""
@@ -37,7 +46,8 @@ class PredictionResult:
 
     def __post_init__(self):
         """Compute derived fields."""
-        self.neuro_score = (self.valence + 1.0) / 2.0
+        if self.neuro_score == 0.0:
+            self.neuro_score = float(calculate_neuro_score(self.valence, self.arousal))
         self._compute_atmosphere()
 
     def _compute_atmosphere(self) -> None:
@@ -164,10 +174,12 @@ class PredictionService:
 
         valence, arousal = self._run_model_prediction(input_data)
         emotion_weights = self._compute_emotion_weights(valence, arousal)
+        final_ns = float(calculate_neuro_score(float(valence), float(arousal)))
 
         return PredictionResult(
             valence=float(valence),
             arousal=float(arousal),
+            neuro_score=final_ns,
             emotion_weights=emotion_weights
         )
 
@@ -202,15 +214,17 @@ class PredictionService:
 
         valence, arousal = self._run_model_prediction(input_data)
         emotion_weights = self._compute_emotion_weights(valence, arousal)
+        final_ns = float(calculate_neuro_score(float(valence), float(arousal)))
 
         return PredictionResult(
             valence=float(valence),
             arousal=float(arousal),
+            neuro_score=final_ns,
             emotion_weights=emotion_weights
         )
 
-    def predict_mc_dropout(self, features_dict: Dict[str, float], n_passes: int = 50) -> PredictionResult:
-        """Run prediction using MC Dropout for uncertainty bounds and confidence scoring."""
+    def predict_with_confidence(self, features_dict: Dict[str, float], n_passes: int = 50) -> PredictionResult:
+        """Run prediction using model variance for uncertainty bounds and confidence scoring."""
         if not isinstance(n_passes, int) or n_passes <= 0:
             raise ValueError(f"n_passes must be an integer > 0, got {n_passes}")
         if self._model is None or not self._feature_names:
@@ -222,15 +236,17 @@ class PredictionService:
             input_data = self._scaler.transform(input_data)
             
         from src.models.adapter import ModelAdapter
-        if not isinstance(self._model, ModelAdapter) or self._model.framework != 'pytorch':
-            raise ValueError("MC Dropout requires a PyTorch model adapter.")
+        if not isinstance(self._model, ModelAdapter):
+            raise ValueError("Confidence scoring requires a ModelAdapter.")
             
-        (valence, arousal), uncertainty, confidence = self._model.predict_mc_dropout(input_data, n_passes)
+        (valence, arousal), uncertainty, confidence = self._model.predict_with_confidence(input_data, n_passes)
         emotion_weights = self._compute_emotion_weights(valence, arousal)
+        final_ns = float(calculate_neuro_score(float(valence), float(arousal)))
         
         return PredictionResult(
             valence=valence,
             arousal=arousal,
+            neuro_score=final_ns,
             emotion_weights=emotion_weights,
             confidence_score=confidence,
             uncertainty=uncertainty
@@ -290,9 +306,11 @@ class PredictionService:
         for i in range(len(predictions)):
             valence, arousal = predictions[i]
             emotion_weights = self._compute_emotion_weights(valence, arousal)
+            final_ns = float(calculate_neuro_score(float(valence), float(arousal)))
             results.append(PredictionResult(
                 valence=float(valence),
                 arousal=float(arousal),
+                neuro_score=final_ns,
                 emotion_weights=emotion_weights
             ))
 

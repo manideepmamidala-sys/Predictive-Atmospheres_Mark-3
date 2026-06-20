@@ -34,6 +34,50 @@ class SpatialInsightsVis(BaseVisualization):
 
         analysis_df = self.df_spatial[numeric_cols + ['NeuroScore']].copy()
 
+        # -------------------------------------------------------------
+        # Phase 0: Feature Correlation Matrix
+        # -------------------------------------------------------------
+        st.subheader("Feature Correlation Matrix")
+        
+        base_cols = [
+            "Length_m", "Width_m", "Height_m", "Num_Doors", "Door_Area_m2",
+            "Num_Windows", "Window_Area_m2", "Daylight_Factor_pct", "Illuminance_lux",
+            "CCT_K", "Walkable_Floor_Area_m2"
+        ]
+        ohe_cols = [
+            "Day_or_Night_Day", "Day_or_Night_Night"
+        ]
+        target_cols = ["fused_valence", "fused_arousal"]
+        
+        corr_cols = base_cols + ohe_cols + target_cols
+        available_corr_cols = [c for c in corr_cols if c in self.df_spatial.columns]
+        
+        if available_corr_cols:
+            corr_matrix = self.df_spatial[available_corr_cols].corr()
+            rename_map = {'fused_valence': 'Valence', 'fused_arousal': 'Arousal'}
+            corr_matrix = corr_matrix.rename(columns=rename_map, index=rename_map)
+            
+            fig_corr = px.imshow(
+                corr_matrix, 
+                text_auto=".2f", 
+                aspect="auto", 
+                color_continuous_scale=[[0.0, '#ef553b'], [0.5, '#131314'], [1.0, '#00cc96']], 
+                color_continuous_midpoint=0
+            )
+            
+            fig_corr.update_layout(
+                plot_bgcolor='rgba(0,0,0,0)',
+                paper_bgcolor='#131314',
+                font=dict(color='#FAFAFA'),
+                xaxis=dict(tickangle=-45),
+                yaxis=dict(tickangle=0),
+                height=800,
+                margin=dict(t=40, b=40, l=40, r=40)
+            )
+            st.plotly_chart(fig_corr, use_container_width=True)
+        else:
+            st.warning("Missing columns to compute correlation matrix.", icon="⚠️")
+
         panel_header("Room Profile", "Spatial Signatures")
 
         room_col = 'Room ID' if 'Room ID' in self.df_spatial.columns else 'Room_ID'

@@ -2,25 +2,19 @@
 Optimization Service
 Room optimization for target emotional response.
 
-Supports both full-feature and legacy 3-dim optimization.
+Supports Vectorized Monte Carlo Search for target Neuro-Score.
 
 NO STREAMLIT DEPENDENCIES - can be used from any interface.
-
-Usage:
-    from src.services import OptimizationService
-
-    service = OptimizationService(model=my_model)
-    result = service.optimize_for_target(target_valence=0.8)
-    print(result.length, result.width, result.height)
 """
 from dataclasses import dataclass, field
-from typing import Optional, Tuple, List, Dict, Any
+from typing import Optional, List, Dict, Any
 import numpy as np
+import pandas as pd
 import logging
-from scipy.optimize import differential_evolution
+import random
 
 from src.config import get_config, Config
-from src.services.prediction_service import PredictionService
+from src.services.prediction_service import PredictionService, calculate_neuro_score
 
 logger = logging.getLogger(__name__)
 
@@ -33,18 +27,19 @@ class OptimizationResult:
     height: float
     predicted_valence: float
     predicted_arousal: float
+    neuro_score: float
     target_achieved: float  # How close to target
     samples_evaluated: int
     full_features: Dict[str, float] = field(default_factory=dict)
 
     def to_dict(self) -> dict:
-        """Convert to dictionary."""
         return {
             'length': float(self.length),
             'width': float(self.width),
             'height': float(self.height),
             'predicted_valence': float(self.predicted_valence),
             'predicted_arousal': float(self.predicted_arousal),
+            'neuro_score': float(self.neuro_score),
             'target_achieved': float(self.target_achieved),
             'samples_evaluated': self.samples_evaluated,
             'full_features': self.full_features,
@@ -54,39 +49,52 @@ class OptimizationResult:
 class OptimizationService:
     """
     Room optimization service.
-
-    Uses differential evolution to find room configurations that achieve
-    a target emotional response.
-
-    Example:
-        service = OptimizationService(model=my_model)
-        result = service.optimize_for_target(0.8)  # Target neuro-score
+    Uses Vectorized Monte Carlo Search to find room configurations that achieve
+    a target Neuro-Score.
     """
 
     def __init__(self, model: Any = None, config: Optional[Config] = None,
                  feature_names: Optional[List[str]] = None, scaler: Any = None):
-        """
-        Initialize optimization service.
-
-        Args:
-            model: Trained model
-            config: Configuration instance
-            feature_names: Ordered feature names for full-feature mode
-            scaler: StandardScaler used during training
-        """
         self._prediction_service = PredictionService(
             model=model, config=config, feature_names=feature_names, scaler=scaler,
         )
         self._config = config or get_config()
         self._feature_names = feature_names or []
         self._scaler = scaler
+        
+        # Step A: Define the strict min and max realistic bounds for all 25 spatial features
+        self._default_bounds = {
+            'Length_m': (2.0, 20.0),
+            'Width_m': (2.0, 20.0),
+            'Height_m': (3.0, 5.0),
+            'Num_Doors': (0.0, 5.0),
+            'Door_Area_m2': (0.0, 10.0),
+            'Num_Windows': (0.0, 10.0),
+            'Window_Area_m2': (0.0, 50.0),
+            'Daylight_Factor_pct': (0.0, 10.0),
+            'Illuminance_lux': (50.0, 1000.0),
+            'CCT_K': (2700.0, 6500.0),
+            'Walkable_Floor_Area_m2': (10.0, 500.0),
+            'Day_or_Night_Day': (0.0, 1.0),
+            'Day_or_Night_Night': (0.0, 1.0),
+            'Type_of_Space_Bedroom': (0.0, 1.0),
+            'Type_of_Space_Living Room': (0.0, 1.0),
+            'Type_of_Space_Workplace': (0.0, 1.0),
+            'Type_of_Space_Classroom': (0.0, 1.0),
+            'Type_of_Space_Cafeteria': (0.0, 1.0),
+            'Length_to_Width_Ratio': (0.1, 10.0),
+            'Floor_Area_m2': (4.0, 400.0),
+            'Wall_Area_m2': (10.0, 1000.0),
+            'Volume_m3': (8.0, 2000.0),
+            'Door_to_Wall_Ratio': (0.01, 0.5),
+            'Window_to_Wall_Ratio': (0.0, 0.9),
+            'Walkable_to_Floor_Ratio': (0.1, 1.0)
+        }
 
     def set_model(self, model: Any) -> None:
-        """Set or update the trained model."""
         self._prediction_service.set_model(model)
 
     def set_feature_config(self, feature_names: List[str], scaler: Any = None) -> None:
-        """Update feature names and scaler for full-feature optimization."""
         self._feature_names = feature_names
         self._scaler = scaler
         self._prediction_service.set_feature_config(feature_names, scaler)
@@ -94,106 +102,133 @@ class OptimizationService:
     def optimize_for_target(
         self,
         target_score: float,
-        n_samples: Optional[int] = None,
-        constraints: Optional[dict] = None,
-        method: str = 'differential_evolution'
+        n_samples: int = 5000,
+        fixed_features: Optional[Dict[str, float]] = None,
     ) -> OptimizationResult:
         """
-        Find room dimensions that achieve target neuro-score.
-
-        Uses differential evolution (default) within dimension constraints.
+        Vectorized Monte Carlo Search for target Neuro-Score.
         """
         if not 0.0 <= target_score <= 1.0:
             raise ValueError(f"target_score must be in [0, 1], got {target_score}")
+            
+        fixed = fixed_features or {}
+        feature_names = self._feature_names
+        if not feature_names:
+            # Fallback to legacy 3-feature if needed, but the prompt implies full features are used.
+            feature_names = ['Length_m', 'Width_m', 'Height_m']
+            
+        spatial_config = self._config.spatial_features
+        bounds_list = []
+        for name in feature_names:
+            if hasattr(spatial_config, name):
+                feat = getattr(spatial_config, name)
+                if isinstance(feat, dict) and 'min' in feat and 'max' in feat:
+                    bounds_list.append((feat['min'], feat['max']))
+                else:
+                    bounds_list.append(self._default_bounds.get(name, (0.0, 1.0)))
+            else:
+                bounds_list.append(self._default_bounds.get(name, (0.0, 1.0)))
+                
+        # Step B: Generate a massive random sample
+        samples_matrix = np.zeros((n_samples, len(feature_names)), dtype=np.float32)
+        for i, name in enumerate(feature_names):
+            if name in fixed:
+                samples_matrix[:, i] = fixed[name]
+            else:
+                min_val, max_val = bounds_list[i]
+                
+                if name.startswith('Num_'):
+                    # Discrete / Integer features
+                    samples_matrix[:, i] = np.random.randint(int(min_val), int(max_val) + 1, size=n_samples)
+                elif name.startswith('Day_or_Night_') or name.startswith('Type_of_Space_'):
+                    # Binary / Categorical features
+                    samples_matrix[:, i] = np.random.choice([0.0, 1.0], size=n_samples)
+                else:
+                    # Continuous features
+                    if name == 'Height_m':
+                        samples_matrix[:, i] = np.round(np.random.uniform(3.0, max_val, n_samples), 2)
+                    else:
+                        samples_matrix[:, i] = np.round(np.random.uniform(min_val, max_val, n_samples), 2)                
+        batch_df = pd.DataFrame(samples_matrix, columns=feature_names)
+        
+        # Step C: Run batch inference
+        if self._scaler is not None:
+            scaled_batch_array = self._scaler.transform(batch_df.values)
+        else:
+            scaled_batch_array = batch_df.to_numpy()
+            
+        # Bypass UI formatting and predict directly using the raw model
+        # Scikit-Learn multi-output regression returns a NumPy array of shape (N_samples, 2)
+        model_adapter = self._prediction_service._model
+        if hasattr(model_adapter, 'model'):
+            raw_model = model_adapter.model
+        else:
+            raw_model = model_adapter
+            
+        try:
+            if hasattr(raw_model, 'predict'):
+                raw_batch_predictions = raw_model.predict(scaled_batch_array)
+            else:
+                # Fallback for PyTorch models that don't have .predict()
+                import torch
+                with torch.no_grad():
+                    t_samples = torch.tensor(scaled_batch_array, dtype=torch.float32)
+                    out = raw_model(t_samples)
+                    if isinstance(out, dict):
+                        out = out['affective_space']
+                    raw_batch_predictions = out.cpu().numpy()
+        except ValueError as ve:
+            # If the raw model itself raises unpacking error, it might be due to a weird pipeline step.
+            # We catch and re-raise with more context.
+            raise ValueError(f"Model prediction failed: {ve}") from ve
 
-        if n_samples is None:
-            n_samples = self._config.optimization.monte_carlo_samples
-
-        # Get dimension ranges
-        room_config = self._config.room
-        constraints = constraints or {}
-
-        l_range = constraints.get('length', (room_config.min_length, room_config.max_length))
-        w_range = constraints.get('width', (room_config.min_width, room_config.max_width))
-        h_range = constraints.get('height', (room_config.min_height, room_config.max_height))
-
-        bounds = [l_range, w_range, h_range]
-
-        target_valence = (target_score * 2.0) - 1.0
-
-        def objective(dims: np.ndarray) -> float:
-            pred = self._prediction_service.predict(float(dims[0]), float(dims[1]), float(dims[2]))
-            return abs(pred.valence - target_valence)
-
-        if method == 'differential_evolution':
-            try:
-                result = differential_evolution(
-                    objective,
-                    bounds=bounds,
-                    seed=42,
-                    maxiter=35,
-                    popsize=10,
-                    polish=True,
-                    tol=1e-6,
-                )
-
-                best_dims = result.x
-                best_pred = self._prediction_service.predict(
-                    float(best_dims[0]),
-                    float(best_dims[1]),
-                    float(best_dims[2])
-                )
-                best_diff = abs(best_pred.valence - target_valence)
-                evaluated = int(result.nfev)
-
-                return OptimizationResult(
-                    length=float(best_dims[0]),
-                    width=float(best_dims[1]),
-                    height=float(best_dims[2]),
-                    predicted_valence=best_pred.valence,
-                    predicted_arousal=best_pred.arousal,
-                    target_achieved=max(0.0, 1.0 - best_diff),
-                    samples_evaluated=evaluated
-                )
-            except Exception as e:
-                logger.warning(f"Differential evolution failed: {e}. Falling back to monte_carlo.")
-                method = 'monte_carlo'
-
-        if method != 'monte_carlo':
-            raise ValueError(f"Unknown optimization method: {method}")
-
-        l_rand = np.random.uniform(l_range[0], l_range[1], n_samples)
-        w_rand = np.random.uniform(w_range[0], w_range[1], n_samples)
-        h_rand = np.random.uniform(h_range[0], h_range[1], n_samples)
-        candidates = np.stack([l_rand, w_rand, h_rand], axis=1)
-
-        best_idx = None
-        best_diff = float('inf')
-
-        for i in range(len(candidates)):
-            pred = self._prediction_service.predict(
-                float(candidates[i, 0]), float(candidates[i, 1]), float(candidates[i, 2])
-            )
-            diff = abs(pred.valence - target_valence)
-            if diff < best_diff:
-                best_diff = diff
-                best_idx = i
-
-        if best_idx is None:
-            raise ValueError("Optimization failed - no valid candidates")
-
-        best_room = candidates[best_idx]
-        best_pred = self._prediction_service.predict(
-            float(best_room[0]), float(best_room[1]), float(best_room[2])
-        )
+        # Slice the columns explicitly: Column 0 is Valence, Column 1 is Arousal
+        valences = raw_batch_predictions[:, 0]
+        arousals = raw_batch_predictions[:, 1]
+            
+        # Step D: Batch Score
+        batch_neuro_scores = calculate_neuro_score(valences, arousals)
+        
+        # Step E: Calculate Error
+        errors = np.abs(batch_neuro_scores - target_score)
+        
+        # Step F: Diversity Selection
+        top_indices = np.argsort(errors)[:50]
+        chosen_idx = random.choice(top_indices)
+        
+        # Step G: Return the feature vector
+        chosen_vector = samples_matrix[chosen_idx]
+        chosen_valence = float(valences[chosen_idx])
+        chosen_arousal = float(arousals[chosen_idx])
+        chosen_ns = float(batch_neuro_scores[chosen_idx])
+        
+        full_features = {name: float(chosen_vector[i]) for i, name in enumerate(feature_names)}
+        
+        # Map back to exact UI param names for frontend syncing
+        ui_mappings = {
+            'Num_Doors': 'num_doors',
+            'Door_Area_m2': 'door_area',
+            'Num_Windows': 'num_windows',
+            'Window_Area_m2': 'window_area',
+            'Daylight_Factor_pct': 'daylight_factor',
+            'Illuminance_lux': 'illuminance',
+            'CCT_K': 'cct',
+            'Walkable_Floor_Area_m2': 'walkable_floor'
+        }
+        for model_key, ui_key in ui_mappings.items():
+            if model_key in full_features:
+                full_features[ui_key] = full_features[model_key]
+        
         return OptimizationResult(
-            length=float(best_room[0]),
-            width=float(best_room[1]),
-            height=float(best_room[2]),
-            predicted_valence=best_pred.valence,
-            predicted_arousal=best_pred.arousal,
-            target_achieved=max(0.0, 1.0 - best_diff),
-            samples_evaluated=n_samples
+            length=full_features.get('Length_m', 0.0),
+            width=full_features.get('Width_m', 0.0),
+            height=full_features.get('Height_m', 0.0),
+            predicted_valence=chosen_valence,
+            predicted_arousal=chosen_arousal,
+            neuro_score=chosen_ns,
+            target_achieved=max(0.0, 1.0 - float(errors[chosen_idx])),
+            samples_evaluated=n_samples,
+            full_features=full_features,
         )
 
     def optimize_full(
@@ -201,203 +236,5 @@ class OptimizationService:
         target_score: float,
         fixed_features: Optional[Dict[str, float]] = None,
     ) -> OptimizationResult:
-        """
-        Full-feature optimization — searches across all spatial parameters.
-
-        Args:
-            target_score: Target neuro-score (0.0 to 1.0)
-            fixed_features: Features to hold constant during optimization
-
-        Returns:
-            OptimizationResult with optimized features
-        """
-        if not self._feature_names:
-            return self.optimize_for_target(target_score)
-
-        spatial_config = self._config.spatial_features
-        fixed = fixed_features or {}
-        target_valence = (target_score * 2.0) - 1.0
-
-        # Build bounds for optimizable features
-        opt_features = []
-        opt_bounds = []
-        for name in self._feature_names:
-            if name in fixed:
-                continue
-            if name.startswith('Day_or_Night_') or name.startswith('Day or Night_'):
-                opt_features.append(name)
-                opt_bounds.append((0.0, 1.0))
-            elif hasattr(spatial_config, name):
-                feat = getattr(spatial_config, name)
-                if isinstance(feat, dict) and 'min' in feat and 'max' in feat:
-                    opt_features.append(name)
-                    opt_bounds.append((feat['min'], feat['max']))
-            else:
-                opt_features.append(name)
-                opt_bounds.append((0.0, 1.0))
-
-        def objective(values: np.ndarray) -> float:
-            features = dict(fixed)
-            for i, fname in enumerate(opt_features):
-                features[fname] = float(values[i])
-            pred = self._prediction_service.predict_full(features)
-            return abs(pred.valence - target_valence)
-
-        try:
-            result = differential_evolution(
-                objective,
-                bounds=opt_bounds,
-                seed=42,
-                maxiter=50,
-                popsize=15,
-                polish=True,
-                tol=1e-6,
-            )
-
-            best_values = result.x
-            best_features = dict(fixed)
-            for i, fname in enumerate(opt_features):
-                best_features[fname] = float(best_values[i])
-
-            best_pred = self._prediction_service.predict_full(best_features)
-
-            return OptimizationResult(
-                length=best_features.get('Length_m', 10.0),
-                width=best_features.get('Width_m', 8.0),
-                height=best_features.get('Height_m', 3.5),
-                predicted_valence=best_pred.valence,
-                predicted_arousal=best_pred.arousal,
-                target_achieved=max(0.0, 1.0 - abs(best_pred.valence - target_valence)),
-                samples_evaluated=int(result.nfev),
-                full_features=best_features,
-            )
-        except Exception as e:
-            logger.warning(f"Full-feature optimization failed: {e}. Falling back to 3-dim optimization.")
-            return self.optimize_for_target(target_score)
-
-    def optimize_for_valence_arousal(
-        self,
-        target_valence: float,
-        target_arousal: float,
-        n_samples: Optional[int] = None,
-        constraints: Optional[dict] = None
-    ) -> OptimizationResult:
-        """
-        Find room dimensions that achieve target valence and arousal.
-        """
-        if n_samples is None:
-            n_samples = self._config.optimization.monte_carlo_samples
-
-        room_config = self._config.room
-        constraints = constraints or {}
-
-        l_range = constraints.get('length', (room_config.min_length, room_config.max_length))
-        w_range = constraints.get('width', (room_config.min_width, room_config.max_width))
-        h_range = constraints.get('height', (room_config.min_height, room_config.max_height))
-
-        l_rand = np.random.uniform(l_range[0], l_range[1], n_samples)
-        w_rand = np.random.uniform(w_range[0], w_range[1], n_samples)
-        h_rand = np.random.uniform(h_range[0], h_range[1], n_samples)
-
-        best_idx = None
-        best_dist = float('inf')
-
-        for i in range(n_samples):
-            pred = self._prediction_service.predict(
-                float(l_rand[i]), float(w_rand[i]), float(h_rand[i])
-            )
-            dist = np.sqrt(
-                (pred.valence - target_valence)**2 +
-                (pred.arousal - target_arousal)**2
-            )
-            if dist < best_dist:
-                best_dist = dist
-                best_idx = i
-
-        if best_idx is None:
-            raise ValueError("Optimization failed - no valid candidates")
-
-        best_pred = self._prediction_service.predict(
-            float(l_rand[best_idx]), float(w_rand[best_idx]), float(h_rand[best_idx])
-        )
-
-        return OptimizationResult(
-            length=float(l_rand[best_idx]),
-            width=float(w_rand[best_idx]),
-            height=float(h_rand[best_idx]),
-            predicted_valence=best_pred.valence,
-            predicted_arousal=best_pred.arousal,
-            target_achieved=1.0 - best_dist / 2.0,
-            samples_evaluated=n_samples
-        )
-
-    def gradient_optimize(
-        self,
-        target_score: float,
-        initial_dims: Tuple[float, float, float],
-        learning_rate: float = 0.1,
-        max_iterations: int = 100,
-        tolerance: float = 0.01
-    ) -> OptimizationResult:
-        """
-        Gradient-based optimization for PyTorch models.
-        Only works with PyTorch models that support backpropagation.
-        """
-        import torch
-        from src.models.adapters import PyTorchAdapter
-
-        model_adapter = self._prediction_service._model
-        if model_adapter is None:
-            raise ValueError("Model not set")
-
-        if isinstance(model_adapter, PyTorchAdapter):
-            model = model_adapter.get_torch_model()
-        elif hasattr(model_adapter, 'parameters'):
-            model = model_adapter
-        else:
-            logger.warning("gradient_optimize is deprecated for non-PyTorch models. Using fallback or rejecting.")
-            raise ValueError("gradient_optimize requires a PyTorchAdapter.")
-
-        target_valence = (target_score * 2.0) - 1.0
-
-        dims = torch.tensor([initial_dims], dtype=torch.float32, requires_grad=True)
-        optimizer = torch.optim.Adam([dims], lr=learning_rate)
-
-        for iteration in range(max_iterations):
-            optimizer.zero_grad()
-
-            output = model(dims)
-            if isinstance(output, dict):
-                pred_valence = output['affective_space'][0, 0]
-            else:
-                pred_valence = output[0, 0]
-
-            loss = (pred_valence - target_valence) ** 2
-            loss.backward()
-            optimizer.step()
-
-            with torch.no_grad():
-                room_config = self._config.room
-                dims.data[0, 0].clamp_(room_config.min_length, room_config.max_length)
-                dims.data[0, 1].clamp_(room_config.min_width, room_config.max_width)
-                dims.data[0, 2].clamp_(room_config.min_height, room_config.max_height)
-
-            if loss.item() < tolerance:
-                break
-
-        with torch.no_grad():
-            final_output = model(dims)
-            if isinstance(final_output, dict):
-                final_va = final_output['affective_space'].numpy()[0]
-            else:
-                final_va = final_output.numpy()[0]
-
-        return OptimizationResult(
-            length=float(dims[0, 0].item()),
-            width=float(dims[0, 1].item()),
-            height=float(dims[0, 2].item()),
-            predicted_valence=float(final_va[0]),
-            predicted_arousal=float(final_va[1]),
-            target_achieved=1.0 - np.sqrt((final_va[0] - target_valence)**2),
-            samples_evaluated=iteration + 1
-        )
+        """Alias for optimize_for_target to maintain compatibility."""
+        return self.optimize_for_target(target_score=target_score, fixed_features=fixed_features)
