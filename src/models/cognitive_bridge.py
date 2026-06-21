@@ -39,6 +39,7 @@ class CognitiveBridge:
         self._validate_coords(coords)
         self.mds_coords: Dict[str, List[float]] = coords
         self.categories: List[str] = list(coords.keys())
+        self._coords_array = np.asarray([self.mds_coords[name] for name in self.categories], dtype=np.float64)
 
     @staticmethod
     def _load_coords(path: Path) -> Dict[str, List[float]]:
@@ -81,9 +82,8 @@ class CognitiveBridge:
                 f"Expected {len(self.categories)} categories, got {probs.shape[1]}."
             )
 
-        coords = np.asarray([self.mds_coords[name] for name in self.categories], dtype=np.float64)
         row_sums = probs.sum(axis=1, keepdims=True)
         if np.any(row_sums == 0.0):
             raise ValueError("Each row of probabilities must not sum to zero.")
         normalized = probs / row_sums
-        return np.asarray(normalized @ coords, dtype=np.float64)
+        return np.asarray(normalized @ self._coords_array, dtype=np.float64)

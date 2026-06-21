@@ -8,6 +8,8 @@ from src.services.container import ServiceContainer
 from src.services.optimization_service import OptimizationResult
 from src.services.prediction_service import PredictionResult
 
+_DEFAULT_MONTE_CARLO_SAMPLES = 2000
+
 
 @dataclass
 class OrchestrationResult:
@@ -49,9 +51,13 @@ class NeuroArchitectureOrchestrator:
         if not hasattr(self._services.config, "optimization"):
             raise ValueError(
                 "services.config must define an optimization section; "
-                "monte_carlo_samples defaults to 2000 if omitted."
+                f"monte_carlo_samples defaults to {_DEFAULT_MONTE_CARLO_SAMPLES} if omitted."
             )
-        monte_carlo_samples = getattr(self._services.config.optimization, "monte_carlo_samples", 2000)
+        monte_carlo_samples = getattr(
+            self._services.config.optimization,
+            "monte_carlo_samples",
+            _DEFAULT_MONTE_CARLO_SAMPLES,
+        )
         if not isinstance(monte_carlo_samples, int) or monte_carlo_samples < 10:
             raise ValueError("services.config.optimization.monte_carlo_samples must be an int >= 10.")
 
