@@ -124,6 +124,12 @@ def _compute_eeg_features(signal_right: np.ndarray, signal_left: np.ndarray, fs:
     return final_valence, arousal_eeg
 
 
+def _compute_faa(signal_right: np.ndarray, signal_left: np.ndarray, fs: int = FS) -> float:
+    """Backward-compatible FAA helper returning valence-like FAA output."""
+    final_valence, _ = _compute_eeg_features(signal_right, signal_left, fs=fs)
+    return float(final_valence)
+
+
 def _detect_r_peaks(ecg: np.ndarray, fs: int = FS) -> np.ndarray:
     """Simple R-peak detector using scipy.signal.find_peaks on filtered ECG."""
     # Band-pass 0.5-5.0 Hz to isolate QRS complex and remove wander
