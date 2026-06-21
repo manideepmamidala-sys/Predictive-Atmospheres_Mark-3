@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, cast
 
 import numpy as np
 
@@ -28,7 +28,13 @@ class CognitiveBridge:
     """Legacy bridge for mapping emotion-probability vectors to MDS trajectories."""
 
     def __init__(self, mds_path: Optional[str] = None):
-        coords = _DEFAULT_MDS_COORDS if mds_path is None else self._load_coords(Path(mds_path))
+        if mds_path is None:
+            coords = _DEFAULT_MDS_COORDS
+        else:
+            resolved = Path(mds_path).expanduser().resolve()
+            if not resolved.is_file():
+                raise FileNotFoundError(f"MDS coordinates file not found: {resolved}")
+            coords = self._load_coords(resolved)
         self._validate_coords(coords)
         self.mds_coords: Dict[str, List[float]] = coords
         self.categories: List[str] = list(coords.keys())
@@ -62,6 +68,7 @@ class CognitiveBridge:
 
         coords = np.asarray([self.mds_coords[name] for name in self.categories], dtype=np.float64)
         row_sums = probs.sum(axis=1, keepdims=True)
-        safe_sums = np.where(row_sums == 0.0, 1.0, row_sums)
-        normalized = probs / safe_sums
-        return normalized @ coords
+        if np.any(row_sums == 0.0):
+            raise ValueError("probabilities rows must not sum to zero.")
+        normalized = probs / row_sums
+        return cast(np.ndarray, normalized @ coords)

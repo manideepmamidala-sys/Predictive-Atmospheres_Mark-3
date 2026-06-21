@@ -27,9 +27,11 @@ class NeuroArchitectureOrchestrator:
         fs: int = 256,
         target_score: float = 0.6,
     ) -> OrchestrationResult:
+        """Run end-to-end optimization while preserving legacy method signature."""
         if eeg_signal.size == 0:
             raise ValueError("eeg_signal must not be empty.")
-        _ = fs  # preserved for legacy signature compatibility
+        if fs <= 0:
+            raise ValueError("fs must be a positive integer.")
 
         optimized_room = self._services.optimization_service.optimize_for_target(
             target_score=target_score,
