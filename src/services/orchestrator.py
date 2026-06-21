@@ -46,11 +46,9 @@ class NeuroArchitectureOrchestrator:
             ecg_channel=signal_array[2],
             fs=fs,
         )
-        monte_carlo_samples = getattr(
-            getattr(self._services.config, "optimization", object()),
-            "monte_carlo_samples",
-            2000,
-        )
+        if not hasattr(self._services.config, "optimization"):
+            raise ValueError("services.config must define an optimization section.")
+        monte_carlo_samples = getattr(self._services.config.optimization, "monte_carlo_samples", 2000)
         if not isinstance(monte_carlo_samples, int) or monte_carlo_samples < 10:
             raise ValueError("services.config.optimization.monte_carlo_samples must be an int >= 10.")
 

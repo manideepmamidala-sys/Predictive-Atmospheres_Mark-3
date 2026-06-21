@@ -43,7 +43,11 @@ class CognitiveBridge:
     @staticmethod
     def _load_coords(path: Path) -> Dict[str, List[float]]:
         try:
-            raw = json.loads(path.read_text(encoding="utf-8"))
+            content = path.read_text(encoding="utf-8")
+        except OSError as exc:
+            raise ValueError(f"Failed to read MDS coordinates file: {path}") from exc
+        try:
+            raw = json.loads(content)
         except JSONDecodeError as exc:
             raise ValueError(f"Failed to parse JSON in MDS coordinates file: {path}") from exc
         if not isinstance(raw, dict):
@@ -51,7 +55,7 @@ class CognitiveBridge:
         parsed: Dict[str, List[float]] = {}
         for key, value in raw.items():
             if not isinstance(value, (list, tuple)):
-                raise ValueError(f"Coordinates for '{key}' must be a 2-item sequence.")
+                raise ValueError(f"Coordinates for '{key}' must be a list or tuple.")
             parsed[str(key)] = list(value)
         return parsed
 
