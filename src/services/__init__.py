@@ -16,10 +16,12 @@ from src.services.prediction_service import PredictionService
 from src.services.optimization_service import OptimizationService
 from src.services.neural_processing_service import NeuralProcessingService
 from src.services.container import ServiceContainer
+from src.services.orchestrator import NeuroArchitectureOrchestrator
 
 __all__ = [
     'PredictionService',
     'OptimizationService',
     'NeuralProcessingService',
-    'ServiceContainer'
+    'ServiceContainer',
+    'NeuroArchitectureOrchestrator',
 ]
