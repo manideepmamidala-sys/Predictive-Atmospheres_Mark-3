@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from json import JSONDecodeError
 from pathlib import Path
 from typing import Dict, List, Optional, cast
 
@@ -41,10 +42,18 @@ class CognitiveBridge:
 
     @staticmethod
     def _load_coords(path: Path) -> Dict[str, List[float]]:
-        raw = json.loads(path.read_text(encoding="utf-8"))
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8"))
+        except JSONDecodeError as exc:
+            raise ValueError(f"Failed to parse JSON in MDS coordinates file: {path}") from exc
         if not isinstance(raw, dict):
             raise ValueError("MDS coordinates file must contain a JSON object.")
-        return {str(k): list(v) for k, v in raw.items()}
+        parsed: Dict[str, List[float]] = {}
+        for key, value in raw.items():
+            if not isinstance(value, (list, tuple)):
+                raise ValueError(f"Coordinates for '{key}' must be a 2-item sequence.")
+            parsed[str(key)] = list(value)
+        return parsed
 
     @staticmethod
     def _validate_coords(coords: Dict[str, List[float]]) -> None:
