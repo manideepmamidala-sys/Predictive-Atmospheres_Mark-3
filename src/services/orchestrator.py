@@ -48,8 +48,8 @@ class NeuroArchitectureOrchestrator:
         )
         if not hasattr(self._services.config, "optimization"):
             raise ValueError(
-                "services.config must define an optimization section with "
-                "a monte_carlo_samples parameter."
+                "services.config must define an optimization section; "
+                "monte_carlo_samples defaults to 2000 if omitted."
             )
         monte_carlo_samples = getattr(self._services.config.optimization, "monte_carlo_samples", 2000)
         if not isinstance(monte_carlo_samples, int) or monte_carlo_samples < 10:

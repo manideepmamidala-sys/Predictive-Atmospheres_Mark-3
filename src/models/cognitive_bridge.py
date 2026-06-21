@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from json import JSONDecodeError
 from pathlib import Path
-from typing import Dict, List, Optional, cast
+from typing import Dict, List, Optional
 
 import numpy as np
 
@@ -86,4 +86,4 @@ class CognitiveBridge:
         if np.any(row_sums == 0.0):
             raise ValueError("Each row of probabilities must not sum to zero.")
         normalized = probs / row_sums
-        return cast(np.ndarray, normalized @ coords)
+        return np.asarray(normalized @ coords, dtype=np.float64)
