@@ -63,8 +63,10 @@ class CognitiveBridge:
     def _validate_coords(coords: Dict[str, List[float]]) -> None:
         for category, pair in coords.items():
             arr = np.asarray(pair, dtype=np.float64)
-            if arr.shape != (2,) or not np.all(np.isfinite(arr)):
-                raise ValueError(f"Invalid 2D coordinates for '{category}'.")
+            if arr.shape != (2,):
+                raise ValueError(f"Coordinates for '{category}' must contain exactly 2 values.")
+            if not np.all(np.isfinite(arr)):
+                raise ValueError(f"Coordinates for '{category}' must be finite numeric values.")
             if np.any(arr < -1.0) or np.any(arr > 1.0):
                 raise ValueError(f"Coordinates for '{category}' are out of bounds [-1, 1].")
 
@@ -82,6 +84,6 @@ class CognitiveBridge:
         coords = np.asarray([self.mds_coords[name] for name in self.categories], dtype=np.float64)
         row_sums = probs.sum(axis=1, keepdims=True)
         if np.any(row_sums == 0.0):
-            raise ValueError("probabilities rows must not sum to zero.")
+            raise ValueError("Each row of probabilities must not sum to zero.")
         normalized = probs / row_sums
         return cast(np.ndarray, normalized @ coords)
