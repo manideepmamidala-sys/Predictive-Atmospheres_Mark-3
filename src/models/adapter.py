@@ -1,4 +1,3 @@
-import torch
 import numpy as np
 
 class ModelAdapter:
@@ -9,6 +8,7 @@ class ModelAdapter:
     def predict(self, X, batch=False, return_array=False):
         """Unified inference method."""
         if self.framework == 'pytorch':
+            import torch
             # Handle PyTorch inference
             self.model.eval()
             if not isinstance(X, torch.Tensor):

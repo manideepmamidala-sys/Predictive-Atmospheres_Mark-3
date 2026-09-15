@@ -8,7 +8,7 @@
 
 ```
 Predictive Atmospheres/
-├── src/                    ← Headless ML Backend (no UI dependencies)
+├── src/                    ← Headless ML Backend (FastAPI, Scikit-learn, zero UI dependencies)
 │   ├── config.py           ← Centralised configuration (EEG, model, training, fusion, spatial)
 │   ├── cli.py              ← Command-line interface (train / predict / info)
 │   ├── data/               ← Data ingestion, EEG/ECG processing, emotion engine
@@ -17,12 +17,12 @@ Predictive Atmospheres/
 │   ├── core/data/          ← Pydantic validators (SpatialInput, EEGSignal)
 │   └── utils/              ← Caching, 3D rendering helpers
 │
-├── frontend/               ← Isolated Streamlit UI (API consumer of src/)
-│   ├── app.py              ← Streamlit entry point
-│   └── ui/                 ← Pages: Design Studio, Human Metrics, Spatial Insights,
-│                              Emotion Landscape, Affective Fusion, Demographic Insights,
-│                              Environmental Impacts, Model Training
+├── frontend/               ← React 18 / Vite / Tailwind SPA (Consumes FastAPI)
+│   ├── src/ui/             ← Pages: Design Studio, Emotion Landscape, etc.
+│   ├── src/components/     ← Reusable Tailwind UI components
+│   └── src/store/          ← Zustand state management and API integration
 │
+├── api.py                  ← FastAPI entry point for all frontend/backend communication
 ├── data/                   ← Experimental datasets (raw EEG CSVs + metadata)
 │   ├── raw/                ← experiment_01/, experiment_02/, experiment_03/
 │   ├── metadata/           ← Biometric + spatial CSVs per experiment
@@ -32,13 +32,13 @@ Predictive Atmospheres/
 └── pyproject.toml          ← Package definition + dependencies
 ```
 
-**Separation principle:** `src/` is a pure Python ML backend with zero Streamlit imports. `frontend/` consumes `src/` as an API. The backend can be imported from CLI, Rhino, or any external system.
+**Separation principle:** `src/` is a pure Python ML backend with zero UI imports. `frontend/` is a Vite SPA that consumes the backend as a REST API. The backend can also be imported from CLI, Rhino, or any external system.
 
 ---
 
 ## Spatial Input Schema
 
-The model accepts exactly **12 independent variables** (+ 2 categoricals). All derived features are computed by the backend — the frontend never supplies them.
+The model accepts exactly **12 independent variables** (+ 1 categorical). All derived features are computed by the backend — the frontend never supplies them.
 
 ### Independent Features (raw inputs)
 
@@ -55,14 +55,13 @@ The model accepts exactly **12 independent variables** (+ 2 categoricals). All d
 | 9   | Illuminance         | lux  | 0 – 2000     |
 | 10  | CCT                 | K    | 2000 – 10000 |
 | 11  | Walkable Floor Area | m²   | 0 – 500      |
+| 12  | Room Volume         | m³   | 0 – 25000    |
 
 ### Categorical Features (one-hot encoded)
 
 | Feature       | Categories                                            |
 | ------------- | ----------------------------------------------------- |
-| Day or Night  | Day, Night, Unspecified                               |
-| Type of Space | Bedroom, Living Room, Workplace, Classroom, Cafeteria, Unspecified |
-| Gender        | Male, Female, Unspecified                             |
+| Type of Space | Bedroom, Living Room, Workplace, Classroom, Cafeteria |
 
 ### Derived Features (computed by backend)
 
@@ -127,13 +126,21 @@ pip install -e .          # Production
 pip install -e .[dev]     # Development (includes pytest, mypy, flake8)
 ```
 
-### Launch Frontend (Streamlit)
+### Launch Backend (FastAPI)
 
 ```bash
-streamlit run frontend/app.py
+fastapi dev api.py
 ```
 
-Models are trained automatically on first launch. The fusion analysis parquet is generated during training.
+### Launch Frontend (React SPA)
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Models are trained automatically on first launch or loaded dynamically via joblib. The fusion analysis parquet is generated during training.
 
 ### CLI (Headless Backend)
 
@@ -196,5 +203,6 @@ Environment variable overrides:
 | ML Core           | PyTorch, scikit-learn, NumPy, SciPy                |
 | Signal Processing | Welch's PSD, Butterworth filters, R-peak detection |
 | Data              | Pandas, Pydantic validation                        |
-| Frontend          | Streamlit, Plotly                                  |
+| API               | FastAPI                                            |
+| Frontend          | React 18, Vite, Tailwind CSS, Zustand              |
 | Infrastructure    | Docker, GitHub Actions CI                          |

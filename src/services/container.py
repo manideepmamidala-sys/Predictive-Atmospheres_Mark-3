@@ -7,7 +7,6 @@ from __future__ import annotations
 from typing import Optional, Any, List
 
 from src.config import Config, get_config
-from src.models.architectures import SpatialMLP
 from src.services.prediction_service import PredictionService
 from src.services.optimization_service import OptimizationService
 from src.services.neural_processing_service import NeuralProcessingService
