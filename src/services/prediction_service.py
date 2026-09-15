@@ -121,8 +121,8 @@ class PredictionService:
 
     def set_model(self, model: Any) -> None:
         """Set or update the trained model, automatically wrapping it in an adapter if needed."""
-        if model is not None and not hasattr(model, 'predict'):
-            from src.models.adapter import ModelAdapter
+        from src.models.adapter import ModelAdapter
+        if not isinstance(model, ModelAdapter):
             model_type = type(model).__module__ if hasattr(type(model), '__module__') else ""
             if 'torch' in model_type or 'src.models' in model_type:
                 model = ModelAdapter(model, framework='pytorch')
