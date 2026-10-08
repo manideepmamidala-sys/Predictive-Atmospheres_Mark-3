@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0.0",
+  "provenance": {
+    "source": "Original investigator-supplied CSV metadata and raw channel recordings",
+    "method": "Analysis specification 1.1.0; conditional primary 500 Hz scenario",
+    "generated_at": null,
+    "limitations": [
+      "Acquisition sample rate, amplitude units and reference wiring are unconfirmed.",
+      "Constructed affect axes are hypotheses, not validated emotion measurements."
+    ],
+    "manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
+    "analysis_spec_sha256": "e14a09e72fda6d9f05e6f975bfc2f22a47e3053047e27294a01c9db867019660"
+  },
+  "model": {
+    "status": "not_better_than_baseline",
+    "explanation": "Experimental population-constructed coordinate prediction from original room attributes; grouped errors describe this small retrospective pilot.",
+    "metrics": [
+      {
+        "name": "valence_mae",
+        "value": 0.3750165481446891,
+        "unit": "constructed-coordinate MAE",
+        "interval": null,
+        "n": 10,
+        "group": "held_out_room"
+      },
+      {
+        "name": "arousal_mae",
+        "value": 0.48576372158717385,
+        "unit": "constructed-coordinate MAE",
+        "interval": null,
+        "n": 10,
+        "group": "held_out_room"
+      },
+      {
+        "name": "mean_mae",
+        "value": 0.4303901348659315,
+        "unit": "constructed-coordinate MAE",
+        "interval": null,
+        "n": 10,
+        "group": "held_out_room"
+      },
+      {
+        "name": "baseline_median_mae",
+        "value": 0.40994218952129924,
+        "unit": "constructed-coordinate MAE",
+        "interval": null,
+        "n": 10,
+        "group": "held_out_room"
+      },
+      {
+        "name": "baseline_mean_mae",
+        "value": 0.42413919212047524,
+        "unit": "constructed-coordinate MAE",
+        "interval": null,
+        "n": 10,
+        "group": "held_out_room"
+      },
+      {
+        "name": "valence_mae",
+        "value": 0.3635527699223094,
+        "unit": "constructed-coordinate MAE",
+        "interval": null,
+        "n": 3,
+        "group": "held_out_subject"
+      },
+      {
+        "name": "arousal_mae",
+        "value": 0.49076709578133276,
+        "unit": "constructed-coordinate MAE",
+        "interval": null,
+        "n": 3,
+        "group": "held_out_subject"
+      },
+      {
+        "name": "mean_mae",
+        "value": 0.42715993285182113,
+        "unit": "constructed-coordinate MAE",
+        "interval": null,
+        "n": 3,
+        "group": "held_out_subject"
+      },
+      {
+        "name": "baseline_median_mae",
+        "value": 0.42715993285182113,
+        "unit": "constructed-coordinate MAE",
+        "interval": null,
+        "n": 3,
+        "group": "held_out_subject"
+      },
+      {
+        "name": "baseline_mean_mae",
+        "value": 0.43687108041845013,
+        "unit": "constructed-coordinate MAE",
+        "interval": null,
+        "n": 3,
+        "group": "held_out_subject"
+      }
+    ],
+    "limitations": [
+      "Acquisition rate, channel units/reference and physiological validity remain unconfirmed.",
+      "Only observed Experiment 3 complete raw-component trials enter this model.",
+      "Small repeated participant/room sample; no causal or clinical interpretation.",
+      "No calibrated prediction interval or individual response guarantee is available."
+    ],
+    "artifact_version": "1.0.0"
+  }
+}

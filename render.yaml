@@ -1,24 +1,15 @@
+# Candidate API deployment only. See docs/operations.md and docs/release-readiness.md.
 services:
-  # FastAPI Backend
   - type: web
     name: predictive-atmospheres-api
-    env: docker
-    dockerfilePath: ./Dockerfile.api
+    runtime: python
     plan: free
-    healthCheckPath: /health
+    autoDeployTrigger: "off"
+    buildCommand: pip install uv==0.5.9 && cd backend && uv sync --frozen --no-dev
+    startCommand: cd backend && uv run --frozen --no-dev uvicorn pa.api.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /v1/health
     envVars:
-      - key: PORT
-        value: 8000
-
-  # Streamlit Frontend
-  - type: web
-    name: predictive-atmospheres-frontend
-    env: docker
-    dockerfilePath: ./Dockerfile
-    plan: free
-    envVars:
-      - key: API_URL
-        fromService:
-          type: web
-          name: predictive-atmospheres-api
-          envVarKey: RENDER_EXTERNAL_URL
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: PA_CORS_ORIGINS
+        sync: false

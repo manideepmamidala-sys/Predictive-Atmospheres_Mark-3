@@ -1,0 +1,182 @@
+{
+  "$defs": {
+    "DayNight": {
+      "enum": [
+        "Day",
+        "Night"
+      ],
+      "title": "DayNight",
+      "type": "string"
+    },
+    "SpaceType": {
+      "enum": [
+        "General",
+        "Bedroom",
+        "Living Room",
+        "Workplace",
+        "Classroom",
+        "Cafeteria"
+      ],
+      "title": "SpaceType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Independent variables only; missing optional observations are not zeros.",
+  "properties": {
+    "cct": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Cct"
+    },
+    "day_or_night": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DayNight"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "daylight_factor": {
+      "anyOf": [
+        {
+          "maximum": 100,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Daylight Factor"
+    },
+    "door_area": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Door Area"
+    },
+    "height": {
+      "exclusiveMinimum": 0,
+      "maximum": 30,
+      "title": "Height",
+      "type": "number"
+    },
+    "illuminance": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Illuminance"
+    },
+    "length": {
+      "exclusiveMinimum": 0,
+      "maximum": 100,
+      "title": "Length",
+      "type": "number"
+    },
+    "num_doors": {
+      "anyOf": [
+        {
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Num Doors"
+    },
+    "num_windows": {
+      "anyOf": [
+        {
+          "maximum": 100,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Num Windows"
+    },
+    "space_type": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SpaceType"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "walkable_floor_area": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Walkable Floor Area"
+    },
+    "width": {
+      "exclusiveMinimum": 0,
+      "maximum": 100,
+      "title": "Width",
+      "type": "number"
+    },
+    "window_area": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Window Area"
+    }
+  },
+  "required": [
+    "length",
+    "width",
+    "height"
+  ],
+  "title": "RoomInput",
+  "type": "object"
+}

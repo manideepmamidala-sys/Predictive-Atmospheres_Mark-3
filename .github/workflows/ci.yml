@@ -1,41 +1,40 @@
-name: CI
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+name: Research platform CI
 
 on:
   push:
-    branches: [main, master]
   pull_request:
 
 jobs:
-  test-and-typecheck:
+  reproduce-and-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CI: "true"
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v9
         with:
-          python-version: "3.11"
+          version: "0.5.9"
+          python-version: "3.11.11"
 
-      - name: Install project + dev deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install -e .[dev]
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22.22.1"
 
-      - name: Run focused test suite
-        run: |
-          pytest -q \
-            src/test/test_emotion_engine.py \
-            src/test/test_validators.py \
-            src/test/test_cognitive_bridge.py \
-            src/test/test_services_orchestrator.py
+      - name: Enable pinned pnpm
+        run: corepack enable
 
-      - name: Run mypy (scoped)
-        run: |
-          mypy \
-            -m src.data.emotion_engine \
-            -m src.models.cognitive_bridge \
-            -m src.core.data.validators
+      - name: Install frozen project dependencies
+        run: make setup
+
+      - name: Install Chromium and host libraries
+        run: cd frontend && corepack pnpm exec playwright install --with-deps chromium
+
+      - name: Verify source and regenerate research products
+        run: make pipeline
+
+      - name: Check source, contract, and browser behavior
+        run: make lint test site

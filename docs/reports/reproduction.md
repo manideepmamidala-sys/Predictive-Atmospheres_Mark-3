@@ -1,0 +1,21 @@
+# Isolated source-snapshot reproduction
+
+Date: 2026-10-08. The working branch was still uncommitted when this check ran, so the existing repository HEAD (`41d6ba5…`) cannot identify the new implementation. `scripts/reproduce_isolated.py` copied the **current intended source and preserved data** into a temporary local Git repository, made a temporary-only source snapshot commit `7b746053c8a4b494206d1735e38ffa513b0c9033`, and made a fresh clean clone of that snapshot. This commit belongs only to `/tmp/pa-repro-2hiv6grb/source-snapshot`; it was not made in, pushed from, or proposed as a commit of the project repository.
+
+The copy excluded `.git`, `artifacts/`, local Python/Node environments, compiled/build caches, staged browser research output and test reports. It retained original recordings, metadata, renders, legacy images, PDFs, source manifest, analysis specification, decisions, frozen locks, frontend derivatives and implementation. `git status --porcelain` was empty in the new clone before the run. `data/processed/` and the legacy model/cache paths had already been retired; no old generated numerical product or fitted model was copied. The clone therefore had to create its own `artifacts/results/` and `artifacts/model/` through the public root workflow.
+
+The command on this host was:
+
+```sh
+LD_LIBRARY_PATH=/tmp/pa-browser-libs/root/usr/lib/x86_64-linux-gnu python3 scripts/reproduce_isolated.py
+```
+
+The temporary `LD_LIBRARY_PATH` provided native Chromium libraries missing from this particular Ubuntu host, as explained in [operations.md](../operations.md). It is not an input to the numerical pipeline or a repository dependency. On a normal supported host, install Chromium and system dependencies with `cd frontend && corepack pnpm exec playwright install --with-deps chromium` and omit the temporary path.
+
+Inside the clean clone, `make all` ran frozen backend/frontend setup, source verification, acquisition audit, gated signal and affect processing, grouped model training, seven validated research exports, OpenAPI/room-input schema generation, Ruff, generated-client/type drift checks, 56 backend tests, 17 offline/browser tests with one intentional live-API skip, and the production Vite build. It passed in **272.5 seconds**. The full command transcript is [reproduction-run.log](reproduction-run.log). The generated model again reported `not_better_than_baseline` on 14 eligible Experiment 3 trials, and source verification again found all 315 inventoried files intact.
+
+`scripts/compare_reproduction.py` then compared **all 15 generated JSON products** in the original working tree and clone recursively, requiring matching keys, order, identifiers, nulls and nonnumeric values, with `abs_tol=rel_tol=1e-8` for finite floats. It reported `Matched 15 JSON products and model metadata`. The fitted `model.joblib` was even byte-identical in this same-host run (SHA-256 `aecbb36c64b51b9c5b77cb20bf555b4a88b0ecea9f899c8b2d8536956fba59c0`). Model metadata comparison excluded only `base_git_revision` and `source_snapshot_status`, which necessarily describe different Git repositories, and the model-file SHA field, which was checked separately. This establishes a same-host, same-lock numerical reproduction; it does not establish cross-platform bitwise equivalence or physiological validity.
+
+The temporary snapshot occupied about **1.2 GB** including its Git objects; the cloned tree after dependency install, products and build occupied about **2.0 GB**. Within that clone the Python environment was 576 MB, Node dependencies 157 MB, numerical results 47 MB and built site 11 MB. Source/data copying and local package cache availability affect total time and disk use. No paid service, login, deployment or legacy processed/model cache was required.
+
+An earlier fresh-process production check correctly found model readiness false after a final backend CLI edit changed the code-tree hash. The pipeline was rerun against the final source bytes, and a new production-dependency API process then returned `ready=true`, `model_status=not_better_than_baseline`; a separate CI-mode single-worker live browser run passed all 18 tests, including real prediction and optimization. The stale long-lived API response was not used as final evidence. That fix preceded the temporary source snapshot and this clean-clone reproduction.

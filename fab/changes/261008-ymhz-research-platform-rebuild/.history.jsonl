@@ -1,0 +1,7 @@
+{"action":"enter","driver":"fab-new","event":"stage-transition","stage":"intake","ts":"2026-10-08T12:21:44Z"}
+{"args":"Rebuild Predictive Atmospheres backend, frontend, repository architecture and scientific pipeline through fresh Fab changes, incorporating the EXECUTION_PLAN.md discussion and repository audit.","cmd":"fab-new","event":"command","ts":"2026-10-08T12:21:44Z"}
+{"delta":"+4.9","event":"confidence","score":4.9,"trigger":"calc-score","ts":"2026-10-08T12:25:49Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-10-08T12:29:08Z"}
+{"cmd":"fab-ff","event":"command","ts":"2026-10-08T12:29:54Z"}
+{"action":"enter","driver":"fab-ff","event":"stage-transition","stage":"apply","ts":"2026-10-08T12:29:55Z"}
+{"action":"enter","driver":"fab-ff","event":"stage-transition","stage":"review","ts":"2026-10-08T14:43:32Z"}

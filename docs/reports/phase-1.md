@@ -1,0 +1,21 @@
+# Phase 1 — Acquisition and source audit
+
+Date: 2026-10-08. Implementation dispatch: Codex `gpt-6-sol`, `high`. Input: original CSV files covered by `data/MANIFEST.sha256`; output: `artifacts/results/audit.json` (schema 1.0.0). No legacy processed cache or model was read. `uv run --frozen pytest -q tests/test_audit.py tests/test_ingestion.py tests/test_manifest.py tests/test_config.py` returned `6 passed in 0.21s`; `uv run --frozen pa audit` returned `Audited 160 recordings`.
+
+## Observed inventory
+
+The audit found 160 finite numeric four-column recordings, 10 distinct subject IDs, 30 distinct room IDs, 30 populated spatial metadata rows and 50/50/60 anchored trial rows in Experiments 1/2/3. Four fully blank Experiment 3 biometric rows and fourteen fully blank spatial rows were filtered as empty CSV rows. There is no evidence from them for missing trials, retakes or additional rooms. The file-level export records source path, sample count, logged seconds, ratios, counter flags and filename-derived chronology for every trial.
+
+Median sample-count/logged-duration ratios are 500.0, 500.0 and 499.5167 samples per logged second by experiment. At a **conditional** 500 Hz analytical rate, six files differ from logged duration by more than 10%. `Subj_M-20260420-190648.csv` contains 7,961 samples and logs 60 seconds; at 500 Hz its samples span 15.922 seconds. This is an unresolved mismatch. Thirty-eight Experiment 1 files have at least one non-unit modulo-256 counter transition; Experiments 2/3 have none. A modulo wrap itself is normal. The transition is a data-integrity flag, not proof of how many packets were lost or of a time correction. Filename order was reconstructed per experiment and subject; filename times are chronology evidence, not verified stimulus event timestamps.
+
+## Rate evidence and remaining ambiguity
+
+The ratios are strong evidence for a roughly 500 Hz **export/sample timeline** in most files, but logged durations were entered separately and contain exceptions. The source CSV has no time column or sample-setting header. The owner does not recall the setting. [Upside Down Labs Chords-Web documentation](https://docs.upsidedownlabs.tech/software/chords/chords-web/index.html) confirms configurable filtering and CSV recording for NPG Lite but does not identify the firmware/settings used for these files. The manufacturer's [ESP-IDF 3-channel firmware repository](https://github.com/upsidedownlabs/NPG-Lite-IDF-Firmware) documents a 250 Hz variant; its [NPG Lite Cardio application documentation](https://docs.upsidedownlabs.tech/software/applications/npg-lite-cardio/index.html) describes 500 Hz for a different application. Neither establishes the configuration of this Chords export. These conflicting device paths justify retaining 250/256/500/512 Hz scenarios in the audit. The 500 Hz scenario is a conditional analysis choice, not a confirmed acquisition fact.
+
+A line-frequency spectrum was not used to resolve the rate: Chords offers 50/60 Hz and modality filters, the chosen export setting is unknown, and mains evidence could be altered by those filters. Physiological timing remains conditional. A later method amendment would be required if hardware/export evidence establishes a different rate.
+
+## Consequences
+
+Do not pad short files or use the logged duration as a sample clock. Signal features must record the assumed rate, actual sample duration, validity and rate sensitivity; duration-dependent claims from discrepant files need caveats. No baseline recording is present or expected from the owner account. Room attributes from Experiment 1 lack openings/lighting, and sleep was recorded only in Experiment 3. The audit does not validate the physiological quality, voltage units, experimental randomization or questionnaire equivalence.
+
+The independent audit/specification checkpoint was subsequently completed by a fresh Codex `gpt-6-astra`, `xhigh` reviewer. The initial review failed three method gaps; version 1.1.0 and adverse synthetic tests addressed them before a fresh independent re-review passed. The coordinator recorded the PASS and released conditional real processing before any accepted signal/fusion/model result. [The checkpoint record](analysis-checkpoint.md) preserves both findings and the exact verdict.

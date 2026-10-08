@@ -1,0 +1,116 @@
+[
+  {
+    "label": "ecg_accepted",
+    "trial_id": "E1:Subj_B:Rm_010",
+    "file": "E1-Subj_B-Rm_010-ecg_accepted.png",
+    "eeg_window_start_s": 4.0,
+    "eeg_window_flags": [],
+    "ecg_window_start_s": 0.206,
+    "ecg_reasons": [
+      "counter_discontinuity",
+      "short_continuous_segment",
+      "insufficient_contiguous_coverage_for_rmssd"
+    ]
+  },
+  {
+    "label": "ecg_rejected",
+    "trial_id": "E1:Subj_A:Rm_001",
+    "file": "E1-Subj_A-Rm_001-ecg_rejected.png",
+    "eeg_window_start_s": 4.0,
+    "eeg_window_flags": [],
+    "ecg_window_start_s": 0.06,
+    "ecg_reasons": [
+      "no_qrs_quality"
+    ]
+  },
+  {
+    "label": "eeg_flagged",
+    "trial_id": "E1:Subj_A:Rm_001",
+    "file": "E1-Subj_A-Rm_001-eeg_flagged.png",
+    "eeg_window_start_s": 0.0,
+    "eeg_window_flags": [
+      "counter_discontinuity"
+    ],
+    "ecg_window_start_s": 0.06,
+    "ecg_reasons": [
+      "no_qrs_quality"
+    ]
+  },
+  {
+    "label": "ecg_accepted",
+    "trial_id": "E2:Subj_M:Rm_013",
+    "file": "E2-Subj_M-Rm_013-ecg_accepted.png",
+    "eeg_window_start_s": 0.0,
+    "eeg_window_flags": [],
+    "ecg_window_start_s": 0.0,
+    "ecg_reasons": []
+  },
+  {
+    "label": "ecg_rejected",
+    "trial_id": "E2:Subj_E:Rm_013",
+    "file": "E2-Subj_E-Rm_013-ecg_rejected.png",
+    "eeg_window_start_s": 0.0,
+    "eeg_window_flags": [],
+    "ecg_window_start_s": 0.0,
+    "ecg_reasons": [
+      "no_qrs_quality"
+    ]
+  },
+  {
+    "label": "eeg_flagged",
+    "trial_id": "E2:Subj_M:Rm_014",
+    "file": "E2-Subj_M-Rm_014-eeg_flagged.png",
+    "eeg_window_start_s": 48.0,
+    "eeg_window_flags": [
+      "extreme_peak_to_peak"
+    ],
+    "ecg_window_start_s": 0.0,
+    "ecg_reasons": []
+  },
+  {
+    "label": "ecg_accepted",
+    "trial_id": "E3:Subj_B:Rm_029",
+    "file": "E3-Subj_B-Rm_029-ecg_accepted.png",
+    "eeg_window_start_s": 0.0,
+    "eeg_window_flags": [],
+    "ecg_window_start_s": 0.0,
+    "ecg_reasons": [
+      "flat_dropout"
+    ]
+  },
+  {
+    "label": "ecg_rejected",
+    "trial_id": "E3:Subj_A:Rm_021",
+    "file": "E3-Subj_A-Rm_021-ecg_rejected.png",
+    "eeg_window_start_s": 0.0,
+    "eeg_window_flags": [],
+    "ecg_window_start_s": 0.0,
+    "ecg_reasons": [
+      "no_qrs_quality"
+    ]
+  },
+  {
+    "label": "eeg_flagged",
+    "trial_id": "E3:Subj_H:Rm_024",
+    "file": "E3-Subj_H-Rm_024-eeg_flagged.png",
+    "eeg_window_start_s": 16.0,
+    "eeg_window_flags": [
+      "abrupt_step"
+    ],
+    "ecg_window_start_s": 0.0,
+    "ecg_reasons": [
+      "insufficient_contiguous_coverage_for_rmssd"
+    ]
+  },
+  {
+    "label": "worst_duration_mismatch",
+    "trial_id": "E3:Subj_M:Rm_021",
+    "file": "E3-Subj_M-Rm_021-worst_duration_mismatch.png",
+    "eeg_window_start_s": 0.0,
+    "eeg_window_flags": [],
+    "ecg_window_start_s": 0.0,
+    "ecg_reasons": [
+      "insufficient_contiguous_coverage_for_rmssd"
+    ]
+  }
+]

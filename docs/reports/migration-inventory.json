@@ -1,0 +1,2233 @@
+{
+  "schema_version": "1.0.0",
+  "source_commit": "41d6ba507965d5159a679e65962fb3d02963a551",
+  "branch": "261008-ymhz-research-platform-rebuild",
+  "initial_worktree_status": [
+    " M fab/.fab-version",
+    " M fab/.kit-migration-version",
+    " M fab/project/config.yaml",
+    "?? AGENTS.md",
+    "?? EXECUTION_PLAN.md",
+    "?? EXECUTION_PLAN.md:Zone.Identifier",
+    "?? PROJECT_REPORT.md",
+    "?? fab/changes/261008-ymhz-research-platform-rebuild/",
+    "?? rooms/",
+    "?? scripts/"
+  ],
+  "existing_user_files": {
+    "AGENTS.md": "7fad58186eeec3d6101515438cf7ca0297316c9b892bd0a49830ec3ef11f4769",
+    "EXECUTION_PLAN.md": "7b4330c738d647a61bb534892556f2dc5597655b826fd851bf029dfc67ebc3b9",
+    "EXECUTION_PLAN.md:Zone.Identifier": "b952d24cf701bc4e7a7d21e1ae85c611824e80579a89836c0cb49b193446ccfe",
+    "PROJECT_REPORT.md": "18ca0b240fbbfbca3b012114b95cdeb791ac4d0ca3bc4c3bdb48e71fbe47c299",
+    "fab/.fab-version": "2b744decd98a36868a9a33392a9bf4c64d7d0f3e6c85fb3dd5ca2d4f428b834d",
+    "fab/.kit-migration-version": "2b744decd98a36868a9a33392a9bf4c64d7d0f3e6c85fb3dd5ca2d4f428b834d",
+    "fab/project/config.yaml": "9bb4350187337f6af6945b6b372e00a0089380921073a121e54ed8bc6853da52"
+  },
+  "entries": [
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_A-20251210-214932.csv",
+      "destination": null,
+      "size_bytes": 1955453,
+      "sha256": "f5fe40c0f71ea897b0a2722b089283def3e13b1f9d6d99f9cebe2f84624edaac"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_A-20251210-215335.csv",
+      "destination": null,
+      "size_bytes": 1958005,
+      "sha256": "fd158f9d5909bb9bb1c469b59c181fea54c3c9c9f49624fdfb764cf3ee6a467e"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_A-20251210-215800.csv",
+      "destination": null,
+      "size_bytes": 1926435,
+      "sha256": "58a2037807412580eb79908e1ab903bfe54bd0a18958c2bda7eb8f4a9a533a2b"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_A-20251210-220152.csv",
+      "destination": null,
+      "size_bytes": 1959704,
+      "sha256": "b18fb5ed79f2a4a40281902c74d3d008aacfdd00145776c77edb1542d052bd1a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_A-20251210-220703.csv",
+      "destination": null,
+      "size_bytes": 1965787,
+      "sha256": "07f0f08af39a191c49188972dc8aea597e38bd5f9186910308315897e33aabfa"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_A-20251210-221010.csv",
+      "destination": null,
+      "size_bytes": 1977671,
+      "sha256": "c382cb2f94a1c89d8a8bf7e7308f4fe2f7a937e1008559e48c44cc4a70bbf6e6"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_A-20251210-222403.csv",
+      "destination": null,
+      "size_bytes": 2116066,
+      "sha256": "09063dbfad03b0174c80e9d96340f1ad2f16bb2a016e92fb8287694bbcd46f8a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_A-20251210-222905.csv",
+      "destination": null,
+      "size_bytes": 1987490,
+      "sha256": "a4824df6892bb11237c10a7fb6f60253345f196ce13a6c8750ccfa487fb0a42a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_A-20251210-223341.csv",
+      "destination": null,
+      "size_bytes": 1986295,
+      "sha256": "0c87c4bd842a9efe50873e809e289e01082c9e7cf107f2fc0b31e126ae95878a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_A-20251210-223654.csv",
+      "destination": null,
+      "size_bytes": 1988056,
+      "sha256": "720371af3e3cfa4a05eef02166961ca3ba891eada74f562dd16621e3d3f7a0cb"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_B-20251210-225844.csv",
+      "destination": null,
+      "size_bytes": 1986818,
+      "sha256": "50ff707a43dbcfbf7cb79400f7aacdee14bcc0bcd990d174c87c0a74e9502854"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_B-20251210-230133.csv",
+      "destination": null,
+      "size_bytes": 1997144,
+      "sha256": "1b4fd25ed5fd3cee671208507b453f0763ab957506c6e8661aa056890d195a92"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_B-20251210-230503.csv",
+      "destination": null,
+      "size_bytes": 1954387,
+      "sha256": "1e220405f5c5c2647770e2930863fea7661ed2f5d0db564f33f709531837164c"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_B-20251210-230836.csv",
+      "destination": null,
+      "size_bytes": 1988904,
+      "sha256": "41e31cad5ae5f5488497eca9b927451c43fb635ab7ad3f23c838e0447203f435"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_B-20251210-231111.csv",
+      "destination": null,
+      "size_bytes": 1986965,
+      "sha256": "7c4edd424cb570b7da54de6e4da11aee365156053bf9c3a9ead95e51f0f1f78b"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_B-20251210-231535.csv",
+      "destination": null,
+      "size_bytes": 1950851,
+      "sha256": "6c33ff2c57e31a8af18e948a1d8770365e3c11a3b58c516f1171b8e987039fef"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_B-20251210-231750.csv",
+      "destination": null,
+      "size_bytes": 1987783,
+      "sha256": "f62460dd130eff9e879b4f3ac02cd7b147a11f5c2621ab60f091c3fe9e247ab9"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_B-20251210-232044.csv",
+      "destination": null,
+      "size_bytes": 1984658,
+      "sha256": "bcf2adb9f1f3fbd80521dd1f69b0adcba108eb4aa61225f5ab9419de50d7361d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_B-20251210-232315.csv",
+      "destination": null,
+      "size_bytes": 1985942,
+      "sha256": "a25582440c1213a0938cfec8bafb661eba3448f29219f76eafa99e649bdf5d99"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_B-20251210-232550.csv",
+      "destination": null,
+      "size_bytes": 1987665,
+      "sha256": "5e53eafc7b0a6c47c2f4078e52bd0b34de0e174b5e48df6c53e0baa2c5516b48"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_C-20251211-004956.csv",
+      "destination": null,
+      "size_bytes": 2070195,
+      "sha256": "9bff2c935feb4622ea0067121d60aedb741c86b58a6679d20800de5a232fc92a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_C-20251211-005442.csv",
+      "destination": null,
+      "size_bytes": 2133168,
+      "sha256": "5a370fbfc96254f8f5d8625adfeb49cdddaeb9561411ec7dc53a59280be81f5a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_C-20251211-005735.csv",
+      "destination": null,
+      "size_bytes": 1994986,
+      "sha256": "8ae17687f7f0960ff4e61c59ff5b32ba7772b61d04faa1527adfdeeb1e8a1b82"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_C-20251211-010034.csv",
+      "destination": null,
+      "size_bytes": 2001318,
+      "sha256": "aa94e7c2593ca3b7d3861bd1a2ac330570685d94d3e237cea6a8e07c999601dd"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_C-20251211-010444.csv",
+      "destination": null,
+      "size_bytes": 2000484,
+      "sha256": "e0c3e93fd9b36a203b50e1c9ad30f0bfbb9ed77d4816cadd99614df5ce8920ec"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_C-20251211-010716.csv",
+      "destination": null,
+      "size_bytes": 2001264,
+      "sha256": "126b163025a79e2bab9a991de0ef104cc3ba6f494a21370c3c7fd4c830ab67d0"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_C-20251211-010934.csv",
+      "destination": null,
+      "size_bytes": 2006907,
+      "sha256": "acde667f667cc1e9bcd698ca7d132302ed442f442ebda8b0426221f23ce47bad"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_C-20251211-011209.csv",
+      "destination": null,
+      "size_bytes": 2004943,
+      "sha256": "64b4e9b177637a11756730ee6852c0c9fc3ef49b2a5ccd95f1b6a8fdbda9c586"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_C-20251211-011508.csv",
+      "destination": null,
+      "size_bytes": 2000557,
+      "sha256": "4d374912b8bbbdb199113a4fb21fafefc0591ee5610abae48d72cd7f4dc2ae6c"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_C-20251211-011731.csv",
+      "destination": null,
+      "size_bytes": 1966208,
+      "sha256": "288b4814747747aaa3f035dd003850ec168c16917658a1ac86575b92115dc9e4"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_D-20251211-013135.csv",
+      "destination": null,
+      "size_bytes": 1996517,
+      "sha256": "b6c1037b3dcb18dc0623d8c67f6868c124a4d4c5ac8b6d8b1766e15d881f06a2"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_D-20251211-013433.csv",
+      "destination": null,
+      "size_bytes": 1989184,
+      "sha256": "8bdace33192f0e4be3900f6c1b286c06a112a7e8a5638075b5987d7e7b2d361d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_D-20251211-013736.csv",
+      "destination": null,
+      "size_bytes": 1998543,
+      "sha256": "078f1649967a425c06d771d7e4400232976702291b1a3af926eccac7646d0d5a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_D-20251211-013957.csv",
+      "destination": null,
+      "size_bytes": 1993419,
+      "sha256": "ccbffb93d1bebc7a28599c783092c5cb4421c4a114217515804128c9f5818981"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_D-20251211-014222.csv",
+      "destination": null,
+      "size_bytes": 1995381,
+      "sha256": "7ba62e3cae7903d44d9f745aa8fccfd5876b7f4c3ccd3368de1c18f85cfed058"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_D-20251211-014439.csv",
+      "destination": null,
+      "size_bytes": 1994900,
+      "sha256": "476ce32d075faea0ea8643b22acd2a0d3df9fbafb3b9aedae47d93247ee2accd"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_D-20251211-014658.csv",
+      "destination": null,
+      "size_bytes": 1992413,
+      "sha256": "eb65f6cbb8cc7812fb5c690fef9ac1639258f27c39c5b9c3738f2cf3e1db3322"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_D-20251211-014931.csv",
+      "destination": null,
+      "size_bytes": 1998515,
+      "sha256": "a0a4aeb011401bfa9475d8409b7573b72bfbc9507d8bddc5d67df10cf8577fa0"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_D-20251211-015140.csv",
+      "destination": null,
+      "size_bytes": 1998664,
+      "sha256": "aff2c31a1ce6347654a00c0b9481b5de6a920acc34cc04fe2d2693c8fab31dfa"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_D-20251211-015619.csv",
+      "destination": null,
+      "size_bytes": 1995212,
+      "sha256": "ba0f771dd0c9a4eaf77d2560397608a77fbce99c0cff8cb24864d921681ff388"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_M-20260507-151453.csv",
+      "destination": null,
+      "size_bytes": 2004789,
+      "sha256": "73f54f1e995817a28e2d7a49cdf23714ba98eafd8a7ec9bdefb37e838d134dad"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_M-20260507-151936.csv",
+      "destination": null,
+      "size_bytes": 2005319,
+      "sha256": "c6aa1ea2ee7d8c2a92145360e2573d2f1ba3d7571955fe70e7bc7e4e247780dd"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_M-20260507-152118.csv",
+      "destination": null,
+      "size_bytes": 2009522,
+      "sha256": "b92408839034688e63c10d24589847623e6fdaecceb40766584fc086345ce60f"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_M-20260507-152308.csv",
+      "destination": null,
+      "size_bytes": 2006341,
+      "sha256": "5dcdde701cf509bf033bb427f7563f763b13faa71eb6c9386eed396bdea86259"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_M-20260507-152608.csv",
+      "destination": null,
+      "size_bytes": 2006305,
+      "sha256": "605ac296b079fef079d892983f6bd757da62cf3e8c49fe9a8e9c8a2632879416"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_M-20260507-152851.csv",
+      "destination": null,
+      "size_bytes": 2009492,
+      "sha256": "9314987fae0d644d2380b290ca57977f574d0fe3891099059f2f4c4b1400f1d5"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_M-20260507-153043.csv",
+      "destination": null,
+      "size_bytes": 2008756,
+      "sha256": "0c247f7f6b610e82f6465c5123a0a1f4fd2ab35784da79cbd67a1ba1ee75af95"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_M-20260507-153233.csv",
+      "destination": null,
+      "size_bytes": 2008222,
+      "sha256": "4a1be44b5f8292d4aac140c443d367a3c7d57e19058c8e00ce9a3c6ae86560ee"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_M-20260507-153407.csv",
+      "destination": null,
+      "size_bytes": 2010322,
+      "sha256": "e4c8f1f1d59f45bc6275bc4596c8e08e72425193604e9180f2717ba10bafa0ec"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_01/Subj_M-20260507-153600.csv",
+      "destination": null,
+      "size_bytes": 2007447,
+      "sha256": "cbe49b23597a22ca64eb87ed7ff1bacb17aef7ddad6def792bf18849dad5093d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_A-20260318-153725.csv",
+      "destination": null,
+      "size_bytes": 1995980,
+      "sha256": "5a7dd0b876136ae1f934c7859c7facf49e38470187bb530b692d4b13529cf7b9"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_A-20260318-154140.csv",
+      "destination": null,
+      "size_bytes": 1994764,
+      "sha256": "63d3871e597cde655c008664882b9a7e6906aece47bb59788434ebef02db78bb"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_A-20260318-154412.csv",
+      "destination": null,
+      "size_bytes": 1687552,
+      "sha256": "fb232ee20b65c8592e61a7fc6bfd0931dcb6c4a258ff3b79a7dfe1f72b8d95c0"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_A-20260318-154635.csv",
+      "destination": null,
+      "size_bytes": 1589052,
+      "sha256": "7d1c3b6808d99a4c2e3efcfd82f386c41628203f2db9e3d0436c9cd4fc0ccf2e"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_A-20260318-155003.csv",
+      "destination": null,
+      "size_bytes": 1751144,
+      "sha256": "3f875bb6deef8c3851ef8bbb9f7fec14cef96880e69eff7322309ca268c5f82b"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_A-20260318-155247.csv",
+      "destination": null,
+      "size_bytes": 1652533,
+      "sha256": "c9eccd24cc634594c2fb2e340ba545f43b6977dc7597daf9b58d06634ca83a6a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_A-20260318-155502.csv",
+      "destination": null,
+      "size_bytes": 1997848,
+      "sha256": "b6a720b0f875ab304857a258049992c1762c4a60e2ac9ebbc528a62d1946b681"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_A-20260318-155818.csv",
+      "destination": null,
+      "size_bytes": 1446989,
+      "sha256": "2d38198c897f80649f58f14a2bba41cd88474553c32dcbabab395e41d230422d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_A-20260318-160056.csv",
+      "destination": null,
+      "size_bytes": 1647876,
+      "sha256": "d3b8e40da2519a67cd3f6703cc15ea90c264cc888b2a0b5e3bec69cf5511072d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_A-20260318-160312.csv",
+      "destination": null,
+      "size_bytes": 1849858,
+      "sha256": "253e27592259952bf970b590dbb4bfe0a04a621524bd6478fb532ec90e149a29"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_E-20260318-130308.csv",
+      "destination": null,
+      "size_bytes": 1736582,
+      "sha256": "52d9d162618259808b23855d7f32ef0d5e01e8ab1ca311a1912ee61a126b96d4"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_E-20260318-130559.csv",
+      "destination": null,
+      "size_bytes": 1697951,
+      "sha256": "8bfe9be6c16d37e3c9f580cf891654f941a22d8ded4bf0ada49804b8fa583dd1"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_E-20260318-130839.csv",
+      "destination": null,
+      "size_bytes": 1651674,
+      "sha256": "884fc5314ebd0e9dabb74d38346603da67c818b6a9fb76eef931f083263a037a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_E-20260318-131107.csv",
+      "destination": null,
+      "size_bytes": 1595793,
+      "sha256": "d4e867c2ceee58f2a99d9cad886f722ffb17003cff34387262aeb5624b55cb69"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_E-20260318-131340.csv",
+      "destination": null,
+      "size_bytes": 1395686,
+      "sha256": "4c639a1a399c6270df4242dd97fdac7b360c0b360c9f4ef11a5032b74f1735b7"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_E-20260318-131606.csv",
+      "destination": null,
+      "size_bytes": 1488190,
+      "sha256": "92ef94565b88420109b5f8442182dce82c7e00400f920d98ae436f3d90b5d54a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_E-20260318-131847.csv",
+      "destination": null,
+      "size_bytes": 1325004,
+      "sha256": "e4d917bf59f52bf22ab86f49399a99229ab4c8b6e7b8dc923b95d8e5dd47a346"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_E-20260318-132052.csv",
+      "destination": null,
+      "size_bytes": 1261971,
+      "sha256": "0dc67ee3fffb13c693ee3f3862c0bebed5643a65600cc877a51a15b04a8790de"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_E-20260318-132309.csv",
+      "destination": null,
+      "size_bytes": 1633177,
+      "sha256": "3b5f12430b738cf0508b9e5b733bfabefb79439795b06d95d74f7ddaeff3330b"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_E-20260318-132526.csv",
+      "destination": null,
+      "size_bytes": 1977905,
+      "sha256": "e2324c8c16b90f5584206b6a9549d74368d9e0e147ce2bc75cb2bcc0357bbb4d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_F-20260318-133857.csv",
+      "destination": null,
+      "size_bytes": 1417037,
+      "sha256": "0b99fb9329e8861a5e3798e2153c4a0906d99844c7675a55e32ecb3aa5b76ca0"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_F-20260318-134159.csv",
+      "destination": null,
+      "size_bytes": 1026301,
+      "sha256": "6bded649df7855e75952a1bdea70a67e6d63b3fff813dbc518121ea0a19c933e"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_F-20260318-134443.csv",
+      "destination": null,
+      "size_bytes": 1491593,
+      "sha256": "9696d2d41861b9aa5d8719943b88ff384f1509423c9173f92f24073e65683f86"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_F-20260318-134648.csv",
+      "destination": null,
+      "size_bytes": 1271180,
+      "sha256": "aeb615b092f1820576c851e61e74eaf185c52a4c4048596a8e00fbbc7ba03172"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_F-20260318-134853.csv",
+      "destination": null,
+      "size_bytes": 887600,
+      "sha256": "357be55e0eb1781366566e1cf457ade10f5e4eabbe765b631c038dfa5c4215d7"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_F-20260318-135043.csv",
+      "destination": null,
+      "size_bytes": 883798,
+      "sha256": "cdf0e8f977222c568c873884ff70506f02164593283981ca18a7b53cacf5eb41"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_F-20260318-135229.csv",
+      "destination": null,
+      "size_bytes": 1301214,
+      "sha256": "0f3dad387419c80808a4c31a43ec107208d4513088b13469849a579ae43307a0"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_F-20260318-135438.csv",
+      "destination": null,
+      "size_bytes": 799234,
+      "sha256": "3a32473a9abec191f9c3023695d09ae505d317798728e43f4709ba6d185f85ce"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_F-20260318-135625.csv",
+      "destination": null,
+      "size_bytes": 1008093,
+      "sha256": "5e3d8f1822887815fc14f89cac28c344ae46a1f52d9be33717f4a4d7cb5b39b1"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_F-20260318-135845.csv",
+      "destination": null,
+      "size_bytes": 1236740,
+      "sha256": "a368aaa3419850fd6da374873357a90618ddb36881e5e12844bc2a8c866fc446"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_G-20260318-175819.csv",
+      "destination": null,
+      "size_bytes": 1990758,
+      "sha256": "dc36c6b561c0f1bdf0cc8e403d775efb5b1f1251e3dc9d08d045f0c9ce50ae34"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_G-20260318-180157.csv",
+      "destination": null,
+      "size_bytes": 1927834,
+      "sha256": "f4aaf8a844799a1dfff29ba00b5d2ef93114ddf9886d326e9acdcbf7af0d6b5f"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_G-20260318-180504.csv",
+      "destination": null,
+      "size_bytes": 1568713,
+      "sha256": "fe17ec8f16f3b406b4240d79b7b3dd35d1a5842ec050a5d60a3674c28a0ed446"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_G-20260318-180816.csv",
+      "destination": null,
+      "size_bytes": 1994029,
+      "sha256": "90255177390712b09cea34116f63cf4e9a55b5026d4accd8f88efe825bd9b943"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_G-20260318-181110.csv",
+      "destination": null,
+      "size_bytes": 1633588,
+      "sha256": "964169695a4b9e4efdfe5ab0377a247ac46141851a739f35181a19824289f48b"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_G-20260318-181357.csv",
+      "destination": null,
+      "size_bytes": 1762316,
+      "sha256": "eea9b0ea6e6524f78c86966ae73f628f6ac309c87c5fc12e16d0f454c2af4c5d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_G-20260318-181646.csv",
+      "destination": null,
+      "size_bytes": 1729442,
+      "sha256": "4e57602a57452fd31a4d122cc068096d646a20de7ecc27d80b1ebf5a9908f8f0"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_G-20260318-181919.csv",
+      "destination": null,
+      "size_bytes": 1993787,
+      "sha256": "68aa8d65f8dd16d34a6630bae78db5bc14ec1da647f75c054ede7c7980faa8ea"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_G-20260318-182139.csv",
+      "destination": null,
+      "size_bytes": 1595820,
+      "sha256": "8efb51d8caa3e3891ccd740a92a002ba35678136904094989a09db8d3bc585a5"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_G-20260318-182354.csv",
+      "destination": null,
+      "size_bytes": 1984444,
+      "sha256": "38e2257ddefa32a76cc7c7bd77b1cdec724fc2a0ce9c1759fb9f336865f230f6"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_M-20260318-162803.csv",
+      "destination": null,
+      "size_bytes": 1987611,
+      "sha256": "4abb3004e0a68d121a82512666c1578c07e41efc88fc316643b04301e86fc3a0"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_M-20260318-163014.csv",
+      "destination": null,
+      "size_bytes": 1991125,
+      "sha256": "59e94a1b139d7a0eebc267a9f843a59086b9b96c40b46379a38a13406a183235"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_M-20260318-163301.csv",
+      "destination": null,
+      "size_bytes": 2011017,
+      "sha256": "6b8da5467df1a2013c809af65c684d3e097e8144832437be8f27854c4c8a1e07"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_M-20260318-163633.csv",
+      "destination": null,
+      "size_bytes": 2008709,
+      "sha256": "cea553739c047441b0d6dcbfadf411f8be141ce645a184340dcc8fcc35a2dbbd"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_M-20260318-163941.csv",
+      "destination": null,
+      "size_bytes": 1998198,
+      "sha256": "3139f62540801fc3cb8b512597b615c3d5476bbf85348e3fd41e40dfa5bbbbd3"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_M-20260318-164212.csv",
+      "destination": null,
+      "size_bytes": 1995658,
+      "sha256": "7c7de5f642069e2286cfa949bd73ba79bdbf74072ae17774bc512e92face033d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_M-20260318-164522.csv",
+      "destination": null,
+      "size_bytes": 1996476,
+      "sha256": "2e77d39c03641ee45129d596e58154eadb7fd6f08ee0e4f3bd6e2f7e9ecbf412"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_M-20260318-164759.csv",
+      "destination": null,
+      "size_bytes": 1978526,
+      "sha256": "f77923c7c9a12c0500589e01bdef5c7d1ccbb4d40ce4492d162247a12af23da2"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_M-20260318-165052.csv",
+      "destination": null,
+      "size_bytes": 1952307,
+      "sha256": "cc00db310a3fe04203a2624dbe8e99b9f3af7dcad425877337e6f42119a71f0b"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_02/Subj_M-20260318-165354.csv",
+      "destination": null,
+      "size_bytes": 1992483,
+      "sha256": "d26e8306e470e03dfb6c22fd4227468fc8f89978e287bfbead384157bcbe4aa9"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_A-20260420-170123.csv",
+      "destination": null,
+      "size_bytes": 1799351,
+      "sha256": "ae72c41f26a728a12a5c96c212c1d974c43461176930e7d59943b55246b4c2ee"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_A-20260420-171246.csv",
+      "destination": null,
+      "size_bytes": 2010531,
+      "sha256": "f6e00cbd658990cebbb6f32d9183f2eafc01a5170460f40ab2452eed9b48e5bf"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_A-20260420-175231.csv",
+      "destination": null,
+      "size_bytes": 2006119,
+      "sha256": "3a8e736ace15283bc7d28edad70983137161662ad514e0a4bdc7f1da76e192ed"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_A-20260420-180836.csv",
+      "destination": null,
+      "size_bytes": 870687,
+      "sha256": "245812d4fe8b478ac02aa3840e33f33b7b77bbff2c1530c5e03881c143a5eead"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_A-20260420-181440.csv",
+      "destination": null,
+      "size_bytes": 703480,
+      "sha256": "aedc239b766d0eb9f4fc2590c661254197a1191b6ea11e184082f3a242d9e98d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_A-20260420-181744.csv",
+      "destination": null,
+      "size_bytes": 2005786,
+      "sha256": "cc06ec0bf494046d535aa67cb6a21d4a8c31e708efe87ad8054bc6349aaeefc2"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_A-20260420-182152.csv",
+      "destination": null,
+      "size_bytes": 2014751,
+      "sha256": "db903ca41c50339337200a4de723152e343c95c86951b720ebb1305a7bacc1f2"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_A-20260420-182546.csv",
+      "destination": null,
+      "size_bytes": 2004877,
+      "sha256": "8a436cb0d350802aa4f52bce74a04c96a34a248aea266ffdb3afcc82702f5014"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_A-20260420-182829.csv",
+      "destination": null,
+      "size_bytes": 2009912,
+      "sha256": "6e0d5e8c7ab53d2beec7ac49a69c64a5cc47397fc31ffb07239c398315eabe23"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_A-20260420-183112.csv",
+      "destination": null,
+      "size_bytes": 2005528,
+      "sha256": "b7e2a2670e0741b6ad44d3d2deb2e7e82dd1c14fd1fd06a67ebb7f08d4ddba2c"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_B-20260502-182434.csv",
+      "destination": null,
+      "size_bytes": 1996839,
+      "sha256": "27c39bee867ed0f8f293566b1d521268add273968f58dadf9ff6cb9cbc82d901"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_B-20260502-182744.csv",
+      "destination": null,
+      "size_bytes": 1992177,
+      "sha256": "c71590cb036eaf43ee7aea63dab7572e7c6c4d993259d740661379fa95aac398"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_B-20260502-183005.csv",
+      "destination": null,
+      "size_bytes": 1987916,
+      "sha256": "2ab653710b3c9ebe63eb8fe191c5c46657a1c3ed37883263023d9aa39f337110"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_B-20260502-183220.csv",
+      "destination": null,
+      "size_bytes": 1992100,
+      "sha256": "07a34be06bd0f068c1f3b4c15f2eb5f0cc92663b3b48bda2cb593f9e9a63ffdc"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_B-20260502-183441.csv",
+      "destination": null,
+      "size_bytes": 1986552,
+      "sha256": "9bcaa601848d18fbf1a80059e13b92a81b9fa6e13dad274e353e83cc595e4a9d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_B-20260502-183742.csv",
+      "destination": null,
+      "size_bytes": 1990135,
+      "sha256": "e19e465082e2f41eb9ce05302cf4382e5dfb1a3531eab74b167896a7cc936fb5"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_B-20260502-184007.csv",
+      "destination": null,
+      "size_bytes": 1985491,
+      "sha256": "a5a3925275da2957d153f2f02a58d9c23e73f4136d8da3196afeea5a3b10c253"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_B-20260502-184247.csv",
+      "destination": null,
+      "size_bytes": 1982874,
+      "sha256": "7baac689a5ed274c5ebddf3a1452343e81f95229d5a2fe48b7b37015c3f376dd"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_B-20260502-184548.csv",
+      "destination": null,
+      "size_bytes": 1980038,
+      "sha256": "094083ebf65621bf1cebb41177eca965daceb8f31d61193f7ad910a1c7a58b48"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_B-20260502-184815.csv",
+      "destination": null,
+      "size_bytes": 1984780,
+      "sha256": "4838131c222db857b865e87b5d1ffa0ab0395d2b2b6390198d150c8e87f88ada"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_D-20260502-163708.csv",
+      "destination": null,
+      "size_bytes": 2001525,
+      "sha256": "aa606868bd9ba92fc0f2ac6106dfed0ed825ba8240c012e4209769515841e2b9"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_D-20260502-164031.csv",
+      "destination": null,
+      "size_bytes": 2002239,
+      "sha256": "6064ea3b2502924ce49e7e39e39fa48eae15114c29b6650b8bb88ae4c9b1d1db"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_D-20260502-164331.csv",
+      "destination": null,
+      "size_bytes": 1985291,
+      "sha256": "4905bac0e3c1f06a8e8878ce339fcbc0e279a4abccd9d695ad81ffc173c4e2de"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_D-20260502-164715.csv",
+      "destination": null,
+      "size_bytes": 930741,
+      "sha256": "52ef9e0402a2bda603a0d461051fb96a5b131100d7133b8844168c3b81381686"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_D-20260502-164946.csv",
+      "destination": null,
+      "size_bytes": 1985646,
+      "sha256": "e62e655fb5eb1e61287e01aff52bffe3f6f1fe818802eaa4c11124fcdf7a099b"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_D-20260502-165445.csv",
+      "destination": null,
+      "size_bytes": 1988611,
+      "sha256": "a82542746307012fef186aebde28c57795a41a1b4d13e875a88fecb29a208f38"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_D-20260502-165721.csv",
+      "destination": null,
+      "size_bytes": 1988111,
+      "sha256": "4c94e0878988a50d5ae8d7f7a0ebd5141aa5fc0a835f29c40c1f304cdbca176a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_D-20260502-170024.csv",
+      "destination": null,
+      "size_bytes": 1982301,
+      "sha256": "35744b6ed8b9226e3620fccf50b83b683eacba342d5314d17de0f9ac9ed383d8"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_D-20260502-170255.csv",
+      "destination": null,
+      "size_bytes": 1984964,
+      "sha256": "840f2a98f06904dc8c6716b60a5c23e55398449aafd7d3b2249f8820b0451de2"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_D-20260502-170531.csv",
+      "destination": null,
+      "size_bytes": 1980327,
+      "sha256": "53231c5b7db2a639f2b05874b09e960f8e2fa8faa8d062a9771a0e08d67dfef0"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_H-20260504-142249.csv",
+      "destination": null,
+      "size_bytes": 1959440,
+      "sha256": "9c1d492631e19a898ed970e9bbcfc65ec8e9761f71d89f6d086dd0dcfa652d26"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_H-20260504-142648.csv",
+      "destination": null,
+      "size_bytes": 1966117,
+      "sha256": "bdf05cc0b19574d68ff575d5a6d3bb3ceb8da12f50debd2731479e23a8407b32"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_H-20260504-142944.csv",
+      "destination": null,
+      "size_bytes": 1972366,
+      "sha256": "8dc7e7e2553624606e1f4f7b17d980c4f005b8b7edd04d45b256a6d7bcf8985a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_H-20260504-143211.csv",
+      "destination": null,
+      "size_bytes": 1968472,
+      "sha256": "c3f413710cf8ca1efefffac329ea1e5c00dca478e9e028912762a92d7181fdf8"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_H-20260504-143421.csv",
+      "destination": null,
+      "size_bytes": 1977037,
+      "sha256": "7e1ff1a5cd1c08af5ffa460454043de30a06f6f90f03229ddd7848c4f89129fa"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_H-20260504-143632.csv",
+      "destination": null,
+      "size_bytes": 1980759,
+      "sha256": "778248131bb079409359067c02791058e71eac4ce17a8ab8c270292f9ec015c8"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_H-20260504-143909.csv",
+      "destination": null,
+      "size_bytes": 1973043,
+      "sha256": "3b191285a5efbf69058e2fe8db28a3a5e230aab7948dc0d9b40f7dfa857db2f3"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_H-20260504-144146.csv",
+      "destination": null,
+      "size_bytes": 1965394,
+      "sha256": "26347b48af4067f44461fc25132ce5a6d1860470c292f65334e03cd6435830ca"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_H-20260504-144351.csv",
+      "destination": null,
+      "size_bytes": 1970880,
+      "sha256": "d68e8fa7889b03591da390c16eb5d2935b11547945ed0c9fddcaf5b3ef0b1260"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_H-20260504-144637.csv",
+      "destination": null,
+      "size_bytes": 1957777,
+      "sha256": "777004127b176d2a34d262bc2107c1deb3ae1d8008ef2f4e15e1e5aef18d325e"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_I-20260511-141007.csv",
+      "destination": null,
+      "size_bytes": 1977873,
+      "sha256": "1459300c33dbea68101a19d3eb5bb4bbd9908e6c4bac20a1207e2d359b92cb1b"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_I-20260511-141247.csv",
+      "destination": null,
+      "size_bytes": 1962706,
+      "sha256": "943dde2159200337753067992063672bd941c99e2e750f186fcf5f60832bc642"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_I-20260511-141512.csv",
+      "destination": null,
+      "size_bytes": 1582180,
+      "sha256": "7088fcfa9ef29d512f62b5b4d50929a3a56801a3865b1cdec52c0a903ba98a01"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_I-20260511-141731.csv",
+      "destination": null,
+      "size_bytes": 1989730,
+      "sha256": "af1f1324c7594f1bf11d71304831843901df3abbac88d92ddf573ecd5fb416b3"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_I-20260511-141942.csv",
+      "destination": null,
+      "size_bytes": 1981777,
+      "sha256": "e0b9fb2224349f174f91577322fa150f845432e0a3c04c8da62b44bfd905a20e"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_I-20260511-142224.csv",
+      "destination": null,
+      "size_bytes": 1976736,
+      "sha256": "450591368774098b43e483346fb1ab75ca4caca18b61fe82002b99f4c528628a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_I-20260511-142454.csv",
+      "destination": null,
+      "size_bytes": 2006221,
+      "sha256": "98b5fda2f4a350b60d14df3aca52fb1b562686bde48f3fdedb00d3767967ddc8"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_I-20260511-142653.csv",
+      "destination": null,
+      "size_bytes": 2012551,
+      "sha256": "72496a902c9de467682c693ec0cc2759ba1845fd8aa49a80c45170993ce52c33"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_I-20260511-142915.csv",
+      "destination": null,
+      "size_bytes": 1998075,
+      "sha256": "a52465a3a55b9b26cd2add3e99bf0f8073e39de9c991cddacb3d11f073ceaaa5"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_I-20260511-143127.csv",
+      "destination": null,
+      "size_bytes": 2013059,
+      "sha256": "9c313963c868307cf75aeed487df4a38903ef6a4ed7f625ed4d0cccf80f8fd8a"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_M-20260420-184241.csv",
+      "destination": null,
+      "size_bytes": 2004648,
+      "sha256": "354b9e66dfada0d0c2f2e036bdd023905df8e59361f72e64d485dd2e879e03d4"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_M-20260420-184540.csv",
+      "destination": null,
+      "size_bytes": 2003183,
+      "sha256": "d02f602269fdb7a5ae8469c5be77e8e0e30b07a7a37601ba32601e38c3e04d9d"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_M-20260420-184846.csv",
+      "destination": null,
+      "size_bytes": 2002421,
+      "sha256": "eafed6f38b93b58a5345a83d6a1fd332510faa176fd31bcb7fcad02fa537d185"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_M-20260420-185101.csv",
+      "destination": null,
+      "size_bytes": 2006060,
+      "sha256": "ab31682b1e33b7f9ead7934c99dfc6f6ea02bfdc9e3bed32f13dfa6303f989b4"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_M-20260420-185353.csv",
+      "destination": null,
+      "size_bytes": 2001348,
+      "sha256": "bf3fc750a91d9d7e957000a1a448be507c8bfe4bef4a7ea54c592affeac3c3df"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_M-20260420-185626.csv",
+      "destination": null,
+      "size_bytes": 2008489,
+      "sha256": "f5245b8ad1238a9f222101a6bfc044f20c158f8ec428986f4099da72ea99d2fa"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_M-20260420-185929.csv",
+      "destination": null,
+      "size_bytes": 2004486,
+      "sha256": "932c85cac6094a3c989ab59d0d9c6027ec2fa4c5e9db7c13a6ce5b4274bf9e49"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_M-20260420-190210.csv",
+      "destination": null,
+      "size_bytes": 2005456,
+      "sha256": "c9bfd3bf309443c8eeb96a34d0450d9ef77f77c43668e9ab3950f414aee6a65e"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_M-20260420-190438.csv",
+      "destination": null,
+      "size_bytes": 2002058,
+      "sha256": "422ef214526b3a6d1ba25f5bafd706f3e3c615ff36c5417589a54957e5285fd9"
+    },
+    {
+      "role": "recording",
+      "source": "data/raw/experiment_03/Subj_M-20260420-190648.csv",
+      "destination": null,
+      "size_bytes": 530566,
+      "sha256": "e283eb8d585e3f4b662f1a7398539c95950fad3bb856e25c08b57ac6b7f6cb64"
+    },
+    {
+      "role": "metadata",
+      "source": "data/metadata/Subject Data.csv",
+      "destination": null,
+      "size_bytes": 293,
+      "sha256": "98d2e507028f24dda1b5d0a6c91f24ba80035f28730665acd04513e22120c85e"
+    },
+    {
+      "role": "metadata",
+      "source": "data/metadata/experiment_01_biometric data.csv",
+      "destination": null,
+      "size_bytes": 2487,
+      "sha256": "836b42a79f45e678c965202537b3870d16d366a54a257aee33efaab9d6fac297"
+    },
+    {
+      "role": "metadata",
+      "source": "data/metadata/experiment_01_spatial data.csv",
+      "destination": null,
+      "size_bytes": 253,
+      "sha256": "196fdcaa3bbb44c3adba638747d76b63330d0e80450444c6e2b2c979dc685899"
+    },
+    {
+      "role": "metadata",
+      "source": "data/metadata/experiment_02_biometric data.csv",
+      "destination": null,
+      "size_bytes": 2728,
+      "sha256": "e2d545ee7dcd5cbf68c0bd79475c69e661ac5febe1f575e86adaa39cbcf5abf0"
+    },
+    {
+      "role": "metadata",
+      "source": "data/metadata/experiment_02_spatial data.csv",
+      "destination": null,
+      "size_bytes": 1229,
+      "sha256": "c3b1bd5199957f13ce70867938400122eae4c706638aa8dc8cef8d66bc275062"
+    },
+    {
+      "role": "metadata",
+      "source": "data/metadata/experiment_03_biometric data.csv",
+      "destination": null,
+      "size_bytes": 3592,
+      "sha256": "0012d8d3a57c7152b7de6bc8fe2ee30f9afd34a0bc3e4c2cc2ef06cdbec42d9c"
+    },
+    {
+      "role": "metadata",
+      "source": "data/metadata/experiment_03_spatial data.csv",
+      "destination": null,
+      "size_bytes": 1832,
+      "sha256": "7c14f2c6db0a58b4bd532111ad97f22cc5ee63c760bc369322b0ae72d2c88daf"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 01_ 360 Renders/Rm_001.png",
+      "destination": "data/renders/raw/Mark 01_ 360 Renders/Rm_001.png",
+      "size_bytes": 5478841,
+      "sha256": "e37442139429166e8d1481057b6e78587c087d5bf8144ad9cc9fe17cc9a482f8"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 01_ 360 Renders/Rm_002.png",
+      "destination": "data/renders/raw/Mark 01_ 360 Renders/Rm_002.png",
+      "size_bytes": 5706194,
+      "sha256": "d2eb69816cad4c7a91d90f8eb491e9b92e008b2e964ceea9cc079a9ae78fa8dd"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 01_ 360 Renders/Rm_003.png",
+      "destination": "data/renders/raw/Mark 01_ 360 Renders/Rm_003.png",
+      "size_bytes": 5459624,
+      "sha256": "6f0b2579de593ed743b6f5b17f35b9066ea0cd50b59ca77fe156fc205182681c"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 01_ 360 Renders/Rm_004.png",
+      "destination": "data/renders/raw/Mark 01_ 360 Renders/Rm_004.png",
+      "size_bytes": 5685729,
+      "sha256": "c7f2e21ca93d9cd0f0ef849b2ba198293ccfc28fc51606595403329b40f9bd97"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 01_ 360 Renders/Rm_005.png",
+      "destination": "data/renders/raw/Mark 01_ 360 Renders/Rm_005.png",
+      "size_bytes": 5892698,
+      "sha256": "91a4f8d2d97c9bf2790da08637826d107458544ab16fe52ee48480f5a2523977"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 01_ 360 Renders/Rm_006.png",
+      "destination": "data/renders/raw/Mark 01_ 360 Renders/Rm_006.png",
+      "size_bytes": 5708156,
+      "sha256": "5c0ce435a8c4b14577505039f5b42cfbfceea1c37fb10a5703e5197cd526a587"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 01_ 360 Renders/Rm_007.png",
+      "destination": "data/renders/raw/Mark 01_ 360 Renders/Rm_007.png",
+      "size_bytes": 5927074,
+      "sha256": "eadcc32c38e3e048bf82dc0c50fdd3fb12029fa53351556e5e665737bde5a98e"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 01_ 360 Renders/Rm_008.png",
+      "destination": "data/renders/raw/Mark 01_ 360 Renders/Rm_008.png",
+      "size_bytes": 5988711,
+      "sha256": "a9176c5e3d41d33b4ee7a1d089f0b3c8d2b1381969c2f7e71caf5d54491734e4"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 01_ 360 Renders/Rm_009.png",
+      "destination": "data/renders/raw/Mark 01_ 360 Renders/Rm_009.png",
+      "size_bytes": 5814581,
+      "sha256": "69137354ff54be93f61dcbab88517debf976977f870462d130f7435041ce6fae"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 01_ 360 Renders/Rm_010.png",
+      "destination": "data/renders/raw/Mark 01_ 360 Renders/Rm_010.png",
+      "size_bytes": 5417310,
+      "sha256": "9042ce44fa7094a843cbb7700134214226dcbecd2b181cab20daf39fa8d90907"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 02_ 360 Renders/Rm_011.jpg",
+      "destination": "data/renders/raw/Mark 02_ 360 Renders/Rm_011.jpg",
+      "size_bytes": 5976828,
+      "sha256": "8fafa6927c7b67d650d4af948023e990cf7ef6e71283ac6ad985c90d6089372c"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 02_ 360 Renders/Rm_012.jpg",
+      "destination": "data/renders/raw/Mark 02_ 360 Renders/Rm_012.jpg",
+      "size_bytes": 5296090,
+      "sha256": "201eefdcc84775823fa1a6f0d652fd16c8b9db7850a2ba1e531912b62e9fde82"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 02_ 360 Renders/Rm_013.jpg",
+      "destination": "data/renders/raw/Mark 02_ 360 Renders/Rm_013.jpg",
+      "size_bytes": 5966449,
+      "sha256": "a5bedba4a5879bd44827d180f8bd706936b8c18e9b122bf4bb6b8ae24c7ae961"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 02_ 360 Renders/Rm_014.jpg",
+      "destination": "data/renders/raw/Mark 02_ 360 Renders/Rm_014.jpg",
+      "size_bytes": 6216378,
+      "sha256": "98dac6a8383e95e842d911a2d25bd9b824488d77e5facc3ea5179fbb17340873"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 02_ 360 Renders/Rm_015.jpg",
+      "destination": "data/renders/raw/Mark 02_ 360 Renders/Rm_015.jpg",
+      "size_bytes": 6391943,
+      "sha256": "f61ac7c69d2f5176860031af6e76e17bd9dd33183297231acfed3b3dd1ab0851"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 02_ 360 Renders/Rm_016.jpg",
+      "destination": "data/renders/raw/Mark 02_ 360 Renders/Rm_016.jpg",
+      "size_bytes": 7098853,
+      "sha256": "5c5681223e5d37509866f7dcb5d7e7cc65cc2042cdac6198b3cce95eb59865bf"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 02_ 360 Renders/Rm_017.jpg",
+      "destination": "data/renders/raw/Mark 02_ 360 Renders/Rm_017.jpg",
+      "size_bytes": 6910646,
+      "sha256": "9f46a11239a676580bf327be3a86ddf0e58c8b93d86ec343e0167d39f51c45c3"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 02_ 360 Renders/Rm_018.jpg",
+      "destination": "data/renders/raw/Mark 02_ 360 Renders/Rm_018.jpg",
+      "size_bytes": 6636384,
+      "sha256": "56eaad4ed1a40569b67733910ae680af49fb86409815961d800edf4cff526413"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 02_ 360 Renders/Rm_019.jpg",
+      "destination": "data/renders/raw/Mark 02_ 360 Renders/Rm_019.jpg",
+      "size_bytes": 6829891,
+      "sha256": "83b33221ee06670eba91c1602493442b4d189556416d13313a026179b30380b4"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 02_ 360 Renders/Rm_020.jpg",
+      "destination": "data/renders/raw/Mark 02_ 360 Renders/Rm_020.jpg",
+      "size_bytes": 6314786,
+      "sha256": "b26a98d1dea463a2739f15c7d3d0a2ca9b275aa15024f47ecb68c7fd2e50b71c"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 03_ 360 Renders/Rm_021.jpg",
+      "destination": "data/renders/raw/Mark 03_ 360 Renders/Rm_021.jpg",
+      "size_bytes": 2382343,
+      "sha256": "ee68f0ad927b6fbddd7ee88218c7924e5859a07eee5c9098b294989595dde573"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 03_ 360 Renders/Rm_022.jpg",
+      "destination": "data/renders/raw/Mark 03_ 360 Renders/Rm_022.jpg",
+      "size_bytes": 2599203,
+      "sha256": "d222c751aee70a00b6ccf27a93ec85d2877f0944cb20366b453be5e3246ee578"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 03_ 360 Renders/Rm_023.jpg",
+      "destination": "data/renders/raw/Mark 03_ 360 Renders/Rm_023.jpg",
+      "size_bytes": 2852526,
+      "sha256": "6552eb88b62739b1e0204913b20a45783af65749fa098b37a1af4ebae8796ced"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 03_ 360 Renders/Rm_024.jpg",
+      "destination": "data/renders/raw/Mark 03_ 360 Renders/Rm_024.jpg",
+      "size_bytes": 3141281,
+      "sha256": "1c05e359f7bac66795208307269536e73d299c08bc87b6e0be8b5568b7706765"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 03_ 360 Renders/Rm_025.jpg",
+      "destination": "data/renders/raw/Mark 03_ 360 Renders/Rm_025.jpg",
+      "size_bytes": 4028380,
+      "sha256": "31618a59afe7988d7a3e79db6a75f018337530c3f3212b4d9f341105ed342ab0"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 03_ 360 Renders/Rm_026.jpg",
+      "destination": "data/renders/raw/Mark 03_ 360 Renders/Rm_026.jpg",
+      "size_bytes": 2938755,
+      "sha256": "58e42f8b1407a66383af974eff130008db23c0b42b974d57eeb94cce5e01c24f"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 03_ 360 Renders/Rm_027.jpg",
+      "destination": "data/renders/raw/Mark 03_ 360 Renders/Rm_027.jpg",
+      "size_bytes": 3246877,
+      "sha256": "160a631d9e34ac9b33a2f858b1263901c17d7de974c9a42df37c34b814aebea4"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 03_ 360 Renders/Rm_028.jpg",
+      "destination": "data/renders/raw/Mark 03_ 360 Renders/Rm_028.jpg",
+      "size_bytes": 3081731,
+      "sha256": "d96dccc0599c500f7d0dff44103805f0fb57225d7c57962937a012d533338651"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 03_ 360 Renders/Rm_029.jpg",
+      "destination": "data/renders/raw/Mark 03_ 360 Renders/Rm_029.jpg",
+      "size_bytes": 2831477,
+      "sha256": "08015857eac74c26d94fd56fdb6fd81a0ecb83f651fc8151c1b18a9d07f3d5c5"
+    },
+    {
+      "role": "room_render",
+      "source": "rooms/Mark 03_ 360 Renders/Rm_030.jpg",
+      "destination": "data/renders/raw/Mark 03_ 360 Renders/Rm_030.jpg",
+      "size_bytes": 2985340,
+      "sha256": "ea4e8e893fe580d147ab494b0df8e9918c335f9702396b114d88e8d862e95d3a"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/AA.png",
+      "destination": "docs/history/legacy-site-assets/AA.png",
+      "size_bytes": 38590,
+      "sha256": "dfce6deffc617553b0b619448940877e8cf58a49198166051dc48b7d4f7cd5c6"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/BIM.png",
+      "destination": "docs/history/legacy-site-assets/BIM.png",
+      "size_bytes": 441508,
+      "sha256": "9e5ed5769f482c72fbbccfc982a28d45578767ad898b68ab7e8e6a649b81bddb"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Affective Fusion/Objective with Target Vectors.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Affective Fusion/Objective with Target Vectors.png",
+      "size_bytes": 239523,
+      "sha256": "99a62c55407e5281a094704bbc992d614db967c02b513788e9499567e0dd8ae4"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Affective Fusion/Objective.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Affective Fusion/Objective.png",
+      "size_bytes": 215850,
+      "sha256": "2031e4a2e5b11d6ade7843b93f68c8956aa50339ded517cfb686d4e747ec41fc"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Affective Fusion/Subjective with Terget Vectors.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Affective Fusion/Subjective with Terget Vectors.png",
+      "size_bytes": 215287,
+      "sha256": "b874d1d38a8eb7c085a68a09b0424c34291d0f5533511233e33c2b1e1649d93b"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Affective Fusion/Subjective.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Affective Fusion/Subjective.png",
+      "size_bytes": 135121,
+      "sha256": "55e3affb4298be1c566820e508de1461bf36a70f8dd65fc7b28cd28bf2c5d707"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Affective Fusion/Target (Fused).png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Affective Fusion/Target (Fused).png",
+      "size_bytes": 117510,
+      "sha256": "6450f42e58c8424d61f0263b8216f77248b0e9d6099089530845eaedbb16b744"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Demographic Insights/Arousal Distribution - Age.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Arousal Distribution - Age.png",
+      "size_bytes": 42693,
+      "sha256": "3bccd43f213a38b67a9b10bb4c9c2328d47f8931d87bd2bd6ebae702f71257d0"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Demographic Insights/Arousal Distribution - Gender.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Arousal Distribution - Gender.png",
+      "size_bytes": 40876,
+      "sha256": "cfb1fa290c1015e5e177397003b2536fa9c9ebe0be629c1a81444cd7291e2603"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Demographic Insights/Arousal Distribution - Sleep.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Arousal Distribution - Sleep.png",
+      "size_bytes": 38413,
+      "sha256": "0cb866f786485c2ea1e55da3ff45e4bdd77777eaaf2aca204af412f048eedadd"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Demographic Insights/Valence Distribution - Age.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Valence Distribution - Age.png",
+      "size_bytes": 43788,
+      "sha256": "e731660015077bc479d93729b2c15f2f9905650fa573048e5db7c9cfbfe50ea4"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Demographic Insights/Valence Distribution - Gender.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Valence Distribution - Gender.png",
+      "size_bytes": 40602,
+      "sha256": "06b4eff6dfd13bea560c7a46312d185478ed9350420dea2e0d4f75fc9674a009"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Demographic Insights/Valence Distribution - Sleep.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Valence Distribution - Sleep.png",
+      "size_bytes": 40359,
+      "sha256": "134fe5b4c6305e4ad7cd880766b7e47e4af4c583f74d44a0ccfe258b9521b814"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Human Metrics/Average ECG Spectrum.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Human Metrics/Average ECG Spectrum.png",
+      "size_bytes": 18180,
+      "sha256": "8f321929bd08f6f4c5f344bfebd1a862a14ec9b7c3d1af45a0be8a1ef75db74c"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Human Metrics/Average EEG Spectrum.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Human Metrics/Average EEG Spectrum.png",
+      "size_bytes": 18628,
+      "sha256": "025c6d867c4feeeed539fffa6f99b6f14c1387ffb906190770dc3ecbf52bd174"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Human Metrics/EEG Band Balance.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Human Metrics/EEG Band Balance.png",
+      "size_bytes": 14544,
+      "sha256": "ab4d53e6f7c6d89268276722f5fc70606c749e9cccda0e7a11560c937c62e45c"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Human Metrics/Heart Rate vs HRV.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Human Metrics/Heart Rate vs HRV.png",
+      "size_bytes": 57203,
+      "sha256": "5a3552035f77eaf7c6e35c435485288c5d8322e11d75a195654d82a44e834138"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Human Metrics/Stress Distribution.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Human Metrics/Stress Distribution.png",
+      "size_bytes": 30761,
+      "sha256": "173aa02a1a916df146fd36b5ef1c2cc8373e97c722c49eb247d7eca1fd08d681"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Spatial Insights/Day vs. Night Impact.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Spatial Insights/Day vs. Night Impact.png",
+      "size_bytes": 25625,
+      "sha256": "0a0d7d9cdec0d99007a58607169b551a660c997b0b94bef136dfa1e4c824eb89"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Spatial Insights/Feature Correlation Matrix.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Spatial Insights/Feature Correlation Matrix.png",
+      "size_bytes": 166032,
+      "sha256": "da4c25922b8b4be3277f8cf541ca1139e374ece162b2990d80871b50d33eae80"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Spatial Insights/High-Variance Spatial Triggers.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Spatial Insights/High-Variance Spatial Triggers.png",
+      "size_bytes": 39052,
+      "sha256": "a9ea10483417a8a4b352809b8c92e75ab3d937ce1c0995eaba764b012dfdb202"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Spatial Insights/Illuminance Extremes.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Spatial Insights/Illuminance Extremes.png",
+      "size_bytes": 28644,
+      "sha256": "db0c68dc2cb88bec1246ec398ac7e39b7225302efd96be9c2783ac9be9bfc6e4"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Spatial Insights/Non-Linear Feature Importance.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Spatial Insights/Non-Linear Feature Importance.png",
+      "size_bytes": 30476,
+      "sha256": "00073be054590bb0cc59b4d0de1b82e7907a551347f5894ade40850e469f46d5"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/FINDINGS/Spatial Insights/Room Profile.png",
+      "destination": "docs/history/legacy-site-assets/FINDINGS/Spatial Insights/Room Profile.png",
+      "size_bytes": 175142,
+      "sha256": "a1bb29aaad40f621851ea71fd75cf94d6c48fb7b8672920adcc48d7439725cd8"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0001.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0001.jpg",
+      "size_bytes": 197199,
+      "sha256": "eaf1bafa7dcc1d42ef6937d36d6fcf420090c607c4e0deeb6d537af6b8edf9fe"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0002.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0002.jpg",
+      "size_bytes": 321823,
+      "sha256": "d5ecab2fedf554e6c38554df81c76907243978e989aa2178d68a689e86628197"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0002.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0002.png",
+      "size_bytes": 589848,
+      "sha256": "b6215a91636d384628404b6c7f50ea96bbc1b546ded14b2f69693496f5d27dd4"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0003.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0003.jpg",
+      "size_bytes": 427615,
+      "sha256": "7f6e2a748e80f0bd0041b4ce7dda2ececfd157fd7a9e072d5fc02f0fad1541ff"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0003.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0003.png",
+      "size_bytes": 1533164,
+      "sha256": "3d9afbf05769b11ef7461ba0e10fa16e2a6e7c0b4515c73a49e645667f6df304"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0004.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0004.jpg",
+      "size_bytes": 461135,
+      "sha256": "d78b9c235f86b3d4d3ba63c7d5b145159b4fa9de8b720aae181de6c00a2fd3e8"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0004.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0004.png",
+      "size_bytes": 195603,
+      "sha256": "68a93da54f32e52ac353944969a82c72162456ff7e2483f0476ed4e6aac0cd43"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0005.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0005.jpg",
+      "size_bytes": 2872791,
+      "sha256": "e9cbf27d62fe7a788b4d5be04dda2c7e894ec55fd78ed63911dc47b67d6f4aaa"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0006.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0006.jpg",
+      "size_bytes": 1063544,
+      "sha256": "30b20d42993130e96af639d3b4ef79e37db935cbcade10c7011b2ee056c5cd6d"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0006.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0006.png",
+      "size_bytes": 1379311,
+      "sha256": "c4966cab326d553a0b7a41568c1a21ba57c44c8924db3f949119bd10228aadd7"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0007.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0007.jpg",
+      "size_bytes": 854404,
+      "sha256": "a4519ef8dd95f3f7c5f378d03284c44d64d622ad8288a2c67bb495c4c9c159a3"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0007.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0007.png",
+      "size_bytes": 1362560,
+      "sha256": "747ea330beabb989cfcca8dfffff6048375180e1c74319cb1534b8936fe05e16"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0008.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0008.jpg",
+      "size_bytes": 1140300,
+      "sha256": "ef8ef505bc5b45d98bbc412c858d623cfd08cb90b2c1a88f08e36f7fd09fe49d"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0008.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0008.png",
+      "size_bytes": 841207,
+      "sha256": "3bfdbcb39cbf80b36f5690738327b0ae0436f3a8c8c9fa438821a408ad150cfc"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0009.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0009.jpg",
+      "size_bytes": 439017,
+      "sha256": "b685c774121d2719d91e72efa94f7541b1fac8a037e816aec9b8f4f09a82aec1"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0009.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0009.png",
+      "size_bytes": 170210,
+      "sha256": "08e68d1b649b4eee68277713c49106ffa86fbfefbf9d808c64c693977f37028e"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0010.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0010.jpg",
+      "size_bytes": 817775,
+      "sha256": "bfcbd81bd0052bb664357a034b9b6657daa0f1e2ab8b1f1821dac6e6bdbfa060"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0010.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0010.png",
+      "size_bytes": 991645,
+      "sha256": "6ef05c8dee80d0cd62b4e3dbb7954697dfb971229b6ffe8febe40d45d3343d0b"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0011.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0011.jpg",
+      "size_bytes": 144627,
+      "sha256": "817a763b826f7ddf9c59c3ddb01a1b70e99156443eb11a9fb2cb8c9765c524ae"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0012.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0012.jpg",
+      "size_bytes": 602364,
+      "sha256": "dcef09030d79e161e9bfda9d8964a2d16ae3dd749bef9117549677c718aa2937"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0012.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0012.png",
+      "size_bytes": 601275,
+      "sha256": "734d157fe31ed84cbfa3201c582ef43b3ff1a6698f1e32625fe89387c00bda03"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0013.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0013.jpg",
+      "size_bytes": 334729,
+      "sha256": "30927e28ca16a2ef8a154fbd1df8551eb733f177ec095f80509f2e01b490c41d"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0013.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0013.png",
+      "size_bytes": 899860,
+      "sha256": "41566b1721a1607e0e562ae71d6ee5d030a90ec9b9a7562c68256fcf7144c92e"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0014.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0014.jpg",
+      "size_bytes": 816476,
+      "sha256": "679f259cac4e34a22933287a9f1bff4a9011086dc225c9a0dadfd8bd596f49b8"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0014.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0014.png",
+      "size_bytes": 222294,
+      "sha256": "e02b35e10db5628f1366a5b674ebde01e96d05b38f78577b71f14de7505e2210"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0015.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0015.jpg",
+      "size_bytes": 1006379,
+      "sha256": "8c7abc785c34155b901d2eb3c61492e1edbd239612eb46a54418092ee245ad02"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0015.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0015.png",
+      "size_bytes": 1088919,
+      "sha256": "8fb1d44a4187c677c44c1a56f1bc5243f70c1dbcf0e042d422adb16b56da0e6f"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0016.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0016.jpg",
+      "size_bytes": 490833,
+      "sha256": "87371a02ed0207f31fd7371fab65f66c9a59eea4b9fae4126ae7af4f46e7ed89"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0017.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0017.jpg",
+      "size_bytes": 418032,
+      "sha256": "fe43d9eb89bc2ead2973fc1195123bc5b11bc7a0b2c5f753266c87aa480fdb2a"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0018.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0018.jpg",
+      "size_bytes": 379701,
+      "sha256": "b5288bb27a5f45c0c2a3f9f3ee9b1d3fb6ce6b77e24525288bb6e700f1f53a61"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0019.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0019.jpg",
+      "size_bytes": 1142014,
+      "sha256": "b847a0ac84a571fdb1730b7ff7723632f82be725242800d4a1f53350b5890394"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0020.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0020.jpg",
+      "size_bytes": 2208915,
+      "sha256": "9215250a6e475c684e434986207ca7656606496dea5ae173ede9ac1f996b71bd"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0021.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0021.jpg",
+      "size_bytes": 2035872,
+      "sha256": "0e3d353cff9dcc4910e4657189c304bed396b631a14c8b24061a04732901e80e"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0022.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0022.jpg",
+      "size_bytes": 458384,
+      "sha256": "35b8be25150a8c751ffa6a31f5d689bce485b99c27c1515a8bb000289ecdb4c2"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0022.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0022.png",
+      "size_bytes": 322253,
+      "sha256": "26ce9695af29fd77205b45ca884ca251ca9e3bfe04d542d640d84c5c2551c0ab"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0023.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0023.jpg",
+      "size_bytes": 135458,
+      "sha256": "4667edffe91315c76168c4bdbd0682039a5053b1eeaec2b929fb9a805aa045ae"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0024.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0024.jpg",
+      "size_bytes": 2558702,
+      "sha256": "41c0345bcad39e103af296939fd676a8ba7b6fffd01721d65fd805d8fbe392fe"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0024.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0024.png",
+      "size_bytes": 3914825,
+      "sha256": "aae5876d0f62b84d5d2f6b79abc924d2c2d27878b8de046c8d313f904c4caa10"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0025.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0025.jpg",
+      "size_bytes": 177832,
+      "sha256": "2f007a2c128600e4ab2b00b876bba84ddbbe7f829ce6453d82d8adafc017ec12"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0026.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0026.jpg",
+      "size_bytes": 554907,
+      "sha256": "c388dccfb1c8850c3f996e4b0354aa3027065f1643de3f35a16cdc6c1f9da330"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0026.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0026.png",
+      "size_bytes": 266543,
+      "sha256": "32d9ddc823f302cc7eec7e18ea784bdc0349d1a320c99bb2fa031f6cd54373fa"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0027.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0027.jpg",
+      "size_bytes": 127996,
+      "sha256": "506d1ba7bf59fb0cd91d727dbf34efbcf90dee9d789158b5cd39b16620bef632"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0028.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0028.jpg",
+      "size_bytes": 504660,
+      "sha256": "e6273c8dc1175a54017d20b2681dc17f14b2108b9a2a74b78632d48e68b45d78"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0029.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0029.jpg",
+      "size_bytes": 951751,
+      "sha256": "b21ce6d151b2a67d37ee556915cb61cd2a268def6c7718000d1c29938d93fbba"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0030.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0030.jpg",
+      "size_bytes": 890841,
+      "sha256": "85b771f760b48bcd902d8a8f5599e929fde12fbff20598c22223ca20d1e37b04"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0031.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0031.jpg",
+      "size_bytes": 609099,
+      "sha256": "69f9f87f121d597529921b36b72bcd4d04cd7f9365434ea8e85c20352d49d5ff"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0032.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0032.jpg",
+      "size_bytes": 641139,
+      "sha256": "7b2f44a9cd8e65586ab10afe611b3d3db0b6c7df83216bf3b36f9615201ae36f"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0033.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0033.jpg",
+      "size_bytes": 359183,
+      "sha256": "0fec4dff8a8ca41e63715ddb6ada52826b4442c928f6e4d3b87a98508759a5cb"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0034.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0034.jpg",
+      "size_bytes": 2621875,
+      "sha256": "d92d2ace847d8ad8ac5b60f9e8f4157cad87efbddca40d142c1aecc9497aad3e"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0034.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0034.png",
+      "size_bytes": 890933,
+      "sha256": "1f7a67a2ed4d192b055359c1638d522af1af91f5ba3fb38038f03d5aac4b8cab"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0035.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0035.jpg",
+      "size_bytes": 166577,
+      "sha256": "bfb932a989533767d9c59610a0e91f40697b1fb9e701fd92a321b3ce18c3b0b5"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0036.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0036.jpg",
+      "size_bytes": 511706,
+      "sha256": "7cd47b677c20379be066f3bdb188bec987d6e0b6b6d579a798ba51e73be410ac"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0036.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0036.png",
+      "size_bytes": 307380,
+      "sha256": "a34db4e6a66019c1abb505141d8e309464b00311ef099b822702b8ab737ecbb4"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0037.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0037.jpg",
+      "size_bytes": 302194,
+      "sha256": "4c0131f8fb0fd33d38aab64002663273fd7fbd172bf3b11f5ec673afed15aefd"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0037.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0037.png",
+      "size_bytes": 416205,
+      "sha256": "0bf77d4e33309e0e248405183654c884c08e612075ae47d15cb81884551bc44d"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0038.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0038.jpg",
+      "size_bytes": 130334,
+      "sha256": "fb705fc29365ae4442efec5dbc6ee109ab7eeab99fdcfa6231b8d8b1149a9cf2"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0039.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0039.jpg",
+      "size_bytes": 697207,
+      "sha256": "1dfb85c79e70cbeb8eef6c5540bcffd36f3236e8d517895439d8aca62f5d5381"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0040.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0040.jpg",
+      "size_bytes": 114806,
+      "sha256": "af873db98010894dfcbb69005185c68bfa991d0baab39f4d802fcbc1aee9f5e0"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0041.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0041.jpg",
+      "size_bytes": 432146,
+      "sha256": "aa5984c98d36af405bb4447acba6e6b58aae415db23d6dd3fb6de2d86b1ffe2f"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0041.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0041.png",
+      "size_bytes": 284173,
+      "sha256": "82b934d94f5facb104a1fb2c18bcff7511513510e36ed61e952d7e16ae80d302"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0042.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0042.jpg",
+      "size_bytes": 431834,
+      "sha256": "4306de5cdecaf4ef27732f6a9725c37400ac7d0a5c06faeece34dca46e716ff7"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0043.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0043.jpg",
+      "size_bytes": 144527,
+      "sha256": "707671a579ae2cc75747be8683f39ba6e81ad2a333746b504a57f48d4ce536c4"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0044.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0044.jpg",
+      "size_bytes": 449738,
+      "sha256": "f95603a766c728195b06855d1f348630f5d29be4f8f284a1bf8879a21a625bce"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0044.png",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0044.png",
+      "size_bytes": 290215,
+      "sha256": "c1f92f274fceb4561dedd7f4cb006b38cb5622afb66791b06a788812abb0a5c7"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0045.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0045.jpg",
+      "size_bytes": 562201,
+      "sha256": "cfbc58c4b6f8e02c8b49a9b868e293015ee49838832002eee807931b23c0708d"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0046.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0046.jpg",
+      "size_bytes": 393756,
+      "sha256": "a9111a0cba0afc5ba56bfa590e754908868eca8570e9d3c8b1b341deadd5ee63"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0047.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0047.jpg",
+      "size_bytes": 314126,
+      "sha256": "d79bf6ae6f6ab72c2e7433a0f171a6d11e472ea96489392b362448fd5b487fd3"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/PredictiveAtmospheres_ManideepMamidala_page-0048.jpg",
+      "destination": "docs/history/legacy-site-assets/PredictiveAtmospheres_ManideepMamidala_page-0048.jpg",
+      "size_bytes": 1442862,
+      "sha256": "43ac7076312d086d68f366f58e8a11ace0448929a5a36a2bacb46c6c49e1349e"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Screenshot 2026-09-03 134147.png",
+      "destination": "docs/history/legacy-site-assets/Screenshot 2026-09-03 134147.png",
+      "size_bytes": 33704,
+      "sha256": "9172f7c7ac3c4be5c7514b85fc20f7276ed4040db498c1f3908c8f2e3352661d"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Screenshot 2026-09-03 134226.png",
+      "destination": "docs/history/legacy-site-assets/Screenshot 2026-09-03 134226.png",
+      "size_bytes": 15630,
+      "sha256": "4780012e88f14f1e9d71b4ca3f584aa6a3b0e07473dab56c3120df67973cec7c"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Screenshot 2026-09-03 134248.png",
+      "destination": "docs/history/legacy-site-assets/Screenshot 2026-09-03 134248.png",
+      "size_bytes": 12356,
+      "sha256": "af461f15c0bcf9ec05820a43d852694b67ecd0eb85ef1b83cf40992aa73553c8"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Screenshot 2026-09-03 134300.png",
+      "destination": "docs/history/legacy-site-assets/Screenshot 2026-09-03 134300.png",
+      "size_bytes": 63332,
+      "sha256": "7e090d68865f7b2c1b8e5041a8c18699cff5156f62e6ec2a6c31a2f49ac04534"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Screenshot 2026-09-03 204836.png",
+      "destination": "docs/history/legacy-site-assets/Screenshot 2026-09-03 204836.png",
+      "size_bytes": 781029,
+      "sha256": "3f1fffe304022b259cae10cb3f94c817fc527215a0ebd8628ca9adf7dc81d3ac"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Screenshot 2026-09-03 204940.png",
+      "destination": "docs/history/legacy-site-assets/Screenshot 2026-09-03 204940.png",
+      "size_bytes": 659519,
+      "sha256": "89f162547214d010ddbd442d6eb94e5f304c153abdbc3eb468fb015f3e464032"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Screenshot 2026-09-03 205015.png",
+      "destination": "docs/history/legacy-site-assets/Screenshot 2026-09-03 205015.png",
+      "size_bytes": 580250,
+      "sha256": "7386784232be2edea9ec40c7512558be5e2b3136aa019a04d8f6dcd7973f4438"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Screenshot 2026-09-03 205028.png",
+      "destination": "docs/history/legacy-site-assets/Screenshot 2026-09-03 205028.png",
+      "size_bytes": 826920,
+      "sha256": "1a5e94683bbf34341897e0addd0230aa33c1df49457aecb4698ea3853b54b684"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Screenshot 2026-09-03 211117.png",
+      "destination": "docs/history/legacy-site-assets/Screenshot 2026-09-03 211117.png",
+      "size_bytes": 825617,
+      "sha256": "a7f03280a0a54feab412a421dff98b5e5032a5e5434bdc8ba8be5e844f22aad8"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Screenshot 2026-09-03 211320.png",
+      "destination": "docs/history/legacy-site-assets/Screenshot 2026-09-03 211320.png",
+      "size_bytes": 157856,
+      "sha256": "da06a9ed66c7438e48a8319b59ea80513c06127219d9923f3a06a2c5f0a045d2"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/Timefield_Predictive Atmospheres.jpg",
+      "destination": "docs/history/legacy-site-assets/Timefield_Predictive Atmospheres.jpg",
+      "size_bytes": 9363468,
+      "sha256": "777c85a252ddd7539ec07ef8717fdd624696c75aff0e97c9361de1260e47180a"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/WELL.png",
+      "destination": "docs/history/legacy-site-assets/WELL.png",
+      "size_bytes": 413996,
+      "sha256": "e40ea2bab2c9e3a1d8ce9b91a92d9954d1f3f137fd48eed5fceff308e1004cda"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (1).png",
+      "destination": "docs/history/legacy-site-assets/newplot (1).png",
+      "size_bytes": 28203,
+      "sha256": "2119da414f89ec39532f4a14ed400ef135a829cf1b6ae3600e27083973de122d"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (10).png",
+      "destination": "docs/history/legacy-site-assets/newplot (10).png",
+      "size_bytes": 31894,
+      "sha256": "303d4e51670b78ac77abf720d03b17c5c75bcc9925958c30f1cc64e3784686ac"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (11).png",
+      "destination": "docs/history/legacy-site-assets/newplot (11).png",
+      "size_bytes": 31411,
+      "sha256": "26ce283b051910dbafe2b5f7cb159f5a6cdf51861a1a3ec35b95c00b60458cde"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (2).png",
+      "destination": "docs/history/legacy-site-assets/newplot (2).png",
+      "size_bytes": 37551,
+      "sha256": "4bb2809e16229bf5b288f052c62e28cdc1a6ee16375f4c0a373d6b086e67cdb4"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (3).png",
+      "destination": "docs/history/legacy-site-assets/newplot (3).png",
+      "size_bytes": 45269,
+      "sha256": "45396196e8f3e92ecb18bb3414c9a81457d941d1139fc48f3201a316bb6154c1"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (4).png",
+      "destination": "docs/history/legacy-site-assets/newplot (4).png",
+      "size_bytes": 19092,
+      "sha256": "c315f397f2725e5c34d124fbe4f190bf83fcd90e9d6b0e09807576fc6bd0f7bd"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (5).png",
+      "destination": "docs/history/legacy-site-assets/newplot (5).png",
+      "size_bytes": 35261,
+      "sha256": "71cc28553f4e54e1b4a7524a9d5ca2bab3965c01783d26d5771e5520c4325be1"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (6).png",
+      "destination": "docs/history/legacy-site-assets/newplot (6).png",
+      "size_bytes": 30858,
+      "sha256": "ce6a7d6fd95282e23d2b8f74018243bb1d3cca0040ee79d2bfb491bde9e6b2e2"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (7).png",
+      "destination": "docs/history/legacy-site-assets/newplot (7).png",
+      "size_bytes": 26196,
+      "sha256": "58227fee30effc7622456d06a0169a2c560177671fb389109f1a3f93e30c5da6"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (8).png",
+      "destination": "docs/history/legacy-site-assets/newplot (8).png",
+      "size_bytes": 37506,
+      "sha256": "9281e06f5a8dc9d8fd02377c11f530af47ff5094b482711edd3405633ce50ec2"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot (9).png",
+      "destination": "docs/history/legacy-site-assets/newplot (9).png",
+      "size_bytes": 24791,
+      "sha256": "f8db4707330951e4da1f676334d55c0da16d0b62d50f814b35aa572ae8d40fa6"
+    },
+    {
+      "role": "legacy_site_asset",
+      "source": "frontend/assets/IMAGES/newplot.png",
+      "destination": "docs/history/legacy-site-assets/newplot.png",
+      "size_bytes": 45230,
+      "sha256": "925b83c6401a3374f9e95e314f77f1cd63de49db2b3609f3f0f9b6b6f0295160"
+    },
+    {
+      "role": "thesis_pdf",
+      "source": "ManideepMamidala_ThesisBooklet.pdf",
+      "destination": "docs/thesis/ManideepMamidala_ThesisBooklet.pdf",
+      "size_bytes": 25566729,
+      "sha256": "d633e20132cacab155af28e6b0d93ee345d9a2e487d8cdf6b6aa12d9a56297ac"
+    },
+    {
+      "role": "thesis_pdf",
+      "source": "PredictiveAtmospheres_ManideepMamidala.pdf",
+      "destination": "docs/thesis/PredictiveAtmospheres_ManideepMamidala.pdf",
+      "size_bytes": 13561838,
+      "sha256": "821bff1820eac354d6496e9845a542a3783f15cc2b084c36aa0d1c8d679ae43a"
+    }
+  ]
+}

@@ -70,7 +70,13 @@
 ## Project-Specific Review Rules
 
 <!-- Add project-specific review rules here. Examples:
-     - All public APIs need integration tests
-     - No new dependencies without justification in the spec
-     - Database migrations must be reversible
-     - All user-facing strings must be internationalized -->
+- All public APIs need integration tests
+- No new dependencies without justification in the spec
+- Database migrations must be reversible
+- All user-facing strings must be internationalized -->
+
+- Check source preservation against `data/MANIFEST.sha256` before retirement of original paths.
+- Verify signal and affect invalidity paths do not emit plausible substitute measurements.
+- Verify room/participant folds fit preprocessing and target transforms only on training members.
+- Check static research claims against generated exports and all seven routes in both themes.
+- Check direct, CLI and API predictions use the same fitted feature builder and model artifact.
