@@ -188,6 +188,13 @@ The audit/specification task must extend these primary sources with device and p
 - [x] T029 Prepare `render.yaml`, `frontend/vercel.json`, environment examples and `docs/operations.md` with locally validated build/start commands and free-tier deployment candidate settings; create `docs/release-readiness.md` separating verified local evidence from actual hosting/login/limits, ownership/licensing, DOI and named-release prerequisites. No release claim or deployment is required here. <!-- R24 -->
 - [x] T030 Reconcile `README.md`, `CHANGELOG.md`, `docs/data_card.md`, `docs/model_card.md`, `docs/protocol/`, `docs/reports/phase-0.md` through `phase-9.md`, and `docs/specs/index.md`; prepare actual behavior and decision evidence for hydrate, including replacing inaccurate `docs/memory/website_architecture.md` with indexed architecture/research/operations memory during hydrate. Record independent findings and coordinator verdicts accurately. <!-- R23 -->
 
+### Review rework cycle 1: Complete scientific presentation and failure contracts
+
+- [x] T031 <!-- rework: cycle 2 RR-01; validate consumed artifact metadata fields before readiness, regenerate compatible artifact and verify affected contracts --> Resolve FR-03/05/06/07/08/09 backend contracts from `docs/reports/final-review.md`: preserve validated ID-based demographics and experiment-scoped sleep; publish filterable participant summaries, disagreement and generated model cohort/preprocessing/provenance; include opening counts in studied-support checks; validate artifact metadata shape; remove the unused `Trial.as_record`. Record any support-method amendment before regenerated outputs, and add focused regression tests. Coordinate export shape with T032. <!-- R5 R9 R11 R13 R15 R16 R17 R20 R21 -->
+- [x] T032 Resolve FR-02/03/04/07/08 frontend behavior: scope People and Affect summaries to active filters, display measured demographics/sleep and separate comfort/disagreement, add Signals participant filtering, repair effective cohort/CCT chart styles, expose generated model evidence, and remove unsupported anonymization wording. Add targeted browser regressions and refresh affected screenshots/report evidence. <!-- R18 R20 R21 R23 -->
+- [x] T033 Resolve FR-01 by pinning a verified setup-uv action revision, validate its inputs and remaining CI setup, and record the shared cause of both failed hosted checks. Implementation evidence: `docs/reports/ci-repair.md`. Hosted execution verification remains pending until the next stage-boundary push; this checkbox records the local repair, not a successful hosted run. <!-- R22 -->
+- [x] T034 <!-- rework: cycle 2 RR-01; validate consumed artifact metadata fields before readiness, regenerate compatible artifact and verify affected contracts --> Regenerate compatible model/results after final backend changes; verify fresh-process artifact loading, complete relevant tests and clean-checkout reproduction, update affected reports/cards, and return evidence for a fresh independent full review. Do not mark acceptance on the reviewer's behalf. <!-- R13 R16 R22 R23 -->
+
 ## Execution Order
 
 T001–T007 are evidence gates: preservation precedes deletion/migration; audit precedes analysis specification; the recorded independent audit/specification review precedes real signal/fusion/model comparison results. Review may expose valid limitations without inventing owner confirmation. Any changed method is an amendment before the affected rerun.
@@ -200,76 +207,76 @@ T019 can start after T004 using typed fixtures explicitly marked synthetic in te
 
 ### Functional Completeness
 
-- [ ] A-001 R1: Reconciled roadmap/governance, actual branch/snapshot record and preserved model routing match intake; phase milestones and evidence gates are executable.
-- [ ] A-002 R2: Exact cleanup evidence identifies only the four authorized historical changes and their obsolete references; current/new work and tooling survive.
-- [ ] A-003 R3: Frozen backend/frontend installations, package/CLI and site build work with declared compatible versions and no active torch/Streamlit dependency.
-- [ ] A-004 R4: Source manifest and migration map account for recordings, metadata, thirty renders, prior image assets and thesis PDFs; verification detects tampering/missing files.
-- [ ] A-005 R5: Ingestion/protocol tests preserve owner provenance, unchanged ratings, separate comfort and structural missingness; no invented protocol or identities appear.
-- [ ] A-006 R6: Actual file-level audit exports rates as evidence-bearing scenarios, flags duration/counter discrepancies and reconstructs observed order without false timing certainty.
-- [ ] A-007 R7: Versioned specification, primary sources, parameter rationale, sensitivity/failure rules and recorded independent checkpoint precede affected analysis; amendments are traceable.
-- [ ] A-008 R8: EEG/ECG synthetic recovery and invalid-input tests pass; actual per-trial validity/reasons and raw/cleaned/QC products exist with declared units/rate caveats.
-- [ ] A-009 R9: Real component/fused/partial products and alpha/experiment sensitivity preserve constructs and missingness; fold-target construction is separate from descriptive normalization.
-- [ ] A-010 R10: Actual descriptive reports identify effective groups, uncertainty assumptions, confounding and unavailable inference without causal/validated-emotion claims.
-- [ ] A-011 R11: One physical schema/builder controls all consumers; total opening-area, derived-feature, categorical, finite-value and missingness tests pass.
-- [ ] A-012 R12: Fold memberships, training-only transforms/tuning, baselines and real room/participant evaluation results or specific eligibility failures are exported; leakage tests pass.
-- [ ] A-013 R13: Complete artifact metadata and pipeline load consistently; trained/reloaded/direct/CLI/API parity and incompatible/missing artifact tests pass. Weak status is honest.
-- [ ] A-014 R14: Finite domain validation, score-at-target, bounds and monotonicity tests pass for the documented fixed-diameter score and user-selected targets.
-- [ ] A-015 R15: Seeded optimization returns distinct valid supported candidates or truthful empty/unavailable outcomes; score and model status agree with prediction.
-- [ ] A-016 R16: Browser exports validate, carry provenance and contain actual research data; all research pages function with API disabled, including missing/empty states.
-- [ ] A-017 R17: Versioned API/OpenAPI, structured error/readiness/CORS/request-bound tests and generated-client drift checks pass without public training/file-loading routes.
-- [ ] A-018 R18: Seven routes share working persistent Light/Dark/System modes; recorded styleguide/final desktop/mobile screenshots and keyboard/reduced-motion checks show usable controls and content.
-- [ ] A-019 R19: Study/Rooms use generated counts and all mapped renders; comparison/filtering and panorama fallback work while unknown CCT/view conventions remain explicit.
-- [ ] A-020 R20: Signals/Affect/People expose actual QC/components/sensitivity and ID-based filtering, accessible tables and explicit missing/invalid/empty states.
-- [ ] A-021 R21: Simulator target/prediction/optimizer and read-only Model report work; weak/offline/unavailable states preserve inputs and interaction mapping accounts for legacy features.
-- [ ] A-022 R22: Meaningful backend/frontend/contract/browser checks pass in frozen environments; clean-checkout regeneration and numerical-tolerance evidence are recorded without stale caches.
-- [ ] A-023 R23: README/cards/phase reports/specs and hydrate-ready evidence reflect actual implementation; commands and independent review findings/verdicts are not fabricated.
-- [ ] A-024 R24: Locally validated deployment preparation and release runbook clearly separate external hosting/licensing/DOI/named-release conditions; actual deployment is not claimed.
-- [ ] A-025 R25: Documented runtime and tests use replacement paths only; legacy responsibility map, preserved-source hashes and active-reference checks support removal.
+- [x] A-001 R1: Reconciled roadmap/governance, actual branch/snapshot record and preserved model routing match intake; phase milestones and evidence gates are executable.
+- [x] A-002 R2: Exact cleanup evidence identifies only the four authorized historical changes and their obsolete references; current/new work and tooling survive.
+- [x] A-003 R3: Frozen backend/frontend installations, package/CLI and site build work with declared compatible versions and no active torch/Streamlit dependency.
+- [x] A-004 R4: Source manifest and migration map account for recordings, metadata, thirty renders, prior image assets and thesis PDFs; verification detects tampering/missing files.
+- [x] A-005 R5: Ingestion/protocol tests preserve owner provenance, unchanged ratings, separate comfort and structural missingness; no invented protocol or identities appear.
+- [x] A-006 R6: Actual file-level audit exports rates as evidence-bearing scenarios, flags duration/counter discrepancies and reconstructs observed order without false timing certainty.
+- [x] A-007 R7: Versioned specification, primary sources, parameter rationale, sensitivity/failure rules and recorded independent checkpoint precede affected analysis; amendments are traceable.
+- [x] A-008 R8: EEG/ECG synthetic recovery and invalid-input tests pass; actual per-trial validity/reasons and raw/cleaned/QC products exist with declared units/rate caveats.
+- [x] A-009 R9: Real component/fused/partial products and alpha/experiment sensitivity preserve constructs and missingness; fold-target construction is separate from descriptive normalization.
+- [x] A-010 R10: Actual descriptive reports identify effective groups, uncertainty assumptions, confounding and unavailable inference without causal/validated-emotion claims.
+- [x] A-011 R11: One physical schema/builder controls all consumers; total opening-area, derived-feature, categorical, finite-value and missingness tests pass.
+- [x] A-012 R12: Fold memberships, training-only transforms/tuning, baselines and real room/participant evaluation results or specific eligibility failures are exported; leakage tests pass.
+- [x] A-013 R13: Complete artifact metadata and pipeline load consistently; trained/reloaded/direct/CLI/API parity and incompatible/missing artifact tests pass. Weak status is honest. <!-- final-rereview-cycle-2: RR-01 resolved; fresh valid-artifact readiness/parity and 25 malformed-field variants across all four public routes pass. See docs/reports/final-rereview-cycle-2.md. -->
+- [x] A-014 R14: Finite domain validation, score-at-target, bounds and monotonicity tests pass for the documented fixed-diameter score and user-selected targets.
+- [x] A-015 R15: Seeded optimization returns distinct valid supported candidates or truthful empty/unavailable outcomes; score and model status agree with prediction.
+- [x] A-016 R16: Browser exports validate, carry provenance and contain actual research data; all research pages function with API disabled, including missing/empty states.
+- [x] A-017 R17: Versioned API/OpenAPI, structured error/readiness/CORS/request-bound tests and generated-client drift checks pass without public training/file-loading routes. <!-- final-rereview-cycle-2: RR-01 resolved; fresh valid-artifact readiness/parity and 25 malformed-field variants across all four public routes pass. See docs/reports/final-rereview-cycle-2.md. -->
+- [x] A-018 R18: Seven routes share working persistent Light/Dark/System modes; recorded styleguide/final desktop/mobile screenshots and keyboard/reduced-motion checks show usable controls and content.
+- [x] A-019 R19: Study/Rooms use generated counts and all mapped renders; comparison/filtering and panorama fallback work while unknown CCT/view conventions remain explicit.
+- [x] A-020 R20: Signals/Affect/People expose actual QC/components/sensitivity and ID-based filtering, accessible tables and explicit missing/invalid/empty states.
+- [x] A-021 R21: Simulator target/prediction/optimizer and read-only Model report work; weak/offline/unavailable states preserve inputs and interaction mapping accounts for legacy features.
+- [x] A-022 R22: Meaningful backend/frontend/contract/browser checks pass in frozen environments; clean-checkout regeneration and numerical-tolerance evidence are recorded without stale caches.
+- [x] A-023 R23: README/cards/phase reports/specs and hydrate-ready evidence reflect actual implementation; commands and independent review findings/verdicts are not fabricated.
+- [x] A-024 R24: Locally validated deployment preparation and release runbook clearly separate external hosting/licensing/DOI/named-release conditions; actual deployment is not claimed.
+- [x] A-025 R25: Documented runtime and tests use replacement paths only; legacy responsibility map, preserved-source hashes and active-reference checks support removal.
 
 ### Behavioral Correctness
 
-- [ ] A-026 R5: Already transformed signed ratings remain numerically identical after ingestion; missing spatial/sleep values remain missing and Experiment 1 comfort is never an affect-axis surrogate.
-- [ ] A-027 R8: Failed/short/flat/corrupt physiology yields invalidity and reason codes, not nominal physiological values, neutral targets or invented baseline correction.
-- [ ] A-028 R11: Opening count does not multiply already-total area, contradictory derived inputs are rejected, and all consumers produce the same ordered features.
-- [ ] A-029 R12: Altering held-out outcomes/covariates does not change fitted training transforms or selected training-only settings; participant and room folds meet their separate contracts.
-- [ ] A-030 R14: Space type never silently changes the selected emotional target, and all score consumers use the same formula and projection policy.
+- [x] A-026 R5: Already transformed signed ratings remain numerically identical after ingestion; missing spatial/sleep values remain missing and Experiment 1 comfort is never an affect-axis surrogate.
+- [x] A-027 R8: Failed/short/flat/corrupt physiology yields invalidity and reason codes, not nominal physiological values, neutral targets or invented baseline correction.
+- [x] A-028 R11: Opening count does not multiply already-total area, contradictory derived inputs are rejected, and all consumers produce the same ordered features.
+- [x] A-029 R12: Altering held-out outcomes/covariates does not change fitted training transforms or selected training-only settings; participant and room folds meet their separate contracts.
+- [x] A-030 R14: Space type never silently changes the selected emotional target, and all score consumers use the same formula and projection policy.
 
 ### Removal Verification
 
-- [ ] A-031 R25: Active dependencies/imports/routes contain no legacy Streamlit/torch app, unversioned inference/training route, duplicate score, fixed type-target or heuristic-confidence fallback.
-- [ ] A-032 R2: Current Fab records, `.agents/`, original user files and source hashes survive historical-change cleanup; deletion scope is reviewable from exact paths.
+- [x] A-031 R25: Active dependencies/imports/routes contain no legacy Streamlit/torch app, unversioned inference/training route, duplicate score, fixed type-target or heuristic-confidence fallback.
+- [x] A-032 R2: Current Fab records, `.agents/`, original user files and source hashes survive historical-change cleanup; deletion scope is reviewable from exact paths.
 
 ### Scenario Coverage
 
-- [ ] A-033 R6: Synthetic audit tests cover modulo wrap, discontinuity and rate/duration conflict without asserting that sample-count/logged-duration alone proves hardware rate.
-- [ ] A-034 R8: Known-band EEG and known RR interval fixtures validate feature mathematics and channel/sign/unit conventions, beyond shape/range checks.
-- [ ] A-035 R13: At least one fitted synthetic test artifact exercises save/reload/CLI/API parity even if the real dataset cannot support a usable model.
-- [ ] A-036 R18: Every route is exercised in both themes at representative mobile/desktop widths; System preference, persistence, keyboard focus and reduced motion are covered.
-- [ ] A-037 R21: Browser tests cover user-selected target, valid responses and offline/unavailable/weak-model responses without hardcoded public research metrics.
+- [x] A-033 R6: Synthetic audit tests cover modulo wrap, discontinuity and rate/duration conflict without asserting that sample-count/logged-duration alone proves hardware rate.
+- [x] A-034 R8: Known-band EEG and known RR interval fixtures validate feature mathematics and channel/sign/unit conventions, beyond shape/range checks.
+- [x] A-035 R13: At least one fitted synthetic test artifact exercises save/reload/CLI/API parity even if the real dataset cannot support a usable model.
+- [x] A-036 R18: Every route is exercised in both themes at representative mobile/desktop widths; System preference, persistence, keyboard focus and reduced motion are covered.
+- [x] A-037 R21: Browser tests cover user-selected target, valid responses and offline/unavailable/weak-model responses without hardcoded public research metrics.
 
 ### Edge Cases & Error Handling
 
-- [ ] A-038 R9: No-self-report, partial-modality, single eligible trial and absent cohort cases remain explicit; no fictitious animation origin or complete-fusion label appears.
-- [ ] A-039 R11: NaN/infinity, zero/negative dimensions, excessive walkable/opening area, contradictory count/area and invalid categoricals fail clearly; documented optional omissions remain valid inputs.
-- [ ] A-040 R15: Exhausted candidate budget, impossible support/constraints and duplicates terminate deterministically with a truthful result, not an unbounded loop.
-- [ ] A-041 R17: Invalid/missing/incompatible artifacts and invalid requests return documented statuses without exposing tracebacks; process liveness is distinguished from prediction readiness.
-- [ ] A-042 R10: Insufficient independent groups, singular analysis and absent calibration evidence produce unavailable/qualified inference rather than fabricated intervals or p-values.
+- [x] A-038 R9: No-self-report, partial-modality, single eligible trial and absent cohort cases remain explicit; no fictitious animation origin or complete-fusion label appears.
+- [x] A-039 R11: NaN/infinity, zero/negative dimensions, excessive walkable/opening area, contradictory count/area and invalid categoricals fail clearly; documented optional omissions remain valid inputs.
+- [x] A-040 R15: Exhausted candidate budget, impossible support/constraints and duplicates terminate deterministically with a truthful result, not an unbounded loop.
+- [x] A-041 R17: Invalid/missing/incompatible artifacts and invalid requests return documented statuses without exposing tracebacks; process liveness is distinguished from prediction readiness. <!-- final-rereview-cycle-2: RR-01 resolved; fresh valid-artifact readiness/parity and 25 malformed-field variants across all four public routes pass. See docs/reports/final-rereview-cycle-2.md. -->
+- [x] A-042 R10: Insufficient independent groups, singular analysis and absent calibration evidence produce unavailable/qualified inference rather than fabricated intervals or p-values.
 
 ### Code Quality
 
-- [ ] A-043 Pattern consistency: Replacement naming, layering and interfaces follow the documented package/frontend conventions.
-- [ ] A-044 No unnecessary duplication: Shared schema, feature builder, score, export contract and utility behavior have single ownership.
-- [ ] A-045 Readability: Domain transformations and failure paths are understandable, typed at boundaries and documented where scientific interpretation matters.
-- [ ] A-046 Existing patterns: Deviations from useful retained conventions are justified by replacement architecture rather than accidental parallel abstractions.
-- [ ] A-047 Composition: Processing, artifact loading, API and presentation are composed through clear interfaces rather than unnecessary inheritance.
-- [ ] A-048 Function scope: Functions longer than fifty lines have a clear domain reason or are decomposed into cohesive units.
-- [ ] A-049 Utility reuse: Existing suitable utilities are reused/migrated or explicitly replaced; repeated implementations do not survive cleanup.
-- [ ] A-050 Named configuration: Scientific settings and protocol categories use named/configured values with decision provenance; useful equations and ordinary UI constants are not prohibited by blanket literal linting.
+- [x] A-043 Pattern consistency: Replacement naming, layering and interfaces follow the documented package/frontend conventions.
+- [x] A-044 No unnecessary duplication: Shared schema, feature builder, score, export contract and utility behavior have single ownership.
+- [x] A-045 Readability: Domain transformations and failure paths are understandable, typed at boundaries and documented where scientific interpretation matters.
+- [x] A-046 Existing patterns: Deviations from useful retained conventions are justified by replacement architecture rather than accidental parallel abstractions.
+- [x] A-047 Composition: Processing, artifact loading, API and presentation are composed through clear interfaces rather than unnecessary inheritance.
+- [x] A-048 Function scope: Functions longer than fifty lines have a clear domain reason or are decomposed into cohesive units.
+- [x] A-049 Utility reuse: Existing suitable utilities are reused/migrated or explicitly replaced; repeated implementations do not survive cleanup.
+- [x] A-050 Named configuration: Scientific settings and protocol categories use named/configured values with decision provenance; useful equations and ordinary UI constants are not prohibited by blanket literal linting.
 
 ### Security
 
-- [ ] A-051 R17: Public API accepts bounded validated scientific inputs, configured origins and trusted local artifacts only; no upload, arbitrary path, training or deserialization endpoint exists.
-- [ ] A-052 R24: Credentials are absent from tracked artifacts; third-party licences remain preserved; release readiness does not assert unverified permission to associate participant names with physiological records.
+- [x] A-051 R17: Public API accepts bounded validated scientific inputs, configured origins and trusted local artifacts only; no upload, arbitrary path, training or deserialization endpoint exists.
+- [x] A-052 R24: Credentials are absent from tracked artifacts; third-party licences remain preserved; release readiness does not assert unverified permission to associate participant names with physiological records.
 
 ## Verification and Release Notes
 
@@ -293,3 +300,7 @@ Externally pending release work is not checked off as locally completed: hosting
 | 10 | Certain | Preserve current routing and require an additional audit/specification review before scientific results | AGENTS.md requires fresh independent review; intake requires scientific specification before implementation | S:100 R:85 A:95 D:90 |
 
 10 assumptions (6 certain, 4 confident, 0 tentative).
+
+## Deletion Candidates
+
+None — the unused `Trial.as_record` wrapper and import identified by FR-09 have been removed. Planned legacy retirement already removed the redundant runtime applications; checksum-equivalent source evidence copies remain intentionally preserved.

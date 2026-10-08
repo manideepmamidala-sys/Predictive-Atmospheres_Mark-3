@@ -47,3 +47,16 @@ def test_studied_support_separates_observed_from_physical():
                                       walkable_floor_area=20, day_or_night="Day",
                                       space_type="Bedroom")
     assert support.assess(physical_but_unstudied).status == "outside_range"
+
+
+def test_studied_support_checks_both_opening_counts_and_missingness():
+    from pa.features.support import load_studied_support
+
+    support = load_studied_support()
+    base = support.rooms[0]
+    assert support.assess(base).status == "supported"
+    for count in ("num_doors", "num_windows"):
+        absent = base.model_copy(update={count: None})
+        assert support.assess(absent).status == "unavailable"
+        outside = base.model_copy(update={count: 99})
+        assert support.assess(outside).status == "outside_range"

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import csv
 import math
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from pathlib import Path
 
 from pa.config import DATA
@@ -58,10 +58,6 @@ class Trial:
     sleep_hours: float | None
     rating_provenance: str
 
-    def as_record(self) -> dict:
-        return asdict(self)
-
-
 def load_trials(metadata_dir: Path = DATA / "metadata") -> list[Trial]:
     trials: list[Trial] = []
     for experiment in (1, 2, 3):
@@ -91,6 +87,20 @@ def load_trials(metadata_dir: Path = DATA / "metadata") -> list[Trial]:
     if len(keys) != len(set(keys)):
         raise ValueError("duplicate experiment/subject/room trial")
     return trials
+
+
+def load_demographics(metadata_dir: Path = DATA / "metadata") -> dict[str, dict]:
+    """Map source participant IDs exactly; reject ambiguous or invalid supplied rows."""
+    records: dict[str, dict] = {}
+    for row in _rows(metadata_dir / "Subject Data.csv"):
+        participant_id = row.get("Subject_ID", "")
+        if not participant_id or participant_id in records:
+            raise ValueError("missing or duplicate Subject_ID in demographic metadata")
+        age = _number(row.get("age", ""))
+        if age is not None and age < 0:
+            raise ValueError(f"negative age for {participant_id}")
+        records[participant_id] = {"age": age, "gender": row.get("gender") or None}
+    return records
 
 
 def load_rooms(metadata_dir: Path = DATA / "metadata") -> list[dict]:

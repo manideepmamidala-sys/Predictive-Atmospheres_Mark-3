@@ -26,15 +26,25 @@ export const SYNTHETIC_RESEARCH: Research = {
     { id: 'synthetic-3', experiment: 3, participant_id: 'P02', room_id: 'Rm_021', eeg_valid: true, ecg_valid: false, reasons: ['ECG peaks absent'], eeg: { sample_rate_hz: 4, unit: 'µV', channel: 'Fp1', window_start_s: 0, raw: [0, 1, 0, -1], cleaned: [], rejected_segments: [[0.5, 1]] }, ecg: null, eeg_band_power: null, faa: null, heart_rate_bpm: null, rmssd_ms: null, subjective: null, objective: null, fused: null, alpha: null, cohort: 'objective_only', comfort: null, available_components: ['eeg'], axis_availability: { valence: false, arousal: false } },
   ],
   sensitivity: [
-    { experiment: 2, alpha: 0, n: 1, mean_valence: 0, mean_arousal: 0, interval_valence: null, interval_arousal: null },
-    { experiment: 2, alpha: 0.5, n: 1, mean_valence: 0.2, mean_arousal: 0.1, interval_valence: null, interval_arousal: null },
-    { experiment: 3, alpha: 0.5, n: 0, mean_valence: null, mean_arousal: null, interval_valence: null, interval_arousal: null },
+    { experiment: 2, participant_id: null, alpha: 0, n: 1, mean_valence: 0, mean_arousal: 0, interval_valence: null, interval_arousal: null },
+    { experiment: 2, participant_id: null, alpha: 0.5, n: 1, mean_valence: 0.2, mean_arousal: 0.1, interval_valence: null, interval_arousal: null },
+    { experiment: 2, participant_id: 'P01', alpha: 0.5, n: 1, mean_valence: 0.2, mean_arousal: 0.1, interval_valence: null, interval_arousal: null },
+    { experiment: 3, participant_id: null, alpha: 0.5, n: 0, mean_valence: null, mean_arousal: null, interval_valence: null, interval_arousal: null },
+  ],
+  disagreement: [
+    { experiment: 2, participant_id: null, cohort: 'complete_fusion', axis: 'valence', n: 1, mean_objective_minus_subjective: -0.4 },
+    { experiment: 2, participant_id: 'P01', cohort: 'complete_fusion', axis: 'valence', n: 1, mean_objective_minus_subjective: -0.4 },
   ],
   people: [
-    { id: 'P01', experiments: [1, 2], trials: 2, valid_fused: 1, mean_valence: 0.2, mean_arousal: 0.1, age: null, gender: null, sleep_hours: null },
-    { id: 'P02', experiments: [3], trials: 1, valid_fused: 0, mean_valence: null, mean_arousal: null, age: null, gender: null, sleep_hours: 7 },
+    { id: 'P01', experiments: [1, 2], trials: 2, valid_fused: 1, mean_valence: 0.2, mean_arousal: 0.1, age: 26, gender: 'Female', sleep_hours: null, by_experiment: [
+      { experiment: 1, trials: 1, valid_fused: 0, mean_valence: null, mean_arousal: null, sleep_hours: null, sleep_min_hours: null, sleep_max_hours: null, sleep_observations: 0 },
+      { experiment: 2, trials: 1, valid_fused: 1, mean_valence: 0.2, mean_arousal: 0.1, sleep_hours: null, sleep_min_hours: null, sleep_max_hours: null, sleep_observations: 0 },
+    ] },
+    { id: 'P02', experiments: [3], trials: 1, valid_fused: 0, mean_valence: null, mean_arousal: null, age: 29, gender: 'Male', sleep_hours: null, by_experiment: [
+      { experiment: 3, trials: 1, valid_fused: 0, mean_valence: null, mean_arousal: null, sleep_hours: 7, sleep_min_hours: 7, sleep_max_hours: 7, sleep_observations: 1 },
+    ] },
   ],
-  model: { status: 'weak', explanation: 'Synthetic weak-model status for browser testing.', metrics: [{ name: 'Room holdout MAE', value: null, unit: null, interval: null, n: 0, group: 'room-held-out' }], limitations: ['No validated prediction from synthetic records.'], artifact_version: null },
+  model: { status: 'weak', explanation: 'Synthetic weak-model status for browser testing.', metrics: [{ name: 'Room holdout MAE', value: null, unit: null, interval: null, n: 0, group: 'room-held-out' }], limitations: ['No validated prediction from synthetic records.'], artifact_version: null, summary: { cohort_trials: 1, cohort_participants: 1, cohort_rooms: 1, exclusions: { missing_features: 2 }, selection_status: 'synthetic_only', selected_candidate: { name: 'fixture' }, preprocessing: ['Synthetic test-only step'], provenance: { code_tree_sha256: 'synthetic-test-hash' }, participant_baseline_fallback: 'Synthetic fixture fallback; not a research finding.', evidence_links: { model_card: 'docs/model_card.md' } } },
 };
 
 export async function useSyntheticResearch(page: Page, data: Research = SYNTHETIC_RESEARCH) {

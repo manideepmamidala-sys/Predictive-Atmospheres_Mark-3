@@ -2003,6 +2003,7 @@
       "Small repeated participant/room sample; no causal or clinical interpretation.",
       "No calibrated prediction interval or individual response guarantee is available."
     ],
-    "artifact_version": "1.0.0"
+    "artifact_version": "1.0.0",
+    "summary": null
   }
 }

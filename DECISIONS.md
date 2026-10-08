@@ -71,3 +71,10 @@ This is an append-only record for this retrospective rebuild. A new decision may
 **Reason:** A stale "pending" label would contradict the recorded gate outcome.
 **Evidence:** `docs/reports/audit-spec-rereview.md` and `docs/reports/analysis-checkpoint.md`.
 **Supersedes:** The pending-status labels only; D-007 through D-009 methodology remains in force.
+
+## D-011 — 2026-10-08 — Include opening counts in empirical room support
+
+**Decision:** Assess studied support against all nine previously checked numeric attributes plus `num_doors` and `num_windows`. A candidate missing either opening count has unavailable support; a count outside the observed complete-room range is outside range. Recompute the normalized nearest-room distance and leave-one-room threshold using these eleven attributes. Physical validity remains a separate check.
+**Reason:** Opening counts are model inputs. Omitting them let a room with 99 doors be labelled an exact studied room.
+**Evidence:** `docs/reports/final-review.md` FR-05; focused support regression and regenerated result/artifact evidence will follow this amendment.
+**Supersedes:** The narrower numeric support neighborhood in the initial implementation. This amendment precedes regeneration; it does not alter source observations or physiological analysis.

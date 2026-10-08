@@ -46,3 +46,46 @@ def test_synthetic_fitted_artifact_roundtrip_and_schema_guard(tmp_path):
 def test_missing_artifact_is_unavailable(tmp_path):
     with pytest.raises(ArtifactUnavailable, match="missing"):
         load_artifact(tmp_path)
+
+
+@pytest.mark.parametrize("document", ["[]", '"text"', "null", "{}",
+                                      '{"model_status": 7, "limitations": []}'])
+def test_malformed_metadata_is_unavailable(tmp_path, document):
+    (tmp_path / "model.joblib").write_bytes(b"trusted-fixture-placeholder")
+    (tmp_path / "metadata.json").write_text(document)
+    with pytest.raises(ArtifactUnavailable, match="metadata"):
+        load_artifact(tmp_path)
+
+
+@pytest.mark.parametrize(("field", "invalid"), [
+    ("artifact_version", []), ("artifact_version", None),
+    ("artifact_version", ""), ("model_status", []),
+    ("model_status", ""), ("limitations", "unavailable"),
+    ("limitations", ["valid", 7]),
+])
+def test_consumed_metadata_fields_are_checked_before_artifact_is_ready(tmp_path, field, invalid):
+    pipeline = DummyRegressor(strategy="mean").fit(np.array([[1], [2], [3]]),
+                                                    np.array([[0, 0], [1, 1], [-1, -1]]))
+    metadata = build_metadata(model_status="synthetic_test", training_scope={"synthetic": True},
+                              metrics={}, limitations=[])
+    save_artifact(pipeline, metadata, tmp_path)
+    assert load_artifact(tmp_path).metadata["artifact_version"] == "1.0.0"
+    path = tmp_path / "metadata.json"
+    malformed = json.loads(path.read_text())
+    malformed[field] = invalid
+    path.write_text(json.dumps(malformed))
+    with pytest.raises(ArtifactUnavailable, match=field):
+        load_artifact(tmp_path)
+
+
+@pytest.mark.parametrize("field", ["artifact_version", "model_status", "limitations"])
+def test_missing_consumed_metadata_field_is_unavailable(tmp_path, field):
+    pipeline = DummyRegressor().fit(np.array([[1], [2]]), np.array([[0, 0], [1, 1]]))
+    save_artifact(pipeline, build_metadata(model_status="synthetic_test", training_scope={},
+                                           metrics={}, limitations=[]), tmp_path)
+    path = tmp_path / "metadata.json"
+    malformed = json.loads(path.read_text())
+    del malformed[field]
+    path.write_text(json.dumps(malformed))
+    with pytest.raises(ArtifactUnavailable, match=field):
+        load_artifact(tmp_path)

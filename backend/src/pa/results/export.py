@@ -46,6 +46,7 @@ def write_products(products: dict[str, BaseModel], destination: Path = RESULTS) 
         trials=[trial.model_copy(update={"eeg": None, "ecg": None})
                 for trial in verified["signals"].trials],
         sensitivity=verified["affect"].sensitivity,
+        disagreement=verified["affect"].disagreement,
         people=verified["people"].people, model=verified["model"].model,
     )
     hashes["bundle"] = write_json(destination / "bundle.json", bundle)

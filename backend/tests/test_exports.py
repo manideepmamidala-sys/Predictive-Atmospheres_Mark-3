@@ -100,7 +100,8 @@ def test_browser_products_keep_unavailable_science_explicit(tmp_path):
     affect = construct_affect_detail([trial], [signal])
     products = build_products([trial], spatial, [signal], affect,
                               ModelRecord(status="unavailable", explanation="No valid model fixture",
-                                          metrics=[]))
+                                          metrics=[]),
+                              demographics={"P1": {"age": 26, "gender": "Female"}})
     write_products(products, tmp_path)
     bundle = json.loads((tmp_path / "bundle.json").read_text())
     signals_export = json.loads((tmp_path / "signals.json").read_text())
@@ -110,4 +111,70 @@ def test_browser_products_keep_unavailable_science_explicit(tmp_path):
     assert len(signals_export["trials"][0]["eeg"]["raw"]) == 100
     assert bundle["trials"][0]["eeg"] is None
     assert bundle["people"][0]["mean_valence"] is None
+    assert bundle["people"][0]["age"] == 26
+    assert bundle["people"][0]["gender"] == "Female"
+    assert bundle["people"][0]["by_experiment"] == [{
+        "experiment": 1, "trials": 1, "valid_fused": 0,
+        "mean_valence": None, "mean_arousal": None,
+        "sleep_hours": None, "sleep_min_hours": None,
+        "sleep_max_hours": None, "sleep_observations": 0}]
+    assert all(row["n"] == 0 for row in bundle["disagreement"])
     assert bundle["model"]["status"] == "unavailable"
+
+
+def test_source_demographics_and_sleep_are_preserved_by_experiment():
+    from pa.io.metadata import load_demographics, load_trials
+
+    demographics = load_demographics()
+    trials = load_trials()
+    assert demographics["Subj_B"] == {"age": 26.0, "gender": "Female"}
+    assert {trial.subject_id for trial in trials} <= demographics.keys()
+    assert sum(trial.sleep_hours is not None for trial in trials if trial.experiment == 3) == 60
+    assert all(trial.sleep_hours is None for trial in trials if trial.experiment in (1, 2))
+
+
+@pytest.mark.parametrize("rows", [
+    "Subject_ID,age,gender,occupation\nP1,20,Female,\nP1,21,Female,\n",
+    "Subject_ID,age,gender,occupation\nP1,-2,Female,\n",
+])
+def test_demographic_reader_rejects_ambiguous_or_invalid_rows(tmp_path, rows):
+    from pa.io.metadata import load_demographics
+
+    (tmp_path / "Subject Data.csv").write_text(rows)
+    with pytest.raises(ValueError):
+        load_demographics(tmp_path)
+
+
+def test_generated_participant_summaries_and_disagreement_match_source_scope():
+    import json
+
+    from pa.config import RESULTS
+
+    bundle = json.loads((RESULTS / "bundle.json").read_text())
+    detail = json.loads((RESULTS / "affect_detail.json").read_text())["trials"]
+    people = {person["id"]: person for person in bundle["people"]}
+    for participant_id, person in people.items():
+        for scope in person["by_experiment"]:
+            rows = [row for row in detail if row["participant_id"] == participant_id
+                    and row["experiment"] == scope["experiment"]]
+            assert scope["trials"] == len(rows)
+            assert scope["valid_fused"] == sum(row["construction"]["cohort"] ==
+                                                "complete_fusion" for row in rows)
+            assert scope["sleep_observations"] == (len(rows) if scope["experiment"] == 3 else 0)
+    subj_m_e1 = next(item for item in people["Subj_M"]["by_experiment"]
+                     if item["experiment"] == 1)
+    assert (subj_m_e1["trials"], subj_m_e1["valid_fused"],
+            subj_m_e1["mean_valence"]) == (10, 0, None)
+    for summary in bundle["disagreement"]:
+        rows = [row for row in detail if row["experiment"] == summary["experiment"]
+                and row["construction"]["cohort"] == summary["cohort"]
+                and (summary["participant_id"] is None or
+                     row["participant_id"] == summary["participant_id"])]
+        pairs = [row["objective_minus_subjective"][summary["axis"]] for row in rows
+                 if row["objective_minus_subjective"][summary["axis"]] is not None]
+        assert summary["n"] == len(pairs)
+        assert summary["mean_objective_minus_subjective"] == pytest.approx(
+            sum(pairs) / len(pairs)) if pairs else summary[
+                "mean_objective_minus_subjective"] is None
+    assert all(item["n"] == 0 for item in bundle["sensitivity"]
+               if item["participant_id"] == "Subj_B" and item["experiment"] == 3)

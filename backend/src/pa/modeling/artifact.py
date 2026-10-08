@@ -96,6 +96,18 @@ def save_artifact(pipeline: Any, metadata: dict, directory: Path = MODEL) -> Non
     (directory / "metadata.json").write_text(json.dumps(saved, indent=2, allow_nan=False) + "\n")
 
 
+def _validate_public_metadata(metadata: dict) -> None:
+    """Reject malformed fields used by health, meta, prediction and optimization."""
+    for field in ("artifact_version", "model_status"):
+        value = metadata.get(field)
+        if not isinstance(value, str) or not value.strip():
+            raise ArtifactUnavailable(f"model metadata has invalid {field}")
+    limitations = metadata.get("limitations")
+    if not isinstance(limitations, list) or not all(
+            isinstance(item, str) for item in limitations):
+        raise ArtifactUnavailable("model metadata has invalid limitations")
+
+
 def load_artifact(directory: Path = MODEL) -> LoadedArtifact:
     metadata_path = directory / "metadata.json"
     model_path = directory / "model.joblib"
@@ -105,6 +117,9 @@ def load_artifact(directory: Path = MODEL) -> LoadedArtifact:
         metadata = json.loads(metadata_path.read_text())
     except (OSError, ValueError) as exc:
         raise ArtifactUnavailable("model metadata is unreadable") from exc
+    if not isinstance(metadata, dict) or not all(isinstance(key, str) for key in metadata):
+        raise ArtifactUnavailable("model metadata must be a JSON object with string keys")
+    _validate_public_metadata(metadata)
     checks = {
         "schema_version": SCHEMA_VERSION,
         "feature_order": list(FEATURE_ORDER),
@@ -125,7 +140,7 @@ def load_artifact(directory: Path = MODEL) -> LoadedArtifact:
         raise ArtifactUnavailable("incompatible model metadata: " + ", ".join(differences))
     try:
         pipeline = joblib.load(model_path)
-    except (OSError, ValueError, EOFError) as exc:
+    except (OSError, ValueError, EOFError, TypeError, AttributeError) as exc:
         raise ArtifactUnavailable("model artifact cannot be loaded") from exc
     if not hasattr(pipeline, "predict"):
         raise ArtifactUnavailable("model artifact has no predict method")

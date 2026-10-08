@@ -16,3 +16,16 @@ test('signal filters keep QC, missingness, units and trace mode visible', async 
   await expect(page.getByRole('img', { name: /EEG trace cleaned trace/ })).toBeVisible();
   await expect(page.getByText(/unit: µV; display rate: 4 Hz; source analytical scenario: unconfirmed Hz; window: 2.0–3.0 s/i)).toBeVisible();
 });
+
+test('signal participant selection scopes trial choices and quality counts', async ({ page }) => {
+  await useSyntheticResearch(page);
+  await page.goto('/signals');
+  await page.getByRole('combobox', { name: 'Participant' }).selectOption('P02');
+  await expect(page.getByText('Trial records in filter').locator('..').locator('.value')).toHaveText('1');
+  await expect(page.getByRole('combobox', { name: 'Trial' }).locator('option')).toHaveCount(1);
+  await expect(page.getByRole('combobox', { name: 'Trial' })).toContainText('synthetic-3');
+  await expect(page.getByRole('region', { name: 'Trial quality table' }).getByRole('row')).toHaveCount(2);
+  await page.getByRole('combobox', { name: 'Experiment' }).selectOption('2');
+  await expect(page.getByRole('combobox', { name: 'Participant' })).toHaveValue('all');
+  await expect(page.getByText('Trial records in filter').locator('..').locator('.value')).toHaveText('1');
+});

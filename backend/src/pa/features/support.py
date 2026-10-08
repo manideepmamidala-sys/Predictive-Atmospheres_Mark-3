@@ -9,7 +9,8 @@ import numpy as np
 from pa.features.schema import RoomInput
 from pa.io.metadata import load_rooms
 
-SUPPORT_COLUMNS = ("length", "width", "height", "door_area", "window_area",
+SUPPORT_COLUMNS = ("length", "width", "height", "num_doors", "door_area",
+                   "num_windows", "window_area",
                    "daylight_factor", "illuminance", "cct", "walkable_floor_area")
 
 

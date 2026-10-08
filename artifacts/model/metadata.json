@@ -31,10 +31,10 @@
   "uv_lock_sha256": "b477770af8fc9cfbecc7c9a78e6c5f98736ebd4c25c6bf32a3c1341753ab7f44",
   "pyproject_sha256": "4b3d4aaf61cccac7851253b5f578c6072c3faeb543e7768b4d09e6cadc06a63c",
   "decisions_sha256": "8f938eac7d6f434a23cce3f919d2a6d70268d29701daf96e5047b013154ca053",
-  "code_tree_sha256": "11a6312a6084ebc2ff893ff623180faeddd9778cf019b1d01fe64854a3c7325f",
+  "code_tree_sha256": "6417adaca920ef208e4cfaec65be2dbc1e81d15b8e9b280360de42e389ee6295",
   "dataset_manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
-  "analysis_spec_sha256": "e14a09e72fda6d9f05e6f975bfc2f22a47e3053047e27294a01c9db867019660",
-  "base_git_revision": "41d6ba507965d5159a679e65962fb3d02963a551",
+  "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7",
+  "base_git_revision": "d46c5afaa9d82f66c021d6a4b7daae155e9f776c",
   "source_snapshot_status": "uncommitted_changes",
   "training_scope": {
     "cohort": "experiment_03_complete_raw_components_full_room_attributes",

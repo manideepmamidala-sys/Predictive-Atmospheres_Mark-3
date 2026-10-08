@@ -97,12 +97,25 @@ class TrialRecord(StrictModel):
 
 class SensitivityRecord(StrictModel):
     experiment: int | None = None
+    participant_id: str | None = None
     alpha: float = Field(allow_inf_nan=False)
     n: int = Field(ge=0)
     mean_valence: float | None = Field(default=None, allow_inf_nan=False)
     mean_arousal: float | None = Field(default=None, allow_inf_nan=False)
     interval_valence: tuple[float, float] | None = None
     interval_arousal: tuple[float, float] | None = None
+
+
+class PersonExperimentRecord(StrictModel):
+    experiment: int
+    trials: int = Field(ge=0)
+    valid_fused: int = Field(ge=0)
+    mean_valence: float | None = Field(default=None, allow_inf_nan=False)
+    mean_arousal: float | None = Field(default=None, allow_inf_nan=False)
+    sleep_hours: float | None = Field(default=None, allow_inf_nan=False)
+    sleep_min_hours: float | None = Field(default=None, allow_inf_nan=False)
+    sleep_max_hours: float | None = Field(default=None, allow_inf_nan=False)
+    sleep_observations: int = Field(ge=0)
 
 
 class PersonRecord(StrictModel):
@@ -115,6 +128,29 @@ class PersonRecord(StrictModel):
     age: float | None = Field(default=None, allow_inf_nan=False)
     gender: str | None = None
     sleep_hours: float | None = Field(default=None, allow_inf_nan=False)
+    by_experiment: list[PersonExperimentRecord] = Field(default_factory=list)
+
+
+class DisagreementRecord(StrictModel):
+    experiment: int
+    participant_id: str | None = None
+    cohort: str
+    axis: str
+    n: int = Field(ge=0)
+    mean_objective_minus_subjective: float | None = Field(default=None, allow_inf_nan=False)
+
+
+class ModelSummary(StrictModel):
+    cohort_trials: int = Field(ge=0)
+    cohort_participants: int = Field(ge=0)
+    cohort_rooms: int = Field(ge=0)
+    exclusions: dict[str, int]
+    selection_status: str | None = None
+    selected_candidate: dict[str, str | int | float] | None = None
+    preprocessing: list[str]
+    provenance: dict[str, str]
+    participant_baseline_fallback: str
+    evidence_links: dict[str, str]
 
 
 class MetricRecord(StrictModel):
@@ -132,6 +168,7 @@ class ModelRecord(StrictModel):
     metrics: list[MetricRecord]
     limitations: list[str] = Field(default_factory=list)
     artifact_version: str | None = None
+    summary: ModelSummary | None = None
 
 
 class ExportBase(StrictModel):
@@ -161,6 +198,7 @@ class SignalsExport(ExportBase):
 class AffectExport(ExportBase):
     sensitivity: list[SensitivityRecord]
     cohorts: dict[str, int] = Field(default_factory=dict)
+    disagreement: list[DisagreementRecord] = Field(default_factory=list)
     analysis: dict = Field(default_factory=dict)
 
 
@@ -177,5 +215,6 @@ class ResearchBundle(ExportBase):
     rooms: list[RoomRecord]
     trials: list[TrialRecord]
     sensitivity: list[SensitivityRecord]
+    disagreement: list[DisagreementRecord] = Field(default_factory=list)
     people: list[PersonRecord]
     model: ModelRecord
