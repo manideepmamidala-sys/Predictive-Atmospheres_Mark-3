@@ -6,3 +6,5 @@
 {"action":"enter","driver":"fab-ff","event":"stage-transition","stage":"apply","ts":"2026-10-08T12:29:55Z"}
 {"action":"enter","driver":"fab-ff","event":"stage-transition","stage":"review","ts":"2026-10-08T14:43:32Z"}
 {"cmd":"fab-ff","event":"command","ts":"2026-10-08T14:52:53Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-10-08T15:14:54Z"}
+{"cmd":"fab-ff","event":"command","ts":"2026-10-08T15:15:09Z"}
