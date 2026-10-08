@@ -50,7 +50,6 @@ def optimize(target_neuro_score: float) -> dict:
         st.error(f"Optimization API error: {e}")
         return None
 
-@st.cache_data(ttl=3600)
 def check_health() -> bool:
     """Check if the backend API is healthy."""
     try:
