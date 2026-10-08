@@ -1,0 +1,703 @@
+{
+  "schema_version": "1.0.0",
+  "removed_count": 87,
+  "note": "Original data, renders, PDFs, frontend image assets, and user-authored files are excluded.",
+  "entries": [
+    {
+      "path": "Dockerfile",
+      "role": "legacy_root_runtime",
+      "replacement": "Makefile, backend/src/pa, frontend/src, hosting candidates",
+      "size_bytes": 585,
+      "sha256": "73c8b6e2422bc5ab99cf5c3ad6d5aa4e5190e745278a21796696586d7a87ba34",
+      "git_tracked": true
+    },
+    {
+      "path": "Dockerfile.api",
+      "role": "legacy_root_runtime",
+      "replacement": "Makefile, backend/src/pa, frontend/src, hosting candidates",
+      "size_bytes": 297,
+      "sha256": "89131d8eb8c1ff92df4790e6a981481d4955d2eac9250c2a45063ce553d53acf",
+      "git_tracked": true
+    },
+    {
+      "path": "api.py",
+      "role": "legacy_root_runtime",
+      "replacement": "Makefile, backend/src/pa, frontend/src, hosting candidates",
+      "size_bytes": 6424,
+      "sha256": "0eb66f80c342c8b57f75c6ad890fda3b865ee1a679a80c523fd0b5e4b8245ff3",
+      "git_tracked": true
+    },
+    {
+      "path": "artifacts/models/random_forest.joblib",
+      "role": "legacy_model",
+      "replacement": "artifacts/model fitted new pipeline",
+      "size_bytes": 893685,
+      "sha256": "be4c3b0da268febaf5de4dfaab8df1d342f1f1727cf0aaab0a8386444750fd06",
+      "git_tracked": true
+    },
+    {
+      "path": "artifacts/neuro_bounds.pkl",
+      "role": "legacy_root_runtime",
+      "replacement": "Makefile, backend/src/pa, frontend/src, hosting candidates",
+      "size_bytes": 52,
+      "sha256": "008ba2e8aef6417bb60bde88e7757112879529bdf33e254dab08b21808b8176b",
+      "git_tracked": true
+    },
+    {
+      "path": "data/processed/05687c51fac06e4580ee22e8b2fe03e2.cache",
+      "role": "legacy_processed_cache",
+      "replacement": "artifacts/results validated new products",
+      "size_bytes": 253680,
+      "sha256": "3f9b4ba5e9e3c241df122aaa38b4b5fc9a4803c90922d5749d5df0016b0e25d6",
+      "git_tracked": true
+    },
+    {
+      "path": "data/processed/cached_data.pt",
+      "role": "legacy_processed_cache",
+      "replacement": "artifacts/results validated new products",
+      "size_bytes": 261645,
+      "sha256": "e60cf8aa68c9f3d0ffb81dab7f8a79b5c4293162a6cfc2bb99a2e0e1ee67177f",
+      "git_tracked": true
+    },
+    {
+      "path": "data/processed/fusion_analysis.parquet",
+      "role": "legacy_processed_cache",
+      "replacement": "artifacts/results validated new products",
+      "size_bytes": 44659,
+      "sha256": "dcddf69cffc37547c74c2ed3f2cf9248f329db03f4f2f63efc492c1a2767bb6b",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/__init__.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/api_client.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 2061,
+      "sha256": "3ac8ef7fa9832d807ff04fe9834e432c9012e24ebca0a7570ec69b938dc13982",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/app.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 4644,
+      "sha256": "ae6c27933d60b77e2d8233cbdb023df4602312349a2b14a58805fa0b134a3c95",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/config.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 12887,
+      "sha256": "ad155424e2b8776f02df5eb11d62bfee1324dcf562da9a7bbefd83899e0b07e4",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/preprocessing.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 7934,
+      "sha256": "d51d4330f3a0a85c104de168591e1a8ee5a61a7cbeba48158a93594c4f77a5f7",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/__init__.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/affective_fusion.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 4097,
+      "sha256": "ccbff3f3e64bdd9099c9c655c7bdc047ef0e3108896ca7f83055ab7a9b6a3079",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/base_visualization.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 1288,
+      "sha256": "c8b8d1dc74b26aadefc1a26c696f9102bd909b7cce6e644959d1a2f1ef38c0e7",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/data_utils.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 562,
+      "sha256": "74b7a2281ec7dcf46030e0c2775b8099a87e4af7c775b9a80f8030467193d150",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/demographic_insights.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 3104,
+      "sha256": "a9e0ad46f251cb6e737528e54e33aca7f24bcfb20c63279a93576ace6aed45ce",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/design_studio.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 15903,
+      "sha256": "d91e0c563c9103e8ee94193262d6a076dd2154ae40929ae40aee4cc1519b55f9",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/emotion_landscape.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 8200,
+      "sha256": "4dc5961ad9caa89fac0b1d921e7281a54c06c629babeaf973f8b7d3afe92ac59",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/environmental_impacts.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 2330,
+      "sha256": "f3bfdf449b02ac703473cec8b0d1cd598033786e6cd0c1f8a53a062024b4e14a",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/human_metrics.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 11884,
+      "sha256": "cafd0cdbe6e1c48b032574c5f7627dd6d0174a9305f13155955c5e6559b4c70b",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/model_training.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 10288,
+      "sha256": "2e4f185dc0271bc63311dcf68a67b27659c76b6620b95c39abb217a08d2a25b8",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/rendering.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 10034,
+      "sha256": "1218ddfc2a492f9c7fd2b608b5a72849c8973bb3bad8fadd1223c058439dc071",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/spatial_insights.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 22778,
+      "sha256": "629923e45c56cae64d6d477fdde8d9e01c56f3a2dc0049704f2f5215fe0180a9",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/state_utils.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 576,
+      "sha256": "68979d1669da0a636031732aa67b52c0ecef01bb19b8467410eac0e5cd87bc7a",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/system_architecture.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 6003,
+      "sha256": "3eebf8703751804d9b4ba7aab2a263007eaf5c31adae151c7fc8c748c008c214",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend/ui/theme.py",
+      "role": "legacy_streamlit_frontend",
+      "replacement": "frontend/src React site",
+      "size_bytes": 9457,
+      "sha256": "9b5bca67c4868b36d2b0d0b6ccc5629e80ff44fe3dad2f3a27512706ba14f517",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/__init__.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/app.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 2615,
+      "sha256": "8f84717aad59c61f82f1f3249a56d52d4b81e16708d64ca5f987a99bb297876d",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/__init__.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/affective_fusion.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 4133,
+      "sha256": "8e8d61bc20aa250bee806ef9eb6b82a98a1e96e07e46e0d4a1aaf49933246b24",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/base_visualization.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 1306,
+      "sha256": "fca35ef6401c50418ff77a6b190ee6c597b8669905cebff1509bbd35c0612ec8",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/data_utils.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 666,
+      "sha256": "fa43f87c1cfaa750bbadd9f2ff8d969b6e1762e765e9f307735a00e5d724cb7d",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/demographic_insights.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 3140,
+      "sha256": "20d126f4dabdfb8a7b1b44af39846dc428c8218267c297532a759a6f98e0a18a",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/design_studio.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 15914,
+      "sha256": "e2b5eb183c0dab8503e77c6028aa0d3e9ce3be0cbc5d9d6f6fb612bed1a95f10",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/emotion_landscape.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 8273,
+      "sha256": "fe6bf7b120bc0c669480c76839c1bb8213ad6d37bd32d47c3de5608bcc941ad6",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/environmental_impacts.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 2366,
+      "sha256": "3fcac7694f63b23e7cb2ea290c329046bb6b33d54d5b0637a46cfcbac6cbd142",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/human_metrics.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 11933,
+      "sha256": "2e162f031e60ef5bfaf777333d777818e9d0b0a44cd5afa244a3fbf7d85636ba",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/model_training.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 10739,
+      "sha256": "3c8f52d731fd62c2312df422246accea8fe17cd436ddfc985a886f026c7a330b",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/spatial_insights.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 22877,
+      "sha256": "5a847c6d1d9b949be2d0ca8c4991d66687b61e29053ed2b42a26aa242900d93b",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/state_utils.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 571,
+      "sha256": "a0d21b38823510f1e40a2fdc6eddeb8fcf70fa8f0339b48aafc634d634d83b87",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/system_architecture.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 6003,
+      "sha256": "3eebf8703751804d9b4ba7aab2a263007eaf5c31adae151c7fc8c748c008c214",
+      "git_tracked": true
+    },
+    {
+      "path": "frontend_streamlit_archive/ui/theme.py",
+      "role": "legacy_streamlit_archive",
+      "replacement": "frontend/src React site",
+      "size_bytes": 9456,
+      "sha256": "e1fe7b9fadda944358a8e3af1c55488d3c3eb1578410fd7f7a9bf66265486187",
+      "git_tracked": true
+    },
+    {
+      "path": "predictive_atmospheres.egg-info/PKG-INFO",
+      "role": "legacy_package_build_output",
+      "replacement": "backend/pyproject.toml and backend/uv.lock",
+      "size_bytes": 7506,
+      "sha256": "5ecfc40daf3073d25db29834e2836f8711cc4bec308a07a19cc119712bd13b91",
+      "git_tracked": true
+    },
+    {
+      "path": "predictive_atmospheres.egg-info/SOURCES.txt",
+      "role": "legacy_package_build_output",
+      "replacement": "backend/pyproject.toml and backend/uv.lock",
+      "size_bytes": 1541,
+      "sha256": "b9aa99fa97d2237d2ec14d77cb99332511eb4139157e6c251fd1adb8cbe9e5b4",
+      "git_tracked": true
+    },
+    {
+      "path": "predictive_atmospheres.egg-info/dependency_links.txt",
+      "role": "legacy_package_build_output",
+      "replacement": "backend/pyproject.toml and backend/uv.lock",
+      "size_bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "git_tracked": true
+    },
+    {
+      "path": "predictive_atmospheres.egg-info/requires.txt",
+      "role": "legacy_package_build_output",
+      "replacement": "backend/pyproject.toml and backend/uv.lock",
+      "size_bytes": 172,
+      "sha256": "d89b0b0cd0c5000bc320bf06d396ae3e89a9a311ec6f17df3a3910af6821c533",
+      "git_tracked": true
+    },
+    {
+      "path": "predictive_atmospheres.egg-info/top_level.txt",
+      "role": "legacy_package_build_output",
+      "replacement": "backend/pyproject.toml and backend/uv.lock",
+      "size_bytes": 13,
+      "sha256": "51c864efed5d2024e4a027dc41a5d06d825e300dd03856dca615ec17393e5f83",
+      "git_tracked": true
+    },
+    {
+      "path": "pyproject.toml",
+      "role": "legacy_root_runtime",
+      "replacement": "Makefile, backend/src/pa, frontend/src, hosting candidates",
+      "size_bytes": 1178,
+      "sha256": "9245a6f9837a2b4bca07ab933b46e500223eecd2146f9b0d6c82711520a12c2e",
+      "git_tracked": true
+    },
+    {
+      "path": "pytest.log",
+      "role": "legacy_root_runtime",
+      "replacement": "Makefile, backend/src/pa, frontend/src, hosting candidates",
+      "size_bytes": 5630,
+      "sha256": "9bb2f5ec4a2fac61cf64c0e0e2046eae6a2daf01db420cccab3ad17aceff01c5",
+      "git_tracked": true
+    },
+    {
+      "path": "requirements.txt",
+      "role": "legacy_root_runtime",
+      "replacement": "Makefile, backend/src/pa, frontend/src, hosting candidates",
+      "size_bytes": 180,
+      "sha256": "a493d9394592dd58be9bbe2f926d7bf97bf044121e8ee12dccc732c3e0261e9c",
+      "git_tracked": true
+    },
+    {
+      "path": "run_pipeline.py",
+      "role": "legacy_root_runtime",
+      "replacement": "Makefile, backend/src/pa, frontend/src, hosting candidates",
+      "size_bytes": 2803,
+      "sha256": "1da50833a62701b9858c72fecf926f89782bd3b649c36103d21e80c5e102fde0",
+      "git_tracked": true
+    },
+    {
+      "path": "src/cli.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 3718,
+      "sha256": "f0f469bdd26c40e639b65b747851c9830dfdf90627a496c59bb359d0b4c04f9a",
+      "git_tracked": true
+    },
+    {
+      "path": "src/config.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 12881,
+      "sha256": "c808d26e4de365276cd13bb73ee10be7793028359cb2e55993e731f1fd83297e",
+      "git_tracked": true
+    },
+    {
+      "path": "src/core/__init__.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 40,
+      "sha256": "7a1e9e5b76b1390f69f26250a7724a9d22edd9be6ebefeab6035d7dcddd0f53c",
+      "git_tracked": true
+    },
+    {
+      "path": "src/core/data/__init__.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 145,
+      "sha256": "e78bb36b1d879f306d4b700c12cfaf7614e5b0e3c7d1fa497f5a56abdc9254ff",
+      "git_tracked": true
+    },
+    {
+      "path": "src/core/data/validators.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 4116,
+      "sha256": "024ef69fbe5cca3a24c3ac26e5c48ff46b1dba755e42ae5fa85da9c9be349218",
+      "git_tracked": true
+    },
+    {
+      "path": "src/data/data_loader.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 12373,
+      "sha256": "24529f81f5a5c2ee24214b198c740683d96f1fccacb7ba038066320b5e430b9b",
+      "git_tracked": true
+    },
+    {
+      "path": "src/data/emotion_engine.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 18554,
+      "sha256": "05990e2f3c03e55057d58ea2da1728e30d77bf4e1ab22ffbe3abdb88fa745cea",
+      "git_tracked": true
+    },
+    {
+      "path": "src/data/experiment_registry.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 5197,
+      "sha256": "40d7b95acf69377628c74f4ca52a01bdbf2b4b6486a921a9f184890c57391239",
+      "git_tracked": true
+    },
+    {
+      "path": "src/data/preprocessing.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 7934,
+      "sha256": "d51d4330f3a0a85c104de168591e1a8ee5a61a7cbeba48158a93594c4f77a5f7",
+      "git_tracked": true
+    },
+    {
+      "path": "src/models/adapter.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 3932,
+      "sha256": "747b102232786af6a07317ee4bec905a71ca2bb84cde053ed8f954b75cc5cfc3",
+      "git_tracked": true
+    },
+    {
+      "path": "src/models/architectures.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 3947,
+      "sha256": "e6e0cb459e2705411bdab823d938d7d46f76e245ecad577f9c2dc89118a42eab",
+      "git_tracked": true
+    },
+    {
+      "path": "src/models/cognitive_bridge.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 3552,
+      "sha256": "4357da82add189f03a83e366fc15103eec3fcd5c1cc64886b96ac6cb31ba2564",
+      "git_tracked": true
+    },
+    {
+      "path": "src/models/sklearn_models.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 615,
+      "sha256": "a3358414506e72566abc9b136c4a50d288cff584575741703addb9dd21c41c91",
+      "git_tracked": true
+    },
+    {
+      "path": "src/models/train.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 22214,
+      "sha256": "a3adbbac65191caa2ccec7f7c2f265cb7bd4935c86ebdab15197929f788ad7f3",
+      "git_tracked": true
+    },
+    {
+      "path": "src/neuro_architect.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 444,
+      "sha256": "ddf2d865f2c529eb1fc10e3b4e1ebb33ec0dfa469e58993d5920e60bb99e01fa",
+      "git_tracked": true
+    },
+    {
+      "path": "src/py.typed",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_tracked": true
+    },
+    {
+      "path": "src/services/__init__.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 849,
+      "sha256": "e147be5e62d653a00e0c178eb68e8b6634fbde61f803c44f62c6b7ff325bf8b1",
+      "git_tracked": true
+    },
+    {
+      "path": "src/services/container.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 5094,
+      "sha256": "8ad98c6a30e46e53319df0f985df388f55a8a46c1a8c8b30a76ebc2f6249b0df",
+      "git_tracked": true
+    },
+    {
+      "path": "src/services/neural_processing_service.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 9150,
+      "sha256": "ef2634be718d32b7a526a3752835b832fcd3824153fb62a3d55720168b77187f",
+      "git_tracked": true
+    },
+    {
+      "path": "src/services/optimization_service.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 9932,
+      "sha256": "02b700e815090ca7c8b2d585ca82db0b51a1826bbc4091aa32caff42947e297c",
+      "git_tracked": true
+    },
+    {
+      "path": "src/services/orchestrator.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 2895,
+      "sha256": "4102d67597583959e98814a8eba604ab46475eddc0dbdf573c75366fdb8c8bd5",
+      "git_tracked": true
+    },
+    {
+      "path": "src/services/prediction_service.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 13326,
+      "sha256": "5f33f7f5c4e737ee3e4fc96226ea50214e3593138ded982d808deba24339bddb",
+      "git_tracked": true
+    },
+    {
+      "path": "src/services/space_capability_service.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 2722,
+      "sha256": "b8304835c69fa85ba4829db4ee0aa05f8260376e3c62b67e09ab60c3216b44cf",
+      "git_tracked": true
+    },
+    {
+      "path": "src/test/__init__.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_tracked": true
+    },
+    {
+      "path": "src/test/test_cache.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 647,
+      "sha256": "1ca7288c05a05e621e03b9c6e8b525a466b9fc4ad8714210c977f44ebe5fdd93",
+      "git_tracked": true
+    },
+    {
+      "path": "src/test/test_cognitive_bridge.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 1406,
+      "sha256": "2767b5cb7e6d73aa8640cbef044c526c317f9f26d9ea77088fb50d4d2d00ceaa",
+      "git_tracked": true
+    },
+    {
+      "path": "src/test/test_emotion_engine.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 3418,
+      "sha256": "f37ea9f5858f89d6e343d8194a27f8e396899dd353e90fc0618ea7aeafa4151a",
+      "git_tracked": true
+    },
+    {
+      "path": "src/test/test_full_feature_training.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 1413,
+      "sha256": "6102efb38dd9d2bbba01305ce45c0acab7dc28ed78dce8e92ce1661f2c55c6e0",
+      "git_tracked": true
+    },
+    {
+      "path": "src/test/test_services_orchestrator.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 1352,
+      "sha256": "6a55667663ce6d939c4f316343c7896063c8953bcfe3616529501137ae8ff17c",
+      "git_tracked": true
+    },
+    {
+      "path": "src/test/test_space_capability_service.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 469,
+      "sha256": "7eb3f044abad61f878014e2202af15d776a012d4d4ba8594c2f74efcef669c58",
+      "git_tracked": true
+    },
+    {
+      "path": "src/test/test_validators.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 726,
+      "sha256": "3e419ad416f0e52db10096bb6ba46fafdb59a599db940bcebd143043588a68d4",
+      "git_tracked": true
+    },
+    {
+      "path": "src/utils/cache_manager.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 5985,
+      "sha256": "faf427c091144852171e4ed97c8e6b01f76360f2dedea1c802e272de5069ac83",
+      "git_tracked": true
+    },
+    {
+      "path": "src/utils/rendering.py",
+      "role": "legacy_backend",
+      "replacement": "backend/src/pa and backend/tests",
+      "size_bytes": 10034,
+      "sha256": "1218ddfc2a492f9c7fd2b608b5a72849c8973bb3bad8fadd1223c058439dc071",
+      "git_tracked": true
+    },
+    {
+      "path": "test_output.txt",
+      "role": "legacy_root_runtime",
+      "replacement": "Makefile, backend/src/pa, frontend/src, hosting candidates",
+      "size_bytes": 11450,
+      "sha256": "e7ae9fba5baad5eb521cc2dedfce7a2551075b718b5470927327839c289690d7",
+      "git_tracked": true
+    }
+  ]
+}

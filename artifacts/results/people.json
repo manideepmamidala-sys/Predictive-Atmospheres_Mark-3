@@ -1,0 +1,348 @@
+{
+  "schema_version": "1.0.0",
+  "provenance": {
+    "source": "Original investigator-supplied CSV metadata and raw channel recordings",
+    "method": "Analysis specification 1.1.0; conditional primary 500 Hz scenario",
+    "generated_at": null,
+    "limitations": [
+      "Acquisition sample rate, amplitude units and reference wiring are unconfirmed.",
+      "Constructed affect axes are hypotheses, not validated emotion measurements."
+    ],
+    "manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
+    "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7"
+  },
+  "people": [
+    {
+      "id": "Subj_A",
+      "experiments": [
+        1,
+        2,
+        3
+      ],
+      "trials": 30,
+      "valid_fused": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "age": 25.0,
+      "gender": "Female",
+      "sleep_hours": null,
+      "by_experiment": [
+        {
+          "experiment": 1,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": null,
+          "sleep_min_hours": null,
+          "sleep_max_hours": null,
+          "sleep_observations": 0
+        },
+        {
+          "experiment": 2,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": null,
+          "sleep_min_hours": null,
+          "sleep_max_hours": null,
+          "sleep_observations": 0
+        },
+        {
+          "experiment": 3,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": 8.0,
+          "sleep_min_hours": 8.0,
+          "sleep_max_hours": 8.0,
+          "sleep_observations": 10
+        }
+      ]
+    },
+    {
+      "id": "Subj_B",
+      "experiments": [
+        1,
+        3
+      ],
+      "trials": 20,
+      "valid_fused": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "age": 26.0,
+      "gender": "Female",
+      "sleep_hours": null,
+      "by_experiment": [
+        {
+          "experiment": 1,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": null,
+          "sleep_min_hours": null,
+          "sleep_max_hours": null,
+          "sleep_observations": 0
+        },
+        {
+          "experiment": 3,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": 7.0,
+          "sleep_min_hours": 7.0,
+          "sleep_max_hours": 7.0,
+          "sleep_observations": 10
+        }
+      ]
+    },
+    {
+      "id": "Subj_C",
+      "experiments": [
+        1
+      ],
+      "trials": 10,
+      "valid_fused": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "age": 28.0,
+      "gender": "Male",
+      "sleep_hours": null,
+      "by_experiment": [
+        {
+          "experiment": 1,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": null,
+          "sleep_min_hours": null,
+          "sleep_max_hours": null,
+          "sleep_observations": 0
+        }
+      ]
+    },
+    {
+      "id": "Subj_D",
+      "experiments": [
+        1,
+        3
+      ],
+      "trials": 20,
+      "valid_fused": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "age": 27.0,
+      "gender": "Male",
+      "sleep_hours": null,
+      "by_experiment": [
+        {
+          "experiment": 1,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": null,
+          "sleep_min_hours": null,
+          "sleep_max_hours": null,
+          "sleep_observations": 0
+        },
+        {
+          "experiment": 3,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": 7.5,
+          "sleep_min_hours": 7.5,
+          "sleep_max_hours": 7.5,
+          "sleep_observations": 10
+        }
+      ]
+    },
+    {
+      "id": "Subj_E",
+      "experiments": [
+        2
+      ],
+      "trials": 10,
+      "valid_fused": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "age": 26.0,
+      "gender": "Female",
+      "sleep_hours": null,
+      "by_experiment": [
+        {
+          "experiment": 2,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": null,
+          "sleep_min_hours": null,
+          "sleep_max_hours": null,
+          "sleep_observations": 0
+        }
+      ]
+    },
+    {
+      "id": "Subj_F",
+      "experiments": [
+        2
+      ],
+      "trials": 10,
+      "valid_fused": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "age": 25.0,
+      "gender": "Female",
+      "sleep_hours": null,
+      "by_experiment": [
+        {
+          "experiment": 2,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": null,
+          "sleep_min_hours": null,
+          "sleep_max_hours": null,
+          "sleep_observations": 0
+        }
+      ]
+    },
+    {
+      "id": "Subj_G",
+      "experiments": [
+        2
+      ],
+      "trials": 10,
+      "valid_fused": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "age": 28.0,
+      "gender": "Female",
+      "sleep_hours": null,
+      "by_experiment": [
+        {
+          "experiment": 2,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": null,
+          "sleep_min_hours": null,
+          "sleep_max_hours": null,
+          "sleep_observations": 0
+        }
+      ]
+    },
+    {
+      "id": "Subj_H",
+      "experiments": [
+        3
+      ],
+      "trials": 10,
+      "valid_fused": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "age": 25.0,
+      "gender": "Male",
+      "sleep_hours": null,
+      "by_experiment": [
+        {
+          "experiment": 3,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": 6.5,
+          "sleep_min_hours": 6.5,
+          "sleep_max_hours": 6.5,
+          "sleep_observations": 10
+        }
+      ]
+    },
+    {
+      "id": "Subj_I",
+      "experiments": [
+        3
+      ],
+      "trials": 10,
+      "valid_fused": 10,
+      "mean_valence": 0.1899567890252007,
+      "mean_arousal": 0.03645488554151285,
+      "age": 25.0,
+      "gender": "Male",
+      "sleep_hours": null,
+      "by_experiment": [
+        {
+          "experiment": 3,
+          "trials": 10,
+          "valid_fused": 10,
+          "mean_valence": 0.1899567890252007,
+          "mean_arousal": 0.03645488554151285,
+          "sleep_hours": 3.0,
+          "sleep_min_hours": 3.0,
+          "sleep_max_hours": 3.0,
+          "sleep_observations": 10
+        }
+      ]
+    },
+    {
+      "id": "Subj_M",
+      "experiments": [
+        1,
+        2,
+        3
+      ],
+      "trials": 30,
+      "valid_fused": 4,
+      "mean_valence": -0.38188624730463333,
+      "mean_arousal": 0.03722131376110906,
+      "age": 25.0,
+      "gender": "Male",
+      "sleep_hours": null,
+      "by_experiment": [
+        {
+          "experiment": 1,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": null,
+          "sleep_min_hours": null,
+          "sleep_max_hours": null,
+          "sleep_observations": 0
+        },
+        {
+          "experiment": 2,
+          "trials": 10,
+          "valid_fused": 4,
+          "mean_valence": -0.38188624730463333,
+          "mean_arousal": 0.03722131376110906,
+          "sleep_hours": null,
+          "sleep_min_hours": null,
+          "sleep_max_hours": null,
+          "sleep_observations": 0
+        },
+        {
+          "experiment": 3,
+          "trials": 10,
+          "valid_fused": 0,
+          "mean_valence": null,
+          "mean_arousal": null,
+          "sleep_hours": 8.5,
+          "sleep_min_hours": 8.5,
+          "sleep_max_hours": 8.5,
+          "sleep_observations": 10
+        }
+      ]
+    }
+  ]
+}

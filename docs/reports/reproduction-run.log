@@ -1,0 +1,220 @@
+cd backend && uv sync --frozen --extra dev
+Using CPython 3.11.11
+Creating virtual environment at: .venv
+Prepared 1 package in 591ms
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 50 packages in 278ms
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + certifi==2026.7.22
+ + click==8.5.0
+ + cloudpickle==3.1.2
+ + contourpy==1.3.3
+ + cycler==0.12.1
+ + fastapi==0.143.0
+ + fonttools==4.66.1
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + idna==3.20
+ + iniconfig==2.3.1
+ + joblib==1.6.0
+ + kiwisolver==1.5.1
+ + markdown-it-py==4.2.0
+ + matplotlib==3.11.2
+ + mdurl==0.1.2
+ + narwhals==2.26.0
+ + numpy==2.4.6
+ + opentelemetry-api==1.45.1
+ + packaging==26.3
+ + pandas==2.3.3
+ + pillow==12.3.0
+ + pluggy==1.6.0
+ + predictive-atmospheres-research==1.0.0a1 (from file:///tmp/pa-repro-aj5mflxs/clean-clone/backend)
+ + pyarrow==24.0.0
+ + pydantic==2.13.5
+ + pydantic-core==2.46.5
+ + pygments==2.21.0
+ + pyparsing==3.3.3
+ + pytest==8.4.2
+ + python-dateutil==2.9.0.post0
+ + pytz==2026.5
+ + pyyaml==6.0.3
+ + rich==15.0.0
+ + ruff==0.16.10
+ + scikit-learn==1.9.1
+ + scipy==1.17.1
+ + shellingham==1.5.4
+ + six==1.17.0
+ + starlette==1.7.0
+ + threadpoolctl==3.7.0
+ + typer==0.27.3
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + tzdata==2026.5
+ + uvicorn==0.54.0
+cd frontend && corepack pnpm install --frozen-lockfile
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +117
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 117, reused 117, downloaded 0, added 117, done
+
+dependencies:
++ @fontsource/public-sans 5.2.7
++ @fontsource/source-serif-4 5.2.8
++ react 18.3.1
++ react-dom 18.3.1
++ react-router-dom 6.30.1
++ zod 3.25.76
+
+devDependencies:
++ @playwright/test 1.64.0
++ @types/node 22.18.6
++ @types/react 18.3.24
++ @types/react-dom 18.3.7
++ @vitejs/plugin-react 4.7.0
++ openapi-typescript 7.10.1
++ sharp 0.34.4
++ typescript 5.9.3
++ vite 6.3.6
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: esbuild, sharp.                                     │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Done in 1.4s using pnpm v10.18.3
+cd backend && uv run --frozen pa pipeline
+Source inventory verified
+Audited 160 recordings
+Processed 160 conditional-rate trials
+Rendered 10 representative signal review panels
+Constructed affect availability for 160 trials
+Analyzed 160 trials
+Model status: not_better_than_baseline; eligible trials: 14
+Exported 7 validated research files
+Generated versioned OpenAPI and room-input contracts
+cd backend && uv run --frozen ruff check src tests
+All checks passed!
+cd frontend && corepack pnpm run api:check
+
+> predictive-atmospheres-site@1.0.0 api:check /tmp/pa-repro-aj5mflxs/clean-clone/frontend
+> openapi-typescript ../artifacts/results/openapi.json -o src/api/schema.check.d.ts && cmp src/api/schema.d.ts src/api/schema.check.d.ts && rm src/api/schema.check.d.ts
+
+✨ openapi-typescript 7.10.1
+🚀 ../artifacts/results/openapi.json → src/api/schema.check.d.ts [109.8ms]
+cd frontend && corepack pnpm run typecheck
+
+> predictive-atmospheres-site@1.0.0 typecheck /tmp/pa-repro-aj5mflxs/clean-clone/frontend
+> tsc -b
+
+cd backend && uv run --frozen pytest -q
+........................................................................ [ 90%]
+........                                                                 [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.11/site-packages/fastapi/testclient.py:1
+  /tmp/pa-repro-aj5mflxs/clean-clone/backend/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+80 passed, 1 warning in 31.87s
+cd frontend && corepack pnpm test
+
+> predictive-atmospheres-site@1.0.0 pretest /tmp/pa-repro-aj5mflxs/clean-clone/frontend
+> node scripts/stage-research.mjs && npm run api:check && npm run typecheck
+
+Staged validated research products (160 trial records, bundle 302672 bytes, signals 7570745 bytes).
+
+> predictive-atmospheres-site@1.0.0 api:check
+> openapi-typescript ../artifacts/results/openapi.json -o src/api/schema.check.d.ts && cmp src/api/schema.d.ts src/api/schema.check.d.ts && rm src/api/schema.check.d.ts
+
+✨ openapi-typescript 7.10.1
+🚀 ../artifacts/results/openapi.json → src/api/schema.check.d.ts [115.9ms]
+
+> predictive-atmospheres-site@1.0.0 typecheck
+> tsc -b
+
+
+> predictive-atmospheres-site@1.0.0 test /tmp/pa-repro-aj5mflxs/clean-clone/frontend
+> playwright test
+
+[WebServer] (node:45482) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:45494) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 26 tests using 6 workers
+
+  -   1 [chromium] › tests/live-api.spec.ts:5:1 › real fitted service responds through the room simulator
+(node:45527) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45530) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45529) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45531) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:45526) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 [chromium] › tests/chart-encoding.spec.ts:5:3 › affect chart computes distinct CCT colors and an open partial marker in light (1.5s)
+  ✓   2 [chromium] › tests/rooms.spec.ts:4:1 › real render gallery filters and pans with keyboard (1.9s)
+  ✓   4 [chromium] › tests/signals.spec.ts:4:1 › signal filters keep QC, missingness, units and trace mode visible (1.7s)
+  ✓   7 [chromium] › tests/affect-people.spec.ts:4:1 › affect filters distinguish components, cohorts and alpha summaries (1.7s)
+  ✓   8 [chromium] › tests/chart-encoding.spec.ts:5:3 › affect chart computes distinct CCT colors and an open partial marker in dark (995ms)
+  ✓  10 [chromium] › tests/signals.spec.ts:20:1 › signal participant selection scopes trial choices and quality counts (1.3s)
+  ✓  11 [chromium] › tests/affect-people.spec.ts:20:1 › partial fused records remain separate from complete headline counts (1.6s)
+  ✓   5 [chromium] › tests/design-capture.spec.ts:6:1 › capture design checkpoint in both themes and widths (3.4s)
+  ✓   9 [chromium] › tests/rooms.spec.ts:19:1 › lighting and space filters use exported metadata and comparison keeps missing values (1.7s)
+  ✓  14 [chromium] › tests/affect-people.spec.ts:32:1 › people filters retain structural missingness (1.1s)
+  ✓  12 [chromium] › tests/simulator.spec.ts:10:1 › typed prediction and optimization preserve user target and show support (2.3s)
+  ✓  16 [chromium] › tests/theme.spec.ts:3:1 › theme choice persists and system preference responds (1.5s)
+  ✓  17 [chromium] › tests/affect-people.spec.ts:42:1 › experiment summaries do not reuse all-experiment fusion means (1.3s)
+  ✓  19 [chromium] › tests/theme.spec.ts:17:1 › styleguide remains usable at mobile width (984ms)
+  ✓   6 [chromium] › tests/real-exports.spec.ts:9:1 › published research pages read the generated bundle with API offline (6.4s)
+  ✓  18 [chromium] › tests/simulator.spec.ts:42:1 › offline and unavailable service errors preserve form inputs (2.0s)
+  ✓  20 [chromium] › tests/affect-people.spec.ts:56:1 › affect participant selection excludes global sensitivity and disagreement rows (1.2s)
+  ✓  21 [chromium] › tests/real-exports.spec.ts:31:1 › published experiment and participant filters use scoped generated summaries (1.2s)
+  ✓  22 [chromium] › tests/real-exports.spec.ts:52:1 › published affect scopes sensitivity and paired disagreement to the chosen person (1.3s)
+  ✓  23 [chromium] › tests/real-exports.spec.ts:69:1 › published model report exposes generated cohort, selection and provenance evidence (697ms)
+  ✓  13 [chromium] › tests/site-capture.spec.ts:12:1 › capture all seven routes in complementary theme and width views (10.6s)
+  ✓  15 [chromium] › tests/site.spec.ts:9:1 › all seven routes remain readable with both themes at desktop and mobile widths (12.1s)
+  ✓  24 [chromium] › tests/site.spec.ts:28:1 › keyboard skip link and reduced motion remain usable (547ms)
+  ✓  25 [chromium] › tests/site.spec.ts:40:1 › research pages load from static export while the API is offline (943ms)
+  ✓  26 [chromium] › tests/site.spec.ts:51:1 › missing static export shows a plain unavailable state (422ms)
+
+  1 skipped
+  25 passed (22.3s)
+cd frontend && corepack pnpm build
+
+> predictive-atmospheres-site@1.0.0 build /tmp/pa-repro-aj5mflxs/clean-clone/frontend
+> node scripts/stage-research.mjs && tsc -b && vite build
+
+Staged validated research products (160 trial records, bundle 302672 bytes, signals 7570745 bytes).
+vite v6.3.6 building for production...
+transforming...
+✓ 61 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                               0.60 kB │ gzip:  0.38 kB
+dist/assets/public-sans-latin-600-normal-Fru-LXNs.woff2      14.59 kB
+dist/assets/public-sans-latin-400-normal-8Rpg0ruU.woff2      14.63 kB
+dist/assets/public-sans-latin-500-normal-NlrCPXnF.woff2      14.66 kB
+dist/assets/public-sans-latin-400-normal-SBbinRkI.woff       18.49 kB
+dist/assets/public-sans-latin-500-normal-vCxiVFAq.woff       18.52 kB
+dist/assets/public-sans-latin-600-normal-BR59oU-I.woff       18.56 kB
+dist/assets/source-serif-4-latin-400-normal-DJ5YJwmz.woff2   20.09 kB
+dist/assets/source-serif-4-latin-600-normal-DouSKlru.woff2   21.53 kB
+dist/assets/source-serif-4-latin-400-normal-Dn3IlU-Z.woff    24.02 kB
+dist/assets/source-serif-4-latin-600-normal-DMD1h6_f.woff    25.62 kB
+dist/assets/index-Ck4FYsLk.css                                9.75 kB │ gzip:  2.95 kB
+dist/assets/index-BuBQ3N0K.js                               297.19 kB │ gzip: 85.23 kB │ map: 1,083.03 kB
+✓ built in 14.59s

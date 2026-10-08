@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0.0",
+  "provenance": {
+    "source": "Original investigator-supplied CSV metadata and raw channel recordings",
+    "method": "Analysis specification 1.1.0; conditional primary 500 Hz scenario",
+    "generated_at": null,
+    "limitations": [
+      "Acquisition sample rate, amplitude units and reference wiring are unconfirmed.",
+      "Constructed affect axes are hypotheses, not validated emotion measurements."
+    ],
+    "manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
+    "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7"
+  },
+  "study": {
+    "title": "Predictive Atmospheres: retrospective pilot reanalysis",
+    "abstract": "Original room-viewing trials are reanalyzed with explicit acquisition uncertainty, signal quality, missingness and grouped predictive evaluation.",
+    "experiments": [
+      {
+        "id": 1,
+        "trials": 50,
+        "participants": 5,
+        "rooms": 10,
+        "measured": [
+          "source ratings: comfort",
+          "approximate bilateral-forehead channels",
+          "owner-reported wrist ECG"
+        ]
+      },
+      {
+        "id": 2,
+        "trials": 50,
+        "participants": 5,
+        "rooms": 10,
+        "measured": [
+          "source ratings: signed valence and arousal",
+          "approximate bilateral-forehead channels",
+          "owner-reported wrist ECG"
+        ]
+      },
+      {
+        "id": 3,
+        "trials": 60,
+        "participants": 6,
+        "rooms": 10,
+        "measured": [
+          "source ratings: signed valence and arousal",
+          "approximate bilateral-forehead channels",
+          "owner-reported wrist ECG"
+        ]
+      }
+    ],
+    "protocol": [
+      "Barcelona room-viewing pilot; post-exposure original ratings.",
+      "Three experiment cohorts are described separately; room and participant observations repeat."
+    ],
+    "limitations": [
+      "No recorded baseline or confirmed exposure timing is available.",
+      "Room simulation attributes are not measured headset exposure.",
+      "Small crossed participant/room sample limits generalization and inference."
+    ]
+  }
+}

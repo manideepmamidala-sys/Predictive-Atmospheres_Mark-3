@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "products": {
+    "study": {
+      "file": "study.json",
+      "sha256": "a9d63537865613a291c306bc6c8d84dd91d09576ef2ee153f6350c018c74f697"
+    },
+    "rooms": {
+      "file": "rooms.json",
+      "sha256": "4106fd16557aec9a02f3434710781525fb7ac7587b84484a53da3ba376538f7f"
+    },
+    "signals": {
+      "file": "signals.json",
+      "sha256": "25f8cacb308d283d4c75730b41c02e4d00649efc1d91567318e4b79cdcc59593"
+    },
+    "affect": {
+      "file": "affect.json",
+      "sha256": "c2dca1b854c07e1b9b83139b8ea78ffef4d64cdcaa6251d79bde99573b0b9e15"
+    },
+    "people": {
+      "file": "people.json",
+      "sha256": "cd496ccf9439c1bb87c8c63b9b472fd5049704be909018249bd81fed6371bc4c"
+    },
+    "model": {
+      "file": "model.json",
+      "sha256": "aa1269ab8c882ebbf14a68623394661296663f52d0aa13597e7bc8133aabaac2"
+    },
+    "bundle": {
+      "file": "bundle.json",
+      "sha256": "728ab1f6c606d834c99d9937087a06f7337c8035869154b0870c6c3ec2a385d7"
+    }
+  },
+  "source_manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
+  "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7"
+}

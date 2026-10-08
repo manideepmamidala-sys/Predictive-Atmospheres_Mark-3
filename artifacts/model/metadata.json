@@ -1,0 +1,226 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_version": "1.0.0",
+  "model_status": "not_better_than_baseline",
+  "feature_order": [
+    "length",
+    "width",
+    "height",
+    "num_doors",
+    "door_area",
+    "num_windows",
+    "window_area",
+    "daylight_factor",
+    "illuminance",
+    "cct",
+    "walkable_floor_area",
+    "day_or_night",
+    "space_type",
+    "length_width_ratio",
+    "floor_area",
+    "wall_area",
+    "volume",
+    "door_wall_ratio",
+    "window_wall_ratio",
+    "walkable_floor_ratio"
+  ],
+  "sklearn_version": "1.9.1",
+  "numpy_version": "2.4.6",
+  "pandas_version": "2.3.3",
+  "scipy_version": "1.17.1",
+  "uv_lock_sha256": "b477770af8fc9cfbecc7c9a78e6c5f98736ebd4c25c6bf32a3c1341753ab7f44",
+  "pyproject_sha256": "4b3d4aaf61cccac7851253b5f578c6072c3faeb543e7768b4d09e6cadc06a63c",
+  "decisions_sha256": "8f938eac7d6f434a23cce3f919d2a6d70268d29701daf96e5047b013154ca053",
+  "code_tree_sha256": "6417adaca920ef208e4cfaec65be2dbc1e81d15b8e9b280360de42e389ee6295",
+  "dataset_manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
+  "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7",
+  "base_git_revision": "d46c5afaa9d82f66c021d6a4b7daae155e9f776c",
+  "source_snapshot_status": "uncommitted_changes",
+  "training_scope": {
+    "cohort": "experiment_03_complete_raw_components_full_room_attributes",
+    "trial_ids": [
+      "E3:Subj_B:Rm_029",
+      "E3:Subj_B:Rm_027",
+      "E3:Subj_H:Rm_021",
+      "E3:Subj_H:Rm_023",
+      "E3:Subj_I:Rm_030",
+      "E3:Subj_I:Rm_029",
+      "E3:Subj_I:Rm_028",
+      "E3:Subj_I:Rm_027",
+      "E3:Subj_I:Rm_026",
+      "E3:Subj_I:Rm_025",
+      "E3:Subj_I:Rm_024",
+      "E3:Subj_I:Rm_023",
+      "E3:Subj_I:Rm_022",
+      "E3:Subj_I:Rm_021"
+    ],
+    "participants": 3,
+    "rooms": 10,
+    "final_selection": {
+      "candidate": {
+        "name": "random_forest",
+        "n_estimators": 100,
+        "max_depth": 2,
+        "min_samples_leaf": 3
+      },
+      "status": "selected",
+      "scores": {
+        "name=dummy_median": 0.5681516037148153,
+        "name=dummy_mean": 0.5223268134998423,
+        "alpha=10.0:name=ridge": 0.5576318345632989,
+        "alpha=1.0:name=ridge": 0.6877905257563514,
+        "alpha=0.1:name=ridge": 0.7388337128865778,
+        "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.5244292537545802,
+        "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.520763109193651,
+        "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.5244292537545802,
+        "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.520763109193651
+      },
+      "inner_fold_calibrations": [
+        {
+          "centers": {
+            "faa": 0.21572000844589034,
+            "beta_alpha": 0.25778975075003513,
+            "heart_rate_bpm": 115.60693641618496,
+            "rmssd_ms": 2.352219730186611
+          },
+          "scales": {
+            "faa": 0.9133127947506815,
+            "beta_alpha": 0.24211917740740285,
+            "heart_rate_bpm": 1.667303929286346,
+            "rmssd_ms": 0.27702834682041094
+          },
+          "training_indices": [
+            1,
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            11,
+            12
+          ],
+          "validation_indices": [
+            0,
+            2,
+            5,
+            10,
+            13
+          ]
+        },
+        {
+          "centers": {
+            "faa": 0.05643990717665304,
+            "beta_alpha": 0.3128502828367191,
+            "heart_rate_bpm": 114.50381679389312,
+            "rmssd_ms": 2.3563187857725514
+          },
+          "scales": {
+            "faa": 0.9626919394337172,
+            "beta_alpha": 0.4540075497556486,
+            "heart_rate_bpm": 3.3027890812962317,
+            "rmssd_ms": 0.21567574233892026
+          },
+          "training_indices": [
+            0,
+            2,
+            3,
+            5,
+            6,
+            9,
+            10,
+            11,
+            13
+          ],
+          "validation_indices": [
+            1,
+            4,
+            7,
+            8,
+            12
+          ]
+        },
+        {
+          "centers": {
+            "faa": 0.061475312919548664,
+            "beta_alpha": 0.28532001679337715,
+            "heart_rate_bpm": 114.72317276476265,
+            "rmssd_ms": 2.3547086429834754
+          },
+          "scales": {
+            "faa": 0.5949840857293843,
+            "beta_alpha": 0.24624476910397403,
+            "heart_rate_bpm": 3.146252374888892,
+            "rmssd_ms": 0.24939067448552318
+          },
+          "training_indices": [
+            0,
+            1,
+            2,
+            4,
+            5,
+            7,
+            8,
+            10,
+            12,
+            13
+          ],
+          "validation_indices": [
+            3,
+            6,
+            9,
+            11
+          ]
+        }
+      ],
+      "ineligibility_reasons": {},
+      "target_calibration": {
+        "centers": {
+          "faa": 0.1360799578112717,
+          "beta_alpha": 0.28532001679337715,
+          "heart_rate_bpm": 114.72317276476265,
+          "rmssd_ms": 2.3547086429834754
+        },
+        "scales": {
+          "faa": 0.8680723286558213,
+          "beta_alpha": 0.2472534740001487,
+          "heart_rate_bpm": 2.9775719188850682,
+          "rmssd_ms": 0.24939067448552318
+        }
+      }
+    }
+  },
+  "metrics": {
+    "room": {
+      "evaluated_folds": 10,
+      "unavailable_folds": 0,
+      "mean_metrics": {
+        "valence_mae": 0.3750165481446891,
+        "arousal_mae": 0.48576372158717385,
+        "mean_mae": 0.4303901348659315,
+        "baseline_median_mae": 0.40994218952129924,
+        "baseline_mean_mae": 0.42413919212047524
+      },
+      "unavailable_reasons": {}
+    },
+    "subject": {
+      "evaluated_folds": 3,
+      "unavailable_folds": 0,
+      "mean_metrics": {
+        "valence_mae": 0.3635527699223094,
+        "arousal_mae": 0.49076709578133276,
+        "mean_mae": 0.42715993285182113,
+        "baseline_median_mae": 0.42715993285182113,
+        "baseline_mean_mae": 0.43687108041845013
+      },
+      "unavailable_reasons": {}
+    }
+  },
+  "limitations": [
+    "Acquisition rate, channel units/reference and physiological validity remain unconfirmed.",
+    "Only observed Experiment 3 complete raw-component trials enter this model.",
+    "Small repeated participant/room sample; no causal or clinical interpretation.",
+    "No calibrated prediction interval or individual response guarantee is available."
+  ],
+  "model_sha256": "aecbb36c64b51b9c5b77cb20bf555b4a88b0ecea9f899c8b2d8536956fba59c0"
+}

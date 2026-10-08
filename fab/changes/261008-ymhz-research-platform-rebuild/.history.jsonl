@@ -1,0 +1,25 @@
+{"action":"enter","driver":"fab-new","event":"stage-transition","stage":"intake","ts":"2026-10-08T12:21:44Z"}
+{"args":"Rebuild Predictive Atmospheres backend, frontend, repository architecture and scientific pipeline through fresh Fab changes, incorporating the EXECUTION_PLAN.md discussion and repository audit.","cmd":"fab-new","event":"command","ts":"2026-10-08T12:21:44Z"}
+{"delta":"+4.9","event":"confidence","score":4.9,"trigger":"calc-score","ts":"2026-10-08T12:25:49Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-10-08T12:29:08Z"}
+{"cmd":"fab-ff","event":"command","ts":"2026-10-08T12:29:54Z"}
+{"action":"enter","driver":"fab-ff","event":"stage-transition","stage":"apply","ts":"2026-10-08T12:29:55Z"}
+{"action":"enter","driver":"fab-ff","event":"stage-transition","stage":"review","ts":"2026-10-08T14:43:32Z"}
+{"cmd":"fab-ff","event":"command","ts":"2026-10-08T14:52:53Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-10-08T15:14:54Z"}
+{"cmd":"fab-ff","event":"command","ts":"2026-10-08T15:15:09Z"}
+{"event":"review","result":"failed","ts":"2026-10-08T15:37:16Z"}
+{"action":"re-entry","driver":"fab-ff","event":"stage-transition","stage":"apply","ts":"2026-10-08T15:37:16Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-10-08T15:38:40Z"}
+{"action":"re-entry","driver":"fab-ff","event":"stage-transition","stage":"review","ts":"2026-10-08T16:03:38Z"}
+{"event":"review","result":"failed","ts":"2026-10-08T16:11:21Z"}
+{"action":"re-entry","driver":"fab-ff","event":"stage-transition","stage":"apply","ts":"2026-10-08T16:11:21Z"}
+{"action":"re-entry","driver":"fab-ff","event":"stage-transition","stage":"review","ts":"2026-10-08T16:22:43Z"}
+{"action":"enter","driver":"fab-ff","event":"stage-transition","stage":"hydrate","ts":"2026-10-08T16:29:49Z"}
+{"event":"review","result":"passed","ts":"2026-10-08T16:29:49Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-10-08T16:31:31Z"}
+{"action":"enter","driver":"fab-ff","event":"stage-transition","stage":"ship","ts":"2026-10-08T16:35:22Z"}
+{"cmd":"git-pr","event":"command","ts":"2026-10-08T16:41:06Z"}
+{"cmd":"git-pr-review","event":"command","ts":"2026-10-08T16:45:29Z"}
+{"action":"enter","driver":"git-pr-review","event":"stage-transition","stage":"review-pr","ts":"2026-10-08T16:45:33Z"}
+{"event":"review","result":"passed","ts":"2026-10-08T16:45:41Z"}

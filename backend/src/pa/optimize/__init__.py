@@ -1,0 +1,1 @@
+"""Bounded experimental room search."""

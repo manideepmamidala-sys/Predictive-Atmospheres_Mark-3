@@ -1,211 +1,50 @@
 # Predictive Atmospheres
 
-> Neuro-Architectural Design Platform — Machine learning framework that infers human emotional states from architectural spatial features using multimodal affective fusion of EEG/ECG biometrics and self-reported scores.
+Predictive Atmospheres is a reproducible pilot study of how people rated rendered rooms and what conditional EEG/ECG features could be extracted while they viewed them. The seven-page research atlas presents source-matched rooms, signal quality, descriptive affect cohorts, participant summaries, and a held-out model report. Its room simulator is an **experimental demonstration**: the current fitted model is **not better than a median baseline** on held-out rooms, and its output is not a validated measure of emotion or a design recommendation.
 
----
+## What the repository contains
 
-## Architecture
+| Path | Role |
+|---|---|
+| `data/raw/`, `data/metadata/`, `data/renders/raw/` | Preserved original recordings, room/ratings metadata and Lumion renders; `data/MANIFEST.sha256` tracks source bytes. |
+| `backend/` | Python 3.11 package for audit, conditional signal processing, descriptive affect analysis, grouped model evaluation, static exports and FastAPI. |
+| `artifacts/results/`, `artifacts/model/` | Versioned research products and a trusted fitted model with compatibility metadata. |
+| `frontend/` | React/Vite/TypeScript atlas. Research routes read schema-validated static exports; only prediction and optimization call the API. |
+| `docs/protocol/`, `docs/specs/`, `docs/reports/` | Investigator provenance, predeclared method, checkpoints, independent review and browser evidence. |
 
-```
-Predictive Atmospheres/
-├── src/                    ← Headless ML Backend (FastAPI, Scikit-learn, zero UI dependencies)
-│   ├── config.py           ← Centralised configuration (EEG, model, training, fusion, spatial)
-│   ├── cli.py              ← Command-line interface (train / predict / info)
-│   ├── data/               ← Data ingestion, EEG/ECG processing, emotion engine
-│   ├── models/             ← SpatialFFNN, SpatialMLP, sklearn wrappers, training loop
-│   ├── services/           ← Prediction, optimisation, neural processing services
-│   ├── core/data/          ← Pydantic validators (SpatialInput, EEGSignal)
-│   └── utils/              ← Caching, 3D rendering helpers
-│
-├── frontend/               ← Streamlit Web App (Tabs, Landing Page, Visualizations)
-│   ├── app.py              ← Main Streamlit application and layout
-│   ├── api_client.py       ← HTTP client bridging Streamlit to FastAPI backend
-│   └── ui/                 ← Streamlit page modules (Design Studio, Emotion Landscape, etc.)
-│
-├── api.py                  ← FastAPI entry point for all frontend/backend communication
-├── data/                   ← Experimental datasets (raw EEG CSVs + metadata)
-│   ├── raw/                ← experiment_01/, experiment_02/, experiment_03/
-│   ├── metadata/           ← Biometric + spatial CSVs per experiment
-│   ├── paper_data/         ← MDS coordinates and emotion ratings for CognitiveBridge
-│   └── processed/          ← Cached tensors + fusion_analysis.parquet (Parquet format)
-│
-├── Dockerfile              ← Streamlit deployment container
-├── Dockerfile.api          ← FastAPI backend deployment container
-├── render.yaml             ← Web Service Blueprint for one-click deployment
-└── pyproject.toml          ← Package definition + dependencies
+The original study contains 160 room-viewing trials in three experiments across ten distinct participant IDs and 30 rooms. Experiment 1 records comfort, not valence/arousal. Complete **descriptive** fusion is available for 14 trials from two people: 4 in Experiment 2 and 10 in Experiment 3, each experiment's complete records coming from one person. Another 96 records use partial modalities and are labelled separately. The model instead uses 14 Experiment 3 trials from three people under a training-fold-fitted target procedure. These cohorts answer different questions and should not be pooled. [The data card](docs/data_card.md) and [model card](docs/model_card.md) explain eligibility and limitations.
+
+## Run locally
+
+Use Python 3.11.11, uv 0.5.9, Node 22.22.1 and Corepack with the pinned pnpm 10.18.3 lock. From the repository root:
+
+```sh
+make setup
+make verify-data
+make pipeline
+make lint test site
 ```
 
-**Separation principle:** `src/` is a pure Python ML backend with zero UI imports. `frontend/` is a decoupled Streamlit website that consumes the backend as a REST API. The backend handles all data loading, predictions, and optimisation.
+The pipeline regenerates the audit, conditional signal/affect/model results, OpenAPI and browser products from preserved inputs. The site build checks product hashes against `artifacts/results/manifest.json` and validates research JSON in the browser. The root `Makefile` and [operations guide](docs/operations.md) give individual commands and setup details.
 
----
+Start the API and frontend in separate terminals after a successful pipeline:
 
-## Spatial Input Schema
-
-The model accepts exactly **12 independent variables** (+ 1 categorical). All derived features are computed by the backend — the frontend never supplies them.
-
-### Independent Features (raw inputs)
-
-| #   | Feature             | Unit | Range        |
-| --- | ------------------- | ---- | ------------ |
-| 1   | Length              | m    | 2.0 – 50.0   |
-| 2   | Width               | m    | 2.0 – 50.0   |
-| 3   | Height              | m    | 2.0 – 10.0   |
-| 4   | Number of Doors     | –    | 0 – 10       |
-| 5   | Door Area           | m²   | 0 – 30       |
-| 6   | Number of Windows   | –    | 0 – 30       |
-| 7   | Window Area         | m²   | 0 – 250      |
-| 8   | Daylight Factor     | %    | 0 – 20       |
-| 9   | Illuminance         | lux  | 0 – 2000     |
-| 10  | CCT                 | K    | 2000 – 10000 |
-| 11  | Walkable Floor Area | m²   | 0 – 500      |
-| 12  | Room Volume         | m³   | 0 – 25000    |
-
-### Categorical Features (one-hot encoded)
-
-| Feature       | Categories                                            |
-| ------------- | ----------------------------------------------------- |
-| Type of Space | Bedroom, Living Room, Workplace, Classroom, Cafeteria |
-
-### Derived Features (computed by backend)
-
-| Feature                             | Formula                          |
-| ----------------------------------- | -------------------------------- |
-| Length to Width Ratio               | L / W                            |
-| Floor Area                          | L × W                            |
-| Wall Area                           | 2(L + W) × H                     |
-| Volume                              | L × W × H                        |
-| Door Area to Wall Area Ratio        | Door Area / Wall Area            |
-| Window Area to Wall Area Ratio      | Window Area / Wall Area          |
-| Walkable Floor to Total Floor Ratio | Walkable Floor Area / Floor Area |
-
-**Purged metrics:** UDI (Useful Daylight Illuminance), sDA (Spatial Daylight Autonomy), and ASE (Annual Sunlight Exposure) are permanently excluded from all data paths.
-
----
-
-## Affective Fusion: Ground-Truth Target Generation
-
-The system uses **multimodal affective fusion** to combine two independent emotional measurements into a single ground-truth target for model training.
-
-### Signal Sources
-
-| Source                       | Method                                             | Axis    |
-| ---------------------------- | -------------------------------------------------- | ------- |
-| **Objective** (biometric)    | Frontal Alpha Asymmetry (FAA) = ln(α_R) − ln(α_L)  | Valence |
-| **Objective** (biometric)    | RMSSD from ECG R-peaks: Arousal = 1 − (RMSSD / 50) | Arousal |
-| **Subjective** (self-report) | "Valence Score by Subject" from metadata CSV       | Valence |
-| **Subjective** (self-report) | "Arousal Score by Subject" from metadata CSV       | Arousal |
-
-### Fusion Algorithm
-
-Given a tunable parameter **α** (default: 0.6, configurable in `src/config.py → FusionConfig`):
-
-```
-Target_Valence = α × FAA_Valence  + (1 − α) × Subjective_Valence
-Target_Arousal = α × RMSSD_Arousal + (1 − α) × Subjective_Arousal
+```sh
+cd backend && uv run --frozen uvicorn pa.api.app:app --host 127.0.0.1 --port 8000
+cd frontend && corepack pnpm dev
 ```
 
-### Variance Metrics
+Open the Vite URL printed by the frontend command. `/v1/health` reports process liveness and a separate model `ready` flag. The frontend remains useful without a live API; the simulator explains when the service is unavailable. Configuration examples are at [.env.example](.env.example), [backend/.env.example](backend/.env.example), and [frontend/.env.example](frontend/.env.example). The public API schema is generated at `artifacts/results/openapi.json`; the client types in `frontend/src/api/schema.d.ts` are regenerated from it and checked for drift.
 
-For each subject/room pair, the pipeline also computes:
+## Read the evidence
 
-```
-Δ_Valence = Objective_V − Subjective_V
-Δ_Arousal = Objective_A − Subjective_A
-Euclidean_Distance = √(Δ_V² + Δ_A²)
-```
+- [Acquisition and exposure](docs/protocol/acquisition.md), [ratings](docs/protocol/ratings.md), and [spatial/render provenance](docs/protocol/spatial-provenance.md) distinguish observed source fields from investigator report and unresolved settings.
+- [Analysis specification](docs/specs/analysis-v1.md) fixes conditional sample-rate handling, QC, cohorts and evaluation decisions. The near-500 Hz source rate is a **conditional analytical scenario**, not a confirmed hardware setting.
+- [Data card](docs/data_card.md), [model card](docs/model_card.md), and [phase reports](docs/reports/) describe generated counts, exclusions, comparisons and limits.
+- [Website browser review](docs/reports/phase-8.md) contains real-export screenshots and an 18-test Chromium run; [release readiness](docs/release-readiness.md) separates local evidence from public-hosting and rights prerequisites.
 
-When subjective scores are unavailable, 100% objective is used (α = 1.0).
+The model's held-out-room mean absolute error on constructed coordinates is 0.4304 versus 0.4099 for the median baseline. The subject holdout is limited by only three eligible people. No calibrated confidence interval or individual response guarantee is available. The Neuro-Score is a declared distance to a **user-selected** valence/arousal target, not a probability of well-being.
 
-All fusion metadata is persisted to `data/processed/fusion_analysis.parquet` and visualised in the **Affective Fusion** tab of the frontend.
+## Status and use boundary
 
----
-
-## Running the Application
-
-### Prerequisites
-
-```bash
-pip install -e .          # Production
-pip install -e .[dev]     # Development (includes pytest, mypy, flake8)
-```
-
-### Launch Backend (FastAPI)
-
-```bash
-fastapi dev api.py
-```
-
-### Launch Frontend (React SPA)
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Models are trained automatically on first launch or loaded dynamically via joblib. The fusion analysis parquet is generated during training.
-
-### CLI (Headless Backend)
-
-```bash
-# Train default model (PyTorch FFNN, full features)
-python -m src.cli train
-
-python run_pipeline.py
-
-# Train alternative architecture
-python -m src.cli train --model "Random Forest"
-
-# Predict emotional response for a room
-python -m src.cli predict 10.0 8.0 3.5
-
-# Dataset info
-python -m src.cli info
-```
-
-### Docker
-
-```bash
-docker build -t predictive-atmospheres .
-docker run -p 8501:8501 predictive-atmospheres
-```
-
-### Testing
-
-```bash
-python -m pytest src/test/ -v
-mypy -m src.data.emotion_engine -m src.models.train -m src.core.data.validators
-```
-
----
-
-## Configuration
-
-All parameters are centralised in `src/config.py` using Python dataclasses. Key tunable parameters:
-
-| Parameter                  | Location         | Default      | Description                    |
-| -------------------------- | ---------------- | ------------ | ------------------------------ |
-| `fusion.alpha`             | `FusionConfig`   | 0.6          | Objective vs subjective weight |
-| `training.epochs`          | `TrainingConfig` | 300          | Training iterations            |
-| `training.learning_rate`   | `TrainingConfig` | 0.005        | Adam learning rate             |
-| `eeg.sample_rate`          | `EEGConfig`      | 256          | EEG sampling frequency (Hz)    |
-| `model.default_model_type` | `ModelConfig`    | PyTorch FFNN | Default architecture           |
-
-Environment variable overrides:
-
-- `PREDICTIVE_ATMOSPHERES_LEARNING_RATE`
-- `PREDICTIVE_ATMOSPHERES_EPOCHS`
-- `PREDICTIVE_ATMOSPHERES_CONFIG` (path to JSON config file)
-
----
-
-## Technology Stack
-
-| Layer             | Technologies                                       |
-| ----------------- | -------------------------------------------------- |
-| ML Core           | PyTorch, scikit-learn, NumPy, SciPy                |
-| Signal Processing | Welch's PSD, Butterworth filters, R-peak detection |
-| Data              | Pandas, Pydantic validation                        |
-| API               | FastAPI                                            |
-| Frontend          | React 18, Vite, Tailwind CSS, Zustand              |
-| Infrastructure    | Docker, GitHub Actions CI                          |
+The GitHub repository is already **PUBLIC**, and the owner authorized public recordings, metadata, renders and results. `render.yaml` and `frontend/vercel.json` are free-tier **deployment candidates**, not an active site deployment. No blanket data/asset license, DOI or association of participant names with biometric records is asserted here; that named association lacks a verified mapping and specific permission. Review license scope, service limits and hosted behavior before those separate release actions. [Operations](docs/operations.md) records the local commands and proposed hosting settings.

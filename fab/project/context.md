@@ -1,19 +1,9 @@
 # Project Context
 
-## Overview
-Predictive Atmospheres is a neuro-architectural machine learning platform inferring human affective states (valence and arousal) from architectural spatial parameters through multimodal fusion of EEG/ECG biometrics and self-reported scores.
+Predictive Atmospheres is a pilot research platform for describing experiences of rendered architectural rooms with approximate bilateral forehead EEG, wrist ECG and self-report. Thirty rooms, ten subject IDs and 160 recordings span three experiments. The owner-reported protocol and source caveats are documented in `docs/protocol/`; `docs/specs/analysis-v1.md` governs derived analyses once reviewed.
 
-## Architecture
-- `src/`: Headless ML backend with zero UI dependencies. Contains configuration (`src/config.py`), Pydantic core schemas (`src/core/data/`), ML architectures (`SpatialFFNN`, `SpatialMLP`, scikit-learn ensembles in `src/models/`), and inference/optimization services (`src/services/`).
-- `frontend/`: React/Vite SPA (`frontend/`) consuming processed datasets (`data/processed/`) and backend services.
-- `api.py`: FastAPI service exposing prediction, optimization, and training endpoints.
-- `data/`: Raw EEG/ECG recordings, experiment metadata CSVs, and processed Parquet tensors.
+The replacement backend lives in `backend/src/pa/` and uses Python 3.11, uv, NumPy, SciPy, pandas, scikit-learn, Pydantic and FastAPI as justified by the scientific specification. It owns ingestion, acquisition audit, signals, affect, room features, modeling, scoring, optimization, research export and the `/v1` API. Source files stay under `data/`; generated results and models live under `artifacts/`.
 
-## Tech Stack & Conventions
-- **Language**: Python 3.10+
-- **Deep Learning / ML**: PyTorch, scikit-learn, joblib
-- **Data Engineering**: Pandas, NumPy, PyArrow (Parquet)
-- **Signal Processing**: MNE, SciPy (FAA, RMSSD, PSD band-power extraction)
-- **API & Validation**: FastAPI, Pydantic v2
-- **UI**: React 18, Vite, and Tailwind CSS with custom design tokens and dark theme
-- **Testing**: pytest (`tests/`), mypy strict typing
+The React/Vite/TypeScript frontend lives in `frontend/src/`. It reads versioned static research exports for all research pages and calls the live API only for the experimental simulator. The seven pages are The study, Rooms, Signals, Affect, People, Room simulator and Model report. Light, Dark and System preferences share a token-based design system.
+
+Use `make setup`, `make verify-data`, `make pipeline`, `make test`, `make site` and `make all` as reproducible entry points. The current Fab change plan owns dependencies and milestones. Original data and renders are checksum preserved; the Python package and React atlas are the active runtime. Local reproduction and release conditions are recorded in `docs/operations.md` and `docs/release-readiness.md`.

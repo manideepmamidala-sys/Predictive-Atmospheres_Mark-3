@@ -1,0 +1,55 @@
+id: ymhz
+name: 261008-ymhz-research-platform-rebuild
+created: 2026-10-08T12:21:44Z
+created_by: manideepmamidala-sys
+change_type: feat
+issues: []
+progress:
+    intake: done
+    apply: done
+    review: done
+    hydrate: done
+    ship: done
+    review-pr: done
+plan:
+    generated: true
+    task_count: 34
+    acceptance_count: 52
+    acceptance_completed: 52
+confidence:
+    certain: 9
+    confident: 2
+    tentative: 0
+    unresolved: 0
+    score: 4.9
+    fuzzy: true
+    dimensions:
+        signal: 93.2
+        reversibility: 84.5
+        competence: 88.6
+        disambiguation: 90.9
+stage_metrics:
+    intake: {started_at: "2026-10-08T12:21:44Z", driver: fab-new, iterations: 1, completed_at: "2026-10-08T12:29:55Z"}
+    apply: {started_at: "2026-10-08T16:11:21Z", driver: fab-ff, iterations: 3, completed_at: "2026-10-08T16:22:43Z"}
+    review: {started_at: "2026-10-08T16:22:43Z", driver: fab-ff, iterations: 3, completed_at: "2026-10-08T16:29:49Z"}
+    hydrate: {started_at: "2026-10-08T16:29:49Z", driver: fab-ff, iterations: 1, completed_at: "2026-10-08T16:35:22Z"}
+    ship: {started_at: "2026-10-08T16:35:22Z", driver: fab-ff, iterations: 1, completed_at: "2026-10-08T16:41:49Z"}
+    review-pr: {started_at: "2026-10-08T16:45:33Z", driver: git-pr-review, iterations: 1, completed_at: "2026-10-08T16:45:41Z", phase: received, reviewer: "@copilot-pull-request-reviewer[bot]"}
+prs:
+    - https://github.com/manideepmamidala-sys/Predictive-Atmospheres_Mark-3/pull/4
+base_branch: main
+change_type_source: explicit
+true_impact:
+    added: 1574490
+    deleted: 12129
+    net: 1562361
+    tests:
+        added: 1551
+        deleted: 0
+        net: 1551
+    computed_at: "2026-10-08T16:41:51Z"
+    computed_at_stage: ship
+summary: Rebuilt the research platform with reproducible analysis, a themed website, versioned API and indexed scientific and operational documentation.
+# base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
+# true_impact: lazily created on first stage-finish that computes it (no placeholder here).
+last_updated: 2026-10-08T16:45:41Z

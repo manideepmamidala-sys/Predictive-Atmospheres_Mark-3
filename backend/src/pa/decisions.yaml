@@ -1,0 +1,89 @@
+version: "1.1.0"
+status: "reviewed conditional retrospective analysis; coordinator checkpoint PASS"
+rate:
+  primary_hz: 500
+  primary_status: "conditional_unconfirmed"
+  sensitivity_hz: [250, 256, 512]
+  duration_disagreement_fraction: 0.10
+  onset_exclusion_primary_s: 0
+  onset_exclusion_sensitivity_s: 5
+qc:
+  flat_std_raw_units: 1.0e-10
+  repeated_one_extremum_fraction: 0.10
+  repeated_both_extrema_fraction: 0.05
+  extremum_magnitude_fraction: 0.5
+  clipping_sensitivity_multipliers: [0.5, 1.5]
+eeg:
+  filter_hz: [1, 45]
+  filter_order: 4
+  epoch_s: 4
+  welch_segment_s: 2
+  welch_overlap_fraction: 0.5
+  min_valid_epochs: 3
+  min_valid_fraction: 0.5
+  alpha_hz: [8, 13]
+  beta_hz: [13, 30]
+  max_peak_to_peak_median_multiple: 6
+  max_step_median_multiple: 8
+  threshold_sensitivity_multipliers: [0.75, 1.25]
+ecg:
+  qrs_filter_hz: [5, 25]
+  filter_order: 4
+  minimum_filter_segment_s: 2
+  dropout_window_s: 1
+  minimum_peak_distance_s: 0.30
+  prominence_quantile: 0.95
+  prominence_multiplier: 0.5
+  template_half_window_s: 0.08
+  minimum_peak_background_ratio: 5
+  minimum_median_template_correlation: 0.8
+  individual_template_correlation: 0.7
+  minimum_morphology_pass_fraction: 0.8
+  polarity_tie_fraction: 0.05
+  rr_range_s: [0.30, 2.0]
+  rr_local_neighbor_radius: 2
+  rr_outlier_fraction_from_local_median: 0.25
+  min_hr_beats: 6
+  min_hr_usable_duration_s: 5
+  rmssd_scenarios:
+    primary: {duration_s: 30, min_intervals: 20}
+    sensitivity_20s: {duration_s: 20, min_intervals: 12}
+    sensitivity_10s: {duration_s: 10, min_intervals: 6}
+affect:
+  primary_alpha: 0.5
+  alpha_sensitivity: [0, 0.25, 0.5, 0.75, 1]
+  min_descriptive_trials_per_participant: 3
+  robust_scale_mad_factor: 1.4826
+  min_population_distinct_values: 3
+  min_population_scale: 1.0e-9
+  mapping: tanh_standardized_component
+modeling:
+  primary_cohort: experiment_03_complete_fusion_full_room_attributes
+  outer_splits: [room, subject]
+  inner_splits: 3
+  min_training_groups_for_inner_cv: 4
+  scoring: equal_group_mean_of_equal_axis_mae
+  tie_tolerance_mae: 1.0e-6
+  fallback: dummy_median
+  candidates:
+    - {name: dummy_median}
+    - {name: dummy_mean}
+    - {name: ridge, alpha: 10.0}
+    - {name: ridge, alpha: 1.0}
+    - {name: ridge, alpha: 0.1}
+    - {name: random_forest, n_estimators: 100, max_depth: 2, min_samples_leaf: 5}
+    - {name: random_forest, n_estimators: 100, max_depth: 2, min_samples_leaf: 3}
+    - {name: random_forest, n_estimators: 100, max_depth: 4, min_samples_leaf: 5}
+    - {name: random_forest, n_estimators: 100, max_depth: 4, min_samples_leaf: 3}
+  random_seed: 2718
+  random_forest_max_features: 1.0
+  random_forest_n_jobs: 1
+scoring:
+  coordinate_bounds: [-1, 1]
+  distance_denominator: 2.8284271247461903
+  raw_prediction_policy: clip_for_score_record_projection
+optimizer:
+  default_budget: 500
+  max_budget: 5000
+  default_candidates: 5
+  max_candidates: 10

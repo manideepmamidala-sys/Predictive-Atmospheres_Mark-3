@@ -6,12 +6,30 @@
 project:
     name: Predictive Atmospheres_Mark 3
 
+# AGENTS.md routing; this Codex harness supports native model/effort dispatch.
+agent:
+    session: codex
+    workers: codex
+    profiles:
+        default: {provider: codex, model: gpt-6-astra, effort: high}
+        operator: {provider: codex, model: gpt-6-astra, effort: max}
+        doing: {provider: codex, model: gpt-6-sol, effort: high}
+        review: {provider: codex, model: gpt-6-astra, effort: xhigh}
+        hydrate: {provider: codex, model: gpt-6-sol, effort: high}
+        fast: {provider: codex, model: gpt-6-luna, effort: medium}
+providers:
+    codex:
+        native: true
+dispatch:
+    mode: native
+
 source_paths:
-    - src/
+    - backend/src/
+    - frontend/src/
 
 test_paths:
-    - "**/test_*.py"
-    - "**/*_test.py"
+    - "backend/tests/**/test_*.py"
+    - "frontend/tests/**/*.spec.ts"
 
 # >>> fab reference (kit 2.27.0) >>> ---------------------------------------
 # Overridable fields you have NOT overridden, with current defaults.

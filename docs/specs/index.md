@@ -1,15 +1,7 @@
 # Specifications Index
 
-> **Specs are pre-implementation artifacts** — what you *planned*. They capture conceptual design
-> intent, high-level decisions, and the "why" behind features. Specs are human-curated,
-> flat in structure, and deliberately size-controlled for quick reading.
->
-> Contrast with [`docs/memory/index.md`](../memory/index.md): memory files are *post-implementation* —
-> what actually happened. Memory files are the authoritative source of truth for system behavior,
-> maintained by `/fab-continue` (hydrate).
->
-> **Ownership**: Specs are written and maintained by humans. No automated tooling creates or
-> enforces structure here — organize files however makes sense for your project.
+This project's analysis specification was written **after the original recordings and ratings were collected**, using a source audit and investigator clarifications. It was frozen before the dependent conditional signal, fusion and modeling reanalysis, then passed a recorded independent audit/specification checkpoint. It is a transparent retrospective analysis plan, **not prospective preregistration**. Amendments require an explicit decision and affected reruns. Generated outcomes and actual implementation evidence are in [`docs/reports/`](../reports/) and the model/data cards; post-implementation architecture memory is maintained separately during hydrate.
 
 | Spec | Description |
 |------|-------------|
+| [analysis-v1.md](analysis-v1.md) | Frozen-before-reanalysis conditional-rate handling, signal QC, descriptive affect cohorts, model evaluation and export rules for the pilot rebuild. Changes require an explicit amendment and affected reruns. |

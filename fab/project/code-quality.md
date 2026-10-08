@@ -11,6 +11,9 @@
 - Readability and maintainability over cleverness
 - Follow existing project patterns unless there's compelling reason to deviate
 - Prefer composition over inheritance
+- Preserve source evidence and distinguish source values, derived features, and predictions
+- Fit learned transforms only inside training folds; serialize preprocessing with the model
+- Represent unavailable measurements and unsupported claims explicitly with reason codes
 
 ## Anti-Patterns
 
@@ -19,6 +22,8 @@
 - God functions (>50 lines without clear reason)
 - Duplicating existing utilities instead of reusing them
 - Magic strings or numbers without named constants
+- Placeholder numerical research claims or default physiological replacements
+- Parallel room-feature, Neuro-Score, or API request schemas
 
 ## Test Strategy
 

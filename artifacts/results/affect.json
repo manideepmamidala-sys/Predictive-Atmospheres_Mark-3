@@ -1,0 +1,2773 @@
+{
+  "schema_version": "1.0.0",
+  "provenance": {
+    "source": "Original investigator-supplied CSV metadata and raw channel recordings",
+    "method": "Analysis specification 1.1.0; conditional primary 500 Hz scenario",
+    "generated_at": null,
+    "limitations": [
+      "Acquisition sample rate, amplitude units and reference wiring are unconfirmed.",
+      "Constructed affect axes are hypotheses, not validated emotion measurements."
+    ],
+    "manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
+    "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7"
+  },
+  "sensitivity": [
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "alpha": 0.0,
+      "n": 4,
+      "mean_valence": 0.0,
+      "mean_arousal": 0.2,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "alpha": 0.25,
+      "n": 4,
+      "mean_valence": -0.1909431236523167,
+      "mean_arousal": 0.11861065688055451,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "alpha": 0.5,
+      "n": 4,
+      "mean_valence": -0.38188624730463333,
+      "mean_arousal": 0.03722131376110906,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "alpha": 0.75,
+      "n": 4,
+      "mean_valence": -0.5728293709569501,
+      "mean_arousal": -0.0441680293583364,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "alpha": 1.0,
+      "n": 4,
+      "mean_valence": -0.7637724946092668,
+      "mean_arousal": -0.12555737247778187,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "alpha": 0.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "alpha": 0.25,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "alpha": 0.5,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "alpha": 0.75,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "alpha": 1.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "alpha": 0.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "alpha": 0.25,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "alpha": 0.5,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "alpha": 0.75,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "alpha": 1.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "alpha": 0.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "alpha": 0.25,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "alpha": 0.5,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "alpha": 0.75,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "alpha": 1.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "alpha": 0.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "alpha": 0.25,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "alpha": 0.5,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "alpha": 0.75,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "alpha": 1.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "alpha": 0.0,
+      "n": 4,
+      "mean_valence": 0.0,
+      "mean_arousal": 0.2,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "alpha": 0.25,
+      "n": 4,
+      "mean_valence": -0.1909431236523167,
+      "mean_arousal": 0.11861065688055451,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "alpha": 0.5,
+      "n": 4,
+      "mean_valence": -0.38188624730463333,
+      "mean_arousal": 0.03722131376110906,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "alpha": 0.75,
+      "n": 4,
+      "mean_valence": -0.5728293709569501,
+      "mean_arousal": -0.0441680293583364,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "alpha": 1.0,
+      "n": 4,
+      "mean_valence": -0.7637724946092668,
+      "mean_arousal": -0.12555737247778187,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "alpha": 0.0,
+      "n": 10,
+      "mean_valence": 0.25999999999999995,
+      "mean_arousal": 0.009999999999999998,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "alpha": 0.25,
+      "n": 10,
+      "mean_valence": 0.22497839451260032,
+      "mean_arousal": 0.02322744277075641,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "alpha": 0.5,
+      "n": 10,
+      "mean_valence": 0.1899567890252007,
+      "mean_arousal": 0.03645488554151285,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "alpha": 0.75,
+      "n": 10,
+      "mean_valence": 0.15493518353780106,
+      "mean_arousal": 0.049682328312269264,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "alpha": 1.0,
+      "n": 10,
+      "mean_valence": 0.11991357805040134,
+      "mean_arousal": 0.06290977108302569,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "alpha": 0.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "alpha": 0.25,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "alpha": 0.5,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "alpha": 0.75,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "alpha": 1.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "alpha": 0.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "alpha": 0.25,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "alpha": 0.5,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "alpha": 0.75,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "alpha": 1.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "alpha": 0.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "alpha": 0.25,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "alpha": 0.5,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "alpha": 0.75,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "alpha": 1.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "alpha": 0.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "alpha": 0.25,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "alpha": 0.5,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "alpha": 0.75,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "alpha": 1.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "alpha": 0.0,
+      "n": 10,
+      "mean_valence": 0.25999999999999995,
+      "mean_arousal": 0.009999999999999998,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "alpha": 0.25,
+      "n": 10,
+      "mean_valence": 0.22497839451260032,
+      "mean_arousal": 0.02322744277075641,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "alpha": 0.5,
+      "n": 10,
+      "mean_valence": 0.1899567890252007,
+      "mean_arousal": 0.03645488554151285,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "alpha": 0.75,
+      "n": 10,
+      "mean_valence": 0.15493518353780106,
+      "mean_arousal": 0.049682328312269264,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "alpha": 1.0,
+      "n": 10,
+      "mean_valence": 0.11991357805040134,
+      "mean_arousal": 0.06290977108302569,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "alpha": 0.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "alpha": 0.25,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "alpha": 0.5,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "alpha": 0.75,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "alpha": 1.0,
+      "n": 0,
+      "mean_valence": null,
+      "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    }
+  ],
+  "cohorts": {
+    "objective_only": 50,
+    "partial_modality_fusion": 96,
+    "complete_fusion": 14
+  },
+  "disagreement": [
+    {
+      "experiment": 1,
+      "participant_id": null,
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": null,
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": null,
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": null,
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": null,
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": null,
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_A",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_A",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_A",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_A",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_A",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_A",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_B",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_B",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_B",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_B",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_B",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_B",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_C",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_C",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_C",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_C",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_C",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_C",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_D",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_D",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_D",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_D",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_D",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_D",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_M",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_M",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_M",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_M",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_M",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 1,
+      "participant_id": "Subj_M",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 4,
+      "mean_objective_minus_subjective": -0.7637724946092667
+    },
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 4,
+      "mean_objective_minus_subjective": -0.3255573724777819
+    },
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 46,
+      "mean_objective_minus_subjective": -0.2594415944343773
+    },
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 46,
+      "mean_objective_minus_subjective": -0.09995279205768325
+    },
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": null,
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.22122053150826462
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.15555056768082584
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_A",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": 0.07789533616249009
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.21084550296227986
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_E",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.4545368178494426
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.0316614090720416
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_F",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.15819766691737
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": 0.03702224423412357
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_G",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 4,
+      "mean_objective_minus_subjective": -0.7637724946092667
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 4,
+      "mean_objective_minus_subjective": -0.3255573724777819
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 6,
+      "mean_objective_minus_subjective": -0.7289527571425803
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 6,
+      "mean_objective_minus_subjective": -0.16457934664053162
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.14008642194959858
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": 0.05290977108302571
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 50,
+      "mean_objective_minus_subjective": -0.14942694707320503
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 50,
+      "mean_objective_minus_subjective": -0.23481955441020944
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.25324270596023785
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.6323728637040448
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": 0.01713399300625525
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": 0.17796093595735146
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.4539776920592442
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.4426879432472616
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.2537315225016523
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.09930907713864176
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.14008642194959858
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": 0.05290977108302571
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": 0.19668319214885402
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.17768882391845037
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    }
+  ],
+  "analysis": {
+    "schema_version": "1.0.0",
+    "method_version": "1.1.0",
+    "experiments": [
+      {
+        "experiment": 1,
+        "trials": 50,
+        "participants": 5,
+        "rooms": 10,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "experiment": 2,
+        "trials": 50,
+        "participants": 5,
+        "rooms": 10,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 50,
+        "mean_self_valence": 0.14,
+        "n_self_arousal": 50,
+        "mean_self_arousal": 0.122,
+        "n_complete_fused_valence": 4,
+        "mean_complete_fused_valence": -0.38188624730463333,
+        "n_complete_fused_arousal": 4,
+        "mean_complete_fused_arousal": 0.03722131376110906,
+        "n_partial_fused_valence": 46,
+        "mean_partial_fused_valence": 0.02245311582628963,
+        "n_partial_fused_arousal": 46,
+        "mean_partial_fused_arousal": 0.06524099527550623
+      },
+      {
+        "experiment": 3,
+        "trials": 60,
+        "participants": 6,
+        "rooms": 10,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 60,
+        "mean_self_valence": 0.3186666666666667,
+        "n_self_arousal": 60,
+        "mean_self_arousal": -0.051333333333333335,
+        "n_complete_fused_valence": 10,
+        "mean_complete_fused_valence": 0.18995678902520066,
+        "n_complete_fused_arousal": 10,
+        "mean_complete_fused_arousal": 0.03645488554151285,
+        "n_partial_fused_valence": 50,
+        "mean_partial_fused_valence": 0.25568652646339746,
+        "n_partial_fused_arousal": 50,
+        "mean_partial_fused_arousal": -0.18100977720510472
+      }
+    ],
+    "rooms": [
+      {
+        "room_id": "Rm_001",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "room_id": "Rm_002",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "room_id": "Rm_003",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "room_id": "Rm_004",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "room_id": "Rm_005",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "room_id": "Rm_006",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "room_id": "Rm_007",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "room_id": "Rm_008",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "room_id": "Rm_009",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "room_id": "Rm_010",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "room_id": "Rm_011",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 5,
+        "mean_self_valence": -0.12000000000000002,
+        "n_self_arousal": 5,
+        "mean_self_arousal": 0.38,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": -0.5059728123024781,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": 0.15565717772444593
+      },
+      {
+        "room_id": "Rm_012",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 5,
+        "mean_self_valence": 0.04,
+        "n_self_arousal": 5,
+        "mean_self_arousal": 0.3,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": -0.14914626537491146,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": 0.3081367990070008
+      },
+      {
+        "room_id": "Rm_013",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 5,
+        "mean_self_valence": -0.12000000000000002,
+        "n_self_arousal": 5,
+        "mean_self_arousal": 0.38,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": -0.32560924537859787,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": 0.3308587811649361,
+        "n_partial_fused_valence": 4,
+        "mean_partial_fused_valence": 0.1695863026175525,
+        "n_partial_fused_arousal": 4,
+        "mean_partial_fused_arousal": 0.13430424862023138
+      },
+      {
+        "room_id": "Rm_014",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 5,
+        "mean_self_valence": 0.12000000000000002,
+        "n_self_arousal": 5,
+        "mean_self_arousal": 0.27999999999999997,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": -0.32936436012373027,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": -0.1490085516114979,
+        "n_partial_fused_valence": 4,
+        "mean_partial_fused_valence": 0.049445690555643004,
+        "n_partial_fused_arousal": 4,
+        "mean_partial_fused_arousal": 0.04113762520905931
+      },
+      {
+        "room_id": "Rm_015",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 5,
+        "mean_self_valence": 0.13999999999999999,
+        "n_self_arousal": 5,
+        "mean_self_arousal": 0.08000000000000002,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": -0.28695526854413633,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": -0.261512669744953,
+        "n_partial_fused_valence": 4,
+        "mean_partial_fused_valence": 0.01684492167527952,
+        "n_partial_fused_arousal": 4,
+        "mean_partial_fused_arousal": 0.04392970536730231
+      },
+      {
+        "room_id": "Rm_016",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 5,
+        "mean_self_valence": 0.54,
+        "n_self_arousal": 5,
+        "mean_self_arousal": -0.29999999999999993,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": 0.3211883801388408,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.2547283813855401
+      },
+      {
+        "room_id": "Rm_017",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 5,
+        "mean_self_valence": 0.5,
+        "n_self_arousal": 5,
+        "mean_self_arousal": -0.16,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": 0.2684310520688372,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.24390953591358713
+      },
+      {
+        "room_id": "Rm_018",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 5,
+        "mean_self_valence": 0.34,
+        "n_self_arousal": 5,
+        "mean_self_arousal": -0.12000000000000002,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": -0.5856161151720689,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": 0.22854769523595103,
+        "n_partial_fused_valence": 4,
+        "mean_partial_fused_valence": 0.421897014960475,
+        "n_partial_fused_arousal": 4,
+        "mean_partial_fused_arousal": -0.006910998195168341
+      },
+      {
+        "room_id": "Rm_019",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 5,
+        "mean_self_valence": 0.2,
+        "n_self_arousal": 5,
+        "mean_self_arousal": 0.06000000000000001,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": -0.0015017964800395633,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": 0.04504085777611875
+      },
+      {
+        "room_id": "Rm_020",
+        "trials": 5,
+        "participants": 5,
+        "rooms": 1,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 5,
+        "mean_self_valence": -0.24000000000000005,
+        "n_self_arousal": 5,
+        "mean_self_arousal": 0.32,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": -0.25264903629554447,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": 0.4200517745250794
+      },
+      {
+        "room_id": "Rm_021",
+        "trials": 6,
+        "participants": 6,
+        "rooms": 1,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 6,
+        "mean_self_valence": 0.6416666666666666,
+        "n_self_arousal": 6,
+        "mean_self_arousal": -0.5333333333333333,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": 0.291922762200199,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": -0.6849770423339386,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": 0.6049184994255837,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.2747638535381965
+      },
+      {
+        "room_id": "Rm_022",
+        "trials": 6,
+        "participants": 6,
+        "rooms": 1,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 6,
+        "mean_self_valence": -0.4666666666666666,
+        "n_self_arousal": 6,
+        "mean_self_arousal": 0.43333333333333335,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": -0.0008471567975481542,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": 0.5009716798021198,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": -0.13361400877939955,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.00482987103296959
+      },
+      {
+        "room_id": "Rm_023",
+        "trials": 6,
+        "participants": 6,
+        "rooms": 1,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 6,
+        "mean_self_valence": 0.4583333333333334,
+        "n_self_arousal": 6,
+        "mean_self_arousal": 0.05000000000000002,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": 0.7998317222420521,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": 0.35573716716583426,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": 0.42487520354918884,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.22976503130009282
+      },
+      {
+        "room_id": "Rm_024",
+        "trials": 6,
+        "participants": 6,
+        "rooms": 1,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 6,
+        "mean_self_valence": 0.7999999999999999,
+        "n_self_arousal": 6,
+        "mean_self_arousal": -0.79,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": 0.8997801199009526,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": -0.42371976151035773,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": 0.3995766772159866,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.5125212670898749
+      },
+      {
+        "room_id": "Rm_025",
+        "trials": 6,
+        "participants": 6,
+        "rooms": 1,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 6,
+        "mean_self_valence": 0.6583333333333333,
+        "n_self_arousal": 6,
+        "mean_self_arousal": -0.375,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": 0.40807723779980093,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": -0.7512033863962422,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": 0.3931668525233367,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.3733007367894047
+      },
+      {
+        "room_id": "Rm_026",
+        "trials": 6,
+        "participants": 6,
+        "rooms": 1,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 6,
+        "mean_self_valence": -0.22333333333333336,
+        "n_self_arousal": 6,
+        "mean_self_arousal": 0.2833333333333334,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": -0.2248463252297373,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": 0.45533212320174277,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": -0.14721628932726066,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.20786979904199007
+      },
+      {
+        "room_id": "Rm_027",
+        "trials": 6,
+        "participants": 6,
+        "rooms": 1,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 6,
+        "mean_self_valence": 0.425,
+        "n_self_arousal": 6,
+        "mean_self_arousal": 0.3833333333333333,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": 0.21918046134033317,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": 0.597131308183882,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": 0.5639725474859689,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": 0.15219500365549254
+      },
+      {
+        "room_id": "Rm_028",
+        "trials": 6,
+        "participants": 6,
+        "rooms": 1,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 6,
+        "mean_self_valence": 0.125,
+        "n_self_arousal": 6,
+        "mean_self_arousal": 0.07,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": -0.017968820541251374,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": -0.02544004792471205,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": 0.12737789013091003,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.061991499633604744
+      },
+      {
+        "room_id": "Rm_029",
+        "trials": 6,
+        "participants": 6,
+        "rooms": 1,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 6,
+        "mean_self_valence": 0.7033333333333335,
+        "n_self_arousal": 6,
+        "mean_self_arousal": -0.06833333333333336,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": -0.007871488669635496,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": -0.04860213305453248,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": 0.10514404415979599,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.0600172179088474
+      },
+      {
+        "room_id": "Rm_030",
+        "trials": 6,
+        "participants": 6,
+        "rooms": 1,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 6,
+        "mean_self_valence": 0.06499999999999999,
+        "n_self_arousal": 6,
+        "mean_self_arousal": 0.033333333333333326,
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": -0.4676906219931587,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": 0.38931894828133273,
+        "n_partial_fused_valence": 5,
+        "mean_partial_fused_valence": 0.21866384824986435,
+        "n_partial_fused_arousal": 5,
+        "mean_partial_fused_arousal": -0.23723349937155885
+      }
+    ],
+    "people": [
+      {
+        "participant_id": "Subj_A",
+        "trials": 30,
+        "participants": 1,
+        "rooms": 30,
+        "experiments": [
+          1,
+          2,
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 20,
+        "mean_self_valence": 0.31050000000000005,
+        "n_self_arousal": 20,
+        "mean_self_arousal": 0.11499999999999999,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 20,
+        "mean_partial_fused_valence": 0.19188419063287437,
+        "n_partial_fused_arousal": 20,
+        "mean_partial_fused_arousal": -0.08198085784621767
+      },
+      {
+        "participant_id": "Subj_B",
+        "trials": 20,
+        "participants": 1,
+        "rooms": 20,
+        "experiments": [
+          1,
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 10,
+        "mean_self_valence": 0.275,
+        "n_self_arousal": 10,
+        "mean_self_arousal": -0.32999999999999996,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 10,
+        "mean_partial_fused_valence": 0.28356699650312767,
+        "n_partial_fused_arousal": 10,
+        "mean_partial_fused_arousal": -0.24101953202132426
+      },
+      {
+        "participant_id": "Subj_C",
+        "trials": 10,
+        "participants": 1,
+        "rooms": 10,
+        "experiments": [
+          1
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 0,
+        "mean_self_valence": null,
+        "n_self_arousal": 0,
+        "mean_self_arousal": null,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "participant_id": "Subj_D",
+        "trials": 20,
+        "participants": 1,
+        "rooms": 20,
+        "experiments": [
+          1,
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 10,
+        "mean_self_valence": 0.29000000000000004,
+        "n_self_arousal": 10,
+        "mean_self_arousal": -0.14999999999999997,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 10,
+        "mean_partial_fused_valence": 0.06301115397037788,
+        "n_partial_fused_arousal": 10,
+        "mean_partial_fused_arousal": -0.37134397162363075
+      },
+      {
+        "participant_id": "Subj_E",
+        "trials": 10,
+        "participants": 1,
+        "rooms": 10,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 10,
+        "mean_self_valence": 0.020000000000000007,
+        "n_self_arousal": 10,
+        "mean_self_arousal": 0.25,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 10,
+        "mean_partial_fused_valence": 0.058947668081245054,
+        "n_partial_fused_arousal": 10,
+        "mean_partial_fused_arousal": 0.1445772485188601
+      },
+      {
+        "participant_id": "Subj_F",
+        "trials": 10,
+        "participants": 1,
+        "rooms": 10,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 10,
+        "mean_self_valence": 0.39,
+        "n_self_arousal": 10,
+        "mean_self_arousal": 0.09999999999999999,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 10,
+        "mean_partial_fused_valence": 0.16273159107527868,
+        "n_partial_fused_arousal": 10,
+        "mean_partial_fused_arousal": 0.08416929546397922
+      },
+      {
+        "participant_id": "Subj_G",
+        "trials": 10,
+        "participants": 1,
+        "rooms": 10,
+        "experiments": [
+          2
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 10,
+        "mean_self_valence": 0.12000000000000002,
+        "n_self_arousal": 10,
+        "mean_self_arousal": -0.020000000000000018,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 10,
+        "mean_partial_fused_valence": 0.040901166541314996,
+        "n_partial_fused_arousal": 10,
+        "mean_partial_fused_arousal": -0.0014888778829382332
+      },
+      {
+        "participant_id": "Subj_H",
+        "trials": 10,
+        "participants": 1,
+        "rooms": 10,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 10,
+        "mean_self_valence": 0.18,
+        "n_self_arousal": 10,
+        "mean_self_arousal": 0.08,
+        "n_complete_fused_valence": 0,
+        "mean_complete_fused_valence": null,
+        "n_complete_fused_arousal": 0,
+        "mean_complete_fused_arousal": null,
+        "n_partial_fused_valence": 10,
+        "mean_partial_fused_valence": 0.05313423874917382,
+        "n_partial_fused_arousal": 10,
+        "mean_partial_fused_arousal": 0.030345461430679104
+      },
+      {
+        "participant_id": "Subj_I",
+        "trials": 10,
+        "participants": 1,
+        "rooms": 10,
+        "experiments": [
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 10,
+        "mean_self_valence": 0.25999999999999995,
+        "n_self_arousal": 10,
+        "mean_self_arousal": 0.009999999999999998,
+        "n_complete_fused_valence": 10,
+        "mean_complete_fused_valence": 0.18995678902520066,
+        "n_complete_fused_arousal": 10,
+        "mean_complete_fused_arousal": 0.03645488554151285,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
+      },
+      {
+        "participant_id": "Subj_M",
+        "trials": 30,
+        "participants": 1,
+        "rooms": 30,
+        "experiments": [
+          1,
+          2,
+          3
+        ],
+        "interval_status": "not_estimated_crossed_dependence",
+        "n_self_valence": 20,
+        "mean_self_valence": 0.22800000000000004,
+        "n_self_arousal": 20,
+        "mean_self_arousal": 0.06599999999999999,
+        "n_complete_fused_valence": 4,
+        "mean_complete_fused_valence": -0.38188624730463333,
+        "n_complete_fused_arousal": 4,
+        "mean_complete_fused_arousal": 0.03722131376110906,
+        "n_partial_fused_valence": 16,
+        "mean_partial_fused_valence": 0.20978485558228305,
+        "n_partial_fused_arousal": 16,
+        "mean_partial_fused_arousal": -0.05388638496961541
+      }
+    ],
+    "cohorts_by_experiment": [
+      {
+        "experiment": 1,
+        "cohort": "objective_only",
+        "trials": 50
+      },
+      {
+        "experiment": 2,
+        "cohort": "complete_fusion",
+        "trials": 4
+      },
+      {
+        "experiment": 2,
+        "cohort": "partial_modality_fusion",
+        "trials": 46
+      },
+      {
+        "experiment": 3,
+        "cohort": "complete_fusion",
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "cohort": "partial_modality_fusion",
+        "trials": 50
+      }
+    ],
+    "objective_subjective_disagreement": [
+      {
+        "experiment": 1,
+        "cohort": "complete_fusion",
+        "axis": "valence",
+        "n_pairs": 0,
+        "mean_signed": null,
+        "mean_absolute": null
+      },
+      {
+        "experiment": 1,
+        "cohort": "complete_fusion",
+        "axis": "arousal",
+        "n_pairs": 0,
+        "mean_signed": null,
+        "mean_absolute": null
+      },
+      {
+        "experiment": 1,
+        "cohort": "partial_modality_fusion",
+        "axis": "valence",
+        "n_pairs": 0,
+        "mean_signed": null,
+        "mean_absolute": null
+      },
+      {
+        "experiment": 1,
+        "cohort": "partial_modality_fusion",
+        "axis": "arousal",
+        "n_pairs": 0,
+        "mean_signed": null,
+        "mean_absolute": null
+      },
+      {
+        "experiment": 1,
+        "cohort": "partial_axis_overlap",
+        "axis": "valence",
+        "n_pairs": 0,
+        "mean_signed": null,
+        "mean_absolute": null
+      },
+      {
+        "experiment": 1,
+        "cohort": "partial_axis_overlap",
+        "axis": "arousal",
+        "n_pairs": 0,
+        "mean_signed": null,
+        "mean_absolute": null
+      },
+      {
+        "experiment": 2,
+        "cohort": "complete_fusion",
+        "axis": "valence",
+        "n_pairs": 4,
+        "mean_signed": -0.7637724946092667,
+        "mean_absolute": 0.7637724946092667
+      },
+      {
+        "experiment": 2,
+        "cohort": "complete_fusion",
+        "axis": "arousal",
+        "n_pairs": 4,
+        "mean_signed": -0.3255573724777819,
+        "mean_absolute": 0.3541050677137329
+      },
+      {
+        "experiment": 2,
+        "cohort": "partial_modality_fusion",
+        "axis": "valence",
+        "n_pairs": 46,
+        "mean_signed": -0.2594415944343773,
+        "mean_absolute": 0.5547950137486845
+      },
+      {
+        "experiment": 2,
+        "cohort": "partial_modality_fusion",
+        "axis": "arousal",
+        "n_pairs": 46,
+        "mean_signed": -0.09995279205768325,
+        "mean_absolute": 0.5296887757050021
+      },
+      {
+        "experiment": 2,
+        "cohort": "partial_axis_overlap",
+        "axis": "valence",
+        "n_pairs": 0,
+        "mean_signed": null,
+        "mean_absolute": null
+      },
+      {
+        "experiment": 2,
+        "cohort": "partial_axis_overlap",
+        "axis": "arousal",
+        "n_pairs": 0,
+        "mean_signed": null,
+        "mean_absolute": null
+      },
+      {
+        "experiment": 3,
+        "cohort": "complete_fusion",
+        "axis": "valence",
+        "n_pairs": 10,
+        "mean_signed": -0.14008642194959858,
+        "mean_absolute": 0.8896537659958863
+      },
+      {
+        "experiment": 3,
+        "cohort": "complete_fusion",
+        "axis": "arousal",
+        "n_pairs": 10,
+        "mean_signed": 0.05290977108302571,
+        "mean_absolute": 0.733513280429061
+      },
+      {
+        "experiment": 3,
+        "cohort": "partial_modality_fusion",
+        "axis": "valence",
+        "n_pairs": 50,
+        "mean_signed": -0.14942694707320503,
+        "mean_absolute": 0.6537982859135859
+      },
+      {
+        "experiment": 3,
+        "cohort": "partial_modality_fusion",
+        "axis": "arousal",
+        "n_pairs": 50,
+        "mean_signed": -0.23481955441020944,
+        "mean_absolute": 0.6974675234129516
+      },
+      {
+        "experiment": 3,
+        "cohort": "partial_axis_overlap",
+        "axis": "valence",
+        "n_pairs": 0,
+        "mean_signed": null,
+        "mean_absolute": null
+      },
+      {
+        "experiment": 3,
+        "cohort": "partial_axis_overlap",
+        "axis": "arousal",
+        "n_pairs": 0,
+        "mean_signed": null,
+        "mean_absolute": null
+      }
+    ],
+    "associations": [
+      {
+        "experiment": 2,
+        "predictor": "illuminance",
+        "outcome": "self_valence",
+        "unit": "room",
+        "n_rooms": 10,
+        "n_participants": 5,
+        "pearson_r": 0.6204697095830144,
+        "interval": null,
+        "p_value": null,
+        "status": "descriptive_only"
+      },
+      {
+        "experiment": 2,
+        "predictor": "illuminance",
+        "outcome": "complete_fused_valence",
+        "unit": "room",
+        "n_rooms": 4,
+        "n_participants": 1,
+        "pearson_r": -0.84262362592118,
+        "interval": null,
+        "p_value": null,
+        "status": "descriptive_only_single_participant"
+      },
+      {
+        "experiment": 3,
+        "predictor": "illuminance",
+        "outcome": "self_valence",
+        "unit": "room",
+        "n_rooms": 10,
+        "n_participants": 6,
+        "pearson_r": 0.08054896258505582,
+        "interval": null,
+        "p_value": null,
+        "status": "descriptive_only"
+      },
+      {
+        "experiment": 3,
+        "predictor": "illuminance",
+        "outcome": "complete_fused_valence",
+        "unit": "room",
+        "n_rooms": 10,
+        "n_participants": 1,
+        "pearson_r": -0.3868838339055471,
+        "interval": null,
+        "p_value": null,
+        "status": "descriptive_only_single_participant"
+      }
+    ],
+    "inference_status": "descriptive_only_crossed_dependence",
+    "interval_status": "unavailable_no_validated_crossed_group_interval_method",
+    "p_value_status": "not_computed"
+  }
+}

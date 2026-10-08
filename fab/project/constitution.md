@@ -2,26 +2,25 @@
 
 ## Core Principles
 
-### I. Architectural Separation of Concerns
-The backend (`src/`) SHALL remain a pure Python ML backend with zero UI dependencies. The frontend (`frontend/ui/`) MUST never process raw data directly; it SHALL only read from processed `.parquet` / `.csv` files or query backend services.
+### I. Preserve source evidence
+Original recordings, metadata, room renders and thesis assets SHALL be inventoried and checksum verified before migration or cleanup. Derived files SHALL remain distinguishable from originals. Missing values and invalid measurements SHALL never become plausible defaults.
 
-### II. Spatial Input and Feature Integrity
-The system MUST enforce strict schema validation via Pydantic on the 12 independent spatial variables (+ categoricals). Derived features SHALL only be computed by the backend feature engineering pipeline. Purged metrics (UDI, sDA, ASE) SHALL NOT be reintroduced.
+### II. Separate evidence, interpretation and demonstration
+The backend SHALL distinguish observed data, owner-reported protocol, analysis assumptions, constructed affect and model predictions. Fusion is a documented descriptive hypothesis. No weak or unavailable model SHALL be presented as a validated emotion detector or causal design tool.
 
-### III. UI/UX and Theming Discipline
-The frontend UI SHALL adhere strictly to project design manifests, typography tokens, and custom dark theme tokens. The frontend UI MUST use the React/Vite/Tailwind stack. Standard browser fonts and default Plotly colorways (Viridis, Plasma) SHALL NOT be used. Native framework components MUST be preferred over manual HTML/CSS pseudo-elements.
+### III. One physical and predictive contract
+One validated room input schema and feature builder SHALL serve training, CLI, API and optimization. Independent inputs and derived features SHALL remain separate. Learned preprocessing SHALL fit only on training data and travel with the serialized model. Neuro-Score SHALL use a user-selected target.
 
-### IV. Resilient Error Handling and State Persistence
-Backend processes MUST never fail silently; errors SHALL be caught and surfaced through styled UI warning containers. Heavy models, boundaries, and datasets SHALL be cached in `Zustand` (for client-side state) or service-level caches to prevent performance degradation across UI reruns.
+### IV. Versioned, accessible delivery
+Python processing SHALL be headless. Seven React/TypeScript research pages SHALL read schema-validated static exports, while live experimental prediction and optimization use the versioned API. Light/Dark/System themes, responsive layouts, keyboard access and reduced-motion handling SHALL be supported.
 
-### V. Multimodal Ground-Truth Governance
-Emotion ground truth targets MUST be synthesized exclusively through the multimodal affective fusion protocol (combining objective FAA/ECG metrics with subjective scores parameterized by α in `FusionConfig`). Raw EEG/ECG signals SHALL be validated before ingestion.
+### V. Honest failure and reproducibility
+Scientific settings SHALL have versioned decision provenance; failures SHALL have explicit validity/status/reason fields. Reports SHALL record actual command output, dataset and schema versions, limitations and independent review findings. Source data and named participant identities SHALL not be invented or silently published.
 
 ## Additional Constraints
 
-### Test Integrity
-Tests MUST conform to the implementation spec — never the other way around. When tests fail, the fix SHALL either (a) update the tests to match the spec, or (b) update the implementation to match the spec. Modifying implementation code solely to accommodate test fixtures or test infrastructure is prohibited. Specs are the source of truth; tests verify conformance to specs.
+Tests verify the scientific specification and implementation, including adverse/degenerate cases, fold isolation and artifact compatibility. A test fixture SHALL NOT define a scientific choice by convenience. Preserve existing third-party licences; proposed new licence terms and external deployment remain release decisions.
 
 ## Governance
 
-**Version**: 1.0.0 | **Ratified**: 2026-09-15 | **Last Amended**: 2026-09-15
+**Version**: 2.0.0 | **Ratified**: 2026-10-08 | **Last Amended**: 2026-10-08
