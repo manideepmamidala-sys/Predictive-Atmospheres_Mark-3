@@ -19,7 +19,7 @@ from frontend.ui import (
     model_training
 )
 from frontend.ui.theme import apply_global_theme, render_hero
-from frontend.api_client import get_config
+from frontend.config import get_config
 
 def render_landing_page():
     st.markdown("""
