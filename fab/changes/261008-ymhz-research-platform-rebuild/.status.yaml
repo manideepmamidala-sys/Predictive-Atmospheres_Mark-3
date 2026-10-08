@@ -9,7 +9,7 @@ progress:
     apply: done
     review: done
     hydrate: done
-    ship: active
+    ship: done
     review-pr: pending
 plan:
     generated: true
@@ -33,21 +33,22 @@ stage_metrics:
     apply: {started_at: "2026-10-08T16:11:21Z", driver: fab-ff, iterations: 3, completed_at: "2026-10-08T16:22:43Z"}
     review: {started_at: "2026-10-08T16:22:43Z", driver: fab-ff, iterations: 3, completed_at: "2026-10-08T16:29:49Z"}
     hydrate: {started_at: "2026-10-08T16:29:49Z", driver: fab-ff, iterations: 1, completed_at: "2026-10-08T16:35:22Z"}
-    ship: {started_at: "2026-10-08T16:35:22Z", driver: fab-ff, iterations: 1}
-prs: []
+    ship: {started_at: "2026-10-08T16:35:22Z", driver: fab-ff, iterations: 1, completed_at: "2026-10-08T16:41:49Z"}
+prs:
+    - https://github.com/manideepmamidala-sys/Predictive-Atmospheres_Mark-3/pull/4
 base_branch: main
 change_type_source: explicit
 true_impact:
-    added: 1574237
-    deleted: 12093
-    net: 1562144
+    added: 1574490
+    deleted: 12129
+    net: 1562361
     tests:
         added: 1551
         deleted: 0
         net: 1551
-    computed_at: "2026-10-08T16:35:25Z"
-    computed_at_stage: hydrate
+    computed_at: "2026-10-08T16:41:51Z"
+    computed_at_stage: ship
 summary: Rebuilt the research platform with reproducible analysis, a themed website, versioned API and indexed scientific and operational documentation.
 # base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-10-08T16:35:25Z
+last_updated: 2026-10-08T16:41:51Z
