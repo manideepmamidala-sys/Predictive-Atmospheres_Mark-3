@@ -20,3 +20,6 @@
 {"cmd":"fab-continue","event":"command","ts":"2026-10-08T16:31:31Z"}
 {"action":"enter","driver":"fab-ff","event":"stage-transition","stage":"ship","ts":"2026-10-08T16:35:22Z"}
 {"cmd":"git-pr","event":"command","ts":"2026-10-08T16:41:06Z"}
+{"cmd":"git-pr-review","event":"command","ts":"2026-10-08T16:45:29Z"}
+{"action":"enter","driver":"git-pr-review","event":"stage-transition","stage":"review-pr","ts":"2026-10-08T16:45:33Z"}
+{"event":"review","result":"passed","ts":"2026-10-08T16:45:41Z"}
