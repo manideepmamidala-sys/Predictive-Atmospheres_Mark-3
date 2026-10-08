@@ -4,7 +4,7 @@ services:
     name: predictive-atmospheres-api
     env: docker
     dockerfilePath: ./Dockerfile.api
-    plan: standard
+    plan: free
     healthCheckPath: /health
     envVars:
       - key: PORT
@@ -15,7 +15,7 @@ services:
     name: predictive-atmospheres-frontend
     env: docker
     dockerfilePath: ./Dockerfile
-    plan: standard
+    plan: free
     envVars:
       - key: API_URL
         fromService:

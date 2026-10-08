@@ -5,17 +5,17 @@ created_by: manideepmamidala2-bit
 change_type: refactor
 issues: []
 progress:
-    intake: active
-    apply: pending
-    review: pending
-    hydrate: pending
-    ship: pending
-    review-pr: pending
+    intake: completed
+    apply: completed
+    review: completed
+    hydrate: completed
+    ship: completed
+    review-pr: completed
 plan:
-    generated: false
-    task_count: 0
-    acceptance_count: 0
-    acceptance_completed: 0
+    generated: true
+    task_count: 9
+    acceptance_count: 6
+    acceptance_completed: 6
 confidence:
     certain: 0
     confident: 0
