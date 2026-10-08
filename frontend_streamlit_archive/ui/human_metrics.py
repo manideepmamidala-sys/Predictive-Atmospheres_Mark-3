@@ -5,10 +5,10 @@ import plotly.graph_objects as go
 import numpy as np
 import scipy.signal
 from src.data.preprocessing import analyze_ecg, analyze_eeg_bands
-from frontend.ui.base_visualization import BaseVisualization
+from frontend_streamlit_archive.ui.base_visualization import BaseVisualization
 from src.config import get_config
-from frontend.ui.theme import style_figure, panel_header
-from frontend.ui.data_utils import load_parquet_data
+from frontend_streamlit_archive.ui.theme import style_figure, panel_header
+from frontend_streamlit_archive.ui.data_utils import load_parquet_data
 
 config = get_config()
 DATA_DIR = config.paths.data_dir

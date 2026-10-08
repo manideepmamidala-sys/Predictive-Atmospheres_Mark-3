@@ -9,8 +9,8 @@ progress:
     apply: done
     review: done
     hydrate: done
-    ship: active
-    review-pr: pending
+    ship: done
+    review-pr: done
 plan:
     generated: true
     task_count: 2
@@ -33,17 +33,18 @@ stage_metrics:
     apply: {started_at: "2026-09-15T07:42:16Z", driver: fab-fff, iterations: 1, completed_at: "2026-09-15T07:42:17Z"}
     review: {started_at: "2026-09-15T07:42:17Z", driver: fab-fff, iterations: 1, completed_at: "2026-09-15T07:42:19Z"}
     hydrate: {started_at: "2026-09-15T07:42:19Z", driver: fab-fff, iterations: 1, completed_at: "2026-09-15T07:42:20Z"}
-    ship: {started_at: "2026-09-15T07:42:20Z", driver: fab-fff, iterations: 1}
+    ship: {started_at: "2026-09-15T07:42:20Z", driver: fab-fff, iterations: 1, completed_at: "2026-09-15T07:43:37Z"}
+    review-pr: {started_at: "2026-09-15T07:43:37Z", driver: git-pr, iterations: 1, completed_at: "2026-09-15T07:43:43Z"}
 prs: []
 true_impact:
-    added: 453
-    deleted: 0
-    net: 453
+    added: 6222
+    deleted: 87
+    net: 6135
     tests:
         added: 0
         deleted: 0
         net: 0
-    computed_at: "2026-09-15T07:42:20Z"
-    computed_at_stage: hydrate
+    computed_at: "2026-09-15T07:43:42Z"
+    computed_at_stage: ship
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-09-15T07:42:20Z
+last_updated: 2026-09-15T07:43:43Z

@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from frontend.ui.theme import style_figure, panel_header, PALETTE, render_hero
-from frontend.ui.data_utils import load_parquet_data
+from frontend_streamlit_archive.ui.theme import style_figure, panel_header, PALETTE, render_hero
+from frontend_streamlit_archive.ui.data_utils import load_parquet_data
 
 def render_page():
     render_hero(

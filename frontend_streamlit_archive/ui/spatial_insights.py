@@ -4,9 +4,9 @@ import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
 from sklearn.ensemble import RandomForestRegressor
-from frontend.ui.base_visualization import BaseVisualization
-from frontend.ui.theme import style_figure, panel_header
-from frontend.ui.data_utils import load_parquet_data
+from frontend_streamlit_archive.ui.base_visualization import BaseVisualization
+from frontend_streamlit_archive.ui.theme import style_figure, panel_header
+from frontend_streamlit_archive.ui.data_utils import load_parquet_data
 
 class SpatialInsightsVis(BaseVisualization):
     def __init__(self):

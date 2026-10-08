@@ -6,7 +6,7 @@ from pathlib import Path
 # Add the project root to sys.path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from frontend.ui import (
+from frontend_streamlit_archive.ui import (
     design_studio,
     human_metrics,
     spatial_insights,
@@ -17,7 +17,7 @@ from frontend.ui import (
     system_architecture,
     model_training
 )
-from frontend.ui.theme import apply_global_theme, render_hero
+from frontend_streamlit_archive.ui.theme import apply_global_theme, render_hero
 from src.config import get_config
 
 def main():

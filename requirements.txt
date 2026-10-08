@@ -8,3 +8,7 @@ pydantic>=2.12.5
 matplotlib>=3.10.7
 pyarrow>=23.0.1
 shap
+fastapi
+uvicorn
+streamlit
+requests

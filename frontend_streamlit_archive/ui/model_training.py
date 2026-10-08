@@ -8,7 +8,7 @@ import numpy as np
 from src.models.train import train_models_logic
 from typing import Optional
 from src.services.container import ServiceContainer
-from frontend.ui.theme import render_hero, style_figure, panel_header
+from frontend_streamlit_archive.ui.theme import render_hero, style_figure, panel_header
 
 
 def plot_model_performance(adapter):

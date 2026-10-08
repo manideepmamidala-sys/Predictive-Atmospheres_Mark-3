@@ -6,7 +6,7 @@ import requests
 
 from src.utils.rendering import render_3d_room, render_2d_affective_map
 from src.config import get_config
-from frontend.ui.theme import render_hero, style_figure, panel_header
+from frontend_streamlit_archive.ui.theme import render_hero, style_figure, panel_header
 
 # Consistent color palette for 13 emotions
 EMOTION_COLORS = {
@@ -255,18 +255,36 @@ def render_page(services: Optional[Any] = None):
     confidence = None
     pred_result = None
     if st.session_state.get('trained', False):
-        features = _collect_full_features(config)
+        length = float(st.session_state.get('L', config.room.default_length))
+        width = float(st.session_state.get('W', config.room.default_width))
+        height = max(3.0, float(st.session_state.get('H', config.room.default_height)))
+        
+        payload = {
+            "length_m": length,
+            "width_m": width,
+            "height_m": height,
+            "num_doors": int(st.session_state.get('num_doors', 1.0)),
+            "door_area_m2": float(st.session_state.get('door_area', 1.8)),
+            "num_windows": int(st.session_state.get('num_windows', 2.0)),
+            "window_area_m2": float(st.session_state.get('window_area', 5.0)),
+            "daylight_factor_pct": float(st.session_state.get('daylight_factor', 2.0)),
+            "illuminance_lux": float(st.session_state.get('illuminance', 300.0)),
+            "cct_k": float(st.session_state.get('cct', 4000.0)),
+            "walkable_floor_area_m2": float(st.session_state.get('walkable_floor', 60.0)),
+            "room_volume_m3": length * width * height,
+            "space_use_type": st.session_state.get('space_type', 'Workplace')
+        }
         
         try:
-            response = requests.post("http://127.0.0.1:8000/predict", json=features, timeout=5)
+            response = requests.post("http://127.0.0.1:8000/predict", json=payload, timeout=5)
             response.raise_for_status()
             pred_result = response.json()
             
-            pred_v = pred_result["Valence"]
-            pred_a = pred_result["Arousal"]
+            pred_v = pred_result["valence"]
+            pred_a = pred_result["arousal"]
             pred_va = np.array([pred_v, pred_a], dtype=float)
-            confidence = pred_result.get("Confidence")
-            emotion_weights = pred_result.get("EmotionWeights", {})
+            confidence = pred_result.get("confidence_pct")
+            emotion_weights = {} # Not returned by new API
         except requests.exceptions.ConnectionError:
             st.error("Backend API is offline. Please run 'uvicorn api:app --reload' in your terminal.")
         except Exception as e:
@@ -275,7 +293,7 @@ def render_page(services: Optional[Any] = None):
     # --- TOP METRICS ---
     with col_metrics:
         if pred_v is not None and pred_a is not None and pred_result is not None:
-            neuro_score = float(pred_result["NeuroScore"])
+            neuro_score = float(pred_result["neuro_score"])
             m1, m2, m3, m4, m5 = st.columns([1.2, 1, 1, 1, 1.2])
             neuro_score_value = f"{neuro_score:.2f}"
             m1.markdown(f"""

@@ -1,6 +1,6 @@
 import streamlit as st
 from abc import ABC, abstractmethod
-from frontend.ui.theme import render_hero
+from frontend_streamlit_archive.ui.theme import render_hero
 
 class BaseVisualization(ABC):
     """

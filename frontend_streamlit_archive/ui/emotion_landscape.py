@@ -4,9 +4,9 @@ import pandas as pd
 import plotly.graph_objects as go
 
 from typing import Optional, Dict
-from frontend.ui.data_utils import load_parquet_data
+from frontend_streamlit_archive.ui.data_utils import load_parquet_data
 from src.services.container import ServiceContainer
-from frontend.ui.theme import render_hero, style_figure, panel_header
+from frontend_streamlit_archive.ui.theme import render_hero, style_figure, panel_header
 from src.config import get_config
 
 

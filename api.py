@@ -5,6 +5,8 @@ import traceback
 import uvicorn
 import os
 from contextlib import asynccontextmanager
+import pandas as pd
+from pathlib import Path
 
 from src.config import get_config
 from src.services.container import ServiceContainer
@@ -127,6 +129,26 @@ async def optimize(request: OptimizeRequest):
     except Exception as e:
         error_trace = traceback.format_exc()
         print(f"CRITICAL API CRASH:\n{error_trace}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/health")
+async def health_check():
+    return {"status": "ok", "model_loaded": pa_container is not None}
+
+@app.get("/config")
+async def get_configuration():
+    return {"version": "1.0", "status": "active"}
+
+@app.get("/data/fusion")
+async def get_fusion_data():
+    try:
+        data_path = Path(__file__).resolve().parent / "data" / "processed" / "fusion_analysis.parquet"
+        if not data_path.exists():
+            raise HTTPException(status_code=404, detail="Data not found")
+        df = pd.read_parquet(data_path)
+        # Convert to records format and handle NaNs/Infs for JSON parsing
+        return df.fillna(0).to_dict(orient='records')
+    except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":

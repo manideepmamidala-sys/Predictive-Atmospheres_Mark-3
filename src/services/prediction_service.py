@@ -316,7 +316,7 @@ class PredictionService:
 
         return results
 
-    def _run_model_prediction(self, input_data: np.ndarray, batch: bool = False) -> Tuple:
+    def _run_model_prediction(self, input_data: np.ndarray, batch: bool = False) -> Any:
         """
         Run model prediction, delegating to the BaseModelAdapter.
         """

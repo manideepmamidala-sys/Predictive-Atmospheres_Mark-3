@@ -17,10 +17,10 @@ Predictive Atmospheres/
 │   ├── core/data/          ← Pydantic validators (SpatialInput, EEGSignal)
 │   └── utils/              ← Caching, 3D rendering helpers
 │
-├── frontend/               ← React 18 / Vite / Tailwind SPA (Consumes FastAPI)
-│   ├── src/ui/             ← Pages: Design Studio, Emotion Landscape, etc.
-│   ├── src/components/     ← Reusable Tailwind UI components
-│   └── src/store/          ← Zustand state management and API integration
+├── frontend/               ← Streamlit Web App (Tabs, Landing Page, Visualizations)
+│   ├── app.py              ← Main Streamlit application and layout
+│   ├── api_client.py       ← HTTP client bridging Streamlit to FastAPI backend
+│   └── ui/                 ← Streamlit page modules (Design Studio, Emotion Landscape, etc.)
 │
 ├── api.py                  ← FastAPI entry point for all frontend/backend communication
 ├── data/                   ← Experimental datasets (raw EEG CSVs + metadata)
@@ -29,10 +29,13 @@ Predictive Atmospheres/
 │   ├── paper_data/         ← MDS coordinates and emotion ratings for CognitiveBridge
 │   └── processed/          ← Cached tensors + fusion_analysis.parquet (Parquet format)
 │
+├── Dockerfile              ← Streamlit deployment container
+├── Dockerfile.api          ← FastAPI backend deployment container
+├── render.yaml             ← Web Service Blueprint for one-click deployment
 └── pyproject.toml          ← Package definition + dependencies
 ```
 
-**Separation principle:** `src/` is a pure Python ML backend with zero UI imports. `frontend/` is a Vite SPA that consumes the backend as a REST API. The backend can also be imported from CLI, Rhino, or any external system.
+**Separation principle:** `src/` is a pure Python ML backend with zero UI imports. `frontend/` is a decoupled Streamlit website that consumes the backend as a REST API. The backend handles all data loading, predictions, and optimisation.
 
 ---
 
