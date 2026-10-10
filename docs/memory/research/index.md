@@ -8,5 +8,5 @@
 
 | File | Description |
 |------|-------------|
-| [analysis](analysis.md) | Conditional EEG/ECG QC, descriptive affect cohorts, grouped model evaluation, scoring and reported limitations. |
-| [protocol](protocol.md) | Observed pilot source inventory, investigator-reported acquisition and ratings, and unresolved measurement provenance. |
+| [analysis](analysis.md) | Approved v1.2 conditional signal analysis, reviewed component eligibility, constructed affect, complete catalogue and baseline-only grouped model evidence. |
+| [protocol](protocol.md) | Observed pilot sources, investigator-reported acquisition and ratings, historical thesis claims, conditional timebase and delegated signal-review provenance. |

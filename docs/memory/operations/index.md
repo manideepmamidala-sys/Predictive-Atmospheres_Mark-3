@@ -8,4 +8,4 @@
 
 | File | Description |
 |------|-------------|
-| [reproducibility](reproducibility.md) | Pinned local reproduction, source and artifact checks, CI, hosting candidates, and release evidence boundaries. |
+| [reproducibility](reproducibility.md) | Pinned source verification, v1.2 clean scientific reproduction, final-source replay, artifact drift checks, local validation and candidate hosting boundaries. |

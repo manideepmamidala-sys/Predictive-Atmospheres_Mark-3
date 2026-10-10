@@ -8,8 +8,8 @@ progress:
     intake: done
     apply: done
     review: done
-    hydrate: active
-    ship: pending
+    hydrate: done
+    ship: active
     review-pr: pending
 plan:
     generated: true
@@ -32,20 +32,22 @@ stage_metrics:
     intake: {started_at: "2026-10-10T08:56:55Z", driver: fab-new, iterations: 1, completed_at: "2026-10-10T09:04:33Z"}
     apply: {started_at: "2026-10-10T15:51:55Z", driver: fab-ff, iterations: 2, completed_at: "2026-10-10T16:19:23Z"}
     review: {started_at: "2026-10-10T16:19:23Z", driver: fab-ff, iterations: 2, completed_at: "2026-10-10T16:30:32Z"}
-    hydrate: {started_at: "2026-10-10T16:30:32Z", driver: fab-ff, iterations: 1}
+    hydrate: {started_at: "2026-10-10T16:30:32Z", driver: fab-ff, iterations: 1, completed_at: "2026-10-10T16:37:02Z"}
+    ship: {started_at: "2026-10-10T16:37:02Z", driver: fab-ff, iterations: 1}
 prs: []
 change_type_source: explicit
 base_branch: main
 true_impact:
-    added: 2036704
-    deleted: 21776
-    net: 2014928
+    added: 2082604
+    deleted: 21884
+    net: 2060720
     tests:
-        added: 1738
+        added: 1886
         deleted: 414
-        net: 1324
-    computed_at: "2026-10-10T16:19:30Z"
-    computed_at_stage: apply
+        net: 1472
+    computed_at: "2026-10-10T16:37:10Z"
+    computed_at_stage: hydrate
+summary: Hydrate approved v1.2 eight-route atlas, reviewed signal evidence, baseline-only fused Studio, reproducibility and release boundaries
 # base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-10-10T16:30:32Z
+last_updated: 2026-10-10T16:37:10Z
