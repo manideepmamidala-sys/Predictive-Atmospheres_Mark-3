@@ -1,0 +1,50 @@
+id: oom7
+name: 261010-oom7-public-deployment-docs
+created: 2026-10-10T18:04:59Z
+created_by: manideepmamidala-sys
+change_type: docs
+issues: []
+progress:
+    intake: done
+    apply: done
+    review: active
+    hydrate: pending
+    ship: pending
+    review-pr: pending
+plan:
+    generated: true
+    task_count: 4
+    acceptance_count: 11
+    acceptance_completed: 0
+confidence:
+    certain: 3
+    confident: 1
+    tentative: 0
+    unresolved: 0
+    score: 5.0
+    fuzzy: true
+    dimensions:
+        signal: 88.3
+        reversibility: 95.3
+        competence: 92.0
+        disambiguation: 91.5
+stage_metrics:
+    intake: {started_at: "2026-10-10T18:04:59Z", driver: fab-new, iterations: 1, completed_at: "2026-10-10T18:06:51Z"}
+    apply: {started_at: "2026-10-10T18:06:51Z", driver: fab-ff, iterations: 1, completed_at: "2026-10-10T18:09:23Z"}
+    review: {started_at: "2026-10-10T18:09:23Z", driver: fab-ff, iterations: 1}
+prs: []
+change_type_source: explicit
+base_branch: main
+true_impact:
+    added: 266
+    deleted: 9
+    net: 257
+    tests:
+        added: 0
+        deleted: 0
+        net: 0
+    computed_at: "2026-10-10T18:09:23Z"
+    computed_at_stage: apply
+# base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
+# true_impact: lazily created on first stage-finish that computes it (no placeholder here).
+last_updated: 2026-10-10T18:09:23Z
