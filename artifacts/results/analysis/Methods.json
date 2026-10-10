@@ -24,7 +24,7 @@
     "method_version": "1.2.0",
     "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
     "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
-    "generated_at_utc": "2026-10-10T13:06:19+00:00"
+    "generated_at_utc": "2026-10-10T16:03:37+00:00"
   },
   "availability_reason": null,
   "chart": {
@@ -69,5 +69,283 @@
     "y_label": "Anchored source trials",
     "x_unit": null,
     "y_unit": "trials"
+  },
+  "methods_evidence": {
+    "settings": [
+      {
+        "category": "Timebase",
+        "label": "Primary conditional sample rate",
+        "value": 500,
+        "unit": "Hz",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "Timebase",
+        "label": "Alternative sample-rate scenarios",
+        "value": "250, 256, 512",
+        "unit": "Hz",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "Timebase",
+        "label": "Duration disagreement review flag",
+        "value": 10.0,
+        "unit": "%",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "Timebase",
+        "label": "Onset-exclusion sensitivity",
+        "value": 5,
+        "unit": "s",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "EEG quality",
+        "label": "Band-pass filter",
+        "value": "1\u201345",
+        "unit": "Hz",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "EEG quality",
+        "label": "Epoch duration",
+        "value": 4,
+        "unit": "s",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "EEG quality",
+        "label": "Minimum accepted epochs",
+        "value": 3,
+        "unit": "epochs",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "EEG quality",
+        "label": "Minimum accepted fraction",
+        "value": 50.0,
+        "unit": "%",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "EEG quality",
+        "label": "Maximum raw line-power ratio",
+        "value": 0.2,
+        "unit": null,
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "EEG quality",
+        "label": "Maximum filtered muscle-power ratio",
+        "value": 0.25,
+        "unit": null,
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "ECG quality",
+        "label": "QRS filter",
+        "value": "5\u201325",
+        "unit": "Hz",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "ECG quality",
+        "label": "Minimum HR beats",
+        "value": 6,
+        "unit": "beats",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "ECG quality",
+        "label": "Minimum HR usable duration",
+        "value": 5,
+        "unit": "s",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "ECG quality",
+        "label": "Primary RMSSD contiguous run",
+        "value": 30,
+        "unit": "s",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "ECG quality",
+        "label": "Primary RMSSD minimum intervals",
+        "value": 20,
+        "unit": "intervals",
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "Affect mapping",
+        "label": "Component calibration",
+        "value": "tanh_standardized_component",
+        "unit": null,
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "Affect mapping",
+        "label": "Descriptive calibration scope",
+        "value": "participant_within_experiment",
+        "unit": null,
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "Affect mapping",
+        "label": "Primary physiology/report fusion weight",
+        "value": 0.5,
+        "unit": null,
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "Affect mapping",
+        "label": "Primary physiology components",
+        "value": "bilateral_faa, alpha_suppression, engagement, heart_rate",
+        "unit": null,
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "Model evaluation",
+        "label": "Primary cohort",
+        "value": "experiment_03_complete_fusion_full_room_attributes",
+        "unit": null,
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "Model evaluation",
+        "label": "Held-out groups",
+        "value": "room, subject",
+        "unit": null,
+        "source": "backend/src/pa/decisions.yaml"
+      },
+      {
+        "category": "Model evaluation",
+        "label": "Inner folds",
+        "value": 3,
+        "unit": null,
+        "source": "backend/src/pa/decisions.yaml"
+      }
+    ],
+    "review": {
+      "verdict": "approved_for_reanalysis_with_exclusions",
+      "reviewed_at_utc": "2026-10-10T11:03:28.551235+00:00",
+      "reviewers": [
+        "codex-cp-b-eeg-ai-reviewer",
+        "codex-cp-b-ecg-timebase-ai-reviewer"
+      ],
+      "decision_counts": {
+        "accept": 304,
+        "reject": 31,
+        "uncertain": 11
+      },
+      "reviewed_eligibility_counts": {
+        "timebase": 154,
+        "eeg_right": 132,
+        "eeg_left": 138,
+        "eeg_bilateral": 128,
+        "ecg_hr": 66,
+        "ecg_rmssd": 17
+      },
+      "ledger_path": "artifacts/results/qc_review.json"
+    },
+    "sensitivity": [
+      {
+        "experiment": 2,
+        "alpha": 0.0,
+        "n": 19,
+        "mean_valence": 0.02105263157894738,
+        "mean_arousal": 0.2421052631578947
+      },
+      {
+        "experiment": 2,
+        "alpha": 0.25,
+        "n": 19,
+        "mean_valence": 0.0005099913859337293,
+        "mean_arousal": 0.16358280863045085
+      },
+      {
+        "experiment": 2,
+        "alpha": 0.5,
+        "n": 19,
+        "mean_valence": -0.02003264880707989,
+        "mean_arousal": 0.08506035410300691
+      },
+      {
+        "experiment": 2,
+        "alpha": 0.75,
+        "n": 19,
+        "mean_valence": -0.04057528900009352,
+        "mean_arousal": 0.006537899575563026
+      },
+      {
+        "experiment": 2,
+        "alpha": 1.0,
+        "n": 19,
+        "mean_valence": -0.061117929193107164,
+        "mean_arousal": -0.0719845549518809
+      },
+      {
+        "experiment": 3,
+        "alpha": 0.0,
+        "n": 21,
+        "mean_valence": 0.3314285714285714,
+        "mean_arousal": -0.18666666666666668
+      },
+      {
+        "experiment": 3,
+        "alpha": 0.25,
+        "n": 21,
+        "mean_valence": 0.2603051109737827,
+        "mean_arousal": -0.14960814385101281
+      },
+      {
+        "experiment": 3,
+        "alpha": 0.5,
+        "n": 21,
+        "mean_valence": 0.189181650518994,
+        "mean_arousal": -0.11254962103535891
+      },
+      {
+        "experiment": 3,
+        "alpha": 0.75,
+        "n": 21,
+        "mean_valence": 0.11805819006420533,
+        "mean_arousal": -0.07549109821970504
+      },
+      {
+        "experiment": 3,
+        "alpha": 1.0,
+        "n": 21,
+        "mean_valence": 0.04693472960941661,
+        "mean_arousal": -0.03843257540405113
+      }
+    ],
+    "references": [
+      {
+        "label": "Approved v1.2 specification",
+        "path": "docs/specs/analysis-v1.2-draft.md"
+      },
+      {
+        "label": "Decision record",
+        "path": "DECISIONS.md"
+      },
+      {
+        "label": "Delegated CP-B decision record",
+        "path": "docs/reports/revision-2026-10/CP-B.md"
+      },
+      {
+        "label": "Data card",
+        "path": "docs/data_card.md"
+      },
+      {
+        "label": "Model card",
+        "path": "docs/model_card.md"
+      },
+      {
+        "label": "Independent CP-C review",
+        "path": "docs/reports/revision-2026-10/CP-C.md"
+      }
+    ]
   }
 }

@@ -2,7 +2,11 @@
 
 **Original delegated disposition:** APPROVED_FOR_BASELINE_ONLY_PUBLICATION_WITH_LIMITATIONS, recorded 2026-10-10T12:36:53Z by independent Codex reviewer `/root/model_checkpoint_review`, model `gpt-6-astra`, reasoning effort `xhigh`. The complete control/comparison evidence and corrected final export contract support a qualified research presentation of this baseline-only result. They do not establish spatial predictive utility, individual accuracy or causal design control.
 
-**Current refresh disposition:** APPROVED_FOR_BASELINE_ONLY_PUBLICATION_WITH_LIMITATIONS, recorded 2026-10-10T13:10:07Z by fresh independent Codex reviewer `/root/science_receipt_refresh`, natively dispatched as `gpt-6-astra` with `xhigh` reasoning. The [dated refresh](#release-validation-refresh--2026-10-10t131007z) covers the regenerated v1.2 affect summary, corrected B5 denominator wording and refreshed code provenance. It preserves the original decision and limitations; it is not personal owner inspection or a whole-change release approval.
+**Earlier release-validation refresh disposition:** APPROVED_FOR_BASELINE_ONLY_PUBLICATION_WITH_LIMITATIONS, recorded 2026-10-10T13:10:07Z by fresh independent Codex reviewer `/root/science_receipt_refresh`, natively dispatched as `gpt-6-astra` with `xhigh` reasoning. The [dated refresh](#release-validation-refresh--2026-10-10t131007z) covers the regenerated v1.2 affect summary, corrected B5 denominator wording and refreshed code provenance. It preserves the original decision and limitations; it is not personal owner inspection or a whole-change release approval.
+
+**Current rework disposition:** APPROVED_FOR_BASELINE_ONLY_PUBLICATION_WITH_LIMITATIONS, recorded 2026-10-10T16:08:42Z by fresh independent Codex reviewer `/root/checkpoint_refresh`, natively dispatched as `gpt-6-astra` with `xhigh` reasoning. The [dated rework receipt](#rework-receipt--2026-10-10t160842z) verifies nonnumerical QC/Methods presentation changes and refreshed artifact provenance against the completed original scientific reconstruction. It preserves the qualified baseline-only interpretation.
+
+**Later card-only receipt:** the two documentation additions at 2026-10-10T16:17:53Z are verified in the [card-only supplement](#card-only-supplement--2026-10-10t161753z); its two hashes supersede the card hashes in the 16:08 table. All scientific artifact identities and the qualified disposition remain unchanged.
 
 **Authorization provenance:** On 2026-10-10 the user instructed `$fab-ff approve all the future checkpoint automatically and continue the work`, following `$fab-ff with your CP-B decidions`. The former delegates the CP-C decision to the agent workflow after concrete evidence review. It does not mean the owner personally inspected these results. The implementation worker used Codex gpt-6-sol/high; the fresh independent checkpoint reviewer used Codex gpt-6-astra/xhigh. The [supplemental independent review](science-checkpoint-c-review.md) records the actual checks, resolved findings and remaining reproduction boundary.
 
@@ -85,3 +89,56 @@ The current canonical catalogue digest is `ca5f6029517b16e57e313c8c88e310fe00cb1
 This disposition opens CP-C's gate for local staging and the qualified research presentation documented above. No outstanding must-fix remains in this checkpoint's reviewed scope. At the original disposition, the corrected index used all 28 canonical `/research/analysis/{ID}.json` paths, model compatibility and source digests passed, and scientific catalogue content was unchanged. The dated refresh above separately reviews the later affect-summary correction, B5 wording and provenance updates. Whole-change review, browser/visual checks, CP-E2, and release validation remain separate obligations; this record does not authorize external deployment.
 
 The null run started before the effective-cohort guard was introduced. Original run fingerprints were retained and match current files; the current guard, observed folds and two regenerated draws are consistent. They cannot prove the historical feature matrix at draw zero. The reviewer accepts this explicit provenance limitation for the qualified local checkpoint. An isolated source-only full reproduction with the guard present before draw zero must compute all 1,000 draws and all 455 subsets and compare the complete scientific records before a clean-reproduction claim is made. That reproduction is **not complete at this disposition**. Changed scientific inputs, model bytes, results or claims require renewed affected-artifact review; harmless generation-time changes are distinguished by the recorded scientific digests.
+
+## Rework receipt — 2026-10-10T16:08:42Z
+
+**Disposition: APPROVED_FOR_BASELINE_ONLY_PUBLICATION_WITH_LIMITATIONS.** Fresh independent AI reviewer `/root/checkpoint_refresh` used the native Codex `gpt-6-astra`/`xhigh` route under the user's existing automatic-checkpoint delegation. This is a scoped receipt for the first formal-review rework, not a new scientific full-pipeline execution, whole-change approval or personal owner inspection. The original dispositions and their then-pending reproduction limits above remain dated historical records.
+
+Exact comparison of all 53 result JSON paths against `/tmp/pa-reference-final-329s8k69`, omitting only the existing declared generation/run-time fields, identifies six changed products: Methods, public signals, bundle, model, model comparison and manifest. All existing trial measurements, eligibility flags, traces, coordinates, cohorts and sensitivity values are exactly unchanged. The only added or modified public evidence is component-specific QC decisions/reasons, approved Methods settings/review/sensitivity references, and dependent code/hash provenance. All other catalogue products retain identical scientific content; P4 remains explicitly unavailable for the constant model.
+
+The model bytes, held-out evaluation, full null, effective-input guard, learning curve, affect detail/summary, validity, signal detail, timebase and integrated CP-B ledger are byte-identical to the pre-rework reference. Their parsed scientific records also exactly match the completed isolated clone after the declared timing normalization. The unchanged approved specification, scientific settings, source manifest and both CP-B decision files were checked against that clone. Only five backend Python sources differ: catalogue/Methods export/schema wiring and removal of the unused administrative report writer. The active CP-B integration function and its helpers have identical syntax trees. No signal processing, calibration, model selection, fold logic, null/learning implementation or numerical scientific input changed.
+
+All 160 public trial QC records reconcile with the approved ledger and source reviewer decisions. The uncertain timebase decision for `E2:Subj_E:Rm_018` now survives export; `E1:Subj_B:Rm_010` and the other 48 HR-valid/RMSSD-invalid trials retain independent cardiac eligibility. The Methods product exposes 22 approved settings, the existing ten experiment/weight sensitivity rows, the actual delegated decision counts and six canonical references. This verifies export evidence; final browser presentation is separately covered by CP-E2.
+
+The trusted loader passes current code/data/spec/package/model-byte compatibility. Its prediction for all 23 eligible E3 rows remains `[0.19933647676353913, -0.07416070665631107]`; a real application lifespan through FastAPI's test client returns `/v1/health` ready and `/v1/meta` `baseline_only`. The reconstructed effective-input guard equals the saved guard exactly. All eight model-comparison source digests, seven public manifest hashes, 28 strict catalogue products and canonical index paths pass. The current backend code-tree SHA-256 is `e4e4e8ebd2ab891945769a0d91d18070f0b9f6803fabc3d79132ac375b161a7d`.
+
+The earlier clean-reproduction requirement was subsequently completed for source snapshot `a4f4850f77e6f6d5eb3d1d0634e0a602f89650f9`: this reviewer inspected terminal exit code 0 and actual logs in `/tmp/pa-final-repro-run-1y3bl3n6`, and independently matched all 150 recorded inputs in its immutable clone to manifest digest `936cd86add14e0406dc563d97a5d536a41b5d33b036b5008f3bb4b245d2dcc93`. Its guarded CLI created the matching guard before starting at zero cached draws, then computed 1,000 fresh full-refit null draws and 455 learning subsets; `make all` passed in 7,672.0 seconds. That evidence closes the original run's clean-reproduction obligation for the scientific implementation and results. **It does not say that the changed current source retains that old 150-input identity or that the full pipeline was rerun after this presentation rework.** Final-source delta validation and regression checks are separately recorded in [validation](validation.md).
+
+Exact file-byte SHA-256 values for this receipt:
+
+| File | SHA-256 |
+| --- | --- |
+| `artifacts/model/model.joblib` | `17bfa472c30a9bb24034dd3800c85cd1fa9db36fec8c4a6cba2b8070b6b3544d` |
+| `artifacts/model/metadata.json` | `7320414317c7799f3f382e5a1e88e77ffa9a28d5047b7297be8cac482dd95331` |
+| `artifacts/results/model_evaluation.json` | `d419789fa076bbb6e816e3090647c3230409547a829310c7879719fd0a2641a6` |
+| `artifacts/results/model_null.json` | `ef66f1421f9addd0a21f39b21f156e3ddf419c3789d6a9691f4925389f09594c` |
+| `artifacts/results/model_learning_curve.json` | `10594cafa9d106b59d8e6f2b374c9c31c2b00e52368b2d596dde4a8dcccbb85e` |
+| `artifacts/results/model_null_input.json` | `8f256372cb6acaeadd40807e33a7bba18e9bc7a5ced278241a0c5f195ab64a77` |
+| `artifacts/results/model_poc.json` | `a4d8e4f0c3715fde756ea32ff600c34b9aa66b372667bf90950f9580a2177c77` |
+| `artifacts/results/analysis/index.json` | `b98514efe855d7d1fb914bb1c59bf1e7efa28dbeb267164d9194cddfce1d1911` |
+| `artifacts/results/analysis/Methods.json` | `ca942a470323aa033f0b7b2e45dea0a4fa69e19cf05668e5ee75490e43396ea5` |
+| `artifacts/results/affect_detail.json` | `ddc2b2765bd7d5c1cc90e07f3c637446384f0165377326f58d735fbca81e0de7` |
+| `artifacts/results/affect_analysis.json` | `4786eed9b1b0a5fb9be854d3b266502427d5057446556e6032167ae519ae0cf0` |
+| `artifacts/results/validity.json` | `296e0f76cfdb8089efef3045e00efe03805d5219107882d86a2a9c98599ee9cd` |
+| `artifacts/results/qc_review.json` | `41718a1d5204f6c195469aa5e45a6d500b8886eadeecb10f1187e293349de294` |
+| `artifacts/results/signals.json` | `bd639b4995dd7b5a669f186a81dcad754157ccc5af89eaf46448a53df1772c3f` |
+| `artifacts/results/model.json` | `3a298b3d622e48c259a1295e974f1fe8705de312ca586252a1339837c0c6430d` |
+| `artifacts/results/bundle.json` | `b01ebb84d511bcfdde5573ef99c56e14b8ff308a20fbf7ced578e3381062ec05` |
+| `artifacts/results/manifest.json` | `b4b8ab1fba06916760746c028a502d0b16b69a46543ab8367d5a75df18d55bfd` |
+| `docs/model_card.md` | `0a56086a12d67765845f76a08ddba746d75e72b9354686e3f0071a50efef497b` |
+| `docs/data_card.md` | `263f1d76c73154f9ed6bf6306c12d49308904f4246b599a5d0d7dcc2c37f051a` |
+
+The current canonical catalogue digest is `f638e143185965f6d61914791cfcc81ca58c2bbd1157657220ed6681c4089d3b`, using the established ID-to-product, sorted compact JSON rule omitting only `provenance.generated_at_utc`. Its change is accounted for by the new Methods evidence; the other 27 products are unchanged under that rule. The analysis index bytes remain unchanged because its paths/statuses are unchanged; this is not a claim that the entire result manifest is unchanged.
+
+**Boundary:** no unresolved finding remains in this affected-artifact receipt. The fitted artifact remains a constant baseline with no demonstrated learned spatial gain, personal accuracy or causal design control. CP-E2, final-source release validation and a different fresh formal whole-change reviewer remain separate obligations. No source, scientific artifact, task checkbox or workflow stage was changed by this reviewer. [Supplemental verification](science-checkpoint-c-review.md#rework-receipt--2026-10-10t160842z) records the read-only check.
+
+## Card-only supplement — 2026-10-10T16:17:53Z
+
+The release worker subsequently added one explanatory paragraph to each card. The same independent reviewer read both exact diffs against the immutable clean clone. The model card now describes the already verified nonnumerical code-provenance refresh and distinguishes the earlier fresh scientific controls from targeted final-source validation. The data card describes the six independent public QC components, reviewed reasons and the two inspected trial examples. Independent counting of the current component records verifies **33 trials with at least one automated-eligible/reviewed-ineligible component** and **49 HR-eligible/RMSSD-ineligible trials**. No other card content changed.
+
+| Updated documentation | Current SHA-256 |
+| --- | --- |
+| `docs/model_card.md` | `4f38486e371df76a111c1639005a0dbf1a1435c2a6913cf99ffd486fdc5f0394` |
+| `docs/data_card.md` | `68a103bc3aeda59068a6c9f5a687963823d1c8f9b9bf923a54a25d0bac8a8a5b` |
+
+**Disposition remains APPROVED_FOR_BASELINE_ONLY_PUBLICATION_WITH_LIMITATIONS.** All 17 scientific/product identities in the preceding table remain unchanged. The card additions introduce no new scientific result or rerun claim. The Methods website's pinned source links continue to identify the historical card versions at the explicit repository snapshot; their governing methods, numerical results and limitations are unchanged by these explanatory paragraphs.

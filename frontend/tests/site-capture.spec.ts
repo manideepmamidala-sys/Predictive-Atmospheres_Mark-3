@@ -37,6 +37,13 @@ test('capture eight real-data routes at both viewports and in both themes', asyn
           await expect(page.locator('.analysis-row')).toHaveCount(route.analyses);
           await expect(page.locator('.analysis-row .research-figure')).toHaveCount(route.analyses);
         }
+        if (route.slug === 'explore') {
+          await expect(page.locator('.data-table tbody tr')).toHaveCount(160);
+        }
+        if (route.slug === 'methods') {
+          await expect(page.locator('.method-settings dl > div')).toHaveCount(22);
+          await expect(page.locator('.methods-sensitivity tbody tr')).toHaveCount(10);
+        }
         await expect(page.getByText('Loading chart…')).toHaveCount(0);
         await expect(page.getByRole('alert').filter({ hasText: 'Analysis catalogue unavailable' })).toHaveCount(0);
         await page.evaluate(async () => {

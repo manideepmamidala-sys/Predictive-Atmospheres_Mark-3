@@ -30,7 +30,10 @@ PRODUCT_TYPES = {
 
 
 def write_json(path: Path, product: BaseModel) -> str:
-    encoded = json.dumps(product.model_dump(mode="json", exclude_none=False),
+    excluded = {"methods_evidence"} if isinstance(product, CatalogueProduct) and \
+        product.methods_evidence is None else set()
+    encoded = json.dumps(product.model_dump(mode="json", exclude_none=False,
+                                            exclude=excluded),
                          indent=2, allow_nan=False) + "\n"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(encoded)

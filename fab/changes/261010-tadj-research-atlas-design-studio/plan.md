@@ -171,14 +171,14 @@ README, CHANGELOG, cards, operations, release readiness and affected memory SHAL
 - [x] T016 Implement approved channel/epoch/trial QC and independent arousal candidates in `backend/src/pa/signals/qc.py`, `backend/src/pa/signals/eeg.py` and `backend/tests/test_eeg.py`; cover known bands, flat/dead/gain/noise/blink/gap/short cases without outcome-tuned thresholds. <!-- R6 -->
 - [x] T017 Extend `backend/src/pa/signals/ecg.py`, `backend/src/pa/signals/run.py` and `backend/tests/test_ecg.py` for approved cardiac coverage/eligibility and examples, preserving contiguous-run failure rules. <!-- R7 -->
 - [x] T018 Generate the approved QC review queue through `backend/src/pa/results/review.py`, `artifacts/results/qc_review.json` and `artifacts/review/`; write concrete flagged-channel evidence in `docs/reports/revision-2026-10/CP-B.md` with pending owner decisions. <!-- R7 -->
-- [x] T019 Record delegated evidence-based CP-B agent dispositions and per-trial/channel decisions in `docs/reports/revision-2026-10/CP-B.md` and `artifacts/results/qc_review.json`; integrate only those decisions into reviewed eligibility. <!-- R7 -->
+- [x] T019 Record delegated evidence-based CP-B agent dispositions and per-trial/channel decisions in `docs/reports/revision-2026-10/CP-B.md` and `artifacts/results/qc_review.json`; integrate only those decisions into reviewed eligibility. <!-- R7 --> <!-- rework: M2 remove unused administrative writer; preserve active CP-B integration -->
 - [x] T020 Implement approved descriptive coordinates, fusion and partial/component-only cohorts in `backend/src/pa/affect/normalization.py`, `backend/src/pa/affect/fusion.py`, `backend/src/pa/affect/run.py` and `backend/tests/test_affect.py`; account for all records and E1/E2/E3 boundaries. <!-- R8 -->
 - [x] T021 Implement approved validity, disagreement and component/composite comparisons in `backend/src/pa/affect/analysis.py` and `backend/tests/test_analysis.py`; export `artifacts/results/validity.json` and reasoned unavailable outcomes. <!-- R9 -->
 - [x] T022 Add room/person/residual, agreement and known-room relative-transfer analyses to `backend/src/pa/analysis/ratings.py` and `backend/src/pa/analysis/transfer.py`, with grouped baseline/null/centering tests in `backend/tests/test_analysis.py`. <!-- R10 -->
 - [x] T023 Extend `backend/src/pa/modeling/targets.py`, `backend/src/pa/modeling/splits.py` and `backend/src/pa/modeling/evaluate.py` for approved component/self-report/fused cohorts and fold-contained transformations; test adversarial held-out mutations in `backend/tests/test_evaluation.py`. <!-- R10 -->
 - [x] T024 Implement approved unseen-room candidate evaluation, learning curves and importance in `backend/src/pa/modeling/evaluate.py` and `backend/src/pa/modeling/train.py`; test insufficient groups, constants, singular fits and unsupported pooling in `backend/tests/test_train.py`. <!-- R10 -->
-- [x] T025 Persist the fitted fused artifact and actual model comparisons in `backend/src/pa/modeling/artifact.py`, `artifacts/model/` and `artifacts/results/model_poc.json`; update `docs/model_card.md`, `docs/data_card.md` and `docs/reports/revision-2026-10/CP-C.md` with actual results and pending publication review. <!-- R11 -->
-- [x] T026 Record delegated evidence-based CP-C agent disposition of exact comparison/model versions in `docs/reports/revision-2026-10/CP-C.md` before new model findings are staged for public pages. <!-- R11 -->
+- [x] T025 Persist the fitted fused artifact and actual model comparisons in `backend/src/pa/modeling/artifact.py`, `artifacts/model/` and `artifacts/results/model_poc.json`; update `docs/model_card.md`, `docs/data_card.md` and `docs/reports/revision-2026-10/CP-C.md` with actual results and pending publication review. <!-- R11 --> <!-- rework: Refresh artifact provenance after nonnumerical export/helper source corrections -->
+- [x] T026 Record delegated evidence-based CP-C agent disposition of exact comparison/model versions in `docs/reports/revision-2026-10/CP-C.md` before new model findings are staged for public pages. <!-- R11 --> <!-- rework: Record current hashes and unchanged numerical evidence after rework -->
 - [x] T027 Extend shared `backend/src/pa/features/schema.py`, `backend/src/pa/features/builder.py` and `backend/src/pa/features/support.py` only as required for approved studio inputs, locks/ranges and support; verify geometry/count/type consistency in `backend/tests/test_features.py`. <!-- R11 -->
 - [x] T028 Extend `backend/src/pa/scoring/neuro_score.py`, `backend/src/pa/api/schemas.py` and `backend/tests/test_scoring.py` for explicit target/score scale boundaries and approved raw/clipped provenance without changing the distance formula. <!-- R12 -->
 - [x] T029 Implement bounded seeded closest-requested-score candidate ranking, locks/ranges, deterministic ties, deduplication and reasoned no-solution output in `backend/src/pa/optimize/search.py`; verify request 65 ranks 64.5 ahead of 95 and respects locked dimensions in `backend/tests/test_optimize.py`. <!-- R13 -->
@@ -186,13 +186,13 @@ README, CHANGELOG, cards, operations, release readiness and affected memory SHAL
 
 ### Phase 3: Integration & Edge Cases — exports and atlas
 
-- [x] T031 Define the catalogue product envelope and explicit unavailable schemas in `backend/src/pa/results/schemas.py`, `backend/src/pa/analysis/__init__.py`, `frontend/src/lib/research.ts` and `backend/tests/test_exports.py`; enforce version/provenance/count/unit fields. <!-- R14 -->
+- [x] T031 Define the catalogue product envelope and explicit unavailable schemas in `backend/src/pa/results/schemas.py`, `backend/src/pa/analysis/__init__.py`, `frontend/src/lib/research.ts` and `backend/tests/test_exports.py`; enforce version/provenance/count/unit fields. <!-- R14 --> <!-- rework: M1 preserve reviewed component status and reason provenance in public schema -->
 - [x] T032 Implement S1–S5 exposure, branching eligibility, room profiles/attribute correlation and per-person characteristics in `backend/src/pa/analysis/study.py` with products under `artifacts/results/analysis/`. <!-- R14 -->
 - [x] T033 Implement R1–R5 variance, ranking, self-report positions/densities, agreement and rating-style products in `backend/src/pa/analysis/ratings.py`; keep independent-unit uncertainty and E2/E3 boundaries explicit. <!-- R14 -->
 - [x] T034 Implement R6–R9 lighting/paired contrasts, function, separate E1 comfort/form and person-characteristic/sleep products in `backend/src/pa/analysis/rooms.py`, covering unsupported small cohorts explicitly. <!-- R14 -->
 - [x] T035 Implement B1–B8 QC, EEG spectra/balance, valid HR/HRV, candidate relationships, FAA, disagreement and physiology/self-report/fusion density products in `backend/src/pa/analysis/body.py`. <!-- R14 -->
 - [x] T036 Implement P1–P5 transfer, null comparisons, unseen-room curves, importance and training-diagram products plus fused model evaluation in `backend/src/pa/analysis/prediction.py`; expose only CP-C-reviewed new model findings for publication. <!-- R14 -->
-- [x] T037 Integrate catalogue and Methods products into `backend/src/pa/results/build.py`, `backend/src/pa/results/export.py` and frontend staging; complete `docs/research/analysis-catalogue.md` mappings and real-export/schema tests in `frontend/tests/real-exports.spec.ts`. <!-- R14 -->
+- [x] T037 Integrate catalogue and Methods products into `backend/src/pa/results/build.py`, `backend/src/pa/results/export.py` and frontend staging; complete `docs/research/analysis-catalogue.md` mappings and real-export/schema tests in `frontend/tests/real-exports.spec.ts`. <!-- R14 --> <!-- rework: M3 complete approved Methods evidence export -->
 - [x] T038 Update `frontend/src/App.tsx`, `frontend/src/ui.tsx`, `frontend/src/lib/repository.ts` and `fab/project/{constitution,context,code-review}.md` for eight routes, horizontal navigation, filter-preserving redirects, accessible loading/error boundaries and real 404. <!-- R15 -->
 - [x] T039 Pin/validate chart dependencies in `frontend/package.json` and its lockfile; implement shared accessible plot/glossary components in `frontend/src/figures/ResearchChart.tsx` and `frontend/src/ui.tsx`, with theme tokens and readable formatting. <!-- R17 -->
 - [x] T040 Draft concrete landing/researcher copy in `docs/research/landing-copy.md`; derive the authorized portrait into `frontend/public/images/researcher.webp`, preserve source provenance, and prepare `docs/reports/revision-2026-10/CP-E1.md` with exact copy and pending review. <!-- R16 -->
@@ -208,10 +208,10 @@ README, CHANGELOG, cards, operations, release readiness and affected memory SHAL
 
 ### Phase 4: Polish — evidence, delegated visual review and release
 
-- [x] T050 Run `make verify-data`, `make pipeline`, `make lint test site` against approved methods and perform isolated reproduction through `scripts/reproduce_isolated.py`; record actual commands/results, source/artifact comparisons and scientific version changes in `docs/reports/revision-2026-10/validation.md`. <!-- R20 -->
-- [x] T051 Capture every route at 1440×900 and 390×844 in both themes using `frontend/tests/site-capture.spec.ts`; store current captures under `docs/screenshots/` and record per-route Lighthouse accessibility results and fixed issues in `docs/reports/revision-2026-10/CP-E2.md`. <!-- R19 -->
-- [x] T052 Record evidence-based delegated CP-E2 agent desktop/mobile review of the concrete site/captures in `docs/reports/revision-2026-10/CP-E2.md`; resolve observed corrections before release. <!-- R19 -->
-- [x] T053 Update `README.md`, `CHANGELOG.md`, `docs/data_card.md`, `docs/model_card.md`, `docs/operations.md` and `docs/release-readiness.md` to final approved evidence, checkpoint outcomes, participant-code policy, limitations and reproduction commands; identify the affected memory domains and actual implementation evidence for the later hydrate handoff in `docs/release-readiness.md`. <!-- R20 -->
+- [x] T050 Run `make verify-data`, `make pipeline`, `make lint test site` against approved methods and perform isolated reproduction through `scripts/reproduce_isolated.py`; record actual commands/results, source/artifact comparisons and scientific version changes in `docs/reports/revision-2026-10/validation.md`. <!-- R20 --> <!-- rework: Verify rework delta against completed clean scientific reproduction and rerun affected checks -->
+- [x] T051 Capture every route at 1440×900 and 390×844 in both themes using `frontend/tests/site-capture.spec.ts`; store current captures under `docs/screenshots/` and record per-route Lighthouse accessibility results and fixed issues in `docs/reports/revision-2026-10/CP-E2.md`. <!-- R19 --> <!-- rework: Refresh visual evidence for changed Explorer and Methods content -->
+- [x] T052 Record evidence-based delegated CP-E2 agent desktop/mobile review of the concrete site/captures in `docs/reports/revision-2026-10/CP-E2.md`; resolve observed corrections before release. <!-- R19 --> <!-- rework: Review corrected presentation under delegated CP-E2 authorization -->
+- [x] T053 Update `README.md`, `CHANGELOG.md`, `docs/data_card.md`, `docs/model_card.md`, `docs/operations.md` and `docs/release-readiness.md` to final approved evidence, checkpoint outcomes, participant-code policy, limitations and reproduction commands; identify the affected memory domains and actual implementation evidence for the later hydrate handoff in `docs/release-readiness.md`. <!-- R20 --> <!-- rework: S1/S2 correct historical snapshot and checkpoint wording; record final rework validation -->
 - [x] T054 Validate current hosting free-tier limits and deployment needs; update `render.yaml`, `frontend/vercel.json` and `docs/release-readiness.md` with a concrete free-hosting choice, static/API readiness checks and outstanding external decisions without purchasing a domain. <!-- R20 -->
 
 ## Execution Order
@@ -228,89 +228,96 @@ README, CHANGELOG, cards, operations, release readiness and affected memory SHAL
 
 ## Acceptance
 
+Fresh independent full review iteration 2 reassessed all 57 items as met; the final disposition and evidence are recorded in `docs/reports/revision-2026-10/code-review.md`.
+
 ### Functional Completeness
 
-- [ ] A-001 R1: Maintained research context provides traceable thesis/prototype/formula/diagram references and corrected-protocol distinctions before corresponding source retirement.
-- [ ] A-002 R2: Every cleanup removal has source/hash/original/knowledge-preservation evidence; unique scientific data, Windows originals, active Fab and unrelated edits remain protected.
-- [ ] A-003 R3: CP-A contains measured storage, dated official limits and an explicit owner choice before any new migration; no history rewrite or second repository occurs.
-- [ ] A-004 R4: Canonical source verification, retired-document provenance, meaningful artifact drift detection and model compatibility work without private-PC runtime dependencies.
-- [ ] A-005 R5: CP-Spec contains a concrete method/decision proposal and explicit approval of the applied version/hash; no dependent v1.2 analysis predates approval.
-- [ ] A-006 R6: Timebase, QC and candidate exports implement approved settings with explicit uncertainty, stage-specific noise definitions and component provenance.
-- [ ] A-007 R7: Flagged review entries have matching evidence and delegated CP-B dispositions; ECG validity remains independent and contiguous-run based.
-- [ ] A-008 R8: Physiology, self-report and fusion are separate declared coordinates; complete/partial eligibility and E1/E2/E3 distinctions account for all source records.
-- [ ] A-009 R9: Every prespecified validity/disagreement result appears with eligible counts, justified uncertainty or an explicit unavailable reason.
-- [ ] A-010 R10: All four research questions and the fused studio model have honest prespecified comparisons, grouped isolation and actual model-card evidence.
-- [ ] A-011 R11: One validated room/feature/fitted-artifact contract serves training, CLI, API and search; CP-C review precedes new model finding publication.
-- [ ] A-012 R12: Studio predicts fused coordinates only and applies the exact target-distance formula with tested API/UI scales and raw/clipped provenance.
-- [ ] A-013 R13: Generation minimizes absolute distance from requested score while preserving locks/ranges and returns requested/achieved/difference with supported-search limitations.
-- [ ] A-014 R14: S1–S5, R1–R9, B1–B8, P1–P5 and Methods each have validated products and route mapping, including unavailable results and fused comparisons.
-- [ ] A-015 R15: Eight named routes, horizontal navigation, useful redirects, URL filters, static offline reading and real 404 are implemented; policy wording matches.
-- [ ] A-016 R16: CP-E1-approved landing is thesis-led with no results cards/featured findings plot; profile/contact/portrait and prototype descriptions match authorized sources.
-- [ ] A-017 R17: Research charts include units/counts/legends/help/data links and accessible alternatives; both themes, reduced motion and responsive layouts preserve meaning.
-- [ ] A-018 R18: One Studio page supports both actions, presets/targets/locks/ranges, schematic geometry, studied references and pre-submit unavailable handling.
-- [ ] A-019 R19: CP-A/CP-Spec have actual owner outcomes; later checkpoints have documented user delegation, evidence-based agent dispositions and no false human-inspection claim. Final browser/viewports/themes and accessibility evidence is recorded, and the changed-file scope and validation outputs are ready for fresh independent review.
-- [ ] A-020 R20: Implementation commands, cards, README, CHANGELOG, operations and release-readiness documents describe actual approved implementation with honest hosting status and no unauthorized purchases; the post-review memory handoff identifies affected domains without claiming hydrate or ship is already complete.
+- [x] A-001 R1: Maintained research context provides traceable thesis/prototype/formula/diagram references and corrected-protocol distinctions before corresponding source retirement.
+- [x] A-002 R2: Every cleanup removal has source/hash/original/knowledge-preservation evidence; unique scientific data, Windows originals, active Fab and unrelated edits remain protected.
+- [x] A-003 R3: CP-A contains measured storage, dated official limits and an explicit owner choice before any new migration; no history rewrite or second repository occurs.
+- [x] A-004 R4: Canonical source verification, retired-document provenance, meaningful artifact drift detection and model compatibility work without private-PC runtime dependencies.
+- [x] A-005 R5: CP-Spec contains a concrete method/decision proposal and explicit approval of the applied version/hash; no dependent v1.2 analysis predates approval.
+- [x] A-006 R6: Timebase, QC and candidate exports implement approved settings with explicit uncertainty, stage-specific noise definitions and component provenance.
+- [x] A-007 R7: Flagged review entries have matching evidence and delegated CP-B dispositions; ECG validity remains independent and contiguous-run based.
+- [x] A-008 R8: Physiology, self-report and fusion are separate declared coordinates; complete/partial eligibility and E1/E2/E3 distinctions account for all source records.
+- [x] A-009 R9: Every prespecified validity/disagreement result appears with eligible counts, justified uncertainty or an explicit unavailable reason.
+- [x] A-010 R10: All four research questions and the fused studio model have honest prespecified comparisons, grouped isolation and actual model-card evidence.
+- [x] A-011 R11: One validated room/feature/fitted-artifact contract serves training, CLI, API and search; CP-C review precedes new model finding publication.
+- [x] A-012 R12: Studio predicts fused coordinates only and applies the exact target-distance formula with tested API/UI scales and raw/clipped provenance.
+- [x] A-013 R13: Generation minimizes absolute distance from requested score while preserving locks/ranges and returns requested/achieved/difference with supported-search limitations.
+- [x] A-014 R14: S1–S5, R1–R9, B1–B8, P1–P5 and Methods each have validated products and route mapping, including unavailable results and fused comparisons. Methods now publishes approved numerical settings, CP-B review provenance, computed sensitivity and versioned references.
+- [x] A-015 R15: Eight named routes, horizontal navigation, useful redirects, URL filters, static offline reading and real 404 are implemented; policy wording matches.
+- [x] A-016 R16: CP-E1-approved landing is thesis-led with no results cards/featured findings plot; profile/contact/portrait and prototype descriptions match authorized sources.
+- [x] A-017 R17: Research charts include units/counts/legends/help/data links and accessible alternatives; both themes, reduced motion and responsive layouts preserve meaning.
+- [x] A-018 R18: One Studio page supports both actions, presets/targets/locks/ranges, schematic geometry, studied references and pre-submit unavailable handling.
+- [x] A-019 R19: CP-A/CP-Spec have actual owner outcomes; later checkpoints have documented user delegation, evidence-based agent dispositions and no false human-inspection claim. Final browser/viewports/themes and accessibility evidence is recorded, and the changed-file scope and validation outputs are ready for fresh independent review.
+- [x] A-020 R20: Implementation commands, cards, README, CHANGELOG, operations and release-readiness documents describe actual approved implementation with honest hosting status and no unauthorized purchases; the post-review memory handoff identifies affected domains without claiming hydrate or ship is already complete.
 
 ### Behavioral Correctness
 
-- [ ] A-021 R5: An unapproved draft does not alter the reviewed current method or executable science; pending decisions are visibly pending rather than implied by checked preparation tasks.
-- [ ] A-022 R8: E1 comfort never becomes a valence axis and only eligible E2/E3 self-report records appear on comparable self-report affect planes.
-- [ ] A-023 R10: Held-out-person-centered results are explicitly relative; no held-out distribution fits learned preprocessing/target calibration in model evaluation.
-- [ ] A-024 R13: With request 65, feasible score 64.5 ranks ahead of 95; default ranking does not maximize scores or treat the request as a minimum threshold.
-- [ ] A-025 R18: Entered locked dimensions reach the backend and remain identical in every generated candidate, including after presets and action changes.
-- [ ] A-026 R14: S2 shows independent branching eligibility and sample denominators distinguish trials, people and rooms; the browser does not compute research statistics.
+- [x] A-021 R5: An unapproved draft does not alter the reviewed current method or executable science; pending decisions are visibly pending rather than implied by checked preparation tasks.
+- [x] A-022 R8: E1 comfort never becomes a valence axis and only eligible E2/E3 self-report records appear on comparable self-report affect planes.
+- [x] A-023 R10: Held-out-person-centered results are explicitly relative; no held-out distribution fits learned preprocessing/target calibration in model evaluation.
+- [x] A-024 R13: With request 65, feasible score 64.5 ranks ahead of 95; default ranking does not maximize scores or treat the request as a minimum threshold.
+- [x] A-025 R18: Entered locked dimensions reach the backend and remain identical in every generated candidate, including after presets and action changes.
+- [x] A-026 R14: S2 shows independent branching eligibility and sample denominators distinguish trials, people and rooms; the browser does not compute research statistics.
 
 ### Removal Verification
 
-- [ ] A-027 R2: Verified obsolete personal/planning copies are absent from current project/public asset contents and ignored where appropriate; no blanket public archive relocation substitutes for removal.
-- [ ] A-028 R16: Thesis/CV/portfolio download links, invented biography, findings-led landing elements and descriptions of implemented prototypes as unbuilt future work are absent.
-- [ ] A-029 R15: Superseded seven-page navigation and stale route targets are removed or deliberately redirected without breaking useful deep links.
+- [x] A-027 R2: Verified obsolete personal/planning copies are absent from current project/public asset contents and ignored where appropriate; no blanket public archive relocation substitutes for removal.
+- [x] A-028 R16: Thesis/CV/portfolio download links, invented biography, findings-led landing elements and descriptions of implemented prototypes as unbuilt future work are absent.
+- [x] A-029 R15: Superseded seven-page navigation and stale route targets are removed or deliberately redirected without breaking useful deep links.
 
 ### Scenario Coverage
 
-- [ ] A-030 R6: Synthetic known bands, dead and ×10-gain channels, blinks, noise, flats, counter gaps and short recordings exercise approved reason/coverage paths.
-- [ ] A-031 R7: Signed and unsigned manual-review cases and ECG gap/ambiguous/short cases demonstrate no unreviewed eligibility promotion or plausible replacement measure.
-- [ ] A-032 R10: Group-membership and held-out-mutation tests demonstrate outer/inner fold isolation, training-only transformations and honest insufficient-group behavior.
-- [ ] A-033 R11: Direct, CLI, API and search prediction parity tests pass with the same fitted artifact; incompatible or altered artifact bytes fail readiness safely.
-- [ ] A-034 R12: Equal points, opposite corners, axis boundaries and out-of-square raw predictions verify exact score scale and approved clipping semantics.
-- [ ] A-035 R13: Tests exercise locks/ranges/type/lighting consistency, requested-score extremes, deterministic ties, duplicates, fixed seeds and impossible constraints.
-- [ ] A-036 R19: Playwright covers all eight routes at 1440×900 and 390×844 in both themes, keyboard controls, numeric wheel behavior, real 404 and action/loading/error states.
-- [ ] A-037 R17: Every route meets the Lighthouse accessibility target of at least 95 with stored actual measurements; visual artifacts support delegated CP-E2 review.
+- [x] A-030 R6: Synthetic known bands, dead and ×10-gain channels, blinks, noise, flats, counter gaps and short recordings exercise approved reason/coverage paths.
+- [x] A-031 R7: Signed and unsigned manual-review cases and ECG gap/ambiguous/short cases demonstrate no unreviewed eligibility promotion or plausible replacement measure.
+- [x] A-032 R10: Group-membership and held-out-mutation tests demonstrate outer/inner fold isolation, training-only transformations and honest insufficient-group behavior.
+- [x] A-033 R11: Direct, CLI, API and search prediction parity tests pass with the same fitted artifact; incompatible or altered artifact bytes fail readiness safely.
+- [x] A-034 R12: Equal points, opposite corners, axis boundaries and out-of-square raw predictions verify exact score scale and approved clipping semantics.
+- [x] A-035 R13: Tests exercise locks/ranges/type/lighting consistency, requested-score extremes, deterministic ties, duplicates, fixed seeds and impossible constraints.
+- [x] A-036 R19: Playwright covers all eight routes at 1440×900 and 390×844 in both themes, keyboard controls, numeric wheel behavior, real 404 and action/loading/error states.
+- [x] A-037 R17: Every route meets the Lighthouse accessibility target of at least 95 with stored actual measurements; visual artifacts support delegated CP-E2 review.
 
 ### Edge Cases & Error Handling
 
-- [ ] A-038 R2: Missing originals or hash mismatches retain affected candidates with reasons and cannot silently destroy evidence or block unrelated safe preparation.
-- [ ] A-039 R8: Missing/constant/uncalibratable modalities stay unavailable; complete and partial rows remain separable and usable components survive other-modality rejection.
-- [ ] A-040 R9: Tiny groups, undefined correlation, singular models and unsupported uncertainty yield explicit unavailable states without adjusting methods after seeing outcomes.
-- [ ] A-041 R18: Offline/missing/incompatible API states are visible before submit, produce no fabricated predictions, and leave static research/comparisons available where supported.
-- [ ] A-042 R14: Malformed/stale/missing export products produce readable errors and fail validation rather than rendering plausible numerical defaults.
+- [x] A-038 R2: Missing originals or hash mismatches retain affected candidates with reasons and cannot silently destroy evidence or block unrelated safe preparation.
+- [x] A-039 R8: Missing/constant/uncalibratable modalities stay unavailable; complete and partial rows remain separable and usable components survive other-modality rejection.
+- [x] A-040 R9: Tiny groups, undefined correlation, singular models and unsupported uncertainty yield explicit unavailable states without adjusting methods after seeing outcomes.
+- [x] A-041 R18: Offline/missing/incompatible API states are visible before submit, produce no fabricated predictions, and leave static research/comparisons available where supported.
+- [x] A-042 R14: Malformed/stale/missing export products produce readable errors and fail validation rather than rendering plausible numerical defaults.
 
 ### Code Quality
 
-- [ ] A-043 Pattern consistency: New code follows surrounding naming, package, schema and error-handling patterns.
-- [ ] A-044 No unnecessary duplication: Existing shared utilities are reused wherever applicable.
-- [ ] A-045 Readability: Scientific and UI code uses clear, maintainable functions and formatted components over clever compression.
-- [ ] A-046 Existing patterns: Deviations from established repository patterns have a concrete documented reason.
-- [ ] A-047 Composition: New behavior is composed through existing modules/components rather than unnecessary inheritance.
-- [ ] A-048 Evidence distinction: Source values, derived features, constructed coordinates and predictions remain identifiable in types, products and prose.
-- [ ] A-049 Fold-contained transforms: Learned preprocessing and target transforms fit only on training members and travel with serialized model provenance.
-- [ ] A-050 Explicit failure: Unavailable measurements and unsupported claims carry status/reason codes through API, exports and UI.
-- [ ] A-051 Function scope: Functions longer than 50 lines have a clear reason or are decomposed into meaningful units.
-- [ ] A-052 Utility reuse: The change introduces no duplicate manifest, chart-formatting, room-feature or inference utilities where existing ones suffice.
-- [ ] A-053 Named settings: Scientific thresholds, API versions, seeds and units use named constants/settings with decision provenance rather than unexplained magic values.
-- [ ] A-054 No invented numbers: Placeholder research claims, nominal physiological replacements and fabricated prediction-confidence values are absent.
-- [ ] A-055 Contract reuse: Room features, Neuro-Score and API requests have one shared canonical definition rather than parallel schemas.
+- [x] A-043 Pattern consistency: New code follows surrounding naming, package, schema and error-handling patterns.
+- [x] A-044 No unnecessary duplication: Existing shared utilities are reused wherever applicable.
+- [x] A-045 Readability: Scientific and UI code uses clear, maintainable functions and formatted components over clever compression. Reviewed page forms and tables are formatted as readable JSX with focused tests.
+- [x] A-046 Existing patterns: Deviations from established repository patterns have a concrete documented reason.
+- [x] A-047 Composition: New behavior is composed through existing modules/components rather than unnecessary inheritance.
+- [x] A-048 Evidence distinction: Source values, derived features, constructed coordinates and predictions remain identifiable in types, products and prose.
+- [x] A-049 Fold-contained transforms: Learned preprocessing and target transforms fit only on training members and travel with serialized model provenance.
+- [x] A-050 Explicit failure: Unavailable measurements and unsupported claims carry status/reason codes through API, exports and UI. Public trial exports and Explorer retain reviewed rejection/uncertainty reasons and independent HR/RMSSD status.
+- [x] A-051 Function scope: Functions longer than 50 lines have a clear reason or are decomposed into meaningful units.
+- [x] A-052 Utility reuse: The change introduces no duplicate manifest, chart-formatting, room-feature or inference utilities where existing ones suffice.
+- [x] A-053 Named settings: Scientific thresholds, API versions, seeds and units use named constants/settings with decision provenance rather than unexplained magic values.
+- [x] A-054 No invented numbers: Placeholder research claims, nominal physiological replacements and fabricated prediction-confidence values are absent.
+- [x] A-055 Contract reuse: Room features, Neuro-Score and API requests have one shared canonical definition rather than parallel schemas.
 
 ### Security
 
-- [ ] A-056 R20: Public exports and profile assets obey authorized scope, use participant display codes and do not publish named-recording associations, PC personal documents or secrets.
-- [ ] A-057 R11: Invalid API constraints and untrusted/incompatible model artifacts cannot bypass validation or trigger request-time training.
+- [x] A-056 R20: Public exports and profile assets obey authorized scope, use participant display codes and do not publish named-recording associations, PC personal documents or secrets.
+- [x] A-057 R11: Invalid API constraints and untrusted/incompatible model artifacts cannot bypass validation or trigger request-time training.
 
 ## Notes
 
 The Tasks section contains only implementation/preparation work. Formal review assesses acceptance after those tasks complete; hydrate and ship are later sequencer obligations under Execution Order and MUST NOT be prerequisites for apply completion or review acceptance.
 
 Check a task only when that specific deliverable is complete and verified. CP-A/CP-Spec required direct owner decisions, already recorded; CP-B/CP-C/CP-E require concrete evidence-based agent disposition under the user's standing delegation. Unavailable scientific results can satisfy a result-reporting requirement only when the approved analysis was actually attempted or its unsupported prerequisite was demonstrated; pending checkpoint work cannot be relabeled unavailable to complete the plan. Whole-change acceptance remains unchecked until reviewed. Maintain actual command output and deviations in the relevant workstream evidence rather than recreating obsolete process documents.
+
+## Deletion Candidates
+
+- `backend/src/pa/signals/qc.py:55` — Reconfirmed in review iteration 2: existing `epoch_reasons` wrapper has no remaining caller after independent channel QC moved callers to `channel_epoch_reasons`.
+- `backend/src/pa/results/review.py:140` — Reconfirmed in review iteration 2: existing `write_review_panels` and its exclusive `_selections`/`_panel` helpers have no remaining caller after the CLI adopted the complete `write_qc_review` path; confirm no supported external entry point before removal.
 
 ## Assumptions
 

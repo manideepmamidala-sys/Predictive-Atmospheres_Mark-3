@@ -59,6 +59,43 @@ class CatalogueChart(StrictModel):
         return self
 
 
+class MethodSetting(StrictModel):
+    category: str
+    label: str
+    value: str | float | int | bool
+    unit: str | None = None
+    source: str
+
+
+class MethodReview(StrictModel):
+    verdict: str
+    reviewed_at_utc: str
+    reviewers: list[str]
+    decision_counts: dict[str, int]
+    reviewed_eligibility_counts: dict[str, int]
+    ledger_path: str
+
+
+class MethodSensitivity(StrictModel):
+    experiment: int
+    alpha: float = Field(allow_inf_nan=False)
+    n: int = Field(ge=0)
+    mean_valence: float | None = Field(allow_inf_nan=False)
+    mean_arousal: float | None = Field(allow_inf_nan=False)
+
+
+class MethodReference(StrictModel):
+    label: str
+    path: str
+
+
+class MethodsEvidence(StrictModel):
+    settings: list[MethodSetting]
+    review: MethodReview
+    sensitivity: list[MethodSensitivity]
+    references: list[MethodReference]
+
+
 class CatalogueProduct(StrictModel):
     schema_version: Literal["1.0.0"]
     id: str
@@ -73,6 +110,7 @@ class CatalogueProduct(StrictModel):
     provenance: CatalogueProvenance
     availability_reason: str | None
     chart: CatalogueChart
+    methods_evidence: MethodsEvidence | None = None
 
     @model_validator(mode="after")
     def validate_envelope(self) -> CatalogueProduct:
@@ -82,6 +120,8 @@ class CatalogueProduct(StrictModel):
             raise ValueError("available product needs rows and no unavailability reason")
         if self.status == "unavailable" and not self.availability_reason:
             raise ValueError("unavailable product needs an explicit reason")
+        if (self.id == "Methods") != (self.methods_evidence is not None):
+            raise ValueError("Methods evidence must appear exactly on the Methods product")
         return self
 
 
@@ -165,6 +205,21 @@ class TraceRecord(StrictModel):
     rejected_segments: list[tuple[float, float]] = Field(default_factory=list)
 
 
+class ReviewDecisionRecord(StrictModel):
+    signal: str
+    status: Literal["accept", "reject", "uncertain"]
+    reason: str = Field(min_length=1)
+    reviewer: str = Field(min_length=1)
+    entry_id: str
+
+
+class ComponentQCRecord(StrictModel):
+    automated_eligible: bool
+    automated_reasons: list[str]
+    reviewed_eligible: bool
+    review_decisions: list[ReviewDecisionRecord]
+
+
 class TrialRecord(StrictModel):
     id: str
     experiment: int
@@ -175,6 +230,7 @@ class TrialRecord(StrictModel):
     ecg_hr_valid: bool = False
     ecg_rmssd_valid: bool = False
     reviewed_eligibility: dict[str, bool] = Field(default_factory=dict)
+    qc_components: dict[str, ComponentQCRecord] = Field(default_factory=dict)
     reasons: list[str] = Field(default_factory=list)
     eeg: TraceRecord | None = None
     ecg: TraceRecord | None = None
@@ -196,6 +252,22 @@ class TrialRecord(StrictModel):
     components: dict[str, float | None] = Field(default_factory=dict)
     available_components: list[str] = Field(default_factory=list)
     axis_availability: dict[str, bool] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def quality_matches_eligibility(self) -> TrialRecord:
+        if self.qc_components:
+            expected = {"timebase", "eeg_right", "eeg_left", "eeg_bilateral",
+                        "ecg_hr", "ecg_rmssd"}
+            if set(self.qc_components) != expected or set(self.reviewed_eligibility) != expected:
+                raise ValueError("trial quality components lack exact reviewed coverage")
+            if any(item.reviewed_eligible != self.reviewed_eligibility[key]
+                   for key, item in self.qc_components.items()):
+                raise ValueError("trial quality differs from reviewed eligibility")
+            if (self.eeg_valid != self.qc_components["eeg_bilateral"].reviewed_eligible or
+                    self.ecg_hr_valid != self.qc_components["ecg_hr"].reviewed_eligible or
+                    self.ecg_rmssd_valid != self.qc_components["ecg_rmssd"].reviewed_eligible):
+                raise ValueError("display eligibility differs from reviewed quality")
+        return self
 
 
 class SensitivityRecord(StrictModel):

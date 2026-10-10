@@ -11,7 +11,7 @@
     },
     "signals": {
       "file": "signals.json",
-      "sha256": "4f685d80c0e9c5564fc4be1f6f5703b22a59c09f6a20bf753439cab45e37a7f3"
+      "sha256": "bd639b4995dd7b5a669f186a81dcad754157ccc5af89eaf46448a53df1772c3f"
     },
     "affect": {
       "file": "affect.json",
@@ -23,11 +23,11 @@
     },
     "model": {
       "file": "model.json",
-      "sha256": "707855509e7c8504c2d2daad66e8d6f5ce0d4d89f8fb89c8e4e1cc94b5916344"
+      "sha256": "3a298b3d622e48c259a1295e974f1fe8705de312ca586252a1339837c0c6430d"
     },
     "bundle": {
       "file": "bundle.json",
-      "sha256": "e0a6125c549d4215ceef98ade91e7eb03e049d2bf62a3b77ff8b3a9f5a847985"
+      "sha256": "b01ebb84d511bcfdde5573ef99c56e14b8ff308a20fbf7ced578e3381062ec05"
     }
   },
   "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",

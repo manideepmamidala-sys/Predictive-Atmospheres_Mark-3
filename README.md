@@ -1,6 +1,6 @@
 # Predictive Atmospheres
 
-Predictive Atmospheres is a reproducible pilot study of how people rated rendered rooms and what conditional EEG/ECG features could be extracted while they viewed them. The eight-route Research Atlas and Design Studio revision has passed local pipeline, model, catalogue and browser checks; its fresh source-only reproduction passed, while independent whole-change release review remains pending. Its [v1.2 analysis specification](docs/specs/analysis-v1.2-draft.md) received exact-source owner approval at CP-Spec; [CP-B](docs/reports/revision-2026-10/CP-B.md) records delegated AI signal review without claiming personal owner inspection. [CP-C](docs/reports/revision-2026-10/CP-C.md) approved qualified **baseline-only** publication with limits. The Design Studio is an experimental demonstration, not a validated measure of emotion or a design recommendation.
+Predictive Atmospheres is a reproducible pilot study of how people rated rendered rooms and what conditional EEG/ECG features could be extracted while they viewed them. The eight-route Research Atlas and Design Studio revision has passed local pipeline, model, catalogue and browser checks; a fresh source-only scientific reconstruction passed, followed by a targeted final-source replay after nonnumerical review corrections. Independent whole-change release review remains pending. Its [v1.2 analysis specification](docs/specs/analysis-v1.2-draft.md) received exact-source owner approval at CP-Spec; [CP-B](docs/reports/revision-2026-10/CP-B.md) records delegated AI signal review without claiming personal owner inspection. [CP-C](docs/reports/revision-2026-10/CP-C.md) approved qualified **baseline-only** publication with limits. The Design Studio is an experimental demonstration, not a validated measure of emotion or a design recommendation.
 
 ## What the repository contains
 
@@ -26,6 +26,8 @@ make lint test site
 ```
 
 The pipeline regenerates the audit, conditional signal/affect/model results, learning curves, OpenAPI and browser products from preserved inputs. It verifies and can reuse an exact complete 1,000-draw spatial-null product; the [isolated source-only run](docs/reports/revision-2026-10/validation.md) computes the controls afresh. The 1,000 full-refit draws and 455 learning-curve subsets can take hours; do not lower those counts to claim a full reproduction. The site build checks product hashes against `artifacts/results/manifest.json` and validates all 28 catalogue products before staging research JSON; browser tests exercise the resulting pages. The root `Makefile` and [operations guide](docs/operations.md) give individual commands and setup details. On the current restricted host, Chromium needs the temporary native-library path documented in the operations guide.
+
+Public trial records distinguish automated from CP-B-reviewed timebase, EEG, HR and RMSSD eligibility, including the reviewed reasons; the Methods page exposes the approved numerical settings and existing sensitivity analysis. The [validation record](docs/reports/revision-2026-10/validation.md) separates the complete fresh scientific-control run from the later final-source provenance/export replay.
 
 Start the API and frontend in separate terminals after a successful pipeline:
 

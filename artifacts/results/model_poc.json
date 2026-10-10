@@ -410,7 +410,7 @@
   },
   "artifact": {
     "model_sha256": "17bfa472c30a9bb24034dd3800c85cd1fa9db36fec8c4a6cba2b8070b6b3544d",
-    "code_tree_sha256": "9e6bd7cb97f84003d1777a09ca40517c43342117360cd193c3125216380438ce",
+    "code_tree_sha256": "e4e4e8ebd2ab891945769a0d91d18070f0b9f6803fabc3d79132ac375b161a7d",
     "decisions_sha256": "51e8722479eaa7c724fbd22b88f83a4a50da64e0c7b5e5c8b1689036b878a180",
     "uv_lock_sha256": "b477770af8fc9cfbecc7c9a78e6c5f98736ebd4c25c6bf32a3c1341753ab7f44"
   },
@@ -430,7 +430,7 @@
     "validity.json": "19d1b30ad08f3d3a5e8529a94e1dea0cd8ffed30bb3447ba1447b3380a5dda5d",
     "model_null.json": "8b592089e70000a80cc44ef5fb27461ce0f8850ff35681fede168227329b8c10",
     "model_learning_curve.json": "b00a155aaf03926063110c6c61d1a5127d5c911466659095b4d57493b4e9da83",
-    "artifacts/model/metadata.json": "6a82203e42fc22dae4df400b3c9dc08ca98ce196f39e658e31de161c99783f60",
+    "artifacts/model/metadata.json": "ee8578c5961b926baf29574ae16a3e326de9ef6ec01993d23574166fde5fb9c0",
     "data/MANIFEST.sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7"
   },
   "source_artifacts_digest_rule": "Canonical sorted JSON; omit only wall-clock run timing in model_null/model_learning_curve and checkout revision/status in model metadata."

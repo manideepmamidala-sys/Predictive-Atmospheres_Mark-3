@@ -188,6 +188,60 @@ def test_reproduction_comparison_ignores_checkout_revision_but_detects_science_d
     assert "v1.2 reference product missing: artifacts/results/model_null_input.json" in incomplete_v12.stdout
 
 
+def test_public_exports_preserve_actual_review_and_methods_evidence(tmp_path):
+    import json
+
+    from pa.results.build import write_research_exports
+
+    write_research_exports(tmp_path)
+    bundle = json.loads((tmp_path / "bundle.json").read_text())
+    rows = {row["id"]: row for row in bundle["trials"]}
+    assert len(rows) == 160
+    assert all(set(row["qc_components"]) == {
+        "timebase", "eeg_right", "eeg_left", "eeg_bilateral", "ecg_hr", "ecg_rmssd"
+    } for row in rows.values())
+
+    uncertain = rows["E2:Subj_E:Rm_018"]
+    assert uncertain["qc_components"]["eeg_bilateral"]["automated_eligible"] is True
+    assert uncertain["qc_components"]["ecg_hr"]["automated_eligible"] is True
+    assert uncertain["reviewed_eligibility"]["timebase"] is False
+    assert uncertain["eeg_valid"] is uncertain["ecg_hr_valid"] is False
+    timebase = uncertain["qc_components"]["timebase"]["review_decisions"][0]
+    assert timebase["status"] == "uncertain"
+    assert "26000 samples imply 52.000 s" in timebase["reason"]
+    assert any("CP-B timebase uncertain" in reason for reason in uncertain["eeg_reasons"])
+    assert any("CP-B timebase uncertain" in reason for reason in uncertain["ecg_reasons"])
+
+    hr_only = rows["E1:Subj_B:Rm_010"]
+    assert hr_only["ecg_hr_valid"] is True and hr_only["ecg_rmssd_valid"] is False
+    assert hr_only["heart_rate_bpm"] == 81.08108108108108
+    assert hr_only["rmssd_ms"] is None
+    assert hr_only["qc_components"]["ecg_hr"]["reviewed_eligible"] is True
+    assert hr_only["qc_components"]["ecg_rmssd"]["automated_reasons"] == [
+        "insufficient_contiguous_coverage_for_rmssd"]
+    assert sum(row["ecg_hr_valid"] and not row["ecg_rmssd_valid"]
+               for row in rows.values()) == 49
+    assert sum((row["qc_components"]["eeg_bilateral"]["automated_eligible"] and
+                not row["eeg_valid"]) or
+               (row["qc_components"]["ecg_hr"]["automated_eligible"] and
+                not row["ecg_hr_valid"]) for row in rows.values()) == 33
+
+    methods = json.loads((tmp_path / "analysis/Methods.json").read_text())
+    evidence = methods["methods_evidence"]
+    assert methods["status"] == "available"
+    assert len(evidence["settings"]) >= 20
+    assert {item["category"] for item in evidence["settings"]} == {
+        "Timebase", "EEG quality", "ECG quality", "Affect mapping", "Model evaluation"}
+    assert evidence["review"]["verdict"] == "approved_for_reanalysis_with_exclusions"
+    assert len(evidence["sensitivity"]) == 10
+    assert {(row["experiment"], row["alpha"]) for row in evidence["sensitivity"]} == {
+        (experiment, alpha) for experiment in (2, 3)
+        for alpha in (0, 0.25, 0.5, 0.75, 1)}
+    assert {item["path"] for item in evidence["references"]} >= {
+        "docs/specs/analysis-v1.2-draft.md", "docs/data_card.md", "docs/model_card.md"}
+    assert "methods_evidence" not in json.loads((tmp_path / "analysis/S1.json").read_text())
+
+
 def test_trace_windows_are_bounded_and_mark_qc_exclusion():
     import numpy as np
 

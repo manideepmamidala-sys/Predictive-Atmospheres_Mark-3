@@ -1,12 +1,99 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { expect, test } from '@playwright/test';
-import { ANALYSIS_IDS } from '../src/lib/research';
+import { ANALYSIS_IDS, AnalysisProductSchema, ResearchSchema } from '../src/lib/research';
 
 const source = resolve(import.meta.dirname, '../../artifacts/results/analysis');
 const published = resolve(import.meta.dirname, '../public/research/analysis');
 const available = existsSync(resolve(source, 'index.json'));
 test.skip(!available, 'Complete current analysis catalogue is generated after the scientific gate.');
+
+test('real trial and Methods exports retain reviewed QC and approved method evidence', () => {
+  const bundle = JSON.parse(readFileSync(resolve(source, '../bundle.json'), 'utf8'));
+  expect(ResearchSchema.safeParse(bundle).success).toBe(true);
+  const trial = (id: string) => bundle.trials.find((item: { id: string }) => item.id === id);
+  const uncertain = trial('E2:Subj_E:Rm_018');
+  expect(uncertain.reviewed_eligibility.timebase).toBe(false);
+  expect(uncertain.qc_components.timebase.review_decisions).toEqual(expect.arrayContaining([
+    expect.objectContaining({ status: 'uncertain', reason: expect.stringMatching(/52|58|timebase|duration/i) }),
+  ]));
+  expect(uncertain.eeg_valid).toBe(false);
+  expect(uncertain.ecg_hr_valid).toBe(false);
+  const hrOnly = trial('E1:Subj_B:Rm_010');
+  expect(hrOnly.ecg_hr_valid).toBe(true);
+  expect(hrOnly.ecg_rmssd_valid).toBe(false);
+  expect(hrOnly.heart_rate_bpm).toBeCloseTo(81.081081, 4);
+  expect(hrOnly.rmssd_ms).toBeNull();
+  expect(bundle.trials.filter((item: { ecg_hr_valid: boolean; ecg_rmssd_valid: boolean }) =>
+    item.ecg_hr_valid && !item.ecg_rmssd_valid)).toHaveLength(49);
+  expect(bundle.trials.filter((item: { qc_components: Record<string, { automated_eligible: boolean; reviewed_eligible: boolean }> }) =>
+    ['eeg_bilateral', 'ecg_hr'].some(key => item.qc_components[key].automated_eligible && !item.qc_components[key].reviewed_eligible))).toHaveLength(33);
+
+  const missingQc = structuredClone(bundle);
+  delete missingQc.trials[0].qc_components;
+  expect(ResearchSchema.safeParse(missingQc).success).toBe(false);
+  const contradictoryQc = structuredClone(bundle);
+  contradictoryQc.trials[0].reviewed_eligibility.timebase = !contradictoryQc.trials[0].reviewed_eligibility.timebase;
+  expect(ResearchSchema.safeParse(contradictoryQc).success).toBe(false);
+
+  const methods = JSON.parse(readFileSync(resolve(source, 'Methods.json'), 'utf8'));
+  expect(AnalysisProductSchema.safeParse(methods).success).toBe(true);
+  const evidence = methods.methods_evidence;
+  expect(evidence.settings.length).toBeGreaterThan(4);
+  expect(evidence.settings.some((setting: { category: string }) => /timebase/i.test(setting.category))).toBe(true);
+  expect(evidence.settings.some((setting: { category: string }) => /EEG|ECG/i.test(setting.category))).toBe(true);
+  expect(evidence.review.ledger_path).toBeTruthy();
+  expect(evidence.sensitivity.length).toBeGreaterThan(1);
+  expect(evidence.references.map((reference: { path: string }) => reference.path)).toEqual(expect.arrayContaining([
+    expect.stringMatching(/analysis-v1\.2/), expect.stringMatching(/model.card|model_card/),
+  ]));
+  const missingEvidence = { ...methods, methods_evidence: undefined };
+  expect(AnalysisProductSchema.safeParse(missingEvidence).success).toBe(false);
+});
+
+test('real Explorer explains uncertain timebase and independent HR/RMSSD at mobile width', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/explore?experiment=2&person=Subj_E&room=Rm_018');
+  const uncertain = page.locator('table.data-table tbody tr').filter({ hasText: 'E2:Subj_E:Rm_018' });
+  await expect(uncertain).toHaveCount(1);
+  await expect(uncertain).toContainText('Timebase review uncertain');
+  await expect(uncertain.locator('td').nth(3)).toHaveText('Withheld');
+  await uncertain.getByText('Inspect automated and reviewed QC').click();
+  await expect(uncertain).toContainText('Review uncertain (timebase)');
+  await expect(uncertain).toContainText('reviewed: withheld');
+
+  await page.goto('/explore?experiment=1&person=Subj_B&room=Rm_010');
+  const hrOnly = page.locator('table.data-table tbody tr').filter({ hasText: 'E1:Subj_B:Rm_010' });
+  await expect(hrOnly).toHaveCount(1);
+  await expect(hrOnly.locator('td').nth(5)).toHaveText('Yes');
+  await expect(hrOnly.locator('td').nth(6)).toHaveText('No');
+  await expect(hrOnly.locator('td').nth(7)).toContainText('81.08');
+  await expect(hrOnly.locator('td').nth(8)).toContainText('Unavailable');
+  await hrOnly.getByText('Inspect automated and reviewed QC').click();
+  await expect(hrOnly).toContainText('ECG heart rate');
+  await expect(hrOnly).toContainText('ECG RMSSD');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThan(2);
+});
+
+test('real Methods evidence reads at both viewports and themes', async ({ page }) => {
+  test.setTimeout(90_000);
+  const methods = JSON.parse(readFileSync(resolve(source, 'Methods.json'), 'utf8'));
+  for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 900 }]) {
+    await page.setViewportSize(viewport);
+    for (const theme of ['light', 'dark'] as const) {
+      await page.goto('/methods');
+      await page.getByRole('combobox', { name: 'Appearance' }).selectOption(theme);
+      const evidence = page.getByRole('region', { name: 'Approved method evidence' });
+      await expect(evidence.getByRole('heading', { name: 'Settings and review decisions' })).toBeVisible();
+      await expect(evidence.getByText(methods.methods_evidence.review.ledger_path)).toBeVisible();
+      await expect(evidence.getByText(methods.methods_evidence.settings[0].label)).toBeVisible();
+      await expect(evidence.getByText(methods.methods_evidence.references[0].path)).toBeVisible();
+      await expect(evidence.getByRole('link', { name: /docs\/specs\/analysis-v1\.2-draft\.md/ })).toHaveAttribute('href', /\/blob\/63a325d7f0446ccfbfeaee2516e94568a3f23772\/docs\/specs\/analysis-v1\.2-draft\.md/);
+      await expect(evidence.locator('.methods-sensitivity tbody tr')).toHaveCount(methods.methods_evidence.sensitivity.length);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), `${viewport.width}px ${theme}`).toBeLessThan(2);
+    }
+  }
+});
 
 test('all 28 generated products retain complete IDs, provenance, route and valid chart encodings', () => {
   const index = JSON.parse(readFileSync(resolve(source, 'index.json'), 'utf8'));

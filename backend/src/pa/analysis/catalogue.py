@@ -29,7 +29,8 @@ def product(identifier: str, *, question: str, takeaway: str, method: str,
             x_label: str, y_label: str, sample: dict[str, int],
             source: dict, caveats: list[str], units: dict[str, str] | None = None,
             series: str | None = None, facet: str | None = None,
-            availability_reason: str | None = None) -> CatalogueProduct:
+            availability_reason: str | None = None,
+            methods_evidence: dict | None = None) -> CatalogueProduct:
     if identifier not in CATALOGUE_ROUTES:
         raise ValueError(f"unsupported product ID {identifier}")
     output = {"schema_version": "1.0.0", "id": identifier,
@@ -46,4 +47,6 @@ def product(identifier: str, *, question: str, takeaway: str, method: str,
                         "series": series, "facet": facet, "x_label": x_label,
                         "y_label": y_label, "x_unit": (units or {}).get(x),
                         "y_unit": (units or {}).get(y)}}
+    if methods_evidence is not None:
+        output["methods_evidence"] = methods_evidence
     return CatalogueProduct.model_validate(output)

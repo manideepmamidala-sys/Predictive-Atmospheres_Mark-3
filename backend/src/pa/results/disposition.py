@@ -3,9 +3,7 @@
 from __future__ import annotations
 
 import hashlib
-import json
 from collections import Counter
-from datetime import UTC, datetime
 from pathlib import Path
 
 from pa.config import ROOT
@@ -147,54 +145,3 @@ def integrate_decisions(queue: dict, signals: dict, timebase: dict,
         key for trial in queue["trials"]
         for key, value in trial["reviewed_eligibility"].items() if value))
     return queue
-
-
-def _report(queue: dict, eeg: dict, ecg: dict) -> str:
-    counts = queue["summary"]["decision_counts"]
-    lines = ["# CP-B — delegated signal-quality disposition", "",
-             "**Delegated QC verdict:** APPROVED_FOR_REANALYSIS_WITH_EXCLUSIONS", "",
-             ("**Owner personal review:** Not claimed. The user delegated decisions on 2026-10-10 via "
-              "`$fab-ff with your CP-B decidions`, then "
-              "`$fab-ff approve all the future checkpoint automatically and continue the work`."), "",
-             f"**Reviewed:** {queue['reviewed_at_utc']} by {', '.join(queue['reviewers'])}.", "",
-             (f"Approved source specification SHA-256: `{queue['approved_spec_sha256']}`. "
-              f"Signal SHA-256: `{queue['signals_sha256']}`. Timebase SHA-256: "
-              f"`{queue['timebase_sha256']}`. Reviewer-file hashes: "
-              f"`{queue['reviewer_file_sha256']}`."), "",
-             (f"Coverage: {len(queue['trials'])} trials, {len(queue['entries'])} queued entries; "
-              f"decisions {counts}. Reviewers also dispositioned every original EEG channel and ECG trial. "
-              "`accept` preserves automated validity; `reject` and `uncertain` withhold reviewed "
-              "eligibility. An automatically invalid signal cannot be promoted."), "",
-             "## Evidence and limitations", "",
-             ("EEG review: [per-channel decisions](cp-b-eeg-decisions.json); "
-              "ECG/timebase review: [per-trial decisions](cp-b-ecg-decisions.json). "
-              "The exact machine ledger and eligibility are in "
-              "[qc_review.json](../../../artifacts/results/qc_review.json)."), "",
-             *[f"- {item}" for item in eeg.get("limitations", [])],
-             *[f"- {item}" for item in ecg.get("limitations", [])], "",
-             "## Complete flagged queue", "",
-             "| Trial | Signal | Flags | Automated eligible | Decision and reason | Evidence |",
-             "| --- | --- | --- | --- | --- | --- |"]
-    for entry in queue["entries"]:
-        decision = entry["decision"]
-        panel = entry["panels"][0]
-        path = "../../../" + panel
-        reason = decision["reason"].replace("|", "\\|").replace("\n", " ")
-        lines.append(f"| {entry['trial_id']} | {entry['signal']} | "
-                     f"{', '.join(entry['flags'])} | {entry['automated_eligible']} | "
-                     f"{decision['status']}: {reason} | [panel]({path}) |")
-    return "\n".join(lines) + "\n"
-
-
-def write_integrated_review() -> dict:
-    queue = json.loads(QUEUE.read_text())
-    if queue.get("eligibility_integrated"):
-        raise RuntimeError("CP-B already integrated; preserve exact decisions")
-    eeg = json.loads(EEG_REVIEW.read_text())
-    ecg = json.loads(ECG_REVIEW.read_text())
-    product = integrate_decisions(queue, json.loads(SIGNALS.read_text()),
-                                  json.loads(TIMEBASE.read_text()), eeg, ecg,
-                                  reviewed_at=datetime.now(UTC).isoformat())
-    QUEUE.write_text(json.dumps(product, indent=2, allow_nan=False) + "\n")
-    REPORT.write_text(_report(product, eeg, ecg))
-    return product
