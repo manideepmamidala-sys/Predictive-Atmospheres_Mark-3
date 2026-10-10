@@ -74,8 +74,10 @@ allowlist, copy the existing `.vercel/project.json` link into that copy and
 verify it points to the intended project **before** running `vercel pull`.
 Then pull the Production environment and run `vercel build --target production`
 with `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`. The CLI may create a root `_uv/`,
-`pyproject.toml` and `uv.lock` as build scratch; these are ignored locally and
-are not the canonical backend project or lockfile. Audit the function output
+`pyproject.toml` and `uv.lock` as build scratch. Git ignores all three; the
+Vercel upload allowlist admits the generated root project and lockfile because
+the prebuilt function map references them, while `_uv/` remains excluded.
+They are not the canonical backend project or lockfile. Audit the function output
 for excluded files before publishing its prebuilt output. The 2026-10-10
 clean-copy Production build passed: the Python 3.12 function mapped 7,233
 existing files totaling 257.97 MiB, and the site emitted 136 files totaling
