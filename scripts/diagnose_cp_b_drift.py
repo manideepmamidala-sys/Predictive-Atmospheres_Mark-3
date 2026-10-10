@@ -1,0 +1,90 @@
+"""Report why regenerated QC inputs differ from the reviewed CP-B sources.
+
+This script is diagnostic only. It never edits artifacts or changes the science gate.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import platform
+import sys
+from itertools import islice
+from pathlib import Path
+
+
+PRODUCTS = ("signals_detail.json", "timebase.json")
+
+
+def _digest(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _differences(expected, actual, path: str = "$"):
+    if type(expected) is not type(actual):
+        yield path, expected, actual
+    elif isinstance(expected, dict):
+        for key in sorted(expected.keys() | actual.keys()):
+            child = f"{path}.{key}"
+            if key not in expected or key not in actual:
+                yield child, expected.get(key, "<missing>"), actual.get(key, "<missing>")
+            else:
+                yield from _differences(expected[key], actual[key], child)
+    elif isinstance(expected, list):
+        if len(expected) != len(actual):
+            yield f"{path}.length", len(expected), len(actual)
+        for index, (left, right) in enumerate(zip(expected, actual)):
+            yield from _differences(left, right, f"{path}[{index}]")
+    elif expected != actual:
+        yield path, expected, actual
+
+
+def _preview(value) -> str:
+    rendered = repr(value)
+    return rendered[:160] + ("..." if len(rendered) > 160 else "")
+
+
+def diagnose(reference_root: Path, regenerated_root: Path) -> bool:
+    reference = reference_root / "artifacts/results"
+    regenerated = regenerated_root / "artifacts/results"
+    ledger = json.loads((reference / "qc_review.json").read_text())
+    mismatched = False
+    for name in PRODUCTS:
+        old_path, new_path = reference / name, regenerated / name
+        field = "signals_sha256" if name == "signals_detail.json" else "timebase_sha256"
+        old_hash, new_hash = _digest(old_path), _digest(new_path)
+        print(f"{name}: approved={ledger[field]} committed={old_hash} "
+              f"regenerated={new_hash}")
+        if old_hash == new_hash == ledger[field]:
+            continue
+        mismatched = True
+        old, new = json.loads(old_path.read_text()), json.loads(new_path.read_text())
+        differences = list(islice(_differences(old, new), 11))
+        if not differences:
+            print("  Parsed JSON is equal; bytes differ in formatting or key order.")
+        else:
+            for path, before, after in differences[:10]:
+                print(f"  {path}: committed={_preview(before)} regenerated={_preview(after)}")
+            if len(differences) > 10:
+                print("  Additional differences omitted; download the CI artifact for full comparison.")
+    if mismatched:
+        print(f"Runtime: Python {sys.version.split()[0]}, platform {platform.platform()}, "
+              f"machine {platform.machine()}, processor {platform.processor()}")
+        cpuinfo = Path("/proc/cpuinfo")
+        for line in cpuinfo.read_text().splitlines() if cpuinfo.exists() else []:
+            if line.startswith("flags") or line.startswith("Features"):
+                print(f"CPU {line}")
+                break
+        import numpy as np
+        import scipy
+
+        print(f"NumPy {np.__version__}, SciPy {scipy.__version__}")
+        np.show_runtime()
+        scipy.show_config()
+    return mismatched
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        raise SystemExit("usage: diagnose_cp_b_drift.py REFERENCE_ROOT REGENERATED_ROOT")
+    diagnose(Path(sys.argv[1]), Path(sys.argv[2]))
