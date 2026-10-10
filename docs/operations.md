@@ -36,6 +36,65 @@ For local Chromium tests on the present Ubuntu host, Playwright 1.64.0 required 
 
 ## Candidate hosting configuration
 
+`vercel.json` at the repository root defines one Vercel Services project with a Vite
+site and a Python FastAPI service. Set the Vercel project Root Directory to the
+repository root and Framework Preset to **Services**. Its ordered rewrites send
+`/v1/*` to the API and other paths to the site, keeping Studio calls on the
+same origin. The site service separately rewrites deep links to `index.html`
+after checking static files. Leave `VITE_API_BASE_URL` unset for this deployment;
+the site build command pins `VITE_REPOSITORY_REF` to the published branch.
+The frontend service requires all manifest-matched static exports. The API
+service loads the trusted fitted artifact; neither trains at request time.
+
+Vercel's Python runtime supports Python 3.12, so the root
+`.python-version` and `requirements.txt` form an isolated deployment
+profile with the artifact-checked package versions. The canonical
+`backend/pyproject.toml`, `backend/uv.lock`, fitted artifact and scientific
+source bytes remain unchanged. The root `.vercelignore` allowlists the
+minimum source, static assets, result exports, metadata, approved specification
+and trusted model needed for the two services. It excludes raw recordings,
+original renders, unrelated reports and local generated outputs from CLI
+uploads. The Python function separately excludes frontend files and all
+research result products except the approved QC ledger. An isolated Python
+3.12 local check loaded the artifact with `ready=true` and returned the same
+health, metadata, prediction and deterministic optimization JSON as the
+canonical Python 3.11 environment, including from an allowlisted source copy.
+The scientific Python dependencies exceed the CLI's standard-function
+packaging threshold. Set `VERCEL_SUPPORT_LARGE_FUNCTIONS=1` for Production
+and Preview on the Vercel project before building or deploying; the same flag
+must be present for a local `vercel build`. Vercel's
+[Large Functions announcement](https://vercel.com/changelog/vercel-functions-can-now-be-up-to-5-gb-in-package-size-7yAwSyCig0IQDXUIDistvS/eadf06d6c3)
+documents the larger package path. Inspect the resulting function bundle and
+verify hosted startup, memory and latency rather than assuming the larger
+package alone makes the API ready. The local Vercel build passed; hosted
+request checks are still required.
+
+For a local provider build, start from a clean copy of the `.vercelignore`
+allowlist, copy the existing `.vercel/project.json` link into that copy and
+verify it points to the intended project **before** running `vercel pull`.
+Then pull the Production environment and run `vercel build --target production`
+with `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`. The CLI may create a root `_uv/`,
+`pyproject.toml` and `uv.lock` as build scratch; these are ignored locally and
+are not the canonical backend project or lockfile. Audit the function output
+for excluded files before publishing its prebuilt output. The 2026-10-10
+clean-copy Production build passed: the Python 3.12 function mapped 7,233
+existing files totaling 257.97 MiB, and the site emitted 136 files totaling
+18.43 MB. The function map contained no raw recordings, reports, Fab files,
+frontend files or local environment files; the canonical source, fitted model
+and hash inputs matched the repository byte-for-byte. Deploy the prebuilt
+output from the same clean copy because its function map references files
+relative to that source root.
+
+After deployment, verify all eight deep links and representative
+`/research/` JSON and `/rooms/` images as static responses; check
+`/v1/health` for JSON `ready=true`, then `/v1/meta`, prediction and
+optimization through the public origin. Inspect the deployed function bundle
+size, memory, cold start, errors and account limits. Vercel Services is
+currently a beta feature available on all plans; the local checks do not
+guarantee account eligibility or hosted behavior.
+
+`render.yaml` and `frontend/vercel.json` remain the earlier two-provider
+candidate if the one-project build cannot satisfy the hosted limits.
 `render.yaml` describes one Render **free Python API** service. It pins Python 3.11.11, installs the frozen backend lock without dev packages, starts Uvicorn on Render's `$PORT`, and leaves automatic deployment off. It never starts analysis or training at request time. A hosting build therefore requires a trusted, compatible `artifacts/model/` and the source data/hash inputs the loader verifies to be present in the connected revision. The final-source local `uv sync --frozen --no-dev` environment loaded the trusted `baseline_only` artifact and served `/v1/health` with JSON `ready=true` plus `/v1/meta`; observed RSS was 215,688 KiB on this host. This does not establish Render's cold-start memory or response times. Its `/v1/health` HTTP check alone does not prove `ready=true`; inspect that field separately. Set `PA_CORS_ORIGINS` to the actual HTTPS frontend origin in the hosting dashboard. The legacy Streamlit service has no active candidate.
 
 `frontend/vercel.json` describes a Vite static SPA build, pinned package installation and a deep-link rewrite. Set the Vercel project Root Directory to `frontend` and enable **Include source files outside of the Root Directory in the Build Step**, because staging reads `../artifacts/results/`; the required-export build flag fails closed if those files are missing. Configure `VITE_API_BASE_URL` to the actual API HTTPS origin and `VITE_REPOSITORY_REF` to an accessible source revision. The rewrite is for client-side routes; verify that existing `/research/` JSON and `/rooms/` image assets still resolve as static files. The final local preview served all eight deep links and representative `/research/` JSON as HTTP 200; 134 built static files total 15,347,819 bytes, with `research/signals.json` the largest at 7,610,410 bytes. These settings have passed local build and browser tests, not a Vercel or Render deployment.

@@ -110,3 +110,10 @@ backend/.pytest_cache/
 backend/.ruff_cache/
 .envrc
 *:Zone.Identifier
+.vercel
+.env*
+
+# Vercel's local Python builder generates these from root requirements.txt.
+/pyproject.toml
+/uv.lock
+/_uv/

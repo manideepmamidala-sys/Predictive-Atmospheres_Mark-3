@@ -12,6 +12,26 @@
 | Review correction | Public exports now carry approved CP-B automated and reviewed statuses/reasons by component; Methods exposes numerical settings, reviewed decisions, computed sensitivities and versioned references. After the fresh scientific reconstruction, a **targeted final-source replay** rebuilt the changed export and model-provenance layers from its clean scientific artifacts. It matched 53 result products and model bytes, with 123 backend tests passing; it did not rerun the 1,000 null draws or 455 fits. Independent [CP-C](reports/revision-2026-10/CP-C.md) records the refreshed exact-hash baseline-only receipt. | Keep the fresh-control and targeted-replay evidence separate when describing the final revision. |
 | Publication identity | `gh repo view` previously reported `PUBLIC`; owner authorization for public research files is recorded in the active intake. Generated records retain pseudonymous source `Subj_*` display codes, with no personal-name mapping asserted. No DOI or final licensing claim is embedded in the application. | Agree code/data/assets license scopes separately and establish release title/authors/version before an archive/DOI. A named association would need verified mapping and specific permission. |
 
-The concrete **candidate** hosting split is Vercel Hobby for static research pages and Render Free for the fitted API. The current `frontend/vercel.json` and `render.yaml` configure those candidates and deliberately do not deploy. The [dated hosting assessment](reports/revision-2026-10/hosting-assessment.md) records official free-tier limits and final local asset/runtime measurements. Before any external deployment, check account eligibility, provider build and limits, exact public CORS/API origins, license scope and any rights in third-party assets; no domain purchase or paid plan is authorized by this local record. A successful local build, a passing health process response and a screenshot remain distinct evidence types.
+The selected deployment candidate is now a single Vercel Services project,
+configured by the root `vercel.json`: static research pages and a same-origin
+`/v1` Python API, with service-local SPA deep-link rewrites. The allowlisted
+source includes the render manifest needed to compile the site while excluding
+raw renders, unrelated reports and development outputs. The Python dependency
+package needs Vercel's Large Functions beta, enabled by
+`VERCEL_SUPPORT_LARGE_FUNCTIONS=1` for Production and Preview. Its isolated
+Python 3.12 profile loaded the unchanged trusted artifact and matched Python
+3.11 health, metadata, prediction and
+optimization output from an allowlisted 17.5 MB source copy. The earlier
+Vercel-plus-Render split remains documented as a fallback. The
+[dated hosting assessment](reports/revision-2026-10/hosting-assessment.md)
+records official free-tier limits and local asset/runtime measurements for
+that earlier split. A clean-copy Vercel Services Production build passed on
+2026-10-10: 136 static files and a Python 3.12 function mapping 257.97 MiB of
+required files, with no source reports, raw recordings or local environment
+files in the API bundle. Deployed API readiness, routes/assets, memory, cold
+start and account limits still require verification at the public URL. No
+domain purchase or paid plan is authorized by this record. A successful local
+build, a passing health process response and a screenshot remain distinct
+evidence types.
 
 For post-review hydrate, the concrete evidence maps to `docs/memory/architecture/platform.md` (trusted artifact compatibility, strict API and static export contracts), `docs/memory/architecture/website.md` (eight routes, catalogue staging, live Studio and accessible charts), `docs/memory/research/analysis.md` (approved v1.2 cohorts, controls, 28 figures and CP-C limits), `docs/memory/research/protocol.md` (source, timebase and CP-B decisions), and `docs/memory/operations/reproducibility.md` (source inventory, ledger bootstrap, uncached clone replay and hosting checks). The parent workflow will hydrate these after independent whole-change review using the final implementation and [validation record](reports/revision-2026-10/validation.md), not from draft aspirations. See [operations.md](operations.md), [data_card.md](data_card.md) and [model_card.md](model_card.md) for present behavior.

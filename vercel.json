@@ -1,0 +1,27 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "site": {
+      "root": "frontend/",
+      "framework": "vite",
+      "installCommand": "corepack pnpm install --frozen-lockfile",
+      "buildCommand": "PA_REQUIRE_RESEARCH_EXPORT=1 VITE_REPOSITORY_REF=261010-tadj-research-atlas-design-studio corepack pnpm build",
+      "outputDirectory": "dist",
+      "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+    },
+    "research_api": {
+      "root": "./",
+      "framework": "fastapi",
+      "entrypoint": "api.index:app",
+      "functions": {
+        "api/index.py": {
+          "excludeFiles": "{data/!(MANIFEST.sha256|metadata){,/**},docs/!(specs){,/**},docs/specs/!(analysis-v1.2-draft.md){,/**},artifacts/results/!(qc_review.json){,/**},frontend/**,fab/**,screenshots/**,backend/{.venv,tests}/**}"
+        }
+      }
+    }
+  },
+  "rewrites": [
+    { "source": "/v1/(.*)", "destination": { "service": "research_api" } },
+    { "source": "/(.*)", "destination": { "service": "site" } }
+  ]
+}
