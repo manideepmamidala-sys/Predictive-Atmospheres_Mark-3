@@ -1,6 +1,6 @@
-# Local operation and hosting candidates
+# Local operation and production hosting
 
-The research pipeline and FastAPI service live in `backend/`. The eight-route React atlas lives in `frontend/`. The site reads generated, hash-checked `artifacts/results/bundle.json`, loads the versioned analysis catalogue on research routes and loads `signals.json` only when the Data Explorer opens signal traces. Prediction and optimization alone need the live API. This page describes local commands and **candidate** hosting configuration; it is not a deployment record.
+The research pipeline and FastAPI service live in `backend/`. The eight-route React atlas lives in `frontend/`. The site reads generated, hash-checked `artifacts/results/bundle.json`, loads the versioned analysis catalogue on research routes and loads `signals.json` only when the Data Explorer opens signal traces. Prediction and optimization alone need the live API. This page describes local commands and the active hosting configuration; the [dated deployment record](reports/revision-2026-10/deployment.md) contains the public URL and observed checks.
 
 ## Reproduce locally
 
@@ -34,7 +34,7 @@ Run these in separate terminals. Vite proxies `/v1` to `PA_API_URL` (default `ht
 
 For local Chromium tests on the present Ubuntu host, Playwright 1.64.0 required native `libnspr4`, `libnss3` and `libasound2t64`. The coordinator extracted package libraries temporarily under `/tmp/pa-browser-libs/root/usr/lib/x86_64-linux-gnu`; this path is **not** a repository dependency or portable setup. On a normal supported host or CI, install Chromium with `cd frontend && corepack pnpm exec playwright install --with-deps chromium`. CI uses that route. On the current restricted host only, the verified browser command sets `LD_LIBRARY_PATH=/tmp/pa-browser-libs/root/usr/lib/x86_64-linux-gnu` before `corepack pnpm test`; recreate the temporary libraries if that path disappears.
 
-## Candidate hosting configuration
+## Production hosting configuration
 
 `vercel.json` at the repository root defines one Vercel Services project with a Vite
 site and a Python FastAPI service. Set the Vercel project Root Directory to the
@@ -66,8 +66,9 @@ must be present for a local `vercel build`. Vercel's
 [Large Functions announcement](https://vercel.com/changelog/vercel-functions-can-now-be-up-to-5-gb-in-package-size-7yAwSyCig0IQDXUIDistvS/eadf06d6c3)
 documents the larger package path. Inspect the resulting function bundle and
 verify hosted startup, memory and latency rather than assuming the larger
-package alone makes the API ready. The local Vercel build passed; hosted
-request checks are still required.
+package alone makes the API ready. The local Vercel build and scoped hosted
+request checks passed; the [deployment record](reports/revision-2026-10/deployment.md)
+distinguishes those checks from unmeasured runtime behavior.
 
 For a local provider build, start from a clean copy of the `.vercelignore`
 allowlist, copy the existing `.vercel/project.json` link into that copy and
@@ -87,13 +88,15 @@ and hash inputs matched the repository byte-for-byte. Deploy the prebuilt
 output from the same clean copy because its function map references files
 relative to that source root.
 
-After deployment, verify all eight deep links and representative
+For each deployment, verify all eight deep links and representative
 `/research/` JSON and `/rooms/` images as static responses; check
 `/v1/health` for JSON `ready=true`, then `/v1/meta`, prediction and
 optimization through the public origin. Inspect the deployed function bundle
-size, memory, cold start, errors and account limits. Vercel Services is
-currently a beta feature available on all plans; the local checks do not
-guarantee account eligibility or hosted behavior.
+size, memory, cold start, errors and account limits. The 2026-10-10 public
+Production deployment passed the direct-route, asset, browser and scoped API
+parity checks recorded in the [deployment report](reports/revision-2026-10/deployment.md).
+Vercel Services and Large Functions are beta features; future builds and
+quota headroom need continued observation.
 
 `render.yaml` and `frontend/vercel.json` remain the earlier two-provider
 candidate if the one-project build cannot satisfy the hosted limits.
