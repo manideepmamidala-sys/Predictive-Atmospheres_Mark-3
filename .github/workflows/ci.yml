@@ -15,6 +15,10 @@ jobs:
     timeout-minutes: 360
     env:
       CI: "true"
+      # Approved CP-B signal bytes reproduce with X86_V3 and Haswell kernels.
+      # Hosted runners can expose AVX-512 and otherwise change floating-point results.
+      NPY_DISABLE_CPU_FEATURES: "X86_V4,AVX512_ICL,AVX512_SPR"
+      OPENBLAS_CORETYPE: "Haswell"
     steps:
       - uses: actions/checkout@v6
 
@@ -35,6 +39,27 @@ jobs:
 
       - name: Install frozen project dependencies
         run: make setup
+
+      - name: Verify approved numerical runtime
+        run: |
+          cd backend
+          uv run --frozen python - <<'PY'
+          import numpy as np
+          from scipy import linalg
+          from threadpoolctl import threadpool_info
+
+          features = np._core._multiarray_umath.__cpu_features__
+          selected = {name: features.get(name) for name in
+                      ("X86_V3", "X86_V4", "AVX512_ICL", "AVX512_SPR")}
+          blas = [row for row in threadpool_info() if row["internal_api"] == "openblas"]
+          print("NumPy CPU features:", selected)
+          print("OpenBLAS kernels:", [row["architecture"] for row in blas])
+          if not selected["X86_V3"] or any(selected[name] for name in
+                                           ("X86_V4", "AVX512_ICL", "AVX512_SPR")):
+              raise SystemExit("NumPy CPU dispatch differs from approved CP-B runtime")
+          if not blas or any(row["architecture"] != "Haswell" for row in blas):
+              raise SystemExit("OpenBLAS kernel differs from approved CP-B runtime")
+          PY
 
       - name: Install Chromium and host libraries
         run: cd frontend && corepack pnpm exec playwright install --with-deps chromium
