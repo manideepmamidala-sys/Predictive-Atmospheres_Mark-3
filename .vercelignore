@@ -10,6 +10,8 @@
 !/frontend
 !/requirements.txt
 !/vercel.json
+!/pyproject.toml
+!/uv.lock
 
 /artifacts/*
 !/artifacts/model
