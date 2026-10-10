@@ -10,7 +10,7 @@ description: "Eight-route React research atlas, validated static catalogue, comp
 
 `frontend/src/` is a React, Vite and TypeScript research atlas. Its eight routes are `/` (Predictive Atmospheres), `/study`, `/rooms`, `/body`, `/prediction`, `/studio`, `/explore` and `/methods`. The landing page presents the architectural question, hypothesis, three experiments, contribution and researcher context before directing readers to findings. Legacy route redirects preserve older links. The [platform](/architecture/platform.md) produces its evidence.
 
-The public entry point is https://predictive-atmospheres.vercel.app. Root `vercel.json` hosts the static site and same-origin `/v1/*` FastAPI service together. The site service checks static assets before rewriting direct page requests to `index.html`. Publication is manual; the [deployment record](../../reports/revision-2026-10/deployment.md) distinguishes verified hosted checks from local test evidence.
+The public entry point is https://predictive-atmospheres.vercel.app. The repository About website field uses this origin, and the README provides direct links to all eight pages. Root `vercel.json` hosts the static site and same-origin `/v1/*` FastAPI service together. The site service checks static assets before rewriting direct page requests to `index.html`. Publication is manual; the [deployment record](../../reports/revision-2026-10/deployment.md) distinguishes verified hosted checks from local test evidence.
 
 ## Requirements
 
