@@ -43,23 +43,23 @@ Validate local documentation links, the eight public page links, homepage metada
 
 ### Functional Completeness
 
-- [ ] A-001 R1: README has prominent live link, eight correct page names/URLs, recent features and visible contact email.
-- [ ] A-002 R1: Local reproduction and scientific evidence links remain available, with fused-only baseline/constant/Neuro-Score qualifications.
-- [ ] A-003 R2: README, memory and project context consistently describe active hosting, runtime split and measured limits; approved specification is unchanged.
-- [ ] A-004 R2: Generated indexes match memory descriptions; dated evidence remains intact.
-- [ ] A-005 R3: Homepage is the live origin and unrelated GitHub metadata is unchanged.
+- [x] A-001 R1: README has prominent live link, eight correct page names/URLs, recent features and visible contact email.
+- [x] A-002 R1: Local reproduction and scientific evidence links remain available, with fused-only baseline/constant/Neuro-Score qualifications.
+- [x] A-003 R2: README, memory and project context consistently describe active hosting, runtime split and measured limits; approved specification is unchanged.
+- [x] A-004 R2: Generated indexes match memory descriptions; dated evidence remains intact.
+- [x] A-005 R3: Homepage is the live origin and unrelated GitHub metadata is unchanged.
 
 ### Scenario Coverage
 
-- [ ] A-006 R4: Local references and eight live routes pass targeted checks, with results recorded.
-- [ ] A-007 R4: Protected hashes remain unchanged, no new runtime/scientific edits exist relative to inherited HEAD, and PR ancestry is described accurately.
+- [x] A-006 R4: Local references and eight live routes pass targeted checks, with results recorded.
+- [x] A-007 R4: Protected hashes remain unchanged, no new runtime/scientific edits exist relative to inherited HEAD, and PR ancestry is described accurately.
 
 ### Code Quality
 
-- [ ] A-008: Plain, readable prose follows existing Markdown and memory conventions.
-- [ ] A-009: Existing deployment report is reused rather than unnecessarily duplicated.
-- [ ] A-010: Source evidence, derived features and predictions remain distinguishable; no placeholder research claims are introduced.
-- [ ] A-011: Documentation changes do not duplicate runtime contracts or add unused utilities/tests.
+- [x] A-008: Plain, readable prose follows existing Markdown and memory conventions.
+- [x] A-009: Existing deployment report is reused rather than unnecessarily duplicated.
+- [x] A-010: Source evidence, derived features and predictions remain distinguishable; no placeholder research claims are introduced.
+- [x] A-011: Documentation changes do not duplicate runtime contracts or add unused utilities/tests.
 
 ## Notes
 
