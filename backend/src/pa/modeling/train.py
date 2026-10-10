@@ -118,6 +118,10 @@ def evaluate_and_fit(cohort: Cohort, artifact_dir: Path = MODEL) -> dict:
         folds = evaluate_outer(cohort.X, cohort.raw, cohort.reports, labels)
         evaluation[name] = {"folds": folds, "aggregate": _aggregate(folds)}
     result = {"schema_version": "1.0.0", "method_version": decisions()["version"],
+              "approved_spec_sha256": decisions()["approved_spec_sha256"],
+              "target_type": "E3_complete_fusion_population_calibrated",
+              "target_mapping": ("FAA and equal alpha-suppression/engagement EEG arousal; "
+                                 "equal EEG/HR physiology arousal; 0.5 physiology + 0.5 E3 reports"),
               "cohort": {"rows": len(cohort.ids), "ids": list(cohort.ids),
                          "rooms": len(set(cohort.room_groups)),
                          "participants": len(set(cohort.subject_groups)),
@@ -149,7 +153,9 @@ def evaluate_and_fit(cohort: Cohort, artifact_dir: Path = MODEL) -> dict:
                                          "inner_fold_calibrations": selected.inner_fold_calibrations,
                                          "ineligibility_reasons": selected.ineligibility_reasons,
                                          "target_calibration": {"centers": calibration.centers,
-                                                                "scales": calibration.scales}}
+                                                                "scales": calibration.scales,
+                                                                "component_order": list(COMPONENTS),
+                                                                "mapping": result["target_mapping"]}}
             metadata = build_metadata(
                 model_status=status,
                 training_scope={"cohort": "experiment_03_complete_raw_components_full_room_attributes",
@@ -174,9 +180,12 @@ def evaluate_and_fit(cohort: Cohort, artifact_dir: Path = MODEL) -> dict:
 
 def write_model_evaluation(affect_path: Path = RESULTS / "affect_detail.json",
                            destination: Path = RESULTS / "model_evaluation.json") -> dict:
+    from pa.modeling.evidence import outer_prediction_evidence
+
     require_science_checkpoint()
     cohort = build_cohort(json.loads(affect_path.read_text()), load_rooms())
     result = evaluate_and_fit(cohort)
+    result["outer_prediction_evidence"] = outer_prediction_evidence(cohort, result["evaluation"])
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
     return result

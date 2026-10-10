@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0.0",
+  "id": "B1",
+  "route": "/body",
+  "status": "available",
+  "question": "Which signals passed reviewed quality and timebase checks?",
+  "takeaway": "Among 160 reviewed source trials, 154 pass the conditional timebase, 128 retain bilateral EEG, 66 retain HR and 17 retain RMSSD.",
+  "method": "Count CP-B reviewed component-specific eligibility independently per experiment; no rejected component is replaced with zero.",
+  "caveats": [
+    "Review inspected selected signal panels and all machine evidence; it was AI-assisted, not a personal owner signoff.",
+    "Sample rate, units and reference remain conditionally unconfirmed."
+  ],
+  "counts": {
+    "trials": 160,
+    "participants": 10,
+    "rooms": 30
+  },
+  "units": {
+    "eligible_trials": "trials"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T13:06:13+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "bar",
+    "rows": [
+      {
+        "experiment": 1,
+        "branch": "timebase",
+        "eligible_trials": 50,
+        "total_trials": 50,
+        "ineligible_trials": 0
+      },
+      {
+        "experiment": 1,
+        "branch": "eeg_right",
+        "eligible_trials": 50,
+        "total_trials": 50,
+        "ineligible_trials": 0
+      },
+      {
+        "experiment": 1,
+        "branch": "eeg_left",
+        "eligible_trials": 50,
+        "total_trials": 50,
+        "ineligible_trials": 0
+      },
+      {
+        "experiment": 1,
+        "branch": "eeg_bilateral",
+        "eligible_trials": 50,
+        "total_trials": 50,
+        "ineligible_trials": 0
+      },
+      {
+        "experiment": 1,
+        "branch": "ecg_hr",
+        "eligible_trials": 13,
+        "total_trials": 50,
+        "ineligible_trials": 37
+      },
+      {
+        "experiment": 1,
+        "branch": "ecg_rmssd",
+        "eligible_trials": 0,
+        "total_trials": 50,
+        "ineligible_trials": 50
+      },
+      {
+        "experiment": 2,
+        "branch": "timebase",
+        "eligible_trials": 49,
+        "total_trials": 50,
+        "ineligible_trials": 1
+      },
+      {
+        "experiment": 2,
+        "branch": "eeg_right",
+        "eligible_trials": 37,
+        "total_trials": 50,
+        "ineligible_trials": 13
+      },
+      {
+        "experiment": 2,
+        "branch": "eeg_left",
+        "eligible_trials": 37,
+        "total_trials": 50,
+        "ineligible_trials": 13
+      },
+      {
+        "experiment": 2,
+        "branch": "eeg_bilateral",
+        "eligible_trials": 37,
+        "total_trials": 50,
+        "ineligible_trials": 13
+      },
+      {
+        "experiment": 2,
+        "branch": "ecg_hr",
+        "eligible_trials": 20,
+        "total_trials": 50,
+        "ineligible_trials": 30
+      },
+      {
+        "experiment": 2,
+        "branch": "ecg_rmssd",
+        "eligible_trials": 4,
+        "total_trials": 50,
+        "ineligible_trials": 46
+      },
+      {
+        "experiment": 3,
+        "branch": "timebase",
+        "eligible_trials": 55,
+        "total_trials": 60,
+        "ineligible_trials": 5
+      },
+      {
+        "experiment": 3,
+        "branch": "eeg_right",
+        "eligible_trials": 45,
+        "total_trials": 60,
+        "ineligible_trials": 15
+      },
+      {
+        "experiment": 3,
+        "branch": "eeg_left",
+        "eligible_trials": 51,
+        "total_trials": 60,
+        "ineligible_trials": 9
+      },
+      {
+        "experiment": 3,
+        "branch": "eeg_bilateral",
+        "eligible_trials": 41,
+        "total_trials": 60,
+        "ineligible_trials": 19
+      },
+      {
+        "experiment": 3,
+        "branch": "ecg_hr",
+        "eligible_trials": 33,
+        "total_trials": 60,
+        "ineligible_trials": 27
+      },
+      {
+        "experiment": 3,
+        "branch": "ecg_rmssd",
+        "eligible_trials": 13,
+        "total_trials": 60,
+        "ineligible_trials": 47
+      }
+    ],
+    "x": "branch",
+    "y": "eligible_trials",
+    "series": "experiment",
+    "facet": null,
+    "x_label": "Quality branch",
+    "y_label": "Eligible trials",
+    "x_unit": null,
+    "y_unit": "trials"
+  }
+}

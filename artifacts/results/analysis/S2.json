@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0.0",
+  "id": "S2",
+  "route": "/study",
+  "status": "available",
+  "question": "Which analyses have eligible source observations?",
+  "takeaway": "Across 160 trials, 128 retain bilateral EEG and 66 retain HR; E3 has 23 raw model candidates versus 21 descriptive complete-fusion trials. These are overlapping branches.",
+  "method": "Count every source trial independently under each prespecified eligibility condition.",
+  "caveats": [
+    "A trial may contribute to multiple branches.",
+    "Descriptive fusion requires within-person calibration; raw model eligibility uses fold-fitted population calibration.",
+    "Human-readable QC decisions are agent-delegated, with uncertain evidence excluded."
+  ],
+  "counts": {
+    "trials": 160,
+    "participants": 10,
+    "rooms": 30
+  },
+  "units": {
+    "trials": "trial count"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T13:06:12+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "bar",
+    "rows": [
+      {
+        "experiment": 1,
+        "branch": "anchored_source",
+        "trials": 50,
+        "participants": 5,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "branch": "reviewed_timebase",
+        "trials": 50,
+        "participants": 5,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "branch": "reviewed_bilateral_EEG",
+        "trials": 50,
+        "participants": 5,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "branch": "reviewed_HR",
+        "trials": 13,
+        "participants": 2,
+        "rooms": 9
+      },
+      {
+        "experiment": 1,
+        "branch": "reviewed_RMSSD",
+        "trials": 0,
+        "participants": 0,
+        "rooms": 0
+      },
+      {
+        "experiment": 1,
+        "branch": "descriptive_complete_fusion",
+        "trials": 0,
+        "participants": 0,
+        "rooms": 0
+      },
+      {
+        "experiment": 1,
+        "branch": "raw_E3_model_candidate",
+        "trials": 0,
+        "participants": 0,
+        "rooms": 0
+      },
+      {
+        "experiment": 2,
+        "branch": "anchored_source",
+        "trials": 50,
+        "participants": 5,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "branch": "reviewed_timebase",
+        "trials": 49,
+        "participants": 5,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "branch": "reviewed_bilateral_EEG",
+        "trials": 37,
+        "participants": 4,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "branch": "reviewed_HR",
+        "trials": 20,
+        "participants": 3,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "branch": "reviewed_RMSSD",
+        "trials": 4,
+        "participants": 1,
+        "rooms": 4
+      },
+      {
+        "experiment": 2,
+        "branch": "descriptive_complete_fusion",
+        "trials": 19,
+        "participants": 3,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "branch": "raw_E3_model_candidate",
+        "trials": 0,
+        "participants": 0,
+        "rooms": 0
+      },
+      {
+        "experiment": 3,
+        "branch": "anchored_source",
+        "trials": 60,
+        "participants": 6,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "branch": "reviewed_timebase",
+        "trials": 55,
+        "participants": 6,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "branch": "reviewed_bilateral_EEG",
+        "trials": 41,
+        "participants": 5,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "branch": "reviewed_HR",
+        "trials": 33,
+        "participants": 5,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "branch": "reviewed_RMSSD",
+        "trials": 13,
+        "participants": 3,
+        "rooms": 9
+      },
+      {
+        "experiment": 3,
+        "branch": "descriptive_complete_fusion",
+        "trials": 21,
+        "participants": 3,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "branch": "raw_E3_model_candidate",
+        "trials": 23,
+        "participants": 4,
+        "rooms": 10
+      }
+    ],
+    "x": "branch",
+    "y": "trials",
+    "series": null,
+    "facet": "experiment",
+    "x_label": "Analysis branch",
+    "y_label": "Eligible trials",
+    "x_unit": null,
+    "y_unit": "trial count"
+  }
+}

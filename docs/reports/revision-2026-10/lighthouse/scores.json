@@ -1,0 +1,70 @@
+{
+  "minimum": 95,
+  "base_url": "http://127.0.0.1:4175/",
+  "routes": [
+    {
+      "route": "/",
+      "score": 100,
+      "fetch_time": "2026-10-10T13:14:34.047Z",
+      "lighthouse_version": "13.5.0",
+      "failed_audits": [],
+      "report": "landing.json"
+    },
+    {
+      "route": "/study",
+      "score": 100,
+      "fetch_time": "2026-10-10T13:14:47.828Z",
+      "lighthouse_version": "13.5.0",
+      "failed_audits": [],
+      "report": "study.json"
+    },
+    {
+      "route": "/rooms",
+      "score": 100,
+      "fetch_time": "2026-10-10T13:15:02.018Z",
+      "lighthouse_version": "13.5.0",
+      "failed_audits": [],
+      "report": "rooms.json"
+    },
+    {
+      "route": "/body",
+      "score": 100,
+      "fetch_time": "2026-10-10T13:15:17.031Z",
+      "lighthouse_version": "13.5.0",
+      "failed_audits": [],
+      "report": "body.json"
+    },
+    {
+      "route": "/prediction",
+      "score": 100,
+      "fetch_time": "2026-10-10T13:15:32.977Z",
+      "lighthouse_version": "13.5.0",
+      "failed_audits": [],
+      "report": "prediction.json"
+    },
+    {
+      "route": "/studio",
+      "score": 100,
+      "fetch_time": "2026-10-10T13:15:47.334Z",
+      "lighthouse_version": "13.5.0",
+      "failed_audits": [],
+      "report": "studio.json"
+    },
+    {
+      "route": "/explore",
+      "score": 100,
+      "fetch_time": "2026-10-10T13:16:01.064Z",
+      "lighthouse_version": "13.5.0",
+      "failed_audits": [],
+      "report": "explore.json"
+    },
+    {
+      "route": "/methods",
+      "score": 100,
+      "fetch_time": "2026-10-10T13:16:16.376Z",
+      "lighthouse_version": "13.5.0",
+      "failed_audits": [],
+      "report": "methods.json"
+    }
+  ]
+}

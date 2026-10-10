@@ -1,0 +1,12 @@
+{"action":"enter","driver":"fab-new","event":"stage-transition","stage":"intake","ts":"2026-10-10T08:56:55Z"}
+{"args":"Revise Mark-3 research atlas, physiology-led comparative analysis, fused-only Neuro-Score Design Studio and repository cleanup per MARK3_REVISION_PLAN.md as superseded by the fab-discuss decisions.","cmd":"fab-new","event":"command","ts":"2026-10-10T08:56:55Z"}
+{"delta":"+5.0","event":"confidence","score":5,"trigger":"calc-score","ts":"2026-10-10T09:00:07Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-10-10T09:04:33Z"}
+{"action":"enter","driver":"fab-continue","event":"stage-transition","stage":"apply","ts":"2026-10-10T09:04:33Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-10-10T09:12:27Z"}
+{"cmd":"fab-ff","event":"command","ts":"2026-10-10T09:19:32Z"}
+{"cmd":"fab-continue","event":"command","ts":"2026-10-10T10:09:54Z"}
+{"cmd":"fab-ff","event":"command","ts":"2026-10-10T10:10:44Z"}
+{"cmd":"fab-ff","event":"command","ts":"2026-10-10T10:49:51Z"}
+{"cmd":"fab-ff","event":"command","ts":"2026-10-10T10:51:17Z"}
+{"action":"enter","driver":"fab-ff","event":"stage-transition","stage":"review","ts":"2026-10-10T15:35:54Z"}

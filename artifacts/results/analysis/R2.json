@@ -1,0 +1,441 @@
+{
+  "schema_version": "1.0.0",
+  "id": "R2",
+  "route": "/rooms",
+  "status": "available",
+  "question": "Which rooms received higher or lower signed ratings?",
+  "takeaway": "Observed room-mean ranges: E2 valence -0.24 to 0.54; E2 arousal -0.30 to 0.38; E3 valence -0.47 to 0.80; E3 arousal -0.79 to 0.43; participant-resampled intervals stay within each source experiment.",
+  "method": "Mean observed transformed score per room; 2,000 seeded participant-vector bootstrap draws when at least four people contribute.",
+  "caveats": [
+    "Intervals condition on the observed rooms and participants; no causal ranking follows.",
+    "A negative score expresses source rating direction, not a validated emotion diagnosis."
+  ],
+  "counts": {
+    "trials": 110,
+    "participants": 9,
+    "rooms": 20
+  },
+  "units": {
+    "mean_rating": "signed source scale \u22121 to 1"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T13:06:13+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "bar",
+    "rows": [
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "room_id": "Rm_011",
+        "mean_rating": 0.38,
+        "participants": 5,
+        "interval_low": 0.21999999999999997,
+        "interval_high": 0.5399999999999999,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "room_id": "Rm_013",
+        "mean_rating": 0.38,
+        "participants": 5,
+        "interval_low": 0.07999999999999999,
+        "interval_high": 0.6199999999999999,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "room_id": "Rm_020",
+        "mean_rating": 0.32,
+        "participants": 5,
+        "interval_low": 0.08,
+        "interval_high": 0.56,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "room_id": "Rm_012",
+        "mean_rating": 0.3,
+        "participants": 5,
+        "interval_low": 0.12000000000000002,
+        "interval_high": 0.44000000000000006,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "room_id": "Rm_014",
+        "mean_rating": 0.27999999999999997,
+        "participants": 5,
+        "interval_low": -0.08000000000000002,
+        "interval_high": 0.56,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "room_id": "Rm_015",
+        "mean_rating": 0.08000000000000002,
+        "participants": 5,
+        "interval_low": -0.16,
+        "interval_high": 0.32,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "room_id": "Rm_019",
+        "mean_rating": 0.06000000000000001,
+        "participants": 5,
+        "interval_low": -0.27999999999999997,
+        "interval_high": 0.36049999999999727,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "room_id": "Rm_018",
+        "mean_rating": -0.12000000000000002,
+        "participants": 5,
+        "interval_low": -0.4,
+        "interval_high": 0.2,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "room_id": "Rm_017",
+        "mean_rating": -0.16,
+        "participants": 5,
+        "interval_low": -0.36,
+        "interval_high": 0.12000000000000002,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "room_id": "Rm_016",
+        "mean_rating": -0.29999999999999993,
+        "participants": 5,
+        "interval_low": -0.5399999999999999,
+        "interval_high": -0.12000000000000002,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "room_id": "Rm_016",
+        "mean_rating": 0.54,
+        "participants": 5,
+        "interval_low": 0.36,
+        "interval_high": 0.6599999999999999,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "room_id": "Rm_017",
+        "mean_rating": 0.5,
+        "participants": 5,
+        "interval_low": 0.31999999999999995,
+        "interval_high": 0.6799999999999999,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "room_id": "Rm_018",
+        "mean_rating": 0.34,
+        "participants": 5,
+        "interval_low": -0.040000000000000015,
+        "interval_high": 0.72,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "room_id": "Rm_019",
+        "mean_rating": 0.2,
+        "participants": 5,
+        "interval_low": -0.12,
+        "interval_high": 0.4,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "room_id": "Rm_015",
+        "mean_rating": 0.13999999999999999,
+        "participants": 5,
+        "interval_low": -0.18,
+        "interval_high": 0.42000000000000004,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "room_id": "Rm_014",
+        "mean_rating": 0.12000000000000002,
+        "participants": 5,
+        "interval_low": -0.08,
+        "interval_high": 0.28,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "room_id": "Rm_012",
+        "mean_rating": 0.04,
+        "participants": 5,
+        "interval_low": -0.08000000000000002,
+        "interval_high": 0.16,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "room_id": "Rm_011",
+        "mean_rating": -0.12000000000000002,
+        "participants": 5,
+        "interval_low": -0.27999999999999997,
+        "interval_high": 0.0,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "room_id": "Rm_013",
+        "mean_rating": -0.12000000000000002,
+        "participants": 5,
+        "interval_low": -0.27999999999999997,
+        "interval_high": 0.0,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "room_id": "Rm_020",
+        "mean_rating": -0.24000000000000005,
+        "participants": 5,
+        "interval_low": -0.48,
+        "interval_high": 0.08000000000000002,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "room_id": "Rm_022",
+        "mean_rating": 0.43333333333333335,
+        "participants": 6,
+        "interval_low": 0.0,
+        "interval_high": 0.8333333333333334,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "room_id": "Rm_027",
+        "mean_rating": 0.3833333333333333,
+        "participants": 6,
+        "interval_low": 0.06666666666666667,
+        "interval_high": 0.6999999999999998,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "room_id": "Rm_026",
+        "mean_rating": 0.2833333333333334,
+        "participants": 6,
+        "interval_low": -4.625929269271485e-18,
+        "interval_high": 0.567083333333331,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "room_id": "Rm_028",
+        "mean_rating": 0.07,
+        "participants": 6,
+        "interval_low": -0.4466666666666667,
+        "interval_high": 0.5367499999999995,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "room_id": "Rm_023",
+        "mean_rating": 0.05000000000000002,
+        "participants": 6,
+        "interval_low": -0.39999999999999997,
+        "interval_high": 0.49999999999999994,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "room_id": "Rm_030",
+        "mean_rating": 0.033333333333333326,
+        "participants": 6,
+        "interval_low": -0.4666666666666666,
+        "interval_high": 0.4833333333333332,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "room_id": "Rm_029",
+        "mean_rating": -0.06833333333333336,
+        "participants": 6,
+        "interval_low": -0.5833333333333334,
+        "interval_high": 0.43999999999999995,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "room_id": "Rm_025",
+        "mean_rating": -0.375,
+        "participants": 6,
+        "interval_low": -0.7416666666666667,
+        "interval_high": -0.016458333333334456,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "room_id": "Rm_021",
+        "mean_rating": -0.5333333333333333,
+        "participants": 6,
+        "interval_low": -0.7833333333333333,
+        "interval_high": -0.2833333333333334,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "room_id": "Rm_024",
+        "mean_rating": -0.79,
+        "participants": 6,
+        "interval_low": -0.89,
+        "interval_high": -0.6900000000000001,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "room_id": "Rm_024",
+        "mean_rating": 0.7999999999999999,
+        "participants": 6,
+        "interval_low": 0.6666666666666666,
+        "interval_high": 0.8833333333333334,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "room_id": "Rm_029",
+        "mean_rating": 0.7033333333333335,
+        "participants": 6,
+        "interval_low": 0.5833333333333333,
+        "interval_high": 0.7933333333333333,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "room_id": "Rm_025",
+        "mean_rating": 0.6583333333333333,
+        "participants": 6,
+        "interval_low": 0.4666666666666666,
+        "interval_high": 0.8166666666666668,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "room_id": "Rm_021",
+        "mean_rating": 0.6416666666666666,
+        "participants": 6,
+        "interval_low": 0.5,
+        "interval_high": 0.7752083333333322,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "room_id": "Rm_023",
+        "mean_rating": 0.4583333333333334,
+        "participants": 6,
+        "interval_low": 0.1083333333333333,
+        "interval_high": 0.6583333333333333,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "room_id": "Rm_027",
+        "mean_rating": 0.425,
+        "participants": 6,
+        "interval_low": 1.804112415015882e-17,
+        "interval_high": 0.7083333333333331,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "room_id": "Rm_028",
+        "mean_rating": 0.125,
+        "participants": 6,
+        "interval_low": -0.37500000000000006,
+        "interval_high": 0.5083333333333333,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "room_id": "Rm_030",
+        "mean_rating": 0.06499999999999999,
+        "participants": 6,
+        "interval_low": -0.4833333333333332,
+        "interval_high": 0.6116666666666667,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "room_id": "Rm_026",
+        "mean_rating": -0.22333333333333336,
+        "participants": 6,
+        "interval_low": -0.5166666666666666,
+        "interval_high": 0.06333333333333332,
+        "bootstrap_draws": 2000
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "room_id": "Rm_022",
+        "mean_rating": -0.4666666666666666,
+        "participants": 6,
+        "interval_low": -0.8333333333333334,
+        "interval_high": 0.03333333333333329,
+        "bootstrap_draws": 2000
+      }
+    ],
+    "x": "room_id",
+    "y": "mean_rating",
+    "series": "axis",
+    "facet": "experiment",
+    "x_label": "Room",
+    "y_label": "Mean signed rating",
+    "x_unit": null,
+    "y_unit": "signed source scale \u22121 to 1"
+  }
+}

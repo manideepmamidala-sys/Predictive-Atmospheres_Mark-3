@@ -1,4 +1,4 @@
-from pa.affect.analysis import analyze_affect, group_summary, room_level_association
+from pa.affect.analysis import _validity_pair, analyze_affect, group_summary, room_level_association
 
 
 def test_crossed_summary_counts_and_missing_values():
@@ -38,3 +38,27 @@ def test_analysis_never_pools_partial_fusion_into_complete_summary():
     assert result["experiments"][0]["n_complete_fused_valence"] == 1
     assert result["experiments"][0]["n_partial_fused_valence"] == 1
     assert result["interval_status"].startswith("unavailable")
+
+
+def test_validity_bootstraps_whole_people_and_reports_undefined_relationships():
+    rows = []
+    for person in range(4):
+        for room in range(4):
+            value = (room - 1.5) / 4
+            rows.append({"experiment": 2, "participant_id": f"P{person}",
+                         "room_id": f"R{room}",
+                         "subjective": {"valence": value, "arousal": value},
+                         "normalized_components": {"faa": value,
+                                                   "alpha_suppression": value,
+                                                   "engagement": value,
+                                                   "heart_rate_bpm": value},
+                         "construction": {"eeg_arousal": value},
+                         "ocular_activity": None, "muscle_activity": value})
+    observed = _validity_pair(rows, 2, "faa", "report_valence")
+    assert observed["participants"] == 4 and observed["trials"] == 16
+    assert observed["equal_participant_mean_rho"] == 1
+    assert observed["interval_95"] == [1.0, 1.0]
+    assert observed["bootstrap_draws"] == 2000
+    ocular = _validity_pair(rows, 2, "ocular", "report_arousal")
+    assert ocular["status"] == "unavailable_detector_not_validated"
+    assert ocular["interval_95"] is None

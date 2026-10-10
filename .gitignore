@@ -61,6 +61,21 @@ venv.bak/
 # *.pdf
 teaser video/
 
+# Personal thesis packages and superseded root planning copies
+/docs/thesis/*.pdf
+/docs/thesis/*.docx
+/docs/thesis/*.zip
+/ManideepMamidala_ThesisBooklet.pdf
+/PredictiveAtmospheres_ManideepMamidala.pdf
+/MARK3_REVISION_PLAN.md
+/EXECUTION_PLAN.md
+/PROJECT_REPORT.md
+/current_state_analysis.md
+/deep_system_audit.md
+/website publishing.md
+/rooms/
+/frontend/assets/IMAGES/
+
 # Streamlit
 .streamlit/
 

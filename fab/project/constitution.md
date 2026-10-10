@@ -12,7 +12,7 @@ The backend SHALL distinguish observed data, owner-reported protocol, analysis a
 One validated room input schema and feature builder SHALL serve training, CLI, API and optimization. Independent inputs and derived features SHALL remain separate. Learned preprocessing SHALL fit only on training data and travel with the serialized model. Neuro-Score SHALL use a user-selected target.
 
 ### IV. Versioned, accessible delivery
-Python processing SHALL be headless. Seven React/TypeScript research pages SHALL read schema-validated static exports, while live experimental prediction and optimization use the versioned API. Light/Dark/System themes, responsive layouts, keyboard access and reduced-motion handling SHALL be supported.
+Python processing SHALL be headless. Eight React/TypeScript pages SHALL present schema-validated static research exports, while live experimental prediction and optimization use the versioned API. Light/Dark/System themes, responsive layouts, keyboard access and reduced-motion handling SHALL be supported.
 
 ### V. Honest failure and reproducibility
 Scientific settings SHALL have versioned decision provenance; failures SHALL have explicit validity/status/reason fields. Reports SHALL record actual command output, dataset and schema versions, limitations and independent review findings. Source data and named participant identities SHALL not be invented or silently published.

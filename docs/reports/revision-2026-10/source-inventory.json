@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "inspected_utc_date": "2026-10-10",
+  "initial_branch": "261010-tadj-research-atlas-design-studio",
+  "initial_head": "5d87d49777f6a61c5df5cc3716b0f051a9b400a2",
+  "preexisting_worktree_edits": [
+    "M artifacts/model/metadata.json",
+    "M fab/changes/261008-ymhz-research-platform-rebuild/.history.jsonl",
+    "?? MARK3_REVISION_PLAN.md",
+    "?? docs/reports/project-review-2026-10.pdf",
+    "?? docs/thesis/ManideepMamidala_TextoftheThesis.docx",
+    "?? docs/thesis/ManideepMamidala_ThesisBooklet Folder.zip"
+  ],
+  "source_records": {
+    "canonical_index": "data/source-inventory.json",
+    "canonical_sha_manifest": "data/MANIFEST.sha256",
+    "historical_path_map": "docs/reports/migration-inventory.json",
+    "recordings": {"count": 160, "bytes": 296535120, "path": "data/raw/", "all_historical_hashes_matched": true},
+    "metadata": {"count": 7, "bytes": 12414, "path": "data/metadata/", "all_historical_hashes_matched": true},
+    "room_renders": {"count": 30, "bytes": 150805079, "path": "data/renders/raw/", "duplicate": "rooms/", "all_pairs_matched": true},
+    "legacy_images": {"count": 116, "bytes": 67811155, "path": "docs/history/legacy-site-assets/", "duplicate": "frontend/assets/IMAGES/", "all_pairs_matched": true}
+  },
+  "documents": [
+    {"name": "PredictiveAtmospheres_ManideepMamidala.pdf", "sha256": "821bff1820eac354d6496e9845a542a3783f15cc2b084c36aa0d1c8d679ae43a", "bytes": 13561838, "project_paths": ["PredictiveAtmospheres_ManideepMamidala.pdf", "docs/thesis/PredictiveAtmospheres_ManideepMamidala.pdf"], "windows_original_sha_match": true, "disposition": "remove_project_duplicates"},
+    {"name": "ManideepMamidala_ThesisBooklet.pdf", "sha256": "d633e20132cacab155af28e6b0d93ee345d9a2e487d8cdf6b6aa12d9a56297ac", "bytes": 25566729, "project_paths": ["ManideepMamidala_ThesisBooklet.pdf", "docs/thesis/ManideepMamidala_ThesisBooklet.pdf"], "windows_original_sha_match": true, "disposition": "remove_project_duplicates"},
+    {"name": "ManideepMamidala_ThesisBooklet Folder.zip", "sha256": "044169a5ea2639c25b751a5efaf30cecb17d6007e428d05d2617b682a7ac3e40", "bytes": 73702232, "project_paths": ["docs/thesis/ManideepMamidala_ThesisBooklet Folder.zip"], "windows_original_sha_match": true, "disposition": "remove_project_duplicate"},
+    {"name": "ManideepMamidala_TextoftheThesis.docx", "sha256": "bd205b8fe18129a2c5543a8481b2701babdf377477e99c726a112f7e28be4411", "bytes": 31855, "project_paths": ["docs/thesis/ManideepMamidala_TextoftheThesis.docx"], "windows_original_sha_match": false, "disposition": "retain_untracked_until_original_verified"}
+  ],
+  "windows_originals_read_only": true,
+  "researcher_portrait": {"source": "/mnt/d/RUNNING FILES/Portfolio 2.0/IMG_2644.png", "bytes": 5170317, "width": 2268, "height": 4032, "sha256": "d81a4475ef87720089a5a7949453b711cd846798a8edcfb15696c792e42392bb", "disposition": "retain_original_derive_web_asset_later"},
+  "history_rewrite": false
+}

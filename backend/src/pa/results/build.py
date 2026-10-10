@@ -8,10 +8,17 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 from pa.affect.analysis import analyze_affect
+from pa.analysis.body import body_products
+from pa.analysis.catalogue import counts as catalogue_counts
+from pa.analysis.catalogue import product as catalogue_product
+from pa.analysis.prediction import prediction_products
+from pa.analysis.ratings import rating_products
+from pa.analysis.rooms import room_products
+from pa.analysis.study import study_products
 from pa.config import RESULTS, ROOT
 from pa.io.checkpoint import require_science_checkpoint
 from pa.io.metadata import Trial, load_demographics, load_rooms, load_trials
-from pa.results.export import write_products
+from pa.results.export import write_catalogue_products, write_products
 from pa.results.schemas import (
     AffectExport,
     DisagreementRecord,
@@ -58,7 +65,7 @@ def build_products(trials: list[Trial], spatial: list[dict], signal_rows: list[d
             len(affect_by_id) != len(affect_detail["trials"])):
         raise ValueError("export trial/source identity mismatch")
     manifest_hash = hashlib.sha256((ROOT / "data/MANIFEST.sha256").read_bytes()).hexdigest()
-    spec_hash = hashlib.sha256((ROOT / "docs/specs/analysis-v1.md").read_bytes()).hexdigest()
+    spec_hash = hashlib.sha256((ROOT / decisions()["approved_spec_path"]).read_bytes()).hexdigest()
     provenance = Provenance(
         source="Original investigator-supplied CSV metadata and raw channel recordings",
         method=f"Analysis specification {decisions()['version']}; conditional primary 500 Hz scenario",
@@ -91,16 +98,22 @@ def build_products(trials: list[Trial], spatial: list[dict], signal_rows: list[d
         affect = affect_by_id[identity]
         eeg, ecg = signal["eeg"], signal["ecg"]
         construction = affect["construction"]
+        reviewed = affect.get("reviewed_eligibility") or {
+            "timebase": True, "eeg_right": eeg["valid"], "eeg_left": eeg["valid"],
+            "eeg_bilateral": eeg["valid"], "ecg_hr": ecg["valid_hr"],
+            "ecg_rmssd": ecg["valid_rmssd"]}
         exported_trials.append(TrialRecord(
             id=identity, experiment=trial.experiment, participant_id=trial.subject_id,
-            room_id=trial.room_id, eeg_valid=eeg["valid"],
-            ecg_valid=ecg["valid_hr"] and ecg["valid_rmssd"],
+            room_id=trial.room_id, eeg_valid=reviewed["eeg_bilateral"],
+            ecg_valid=reviewed["ecg_hr"] and reviewed["ecg_rmssd"],
+            ecg_hr_valid=reviewed["ecg_hr"], ecg_rmssd_valid=reviewed["ecg_rmssd"],
+            reviewed_eligibility=reviewed,
             reasons=list(dict.fromkeys([*eeg["reasons"], *ecg["reasons"]])),
             eeg=browser_trace(signal["eeg_trace"]),
             ecg=browser_trace(signal["ecg_trace"]),
             eeg_band_power=({"alpha_right": eeg["alpha_right"], "alpha_left": eeg["alpha_left"],
                              "beta_right": eeg["beta_right"], "beta_left": eeg["beta_left"]}
-                            if eeg["valid"] else None),
+                            if reviewed["eeg_bilateral"] else None),
             faa=affect["faa"], heart_rate_bpm=affect["heart_rate_bpm"],
             rmssd_ms=affect["rmssd_ms"],
             subjective=_position(construction["subjective"]),
@@ -131,6 +144,10 @@ def build_products(trials: list[Trial], spatial: list[dict], signal_rows: list[d
             space_type=room["space_type"], lighting=room["day_or_night"],
             illuminance_lux=room["illuminance"], cct_kelvin=room["cct"],
             dimensions={name: room[name] for name in ("length", "width", "height")},
+            independent_attributes={name: room.get(name) for name in (
+                "length", "width", "height", "num_doors", "door_area", "num_windows",
+                "window_area", "daylight_factor", "illuminance", "cct",
+                "walkable_floor_area", "day_or_night", "space_type")},
             mean_affect=Position(valence=_mean([point.valence for point in points]),
                                  arousal=_mean([point.arousal for point in points])) if points else None,
             n_affect=len(points)))
@@ -238,4 +255,70 @@ def write_research_exports(destination: Path = RESULTS) -> dict:
         raise ValueError(f"missing demographic metadata for supplied trial IDs: {sorted(unknown)}")
     products = build_products(trial_rows, load_rooms(), signals["trials"], affect, model,
                               demographics=demographics)
-    return write_products(products, destination)
+    manifest = write_products(products, destination)
+    catalogue = build_catalogue_products(affect, signals, load_rooms(), trial_rows,
+                                         demographics, evaluation)
+    manifest["analysis_catalogue"] = write_catalogue_products(
+        catalogue, destination / "analysis")
+    return manifest
+
+
+def build_catalogue_products(affect: dict, signals: dict, spatial: list[dict],
+                             trials: list[Trial], demographics: dict[str, dict],
+                             evaluation: dict) -> dict:
+    """Compute all twenty-eight figure products from reviewed, versioned analyses."""
+    def saved(name: str) -> dict:
+        path = RESULTS / name
+        if not path.is_file():
+            raise FileNotFoundError(f"required research analysis missing: {path}")
+        result = json.loads(path.read_text())
+        approved = (result.get("approved_spec_sha256") or
+                    result.get("source_fingerprint", {}).get(
+                        "docs/specs/analysis-v1.2-draft.md"))
+        if approved != affect["approved_spec_sha256"]:
+            raise ValueError(f"research analysis spec mismatch: {name}")
+        return result
+
+    ratings = saved("rating_research.json")
+    validity = saved("validity.json")
+    comparator = saved("self_report_comparator.json")
+    null = saved("model_null.json")
+    learning = saved("model_learning_curve.json")
+    review = saved("qc_review.json")
+    products = {}
+    for family in (study_products(affect, spatial, demographics),
+                   rating_products(affect, ratings),
+                   room_products(affect, spatial, trials, demographics),
+                   body_products(affect, signals, review, validity, trials),
+                   prediction_products(affect, ratings, evaluation, comparator, null, learning)):
+        overlap = set(products) & set(family)
+        if overlap:
+            raise ValueError(f"duplicate catalogue product IDs: {sorted(overlap)}")
+        products.update(family)
+    methods = []
+    for experiment in (1, 2, 3):
+        own = [row for row in affect["trials"] if row["experiment"] == experiment]
+        methods.append({"experiment": experiment, "source_trials": len(own),
+                        "participants": len({row["participant_id"] for row in own}),
+                        "rooms": len({row["room_id"] for row in own}),
+                        "rating_question": "comfort (separate)" if experiment == 1 else
+                        "signed valence/arousal (different elicitation by experiment)",
+                        "complete_descriptive_fusion": sum(row["construction"]["cohort"] ==
+                                                           "complete_fusion" for row in own),
+                        "reviewed_timebase": sum(row["reviewed_eligibility"]["timebase"]
+                                                 for row in own),
+                        "reviewed_HR": sum(row["reviewed_eligibility"]["ecg_hr"]
+                                           for row in own)})
+    products["Methods"] = catalogue_product(
+        "Methods", question="What source and analysis rules support these figures?",
+        takeaway="Three source experiments are described separately; reviewed physiology, descriptive mapping and fold-fitted E3 prediction have different eligibility.",
+        method="Source-trial accounting plus approved v1.2 methods: conditional 500 Hz signal processing, delegated CP-B quality review, robust within-person descriptive calibration, E3 fold-contained population calibration, grouped evaluation and descriptive controls.",
+        rows=methods, x="experiment", y="source_trials", chart_type="table",
+        x_label="Experiment", y_label="Anchored source trials",
+        sample=catalogue_counts(affect["trials"]), source=affect,
+        caveats=["Acquisition rate/reference and absolute units remain unconfirmed.",
+                 "Neither constructed coordinates nor pilot associations validate a clinical emotion measure.",
+                 "E2/E3 rating protocols differ; no pooled deployed model or population p-value is claimed.",
+                 "All 160 source trials remain accounted for even when a component is invalid or unavailable."],
+        units={"source_trials": "trials"})
+    return products

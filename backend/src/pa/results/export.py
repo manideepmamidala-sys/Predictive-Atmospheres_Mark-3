@@ -10,7 +10,10 @@ from pydantic import BaseModel
 
 from pa.config import RESULTS, ROOT, SCHEMA_VERSION
 from pa.results.schemas import (
+    CATALOGUE_IDS,
     AffectExport,
+    CatalogueIndex,
+    CatalogueProduct,
     ModelExport,
     PeopleExport,
     ResearchBundle,
@@ -18,6 +21,7 @@ from pa.results.schemas import (
     SignalsExport,
     StudyExport,
 )
+from pa.signals.common import decisions
 
 PRODUCT_TYPES = {
     "study": StudyExport, "rooms": RoomsExport, "signals": SignalsExport,
@@ -55,7 +59,8 @@ def write_products(products: dict[str, BaseModel], destination: Path = RESULTS) 
         "products": {name: {"file": f"{name}.json", "sha256": digest}
                      for name, digest in hashes.items()},
         "source_manifest_sha256": hashlib.sha256((ROOT / "data/MANIFEST.sha256").read_bytes()).hexdigest(),
-        "analysis_spec_sha256": hashlib.sha256((ROOT / "docs/specs/analysis-v1.md").read_bytes()).hexdigest(),
+        "analysis_spec_sha256": hashlib.sha256(
+            (ROOT / decisions()["approved_spec_path"]).read_bytes()).hexdigest(),
     }
     write_json(destination / "manifest.json", ManifestModel.model_validate(manifest))
     return manifest
@@ -66,3 +71,34 @@ class ManifestModel(BaseModel):
     products: dict[str, dict[str, str]]
     source_manifest_sha256: str
     analysis_spec_sha256: str
+
+
+def write_catalogue_products(products: dict[str, CatalogueProduct],
+                             destination: Path = RESULTS / "analysis") -> dict:
+    """Write every catalogue ID through strict schemas and a checked lazy index."""
+    if set(products) != set(CATALOGUE_IDS):
+        missing = set(CATALOGUE_IDS) - set(products)
+        extra = set(products) - set(CATALOGUE_IDS)
+        raise ValueError(f"catalogue coverage mismatch: missing={sorted(missing)} extra={sorted(extra)}")
+    verified = {identifier: CatalogueProduct.model_validate(product.model_dump(mode="json"))
+                for identifier, product in products.items()}
+    source_versions = {(item.provenance.method_version,
+                        item.provenance.approved_spec_sha256,
+                        item.provenance.source_manifest_sha256) for item in verified.values()}
+    if len(source_versions) != 1:
+        raise ValueError("catalogue products have inconsistent method/spec/source provenance")
+    hashes = {}
+    for identifier in CATALOGUE_IDS:
+        hashes[identifier] = write_json(destination / f"{identifier}.json", verified[identifier])
+    first = verified[CATALOGUE_IDS[0]]
+    index = CatalogueIndex.model_validate({
+        "schema_version": "1.0.0", "method_version": first.provenance.method_version,
+        "approved_spec_sha256": first.provenance.approved_spec_sha256,
+        "products": [{"id": identifier, "route": verified[identifier].route,
+                      "status": verified[identifier].status,
+                      "path": f"/research/analysis/{identifier}.json"}
+                     for identifier in CATALOGUE_IDS],
+    })
+    hashes["index"] = write_json(destination / "index.json", index)
+    return {"products": hashes, "available": sum(item.status == "available" for item in verified.values()),
+            "unavailable": sum(item.status == "unavailable" for item in verified.values())}

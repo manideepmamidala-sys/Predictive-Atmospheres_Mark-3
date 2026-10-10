@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "id": "Methods",
+  "route": "/methods",
+  "status": "available",
+  "question": "What source and analysis rules support these figures?",
+  "takeaway": "Three source experiments are described separately; reviewed physiology, descriptive mapping and fold-fitted E3 prediction have different eligibility.",
+  "method": "Source-trial accounting plus approved v1.2 methods: conditional 500 Hz signal processing, delegated CP-B quality review, robust within-person descriptive calibration, E3 fold-contained population calibration, grouped evaluation and descriptive controls.",
+  "caveats": [
+    "Acquisition rate/reference and absolute units remain unconfirmed.",
+    "Neither constructed coordinates nor pilot associations validate a clinical emotion measure.",
+    "E2/E3 rating protocols differ; no pooled deployed model or population p-value is claimed.",
+    "All 160 source trials remain accounted for even when a component is invalid or unavailable."
+  ],
+  "counts": {
+    "trials": 160,
+    "participants": 10,
+    "rooms": 30
+  },
+  "units": {
+    "source_trials": "trials"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T13:06:19+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "table",
+    "rows": [
+      {
+        "experiment": 1,
+        "source_trials": 50,
+        "participants": 5,
+        "rooms": 10,
+        "rating_question": "comfort (separate)",
+        "complete_descriptive_fusion": 0,
+        "reviewed_timebase": 50,
+        "reviewed_HR": 13
+      },
+      {
+        "experiment": 2,
+        "source_trials": 50,
+        "participants": 5,
+        "rooms": 10,
+        "rating_question": "signed valence/arousal (different elicitation by experiment)",
+        "complete_descriptive_fusion": 19,
+        "reviewed_timebase": 49,
+        "reviewed_HR": 20
+      },
+      {
+        "experiment": 3,
+        "source_trials": 60,
+        "participants": 6,
+        "rooms": 10,
+        "rating_question": "signed valence/arousal (different elicitation by experiment)",
+        "complete_descriptive_fusion": 21,
+        "reviewed_timebase": 55,
+        "reviewed_HR": 33
+      }
+    ],
+    "x": "experiment",
+    "y": "source_trials",
+    "series": null,
+    "facet": null,
+    "x_label": "Experiment",
+    "y_label": "Anchored source trials",
+    "x_unit": null,
+    "y_unit": "trials"
+  }
+}

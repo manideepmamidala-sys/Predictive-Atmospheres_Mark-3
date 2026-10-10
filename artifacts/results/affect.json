@@ -2,23 +2,23 @@
   "schema_version": "1.0.0",
   "provenance": {
     "source": "Original investigator-supplied CSV metadata and raw channel recordings",
-    "method": "Analysis specification 1.1.0; conditional primary 500 Hz scenario",
+    "method": "Analysis specification 1.2.0; conditional primary 500 Hz scenario",
     "generated_at": null,
     "limitations": [
       "Acquisition sample rate, amplitude units and reference wiring are unconfirmed.",
       "Constructed affect axes are hypotheses, not validated emotion measurements."
     ],
-    "manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
-    "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7"
+    "manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "analysis_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac"
   },
   "sensitivity": [
     {
       "experiment": 2,
       "participant_id": null,
       "alpha": 0.0,
-      "n": 4,
-      "mean_valence": 0.0,
-      "mean_arousal": 0.2,
+      "n": 19,
+      "mean_valence": 0.02105263157894738,
+      "mean_arousal": 0.2421052631578947,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -26,9 +26,9 @@
       "experiment": 2,
       "participant_id": null,
       "alpha": 0.25,
-      "n": 4,
-      "mean_valence": -0.1909431236523167,
-      "mean_arousal": 0.11861065688055451,
+      "n": 19,
+      "mean_valence": 0.0005099913859337293,
+      "mean_arousal": 0.16358280863045085,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -36,9 +36,9 @@
       "experiment": 2,
       "participant_id": null,
       "alpha": 0.5,
-      "n": 4,
-      "mean_valence": -0.38188624730463333,
-      "mean_arousal": 0.03722131376110906,
+      "n": 19,
+      "mean_valence": -0.02003264880707989,
+      "mean_arousal": 0.08506035410300691,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -46,9 +46,9 @@
       "experiment": 2,
       "participant_id": null,
       "alpha": 0.75,
-      "n": 4,
-      "mean_valence": -0.5728293709569501,
-      "mean_arousal": -0.0441680293583364,
+      "n": 19,
+      "mean_valence": -0.04057528900009352,
+      "mean_arousal": 0.006537899575563026,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -56,9 +56,9 @@
       "experiment": 2,
       "participant_id": null,
       "alpha": 1.0,
-      "n": 4,
-      "mean_valence": -0.7637724946092668,
-      "mean_arousal": -0.12555737247778187,
+      "n": 19,
+      "mean_valence": -0.061117929193107164,
+      "mean_arousal": -0.0719845549518809,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -116,9 +116,9 @@
       "experiment": 2,
       "participant_id": "Subj_E",
       "alpha": 0.0,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 8,
+      "mean_valence": -0.024999999999999994,
+      "mean_arousal": 0.3125,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -126,9 +126,9 @@
       "experiment": 2,
       "participant_id": "Subj_E",
       "alpha": 0.25,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 8,
+      "mean_valence": -0.05422044639176279,
+      "mean_arousal": 0.23187840444761676,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -136,9 +136,9 @@
       "experiment": 2,
       "participant_id": "Subj_E",
       "alpha": 0.5,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 8,
+      "mean_valence": -0.08344089278352558,
+      "mean_arousal": 0.1512568088952334,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -146,9 +146,9 @@
       "experiment": 2,
       "participant_id": "Subj_E",
       "alpha": 0.75,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 8,
+      "mean_valence": -0.11266133917528837,
+      "mean_arousal": 0.07063521334285014,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -156,9 +156,9 @@
       "experiment": 2,
       "participant_id": "Subj_E",
       "alpha": 1.0,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 8,
+      "mean_valence": -0.14188178556705117,
+      "mean_arousal": -0.00998638220953315,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -216,9 +216,9 @@
       "experiment": 2,
       "participant_id": "Subj_G",
       "alpha": 0.0,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 3,
+      "mean_valence": -0.20000000000000004,
+      "mean_arousal": 0.39999999999999997,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -226,9 +226,9 @@
       "experiment": 2,
       "participant_id": "Subj_G",
       "alpha": 0.25,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 3,
+      "mean_valence": -0.1097472749348165,
+      "mean_arousal": 0.31115527770341683,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -236,9 +236,9 @@
       "experiment": 2,
       "participant_id": "Subj_G",
       "alpha": 0.5,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 3,
+      "mean_valence": -0.01949454986963291,
+      "mean_arousal": 0.22231055540683378,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -246,9 +246,9 @@
       "experiment": 2,
       "participant_id": "Subj_G",
       "alpha": 0.75,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 3,
+      "mean_valence": 0.07075817519555065,
+      "mean_arousal": 0.13346583311025065,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -256,9 +256,9 @@
       "experiment": 2,
       "participant_id": "Subj_G",
       "alpha": 1.0,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 3,
+      "mean_valence": 0.1610109002607342,
+      "mean_arousal": 0.04462111081366756,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -266,9 +266,9 @@
       "experiment": 2,
       "participant_id": "Subj_M",
       "alpha": 0.0,
-      "n": 4,
-      "mean_valence": 0.0,
-      "mean_arousal": 0.2,
+      "n": 8,
+      "mean_valence": 0.15,
+      "mean_arousal": 0.11249999999999996,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -276,9 +276,9 @@
       "experiment": 2,
       "participant_id": "Subj_M",
       "alpha": 0.25,
-      "n": 4,
-      "mean_valence": -0.1909431236523167,
-      "mean_arousal": 0.11861065688055451,
+      "n": 8,
+      "mean_valence": 0.09658690403391158,
+      "mean_arousal": 0.039947536910922676,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -286,9 +286,9 @@
       "experiment": 2,
       "participant_id": "Subj_M",
       "alpha": 0.5,
-      "n": 4,
-      "mean_valence": -0.38188624730463333,
-      "mean_arousal": 0.03722131376110906,
+      "n": 8,
+      "mean_valence": 0.04317380806782317,
+      "mean_arousal": -0.03260492617815464,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -296,9 +296,9 @@
       "experiment": 2,
       "participant_id": "Subj_M",
       "alpha": 0.75,
-      "n": 4,
-      "mean_valence": -0.5728293709569501,
-      "mean_arousal": -0.0441680293583364,
+      "n": 8,
+      "mean_valence": -0.01023928789826524,
+      "mean_arousal": -0.10515738926723195,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -306,9 +306,9 @@
       "experiment": 2,
       "participant_id": "Subj_M",
       "alpha": 1.0,
-      "n": 4,
-      "mean_valence": -0.7637724946092668,
-      "mean_arousal": -0.12555737247778187,
+      "n": 8,
+      "mean_valence": -0.06365238386435365,
+      "mean_arousal": -0.1777098523563093,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -316,9 +316,9 @@
       "experiment": 3,
       "participant_id": null,
       "alpha": 0.0,
-      "n": 10,
-      "mean_valence": 0.25999999999999995,
-      "mean_arousal": 0.009999999999999998,
+      "n": 21,
+      "mean_valence": 0.3314285714285714,
+      "mean_arousal": -0.18666666666666668,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -326,9 +326,9 @@
       "experiment": 3,
       "participant_id": null,
       "alpha": 0.25,
-      "n": 10,
-      "mean_valence": 0.22497839451260032,
-      "mean_arousal": 0.02322744277075641,
+      "n": 21,
+      "mean_valence": 0.2603051109737827,
+      "mean_arousal": -0.14960814385101281,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -336,9 +336,9 @@
       "experiment": 3,
       "participant_id": null,
       "alpha": 0.5,
-      "n": 10,
-      "mean_valence": 0.1899567890252007,
-      "mean_arousal": 0.03645488554151285,
+      "n": 21,
+      "mean_valence": 0.189181650518994,
+      "mean_arousal": -0.11254962103535891,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -346,9 +346,9 @@
       "experiment": 3,
       "participant_id": null,
       "alpha": 0.75,
-      "n": 10,
-      "mean_valence": 0.15493518353780106,
-      "mean_arousal": 0.049682328312269264,
+      "n": 21,
+      "mean_valence": 0.11805819006420533,
+      "mean_arousal": -0.07549109821970504,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -356,65 +356,15 @@
       "experiment": 3,
       "participant_id": null,
       "alpha": 1.0,
-      "n": 10,
-      "mean_valence": 0.11991357805040134,
-      "mean_arousal": 0.06290977108302569,
+      "n": 21,
+      "mean_valence": 0.04693472960941661,
+      "mean_arousal": -0.03843257540405113,
       "interval_valence": null,
       "interval_arousal": null
     },
     {
       "experiment": 3,
       "participant_id": "Subj_A",
-      "alpha": 0.0,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
-      "interval_valence": null,
-      "interval_arousal": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_A",
-      "alpha": 0.25,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
-      "interval_valence": null,
-      "interval_arousal": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_A",
-      "alpha": 0.5,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
-      "interval_valence": null,
-      "interval_arousal": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_A",
-      "alpha": 0.75,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
-      "interval_valence": null,
-      "interval_arousal": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_A",
-      "alpha": 1.0,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
-      "interval_valence": null,
-      "interval_arousal": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_B",
       "alpha": 0.0,
       "n": 0,
       "mean_valence": null,
@@ -424,7 +374,7 @@
     },
     {
       "experiment": 3,
-      "participant_id": "Subj_B",
+      "participant_id": "Subj_A",
       "alpha": 0.25,
       "n": 0,
       "mean_valence": null,
@@ -434,7 +384,7 @@
     },
     {
       "experiment": 3,
-      "participant_id": "Subj_B",
+      "participant_id": "Subj_A",
       "alpha": 0.5,
       "n": 0,
       "mean_valence": null,
@@ -444,7 +394,7 @@
     },
     {
       "experiment": 3,
-      "participant_id": "Subj_B",
+      "participant_id": "Subj_A",
       "alpha": 0.75,
       "n": 0,
       "mean_valence": null,
@@ -454,11 +404,61 @@
     },
     {
       "experiment": 3,
-      "participant_id": "Subj_B",
+      "participant_id": "Subj_A",
       "alpha": 1.0,
       "n": 0,
       "mean_valence": null,
       "mean_arousal": null,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "alpha": 0.0,
+      "n": 10,
+      "mean_valence": 0.275,
+      "mean_arousal": -0.33000000000000007,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "alpha": 0.25,
+      "n": 10,
+      "mean_valence": 0.2104937589176635,
+      "mean_arousal": -0.2619634222760408,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "alpha": 0.5,
+      "n": 10,
+      "mean_valence": 0.14598751783532699,
+      "mean_arousal": -0.19392684455208148,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "alpha": 0.75,
+      "n": 10,
+      "mean_valence": 0.08148127675299044,
+      "mean_arousal": -0.12589026682812218,
+      "interval_valence": null,
+      "interval_arousal": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "alpha": 1.0,
+      "n": 10,
+      "mean_valence": 0.016975035670653938,
+      "mean_arousal": -0.05785368910416294,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -566,9 +566,9 @@
       "experiment": 3,
       "participant_id": "Subj_I",
       "alpha": 0.0,
-      "n": 10,
-      "mean_valence": 0.25999999999999995,
-      "mean_arousal": 0.009999999999999998,
+      "n": 5,
+      "mean_valence": 0.47999999999999987,
+      "mean_arousal": -0.24000000000000005,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -576,9 +576,9 @@
       "experiment": 3,
       "participant_id": "Subj_I",
       "alpha": 0.25,
-      "n": 10,
-      "mean_valence": 0.22497839451260032,
-      "mean_arousal": 0.02322744277075641,
+      "n": 5,
+      "mean_valence": 0.3843843731005704,
+      "mean_arousal": -0.1547900649699959,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -586,9 +586,9 @@
       "experiment": 3,
       "participant_id": "Subj_I",
       "alpha": 0.5,
-      "n": 10,
-      "mean_valence": 0.1899567890252007,
-      "mean_arousal": 0.03645488554151285,
+      "n": 5,
+      "mean_valence": 0.2887687462011409,
+      "mean_arousal": -0.06958012993999177,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -596,9 +596,9 @@
       "experiment": 3,
       "participant_id": "Subj_I",
       "alpha": 0.75,
-      "n": 10,
-      "mean_valence": 0.15493518353780106,
-      "mean_arousal": 0.049682328312269264,
+      "n": 5,
+      "mean_valence": 0.19315311930171145,
+      "mean_arousal": 0.015629805090012373,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -606,9 +606,9 @@
       "experiment": 3,
       "participant_id": "Subj_I",
       "alpha": 1.0,
-      "n": 10,
-      "mean_valence": 0.11991357805040134,
-      "mean_arousal": 0.06290977108302569,
+      "n": 5,
+      "mean_valence": 0.0975374924022819,
+      "mean_arousal": 0.10083974012001654,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -616,9 +616,9 @@
       "experiment": 3,
       "participant_id": "Subj_M",
       "alpha": 0.0,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 6,
+      "mean_valence": 0.30166666666666664,
+      "mean_arousal": 0.09666666666666669,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -626,9 +626,9 @@
       "experiment": 3,
       "participant_id": "Subj_M",
       "alpha": 0.25,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 6,
+      "mean_valence": 0.23992464596165833,
+      "mean_arousal": 0.041968921123186405,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -636,9 +636,9 @@
       "experiment": 3,
       "participant_id": "Subj_M",
       "alpha": 0.5,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 6,
+      "mean_valence": 0.17818262525665,
+      "mean_arousal": -0.01272882442029391,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -646,9 +646,9 @@
       "experiment": 3,
       "participant_id": "Subj_M",
       "alpha": 0.75,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 6,
+      "mean_valence": 0.11644060455164164,
+      "mean_arousal": -0.06742656996377418,
       "interval_valence": null,
       "interval_arousal": null
     },
@@ -656,17 +656,19 @@
       "experiment": 3,
       "participant_id": "Subj_M",
       "alpha": 1.0,
-      "n": 0,
-      "mean_valence": null,
-      "mean_arousal": null,
+      "n": 6,
+      "mean_valence": 0.05469858384663332,
+      "mean_arousal": -0.12212431550725449,
       "interval_valence": null,
       "interval_arousal": null
     }
   ],
   "cohorts": {
     "objective_only": 50,
-    "partial_modality_fusion": 96,
-    "complete_fusion": 14
+    "subjective_only": 17,
+    "complete_fusion": 40,
+    "partial_modality_fusion": 38,
+    "partial_axis_overlap": 15
   },
   "disagreement": [
     {
@@ -962,32 +964,32 @@
       "participant_id": null,
       "cohort": "complete_fusion",
       "axis": "valence",
-      "n": 4,
-      "mean_objective_minus_subjective": -0.7637724946092667
+      "n": 19,
+      "mean_objective_minus_subjective": -0.08217056077205452
     },
     {
       "experiment": 2,
       "participant_id": null,
       "cohort": "complete_fusion",
       "axis": "arousal",
-      "n": 4,
-      "mean_objective_minus_subjective": -0.3255573724777819
+      "n": 19,
+      "mean_objective_minus_subjective": -0.3140898181097757
     },
     {
       "experiment": 2,
       "participant_id": null,
       "cohort": "partial_modality_fusion",
       "axis": "valence",
-      "n": 46,
-      "mean_objective_minus_subjective": -0.2594415944343773
+      "n": 18,
+      "mean_objective_minus_subjective": -0.12304026030318951
     },
     {
       "experiment": 2,
       "participant_id": null,
       "cohort": "partial_modality_fusion",
       "axis": "arousal",
-      "n": 46,
-      "mean_objective_minus_subjective": -0.09995279205768325
+      "n": 18,
+      "mean_objective_minus_subjective": -0.08113632865742154
     },
     {
       "experiment": 2,
@@ -1002,8 +1004,8 @@
       "participant_id": null,
       "cohort": "partial_axis_overlap",
       "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
+      "n": 1,
+      "mean_objective_minus_subjective": 0.7545171799222986
     },
     {
       "experiment": 2,
@@ -1027,7 +1029,7 @@
       "cohort": "partial_modality_fusion",
       "axis": "valence",
       "n": 10,
-      "mean_objective_minus_subjective": -0.22122053150826462
+      "mean_objective_minus_subjective": -0.1451566094331121
     },
     {
       "experiment": 2,
@@ -1035,7 +1037,7 @@
       "cohort": "partial_modality_fusion",
       "axis": "arousal",
       "n": 10,
-      "mean_objective_minus_subjective": -0.15555056768082584
+      "mean_objective_minus_subjective": -0.21243467952084508
     },
     {
       "experiment": 2,
@@ -1058,32 +1060,32 @@
       "participant_id": "Subj_E",
       "cohort": "complete_fusion",
       "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
+      "n": 8,
+      "mean_objective_minus_subjective": -0.11688178556705116
     },
     {
       "experiment": 2,
       "participant_id": "Subj_E",
       "cohort": "complete_fusion",
       "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
+      "n": 8,
+      "mean_objective_minus_subjective": -0.32248638220953324
     },
     {
       "experiment": 2,
       "participant_id": "Subj_E",
       "cohort": "partial_modality_fusion",
       "axis": "valence",
-      "n": 10,
-      "mean_objective_minus_subjective": 0.07789533616249009
+      "n": 1,
+      "mean_objective_minus_subjective": 1.1409529769029783
     },
     {
       "experiment": 2,
       "participant_id": "Subj_E",
       "cohort": "partial_modality_fusion",
       "axis": "arousal",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.21084550296227986
+      "n": 1,
+      "mean_objective_minus_subjective": -0.4923762117030916
     },
     {
       "experiment": 2,
@@ -1122,16 +1124,16 @@
       "participant_id": "Subj_F",
       "cohort": "partial_modality_fusion",
       "axis": "valence",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.4545368178494426
+      "n": 0,
+      "mean_objective_minus_subjective": null
     },
     {
       "experiment": 2,
       "participant_id": "Subj_F",
       "cohort": "partial_modality_fusion",
       "axis": "arousal",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.0316614090720416
+      "n": 0,
+      "mean_objective_minus_subjective": null
     },
     {
       "experiment": 2,
@@ -1154,32 +1156,32 @@
       "participant_id": "Subj_G",
       "cohort": "complete_fusion",
       "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
+      "n": 3,
+      "mean_objective_minus_subjective": 0.36101090026073424
     },
     {
       "experiment": 2,
       "participant_id": "Subj_G",
       "cohort": "complete_fusion",
       "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
+      "n": 3,
+      "mean_objective_minus_subjective": -0.35537888918633237
     },
     {
       "experiment": 2,
       "participant_id": "Subj_G",
       "cohort": "partial_modality_fusion",
       "axis": "valence",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.15819766691737
+      "n": 7,
+      "mean_objective_minus_subjective": -0.27201593828989556
     },
     {
       "experiment": 2,
       "participant_id": "Subj_G",
       "cohort": "partial_modality_fusion",
       "axis": "arousal",
-      "n": 10,
-      "mean_objective_minus_subjective": 0.03702224423412357
+      "n": 7,
+      "mean_objective_minus_subjective": 0.16518129872542206
     },
     {
       "experiment": 2,
@@ -1202,368 +1204,368 @@
       "participant_id": "Subj_M",
       "cohort": "complete_fusion",
       "axis": "valence",
-      "n": 4,
-      "mean_objective_minus_subjective": -0.7637724946092667
+      "n": 8,
+      "mean_objective_minus_subjective": -0.21365238386435367
     },
     {
       "experiment": 2,
       "participant_id": "Subj_M",
       "cohort": "complete_fusion",
       "axis": "arousal",
-      "n": 4,
-      "mean_objective_minus_subjective": -0.3255573724777819
+      "n": 8,
+      "mean_objective_minus_subjective": -0.2902098523563093
     },
     {
       "experiment": 2,
       "participant_id": "Subj_M",
       "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 2,
+      "participant_id": "Subj_M",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 1,
+      "mean_objective_minus_subjective": 0.7545171799222986
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 21,
+      "mean_objective_minus_subjective": -0.2844938418191548
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 21,
+      "mean_objective_minus_subjective": 0.14823409126261552
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 20,
+      "mean_objective_minus_subjective": -0.383049073398599
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 20,
+      "mean_objective_minus_subjective": -0.02988804097937913
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": null,
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 14,
+      "mean_objective_minus_subjective": -0.30411177427224
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 8,
+      "mean_objective_minus_subjective": -0.4480248334620527
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 8,
+      "mean_objective_minus_subjective": -0.2947456323924836
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_A",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.2580249643293461
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": 0.272146310895837
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_B",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 9,
+      "mean_objective_minus_subjective": -0.36653485404106
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 9,
+      "mean_objective_minus_subjective": 0.12583241746320806
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_D",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_H",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 10,
+      "mean_objective_minus_subjective": -0.11347801330952208
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "complete_fusion",
+      "axis": "valence",
+      "n": 5,
+      "mean_objective_minus_subjective": -0.38246250759771805
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "complete_fusion",
+      "axis": "arousal",
+      "n": 5,
+      "mean_objective_minus_subjective": 0.34083974012001644
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "partial_modality_fusion",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "partial_modality_fusion",
+      "axis": "arousal",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "partial_axis_overlap",
+      "axis": "valence",
+      "n": 0,
+      "mean_objective_minus_subjective": null
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_I",
+      "cohort": "partial_axis_overlap",
+      "axis": "arousal",
+      "n": 4,
+      "mean_objective_minus_subjective": -0.780696176679035
+    },
+    {
+      "experiment": 3,
+      "participant_id": "Subj_M",
+      "cohort": "complete_fusion",
       "axis": "valence",
       "n": 6,
-      "mean_objective_minus_subjective": -0.7289527571425803
+      "mean_objective_minus_subjective": -0.24696808282003327
     },
     {
-      "experiment": 2,
+      "experiment": 3,
       "participant_id": "Subj_M",
-      "cohort": "partial_modality_fusion",
+      "cohort": "complete_fusion",
       "axis": "arousal",
       "n": 6,
-      "mean_objective_minus_subjective": -0.16457934664053162
-    },
-    {
-      "experiment": 2,
-      "participant_id": "Subj_M",
-      "cohort": "partial_axis_overlap",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 2,
-      "participant_id": "Subj_M",
-      "cohort": "partial_axis_overlap",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": null,
-      "cohort": "complete_fusion",
-      "axis": "valence",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.14008642194959858
-    },
-    {
-      "experiment": 3,
-      "participant_id": null,
-      "cohort": "complete_fusion",
-      "axis": "arousal",
-      "n": 10,
-      "mean_objective_minus_subjective": 0.05290977108302571
-    },
-    {
-      "experiment": 3,
-      "participant_id": null,
-      "cohort": "partial_modality_fusion",
-      "axis": "valence",
-      "n": 50,
-      "mean_objective_minus_subjective": -0.14942694707320503
-    },
-    {
-      "experiment": 3,
-      "participant_id": null,
-      "cohort": "partial_modality_fusion",
-      "axis": "arousal",
-      "n": 50,
-      "mean_objective_minus_subjective": -0.23481955441020944
-    },
-    {
-      "experiment": 3,
-      "participant_id": null,
-      "cohort": "partial_axis_overlap",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": null,
-      "cohort": "partial_axis_overlap",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_A",
-      "cohort": "complete_fusion",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_A",
-      "cohort": "complete_fusion",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_A",
-      "cohort": "partial_modality_fusion",
-      "axis": "valence",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.25324270596023785
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_A",
-      "cohort": "partial_modality_fusion",
-      "axis": "arousal",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.6323728637040448
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_A",
-      "cohort": "partial_axis_overlap",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_A",
-      "cohort": "partial_axis_overlap",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_B",
-      "cohort": "complete_fusion",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_B",
-      "cohort": "complete_fusion",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_B",
-      "cohort": "partial_modality_fusion",
-      "axis": "valence",
-      "n": 10,
-      "mean_objective_minus_subjective": 0.01713399300625525
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_B",
-      "cohort": "partial_modality_fusion",
-      "axis": "arousal",
-      "n": 10,
-      "mean_objective_minus_subjective": 0.17796093595735146
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_B",
-      "cohort": "partial_axis_overlap",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_B",
-      "cohort": "partial_axis_overlap",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_D",
-      "cohort": "complete_fusion",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_D",
-      "cohort": "complete_fusion",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_D",
-      "cohort": "partial_modality_fusion",
-      "axis": "valence",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.4539776920592442
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_D",
-      "cohort": "partial_modality_fusion",
-      "axis": "arousal",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.4426879432472616
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_D",
-      "cohort": "partial_axis_overlap",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_D",
-      "cohort": "partial_axis_overlap",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_H",
-      "cohort": "complete_fusion",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_H",
-      "cohort": "complete_fusion",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_H",
-      "cohort": "partial_modality_fusion",
-      "axis": "valence",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.2537315225016523
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_H",
-      "cohort": "partial_modality_fusion",
-      "axis": "arousal",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.09930907713864176
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_H",
-      "cohort": "partial_axis_overlap",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_H",
-      "cohort": "partial_axis_overlap",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_I",
-      "cohort": "complete_fusion",
-      "axis": "valence",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.14008642194959858
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_I",
-      "cohort": "complete_fusion",
-      "axis": "arousal",
-      "n": 10,
-      "mean_objective_minus_subjective": 0.05290977108302571
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_I",
-      "cohort": "partial_modality_fusion",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_I",
-      "cohort": "partial_modality_fusion",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_I",
-      "cohort": "partial_axis_overlap",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_I",
-      "cohort": "partial_axis_overlap",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_M",
-      "cohort": "complete_fusion",
-      "axis": "valence",
-      "n": 0,
-      "mean_objective_minus_subjective": null
-    },
-    {
-      "experiment": 3,
-      "participant_id": "Subj_M",
-      "cohort": "complete_fusion",
-      "axis": "arousal",
-      "n": 0,
-      "mean_objective_minus_subjective": null
+      "mean_objective_minus_subjective": -0.2187909821739212
     },
     {
       "experiment": 3,
       "participant_id": "Subj_M",
       "cohort": "partial_modality_fusion",
       "axis": "valence",
-      "n": 10,
-      "mean_objective_minus_subjective": 0.19668319214885402
+      "n": 3,
+      "mean_objective_minus_subjective": -0.25932303796867295
     },
     {
       "experiment": 3,
       "participant_id": "Subj_M",
       "cohort": "partial_modality_fusion",
       "axis": "arousal",
-      "n": 10,
-      "mean_objective_minus_subjective": -0.17768882391845037
+      "n": 3,
+      "mean_objective_minus_subjective": 0.2092374941278046
     },
     {
       "experiment": 3,
@@ -1584,7 +1586,7 @@
   ],
   "analysis": {
     "schema_version": "1.0.0",
-    "method_version": "1.1.0",
+    "method_version": "1.2.0",
     "experiments": [
       {
         "experiment": 1,
@@ -1621,14 +1623,14 @@
         "mean_self_valence": 0.14,
         "n_self_arousal": 50,
         "mean_self_arousal": 0.122,
-        "n_complete_fused_valence": 4,
-        "mean_complete_fused_valence": -0.38188624730463333,
-        "n_complete_fused_arousal": 4,
-        "mean_complete_fused_arousal": 0.03722131376110906,
-        "n_partial_fused_valence": 46,
-        "mean_partial_fused_valence": 0.02245311582628963,
-        "n_partial_fused_arousal": 46,
-        "mean_partial_fused_arousal": 0.06524099527550623
+        "n_complete_fused_valence": 19,
+        "mean_complete_fused_valence": -0.020032648807079896,
+        "n_complete_fused_arousal": 19,
+        "mean_complete_fused_arousal": 0.08506035410300691,
+        "n_partial_fused_valence": 18,
+        "mean_partial_fused_valence": 0.09959098095951634,
+        "n_partial_fused_arousal": 18,
+        "mean_partial_fused_arousal": -0.01279038655093299
       },
       {
         "experiment": 3,
@@ -1643,14 +1645,14 @@
         "mean_self_valence": 0.3186666666666667,
         "n_self_arousal": 60,
         "mean_self_arousal": -0.051333333333333335,
-        "n_complete_fused_valence": 10,
-        "mean_complete_fused_valence": 0.18995678902520066,
-        "n_complete_fused_arousal": 10,
-        "mean_complete_fused_arousal": 0.03645488554151285,
-        "n_partial_fused_valence": 50,
-        "mean_partial_fused_valence": 0.25568652646339746,
-        "n_partial_fused_arousal": 50,
-        "mean_partial_fused_arousal": -0.18100977720510472
+        "n_complete_fused_valence": 21,
+        "mean_complete_fused_valence": 0.189181650518994,
+        "n_complete_fused_arousal": 21,
+        "mean_complete_fused_arousal": -0.11254962103535891,
+        "n_partial_fused_valence": 20,
+        "mean_partial_fused_valence": 0.14647546330070046,
+        "n_partial_fused_arousal": 20,
+        "mean_partial_fused_arousal": 0.06205597951031043
       }
     ],
     "rooms": [
@@ -1887,14 +1889,14 @@
         "mean_self_valence": -0.12000000000000002,
         "n_self_arousal": 5,
         "mean_self_arousal": 0.38,
-        "n_complete_fused_valence": 0,
-        "mean_complete_fused_valence": null,
-        "n_complete_fused_arousal": 0,
-        "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": -0.5059728123024781,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": 0.15565717772444593
+        "n_complete_fused_valence": 3,
+        "mean_complete_fused_valence": -0.4858857165504025,
+        "n_complete_fused_arousal": 3,
+        "mean_complete_fused_arousal": 0.1132189338163751,
+        "n_partial_fused_valence": 1,
+        "mean_partial_fused_valence": -0.31015378762736323,
+        "n_partial_fused_arousal": 1,
+        "mean_partial_fused_arousal": 0.322736535322914
       },
       {
         "room_id": "Rm_012",
@@ -1909,14 +1911,14 @@
         "mean_self_valence": 0.04,
         "n_self_arousal": 5,
         "mean_self_arousal": 0.3,
-        "n_complete_fused_valence": 0,
-        "mean_complete_fused_valence": null,
-        "n_complete_fused_arousal": 0,
-        "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": -0.14914626537491146,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": 0.3081367990070008
+        "n_complete_fused_valence": 3,
+        "mean_complete_fused_valence": -0.02989630017457477,
+        "n_complete_fused_arousal": 3,
+        "mean_complete_fused_arousal": 0.14243145966038093,
+        "n_partial_fused_valence": 1,
+        "mean_partial_fused_valence": 0.288139853541777,
+        "n_partial_fused_arousal": 1,
+        "mean_partial_fused_arousal": 0.16924411354452867
       },
       {
         "room_id": "Rm_013",
@@ -1932,13 +1934,13 @@
         "n_self_arousal": 5,
         "mean_self_arousal": 0.38,
         "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": -0.32560924537859787,
+        "mean_complete_fused_valence": -0.13377700306634455,
         "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": 0.3308587811649361,
-        "n_partial_fused_valence": 4,
-        "mean_partial_fused_valence": 0.1695863026175525,
-        "n_partial_fused_arousal": 4,
-        "mean_partial_fused_arousal": 0.13430424862023138
+        "mean_complete_fused_arousal": 0.13529424576288435,
+        "n_partial_fused_valence": 3,
+        "mean_partial_fused_valence": 0.24501676378693213,
+        "n_partial_fused_arousal": 3,
+        "mean_partial_fused_arousal": 0.3254986142332633
       },
       {
         "room_id": "Rm_014",
@@ -1953,14 +1955,14 @@
         "mean_self_valence": 0.12000000000000002,
         "n_self_arousal": 5,
         "mean_self_arousal": 0.27999999999999997,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": -0.32936436012373027,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": -0.1490085516114979,
-        "n_partial_fused_valence": 4,
-        "mean_partial_fused_valence": 0.049445690555643004,
-        "n_partial_fused_arousal": 4,
-        "mean_partial_fused_arousal": 0.04113762520905931
+        "n_complete_fused_valence": 3,
+        "mean_complete_fused_valence": 0.2114380266790885,
+        "n_complete_fused_arousal": 3,
+        "mean_complete_fused_arousal": 0.11172194829120824,
+        "n_partial_fused_valence": 1,
+        "mean_partial_fused_valence": 0.17405075360458921,
+        "n_partial_fused_arousal": 1,
+        "mean_partial_fused_arousal": 0.22872044116082518
       },
       {
         "room_id": "Rm_015",
@@ -1975,14 +1977,14 @@
         "mean_self_valence": 0.13999999999999999,
         "n_self_arousal": 5,
         "mean_self_arousal": 0.08000000000000002,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": -0.28695526854413633,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": -0.261512669744953,
-        "n_partial_fused_valence": 4,
-        "mean_partial_fused_valence": 0.01684492167527952,
-        "n_partial_fused_arousal": 4,
-        "mean_partial_fused_arousal": 0.04392970536730231
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": 0.23422838712379151,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": -0.06680057246699965,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": 0.3096130572421959,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": 0.00240053137235164
       },
       {
         "room_id": "Rm_016",
@@ -1997,14 +1999,14 @@
         "mean_self_valence": 0.54,
         "n_self_arousal": 5,
         "mean_self_arousal": -0.29999999999999993,
-        "n_complete_fused_valence": 0,
-        "mean_complete_fused_valence": null,
-        "n_complete_fused_arousal": 0,
-        "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": 0.3211883801388408,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.2547283813855401
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": 0.20243773392867276,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": -0.20504620591264672,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": 0.5561187964027994,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": -0.5621502127902703
       },
       {
         "room_id": "Rm_017",
@@ -2019,14 +2021,14 @@
         "mean_self_valence": 0.5,
         "n_self_arousal": 5,
         "mean_self_arousal": -0.16,
-        "n_complete_fused_valence": 0,
-        "mean_complete_fused_valence": null,
-        "n_complete_fused_arousal": 0,
-        "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": 0.2684310520688372,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.24390953591358713
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": 0.433082361443432,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": 0.07687585794388803,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": -0.04595236306314682,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": -0.3692258143974714
       },
       {
         "room_id": "Rm_018",
@@ -2042,13 +2044,13 @@
         "n_self_arousal": 5,
         "mean_self_arousal": -0.12000000000000002,
         "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": -0.5856161151720689,
+        "mean_complete_fused_valence": -0.561931146834413,
         "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": 0.22854769523595103,
-        "n_partial_fused_valence": 4,
-        "mean_partial_fused_valence": 0.421897014960475,
-        "n_partial_fused_arousal": 4,
-        "mean_partial_fused_arousal": -0.006910998195168341
+        "mean_complete_fused_arousal": 0.22810486483370657,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": 0.2734558508981912,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": -0.04544690727387664
       },
       {
         "room_id": "Rm_019",
@@ -2063,14 +2065,14 @@
         "mean_self_valence": 0.2,
         "n_self_arousal": 5,
         "mean_self_arousal": 0.06000000000000001,
-        "n_complete_fused_valence": 0,
-        "mean_complete_fused_valence": null,
-        "n_complete_fused_arousal": 0,
-        "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": -0.0015017964800395633,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": 0.04504085777611875
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": 0.1,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": 0.346509038100996,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": -0.06925445640932744,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": -0.08298739541974741
       },
       {
         "room_id": "Rm_020",
@@ -2085,14 +2087,14 @@
         "mean_self_valence": -0.24000000000000005,
         "n_self_arousal": 5,
         "mean_self_arousal": 0.32,
-        "n_complete_fused_valence": 0,
-        "mean_complete_fused_valence": null,
-        "n_complete_fused_arousal": 0,
-        "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": -0.25264903629554447,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": 0.4200517745250794
+        "n_complete_fused_valence": 1,
+        "mean_complete_fused_valence": -0.6113771722878867,
+        "n_complete_fused_arousal": 1,
+        "mean_complete_fused_arousal": 0.19406339482716847,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": -0.5712056118749648,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": 0.09369785318658833
       },
       {
         "room_id": "Rm_021",
@@ -2107,14 +2109,14 @@
         "mean_self_valence": 0.6416666666666666,
         "n_self_arousal": 6,
         "mean_self_arousal": -0.5333333333333333,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": 0.291922762200199,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": -0.6849770423339386,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": 0.6049184994255837,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.2747638535381965
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": 0.3261048661330172,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": -0.5568982814143764,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": 0.3437338996264673,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": -0.09382257559575806
       },
       {
         "room_id": "Rm_022",
@@ -2129,14 +2131,14 @@
         "mean_self_valence": -0.4666666666666666,
         "n_self_arousal": 6,
         "mean_self_arousal": 0.43333333333333335,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": -0.0008471567975481542,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": 0.5009716798021198,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": -0.13361400877939955,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.00482987103296959
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": -0.2798520177073992,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": 0.22405218626529755,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": -0.4200967474232522,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": 0.2527567572229425
       },
       {
         "room_id": "Rm_023",
@@ -2151,14 +2153,14 @@
         "mean_self_valence": 0.4583333333333334,
         "n_self_arousal": 6,
         "mean_self_arousal": 0.05000000000000002,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": 0.7998317222420521,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": 0.35573716716583426,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": 0.42487520354918884,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.22976503130009282
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": 0.41985126898225833,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": 0.04306887643712841,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": 0.5756940440080877,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": 0.0387003395210159
       },
       {
         "room_id": "Rm_024",
@@ -2173,14 +2175,14 @@
         "mean_self_valence": 0.7999999999999999,
         "n_self_arousal": 6,
         "mean_self_arousal": -0.79,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": 0.8997801199009526,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": -0.42371976151035773,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": 0.3995766772159866,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.5125212670898749
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": 0.44722905893175013,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": -0.2711613953120722,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
       },
       {
         "room_id": "Rm_025",
@@ -2195,14 +2197,14 @@
         "mean_self_valence": 0.6583333333333333,
         "n_self_arousal": 6,
         "mean_self_arousal": -0.375,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": 0.40807723779980093,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": -0.7512033863962422,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": 0.3931668525233367,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.3733007367894047
+        "n_complete_fused_valence": 3,
+        "mean_complete_fused_valence": 0.36890240475538943,
+        "n_complete_fused_arousal": 3,
+        "mean_complete_fused_arousal": -0.3413183618745679,
+        "n_partial_fused_valence": 1,
+        "mean_partial_fused_valence": -0.037343418390310634,
+        "n_partial_fused_arousal": 1,
+        "mean_partial_fused_arousal": -0.2103875446748513
       },
       {
         "room_id": "Rm_026",
@@ -2217,14 +2219,14 @@
         "mean_self_valence": -0.22333333333333336,
         "n_self_arousal": 6,
         "mean_self_arousal": 0.2833333333333334,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": -0.2248463252297373,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": 0.45533212320174277,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": -0.14721628932726066,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.20786979904199007
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": -0.21392869113522786,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": -0.2369851740308998,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": -0.06935712854012359,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": 0.06179030719712149
       },
       {
         "room_id": "Rm_027",
@@ -2239,14 +2241,14 @@
         "mean_self_valence": 0.425,
         "n_self_arousal": 6,
         "mean_self_arousal": 0.3833333333333333,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": 0.21918046134033317,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": 0.597131308183882,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": 0.5639725474859689,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": 0.15219500365549254
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": 0.6102147079555574,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": 0.4751541503140997,
+        "n_partial_fused_valence": 3,
+        "mean_partial_fused_valence": 0.5361372779885621,
+        "n_partial_fused_arousal": 3,
+        "mean_partial_fused_arousal": 0.29964224406336687
       },
       {
         "room_id": "Rm_028",
@@ -2261,14 +2263,14 @@
         "mean_self_valence": 0.125,
         "n_self_arousal": 6,
         "mean_self_arousal": 0.07,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": -0.017968820541251374,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": -0.02544004792471205,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": 0.12737789013091003,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.061991499633604744
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": 0.005371890516499243,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": -0.03734636939817487,
+        "n_partial_fused_valence": 2,
+        "mean_partial_fused_valence": 0.18748738360969372,
+        "n_partial_fused_arousal": 2,
+        "mean_partial_fused_arousal": 0.16371782218843767
       },
       {
         "room_id": "Rm_029",
@@ -2283,14 +2285,14 @@
         "mean_self_valence": 0.7033333333333335,
         "n_self_arousal": 6,
         "mean_self_arousal": -0.06833333333333336,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": -0.007871488669635496,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": -0.04860213305453248,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": 0.10514404415979599,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.0600172179088474
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": -0.1000161235860669,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": -0.3191942178755466,
+        "n_partial_fused_valence": 3,
+        "mean_partial_fused_valence": -0.0853167524114689,
+        "n_partial_fused_arousal": 3,
+        "mean_partial_fused_arousal": 0.05535057484706751
       },
       {
         "room_id": "Rm_030",
@@ -2305,14 +2307,14 @@
         "mean_self_valence": 0.06499999999999999,
         "n_self_arousal": 6,
         "mean_self_arousal": 0.033333333333333326,
-        "n_complete_fused_valence": 1,
-        "mean_complete_fused_valence": -0.4676906219931587,
-        "n_complete_fused_arousal": 1,
-        "mean_complete_fused_arousal": 0.38931894828133273,
-        "n_partial_fused_valence": 5,
-        "mean_partial_fused_valence": 0.21866384824986435,
-        "n_partial_fused_arousal": 5,
-        "mean_partial_fused_arousal": -0.23723349937155885
+        "n_complete_fused_valence": 2,
+        "mean_complete_fused_valence": 0.21807876322596473,
+        "n_complete_fused_arousal": 2,
+        "mean_complete_fused_arousal": 0.00951674695512758,
+        "n_partial_fused_valence": 3,
+        "mean_partial_fused_valence": 0.12648940170376477,
+        "n_partial_fused_arousal": 3,
+        "mean_partial_fused_arousal": -0.15325220763925398
       }
     ],
     "people": [
@@ -2335,10 +2337,10 @@
         "mean_complete_fused_valence": null,
         "n_complete_fused_arousal": 0,
         "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 20,
-        "mean_partial_fused_valence": 0.19188419063287437,
-        "n_partial_fused_arousal": 20,
-        "mean_partial_fused_arousal": -0.08198085784621767
+        "n_partial_fused_valence": 18,
+        "mean_partial_fused_valence": 0.11067320105479045,
+        "n_partial_fused_arousal": 18,
+        "mean_partial_fused_arousal": 0.06993578182365782
       },
       {
         "participant_id": "Subj_B",
@@ -2354,14 +2356,14 @@
         "mean_self_valence": 0.275,
         "n_self_arousal": 10,
         "mean_self_arousal": -0.32999999999999996,
-        "n_complete_fused_valence": 0,
-        "mean_complete_fused_valence": null,
-        "n_complete_fused_arousal": 0,
-        "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 10,
-        "mean_partial_fused_valence": 0.28356699650312767,
-        "n_partial_fused_arousal": 10,
-        "mean_partial_fused_arousal": -0.24101953202132426
+        "n_complete_fused_valence": 10,
+        "mean_complete_fused_valence": 0.14598751783532699,
+        "n_complete_fused_arousal": 10,
+        "mean_complete_fused_arousal": -0.19392684455208148,
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
       },
       {
         "participant_id": "Subj_C",
@@ -2403,10 +2405,10 @@
         "mean_complete_fused_valence": null,
         "n_complete_fused_arousal": 0,
         "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 10,
-        "mean_partial_fused_valence": 0.06301115397037788,
-        "n_partial_fused_arousal": 10,
-        "mean_partial_fused_arousal": -0.37134397162363075
+        "n_partial_fused_valence": 9,
+        "mean_partial_fused_valence": 0.038954795201692205,
+        "n_partial_fused_arousal": 9,
+        "mean_partial_fused_arousal": 0.0073606531760484544
       },
       {
         "participant_id": "Subj_E",
@@ -2421,14 +2423,14 @@
         "mean_self_valence": 0.020000000000000007,
         "n_self_arousal": 10,
         "mean_self_arousal": 0.25,
-        "n_complete_fused_valence": 0,
-        "mean_complete_fused_valence": null,
-        "n_complete_fused_arousal": 0,
-        "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 10,
-        "mean_partial_fused_valence": 0.058947668081245054,
-        "n_partial_fused_arousal": 10,
-        "mean_partial_fused_arousal": 0.1445772485188601
+        "n_complete_fused_valence": 8,
+        "mean_complete_fused_valence": -0.08344089278352558,
+        "n_complete_fused_arousal": 8,
+        "mean_complete_fused_arousal": 0.1512568088952334,
+        "n_partial_fused_valence": 1,
+        "mean_partial_fused_valence": 0.37047648845148906,
+        "n_partial_fused_arousal": 1,
+        "mean_partial_fused_arousal": 0.15381189414845423
       },
       {
         "participant_id": "Subj_F",
@@ -2447,10 +2449,10 @@
         "mean_complete_fused_valence": null,
         "n_complete_fused_arousal": 0,
         "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 10,
-        "mean_partial_fused_valence": 0.16273159107527868,
-        "n_partial_fused_arousal": 10,
-        "mean_partial_fused_arousal": 0.08416929546397922
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
       },
       {
         "participant_id": "Subj_G",
@@ -2465,14 +2467,14 @@
         "mean_self_valence": 0.12000000000000002,
         "n_self_arousal": 10,
         "mean_self_arousal": -0.020000000000000018,
-        "n_complete_fused_valence": 0,
-        "mean_complete_fused_valence": null,
-        "n_complete_fused_arousal": 0,
-        "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 10,
-        "mean_partial_fused_valence": 0.040901166541314996,
-        "n_partial_fused_arousal": 10,
-        "mean_partial_fused_arousal": -0.0014888778829382332
+        "n_complete_fused_valence": 3,
+        "mean_complete_fused_valence": -0.01949454986963291,
+        "n_complete_fused_arousal": 3,
+        "mean_complete_fused_arousal": 0.22231055540683378,
+        "n_partial_fused_valence": 7,
+        "mean_partial_fused_valence": 0.1211348879979094,
+        "n_partial_fused_arousal": 7,
+        "mean_partial_fused_arousal": -0.11740935063728897
       },
       {
         "participant_id": "Subj_H",
@@ -2491,10 +2493,10 @@
         "mean_complete_fused_valence": null,
         "n_complete_fused_arousal": 0,
         "mean_complete_fused_arousal": null,
-        "n_partial_fused_valence": 10,
-        "mean_partial_fused_valence": 0.05313423874917382,
-        "n_partial_fused_arousal": 10,
-        "mean_partial_fused_arousal": 0.030345461430679104
+        "n_partial_fused_valence": 0,
+        "mean_partial_fused_valence": null,
+        "n_partial_fused_arousal": 0,
+        "mean_partial_fused_arousal": null
       },
       {
         "participant_id": "Subj_I",
@@ -2509,10 +2511,10 @@
         "mean_self_valence": 0.25999999999999995,
         "n_self_arousal": 10,
         "mean_self_arousal": 0.009999999999999998,
-        "n_complete_fused_valence": 10,
-        "mean_complete_fused_valence": 0.18995678902520066,
-        "n_complete_fused_arousal": 10,
-        "mean_complete_fused_arousal": 0.03645488554151285,
+        "n_complete_fused_valence": 5,
+        "mean_complete_fused_valence": 0.2887687462011409,
+        "n_complete_fused_arousal": 5,
+        "mean_complete_fused_arousal": -0.06958012993999177,
         "n_partial_fused_valence": 0,
         "mean_partial_fused_valence": null,
         "n_partial_fused_arousal": 0,
@@ -2533,14 +2535,14 @@
         "mean_self_valence": 0.22800000000000004,
         "n_self_arousal": 20,
         "mean_self_arousal": 0.06599999999999999,
-        "n_complete_fused_valence": 4,
-        "mean_complete_fused_valence": -0.38188624730463333,
-        "n_complete_fused_arousal": 4,
-        "mean_complete_fused_arousal": 0.03722131376110906,
-        "n_partial_fused_valence": 16,
-        "mean_partial_fused_valence": 0.20978485558228305,
-        "n_partial_fused_arousal": 16,
-        "mean_partial_fused_arousal": -0.05388638496961541
+        "n_complete_fused_valence": 14,
+        "mean_complete_fused_valence": 0.10103472972017753,
+        "n_complete_fused_arousal": 14,
+        "mean_complete_fused_arousal": -0.02408659685335718,
+        "n_partial_fused_valence": 3,
+        "mean_partial_fused_valence": 0.3870051476823302,
+        "n_partial_fused_arousal": 3,
+        "mean_partial_fused_arousal": 0.11795208039723565
       }
     ],
     "cohorts_by_experiment": [
@@ -2552,22 +2554,42 @@
       {
         "experiment": 2,
         "cohort": "complete_fusion",
-        "trials": 4
+        "trials": 19
+      },
+      {
+        "experiment": 2,
+        "cohort": "partial_axis_overlap",
+        "trials": 1
       },
       {
         "experiment": 2,
         "cohort": "partial_modality_fusion",
-        "trials": 46
+        "trials": 18
+      },
+      {
+        "experiment": 2,
+        "cohort": "subjective_only",
+        "trials": 12
       },
       {
         "experiment": 3,
         "cohort": "complete_fusion",
-        "trials": 10
+        "trials": 21
+      },
+      {
+        "experiment": 3,
+        "cohort": "partial_axis_overlap",
+        "trials": 14
       },
       {
         "experiment": 3,
         "cohort": "partial_modality_fusion",
-        "trials": 50
+        "trials": 20
+      },
+      {
+        "experiment": 3,
+        "cohort": "subjective_only",
+        "trials": 5
       }
     ],
     "objective_subjective_disagreement": [
@@ -2623,33 +2645,33 @@
         "experiment": 2,
         "cohort": "complete_fusion",
         "axis": "valence",
-        "n_pairs": 4,
-        "mean_signed": -0.7637724946092667,
-        "mean_absolute": 0.7637724946092667
+        "n_pairs": 19,
+        "mean_signed": -0.08217056077205452,
+        "mean_absolute": 0.5049080469677217
       },
       {
         "experiment": 2,
         "cohort": "complete_fusion",
         "axis": "arousal",
-        "n_pairs": 4,
-        "mean_signed": -0.3255573724777819,
-        "mean_absolute": 0.3541050677137329
+        "n_pairs": 19,
+        "mean_signed": -0.3140898181097757,
+        "mean_absolute": 0.46647399213478175
       },
       {
         "experiment": 2,
         "cohort": "partial_modality_fusion",
         "axis": "valence",
-        "n_pairs": 46,
-        "mean_signed": -0.2594415944343773,
-        "mean_absolute": 0.5547950137486845
+        "n_pairs": 18,
+        "mean_signed": -0.12304026030318951,
+        "mean_absolute": 0.6236746263082082
       },
       {
         "experiment": 2,
         "cohort": "partial_modality_fusion",
         "axis": "arousal",
-        "n_pairs": 46,
-        "mean_signed": -0.09995279205768325,
-        "mean_absolute": 0.5296887757050021
+        "n_pairs": 18,
+        "mean_signed": -0.08113632865742154,
+        "mean_absolute": 0.5393212095697217
       },
       {
         "experiment": 2,
@@ -2663,41 +2685,41 @@
         "experiment": 2,
         "cohort": "partial_axis_overlap",
         "axis": "arousal",
-        "n_pairs": 0,
-        "mean_signed": null,
-        "mean_absolute": null
+        "n_pairs": 1,
+        "mean_signed": 0.7545171799222986,
+        "mean_absolute": 0.7545171799222986
       },
       {
         "experiment": 3,
         "cohort": "complete_fusion",
         "axis": "valence",
-        "n_pairs": 10,
-        "mean_signed": -0.14008642194959858,
-        "mean_absolute": 0.8896537659958863
+        "n_pairs": 21,
+        "mean_signed": -0.2844938418191548,
+        "mean_absolute": 0.6523010328790926
       },
       {
         "experiment": 3,
         "cohort": "complete_fusion",
         "axis": "arousal",
-        "n_pairs": 10,
-        "mean_signed": 0.05290977108302571,
-        "mean_absolute": 0.733513280429061
+        "n_pairs": 21,
+        "mean_signed": 0.14823409126261552,
+        "mean_absolute": 0.528390166729393
       },
       {
         "experiment": 3,
         "cohort": "partial_modality_fusion",
         "axis": "valence",
-        "n_pairs": 50,
-        "mean_signed": -0.14942694707320503,
-        "mean_absolute": 0.6537982859135859
+        "n_pairs": 20,
+        "mean_signed": -0.383049073398599,
+        "mean_absolute": 0.7592095319342934
       },
       {
         "experiment": 3,
         "cohort": "partial_modality_fusion",
         "axis": "arousal",
-        "n_pairs": 50,
-        "mean_signed": -0.23481955441020944,
-        "mean_absolute": 0.6974675234129516
+        "n_pairs": 20,
+        "mean_signed": -0.02988804097937913,
+        "mean_absolute": 0.5873576714169269
       },
       {
         "experiment": 3,
@@ -2711,9 +2733,9 @@
         "experiment": 3,
         "cohort": "partial_axis_overlap",
         "axis": "arousal",
-        "n_pairs": 0,
-        "mean_signed": null,
-        "mean_absolute": null
+        "n_pairs": 14,
+        "mean_signed": -0.30411177427224,
+        "mean_absolute": 0.8506448119192481
       }
     ],
     "associations": [
@@ -2734,12 +2756,12 @@
         "predictor": "illuminance",
         "outcome": "complete_fused_valence",
         "unit": "room",
-        "n_rooms": 4,
-        "n_participants": 1,
-        "pearson_r": -0.84262362592118,
+        "n_rooms": 10,
+        "n_participants": 3,
+        "pearson_r": 0.14614343155252388,
         "interval": null,
         "p_value": null,
-        "status": "descriptive_only_single_participant"
+        "status": "descriptive_only"
       },
       {
         "experiment": 3,
@@ -2759,11 +2781,11 @@
         "outcome": "complete_fused_valence",
         "unit": "room",
         "n_rooms": 10,
-        "n_participants": 1,
-        "pearson_r": -0.3868838339055471,
+        "n_participants": 3,
+        "pearson_r": 0.14636944434423907,
         "interval": null,
         "p_value": null,
-        "status": "descriptive_only_single_participant"
+        "status": "descriptive_only"
       }
     ],
     "inference_status": "descriptive_only_crossed_dependence",

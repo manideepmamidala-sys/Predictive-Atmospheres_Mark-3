@@ -1,0 +1,1504 @@
+{
+  "schema_version": "1.0.0",
+  "id": "S4",
+  "route": "/rooms",
+  "status": "available",
+  "question": "Which measured room attributes co-vary?",
+  "takeaway": "Each experiment has ten designed rooms; E1 has 3 estimable attribute pairs, E2 has 45 estimable attribute pairs, E3 has 36 estimable attribute pairs.",
+  "method": "Pairwise Spearman correlations on observed rooms within each experiment; constant columns return null.",
+  "caveats": [
+    "Ten designed rooms per experiment constrain precision.",
+    "Co-variation among design choices does not identify an effect on people."
+  ],
+  "counts": {
+    "trials": 0,
+    "participants": 0,
+    "rooms": 30
+  },
+  "units": {
+    "spearman_rho": "Spearman \u03c1"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T13:06:12+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "heatmap",
+    "rows": [
+      {
+        "experiment": 1,
+        "attribute_x": "length",
+        "attribute_y": "length",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "attribute_x": "length",
+        "attribute_y": "width",
+        "spearman_rho": 0.7064253216011243,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "attribute_x": "length",
+        "attribute_y": "height",
+        "spearman_rho": 0.4189622037201473,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "attribute_x": "width",
+        "attribute_y": "length",
+        "spearman_rho": 0.7064253216011243,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "attribute_x": "width",
+        "attribute_y": "width",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "attribute_x": "width",
+        "attribute_y": "height",
+        "spearman_rho": 0.6951219512195123,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "attribute_x": "height",
+        "attribute_y": "length",
+        "spearman_rho": 0.4189622037201473,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "attribute_x": "height",
+        "attribute_y": "width",
+        "spearman_rho": 0.6951219512195123,
+        "rooms": 10
+      },
+      {
+        "experiment": 1,
+        "attribute_x": "height",
+        "attribute_y": "height",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "length",
+        "attribute_y": "length",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "length",
+        "attribute_y": "width",
+        "spearman_rho": 0.17901234567901234,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "length",
+        "attribute_y": "height",
+        "spearman_rho": 0.6932645803587589,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "length",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.79115480528524,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "length",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.7630805353010245,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "length",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.785081015728862,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "length",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.8134898931211442,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "length",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.5627148132868065,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "length",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.483200763583236,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "length",
+        "attribute_y": "cct",
+        "spearman_rho": 0.6257786477574637,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "width",
+        "attribute_y": "length",
+        "spearman_rho": 0.17901234567901234,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "width",
+        "attribute_y": "width",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "width",
+        "attribute_y": "height",
+        "spearman_rho": 0.2883489847509882,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "width",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.3042903097250923,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "width",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.2646166372414843,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "width",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.47042552926610387,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "width",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.5015501596686753,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "width",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.05504818825631803,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "width",
+        "attribute_y": "illuminance",
+        "spearman_rho": -0.324172664176095,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "width",
+        "attribute_y": "cct",
+        "spearman_rho": -0.17484991628517368,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "height",
+        "attribute_y": "length",
+        "spearman_rho": 0.6932645803587589,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "height",
+        "attribute_y": "width",
+        "spearman_rho": 0.2883489847509882,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "height",
+        "attribute_y": "height",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "height",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.6653442168000473,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "height",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.8685055901935901,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "height",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.483030013101975,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "height",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.6808542089216723,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "height",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.47416632407045034,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "height",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.41337576970244394,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "height",
+        "attribute_y": "cct",
+        "spearman_rho": 0.5579268292682927,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_doors",
+        "attribute_y": "length",
+        "spearman_rho": 0.7911548052852398,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_doors",
+        "attribute_y": "width",
+        "spearman_rho": 0.3042903097250923,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_doors",
+        "attribute_y": "height",
+        "spearman_rho": 0.6653442168000473,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_doors",
+        "attribute_y": "num_doors",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_doors",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.8696190078499354,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_doors",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.6757246285173464,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_doors",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.7638287395970011,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_doors",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.3618136134933163,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_doors",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.2613098319673951,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_doors",
+        "attribute_y": "cct",
+        "spearman_rho": 0.3830769733091181,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "door_area",
+        "attribute_y": "length",
+        "spearman_rho": 0.7630805353010245,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "door_area",
+        "attribute_y": "width",
+        "spearman_rho": 0.2646166372414843,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "door_area",
+        "attribute_y": "height",
+        "spearman_rho": 0.86850559019359,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "door_area",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.8696190078499354,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "door_area",
+        "attribute_y": "door_area",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "door_area",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.5652610071228636,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "door_area",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.7500139429824981,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "door_area",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.5365953413208115,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "door_area",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.5365953413208115,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "door_area",
+        "attribute_y": "cct",
+        "spearman_rho": 0.6269142464425562,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_windows",
+        "attribute_y": "length",
+        "spearman_rho": 0.7850810157288621,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_windows",
+        "attribute_y": "width",
+        "spearman_rho": 0.4704255292661038,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_windows",
+        "attribute_y": "height",
+        "spearman_rho": 0.4830300131019749,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_windows",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.6757246285173464,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_windows",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.5652610071228636,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_windows",
+        "attribute_y": "num_windows",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_windows",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.8890413438919633,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_windows",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.39512948617420596,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_windows",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.2593037253018226,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "num_windows",
+        "attribute_y": "cct",
+        "spearman_rho": 0.40562135715614567,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "window_area",
+        "attribute_y": "length",
+        "spearman_rho": 0.8134898931211442,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "window_area",
+        "attribute_y": "width",
+        "spearman_rho": 0.5015501596686753,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "window_area",
+        "attribute_y": "height",
+        "spearman_rho": 0.6808542089216724,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "window_area",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.7638287395970011,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "window_area",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.7500139429824981,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "window_area",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.8890413438919634,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "window_area",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.9999999999999999,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "window_area",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.6727272727272726,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "window_area",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.4424242424242424,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "window_area",
+        "attribute_y": "cct",
+        "spearman_rho": 0.6261427099904666,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "length",
+        "spearman_rho": 0.5627148132868065,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "width",
+        "spearman_rho": 0.05504818825631803,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "height",
+        "spearman_rho": 0.47416632407045034,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.3618136134933163,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.5365953413208117,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.3951294861742059,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.6727272727272726,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.9999999999999999,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.8424242424242423,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "cct",
+        "spearman_rho": 0.8997002046464955,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "illuminance",
+        "attribute_y": "length",
+        "spearman_rho": 0.483200763583236,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "illuminance",
+        "attribute_y": "width",
+        "spearman_rho": -0.324172664176095,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "illuminance",
+        "attribute_y": "height",
+        "spearman_rho": 0.41337576970244394,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "illuminance",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.2613098319673951,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "illuminance",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.5365953413208117,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "illuminance",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.2593037253018226,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "illuminance",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.4424242424242424,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "illuminance",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.8424242424242423,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "illuminance",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.9999999999999999,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "illuminance",
+        "attribute_y": "cct",
+        "spearman_rho": 0.9483326481409007,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "cct",
+        "attribute_y": "length",
+        "spearman_rho": 0.6257786477574637,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "cct",
+        "attribute_y": "width",
+        "spearman_rho": -0.1748499162851737,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "cct",
+        "attribute_y": "height",
+        "spearman_rho": 0.5579268292682927,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "cct",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.38307697330911816,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "cct",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.6269142464425561,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "cct",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.4056213571561456,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "cct",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.6261427099904665,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "cct",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.8997002046464956,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "cct",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.9483326481409007,
+        "rooms": 10
+      },
+      {
+        "experiment": 2,
+        "attribute_x": "cct",
+        "attribute_y": "cct",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "length",
+        "attribute_y": "length",
+        "spearman_rho": 0.9999999999999999,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "length",
+        "attribute_y": "width",
+        "spearman_rho": 0.7781190959104827,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "length",
+        "attribute_y": "height",
+        "spearman_rho": -0.09203146787097732,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "length",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.09693667772552661,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "length",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.46015733935488656,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "length",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.7119187333033755,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "length",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.709090909090909,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "length",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.24848484848484845,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "length",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.6400757530925302,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "length",
+        "attribute_y": "cct",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "width",
+        "attribute_y": "length",
+        "spearman_rho": 0.7781190959104828,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "width",
+        "attribute_y": "width",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "width",
+        "attribute_y": "height",
+        "spearman_rho": -0.2584725505444276,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "width",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.47120010272614504,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "width",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.6092567262832936,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "width",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.5196250211466208,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "width",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.6930123197952737,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "width",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": -0.05471149893120582,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "width",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.3549653237959463,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "width",
+        "attribute_y": "cct",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "height",
+        "attribute_y": "length",
+        "spearman_rho": -0.09203146787097731,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "height",
+        "attribute_y": "width",
+        "spearman_rho": -0.2584725505444276,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "height",
+        "attribute_y": "height",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "height",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.06793855764769173,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "height",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.20496894409937888,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "height",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.03860936712526721,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "height",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.04294801833978941,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "height",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": -0.21474009169894706,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "height",
+        "attribute_y": "illuminance",
+        "spearman_rho": -0.19937791451169073,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "height",
+        "attribute_y": "cct",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_doors",
+        "attribute_y": "length",
+        "spearman_rho": 0.09693667772552661,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_doors",
+        "attribute_y": "width",
+        "spearman_rho": 0.47120010272614504,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_doors",
+        "attribute_y": "height",
+        "spearman_rho": 0.06793855764769173,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_doors",
+        "attribute_y": "num_doors",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_doors",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.7775190486346943,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_doors",
+        "attribute_y": "num_windows",
+        "spearman_rho": -0.2346185661017325,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_doors",
+        "attribute_y": "window_area",
+        "spearman_rho": -0.022370002552044604,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_doors",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": -0.6487300740092935,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_doors",
+        "attribute_y": "illuminance",
+        "spearman_rho": -0.3407526747086528,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_doors",
+        "attribute_y": "cct",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "door_area",
+        "attribute_y": "length",
+        "spearman_rho": 0.46015733935488656,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "door_area",
+        "attribute_y": "width",
+        "spearman_rho": 0.6092567262832936,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "door_area",
+        "attribute_y": "height",
+        "spearman_rho": 0.20496894409937888,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "door_area",
+        "attribute_y": "num_doors",
+        "spearman_rho": 0.7775190486346943,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "door_area",
+        "attribute_y": "door_area",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "door_area",
+        "attribute_y": "num_windows",
+        "spearman_rho": -0.04504426164614508,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "door_area",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.39880302744090174,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "door_area",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": -0.37426130267530777,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "door_area",
+        "attribute_y": "illuminance",
+        "spearman_rho": -0.24299183331112306,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "door_area",
+        "attribute_y": "cct",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_windows",
+        "attribute_y": "length",
+        "spearman_rho": 0.7119187333033755,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_windows",
+        "attribute_y": "width",
+        "spearman_rho": 0.5196250211466208,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_windows",
+        "attribute_y": "height",
+        "spearman_rho": 0.03860936712526721,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_windows",
+        "attribute_y": "num_doors",
+        "spearman_rho": -0.23461856610173254,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_windows",
+        "attribute_y": "door_area",
+        "spearman_rho": -0.045044261646145084,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_windows",
+        "attribute_y": "num_windows",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_windows",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.7119187333033755,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_windows",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.495800546407708,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_windows",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.8133265027035577,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "num_windows",
+        "attribute_y": "cct",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "window_area",
+        "attribute_y": "length",
+        "spearman_rho": 0.709090909090909,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "window_area",
+        "attribute_y": "width",
+        "spearman_rho": 0.6930123197952736,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "window_area",
+        "attribute_y": "height",
+        "spearman_rho": 0.042948018339789416,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "window_area",
+        "attribute_y": "num_doors",
+        "spearman_rho": -0.022370002552044604,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "window_area",
+        "attribute_y": "door_area",
+        "spearman_rho": 0.3988030274409017,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "window_area",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.7119187333033755,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "window_area",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.9999999999999999,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "window_area",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.3939393939393939,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "window_area",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.3569653238400649,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "window_area",
+        "attribute_y": "cct",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "length",
+        "spearman_rho": 0.24848484848484845,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "width",
+        "spearman_rho": -0.05471149893120582,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "height",
+        "spearman_rho": -0.21474009169894706,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "num_doors",
+        "spearman_rho": -0.6487300740092935,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "door_area",
+        "spearman_rho": -0.37426130267530777,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.495800546407708,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.3939393939393939,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.9999999999999999,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "illuminance",
+        "spearman_rho": 0.6400757530925302,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "daylight_factor",
+        "attribute_y": "cct",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "illuminance",
+        "attribute_y": "length",
+        "spearman_rho": 0.6400757530925302,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "illuminance",
+        "attribute_y": "width",
+        "spearman_rho": 0.3549653237959463,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "illuminance",
+        "attribute_y": "height",
+        "spearman_rho": -0.19937791451169073,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "illuminance",
+        "attribute_y": "num_doors",
+        "spearman_rho": -0.3407526747086528,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "illuminance",
+        "attribute_y": "door_area",
+        "spearman_rho": -0.24299183331112306,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "illuminance",
+        "attribute_y": "num_windows",
+        "spearman_rho": 0.8133265027035576,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "illuminance",
+        "attribute_y": "window_area",
+        "spearman_rho": 0.3569653238400649,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "illuminance",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": 0.6400757530925302,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "illuminance",
+        "attribute_y": "illuminance",
+        "spearman_rho": 1.0,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "illuminance",
+        "attribute_y": "cct",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "cct",
+        "attribute_y": "length",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "cct",
+        "attribute_y": "width",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "cct",
+        "attribute_y": "height",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "cct",
+        "attribute_y": "num_doors",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "cct",
+        "attribute_y": "door_area",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "cct",
+        "attribute_y": "num_windows",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "cct",
+        "attribute_y": "window_area",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "cct",
+        "attribute_y": "daylight_factor",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "cct",
+        "attribute_y": "illuminance",
+        "spearman_rho": null,
+        "rooms": 10
+      },
+      {
+        "experiment": 3,
+        "attribute_x": "cct",
+        "attribute_y": "cct",
+        "spearman_rho": null,
+        "rooms": 10
+      }
+    ],
+    "x": "attribute_x",
+    "y": "attribute_y",
+    "series": "spearman_rho",
+    "facet": "experiment",
+    "x_label": "Room attribute",
+    "y_label": "Room attribute",
+    "x_unit": null,
+    "y_unit": null
+  }
+}

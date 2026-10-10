@@ -1,13 +1,21 @@
-"""Inventory supplied evidence before migration; never rewrite it during verification."""
+"""Build or check the path-stable inventory of retained original evidence."""
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
-import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+GROUPS = (
+    ("recording", "data/raw"),
+    ("metadata", "data/metadata"),
+    ("room_render", "data/renders/raw"),
+    ("legacy_site_asset", "docs/history/legacy-site-assets"),
+)
+INVENTORY = ROOT / "data/source-inventory.json"
+MANIFEST = ROOT / "data/MANIFEST.sha256"
 
 
 def digest(path: Path) -> str:
@@ -18,49 +26,33 @@ def digest(path: Path) -> str:
     return sha.hexdigest()
 
 
-def main() -> None:
-    groups = (
-        ("recording", ROOT / "data/raw", None),
-        ("metadata", ROOT / "data/metadata", None),
-        ("room_render", ROOT / "rooms", ROOT / "data/renders/raw"),
-        ("legacy_site_asset", ROOT / "frontend/assets/IMAGES", ROOT / "docs/history/legacy-site-assets"),
-    )
+def build() -> tuple[str, str, list[dict]]:
     entries = []
-    for role, source, destination in groups:
-        for file in sorted(path for path in source.rglob("*") if path.is_file()):
-            relative = file.relative_to(source)
-            entries.append({
-                "role": role,
-                "source": file.relative_to(ROOT).as_posix(),
-                "destination": (destination / relative).relative_to(ROOT).as_posix() if destination else None,
-                "size_bytes": file.stat().st_size,
-                "sha256": digest(file),
-            })
-    for name in ("ManideepMamidala_ThesisBooklet.pdf", "PredictiveAtmospheres_ManideepMamidala.pdf"):
-        file = ROOT / name
-        entries.append({
-            "role": "thesis_pdf",
-            "source": name,
-            "destination": f"docs/thesis/{name}",
-            "size_bytes": file.stat().st_size,
-            "sha256": digest(file),
-        })
-    status = subprocess.check_output(["git", "status", "--porcelain=v1"], cwd=ROOT, text=True).splitlines()
-    user_files = ("AGENTS.md", "EXECUTION_PLAN.md", "EXECUTION_PLAN.md:Zone.Identifier", "PROJECT_REPORT.md", "fab/.fab-version", "fab/.kit-migration-version", "fab/project/config.yaml")
-    report = {
-        "schema_version": "1.0.0",
-        "source_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
-        "branch": subprocess.check_output(["git", "branch", "--show-current"], cwd=ROOT, text=True).strip(),
-        "initial_worktree_status": status,
-        "existing_user_files": {name: digest(ROOT / name) for name in user_files if (ROOT / name).is_file()},
-        "entries": entries,
-    }
-    report_path = ROOT / "docs/reports/migration-inventory.json"
-    report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(json.dumps(report, indent=2) + "\n")
-    manifest_path = ROOT / "data/MANIFEST.sha256"
-    manifest_path.write_text("".join(f"{entry['sha256']}  {entry['source']}\n" for entry in entries))
-    print(f"Inventoried {len(entries)} source files by role: " + ", ".join(f"{role}={sum(e['role'] == role for e in entries)}" for role in sorted({e['role'] for e in entries})))
+    for role, directory in GROUPS:
+        source = ROOT / directory
+        for path in sorted(p for p in source.rglob("*") if p.is_file()):
+            entries.append({"role": role, "path": path.relative_to(ROOT).as_posix(),
+                            "size_bytes": path.stat().st_size, "sha256": digest(path)})
+    inventory = json.dumps({"schema_version": "2.0.0", "entries": entries}, indent=2) + "\n"
+    manifest = "".join(f"{entry['sha256']}  {entry['path']}\n" for entry in entries)
+    return inventory, manifest, entries
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true", help="compare retained sources with checked-in records")
+    args = parser.parse_args()
+    inventory, manifest, entries = build()
+    if args.check:
+        if not INVENTORY.is_file() or INVENTORY.read_text() != inventory:
+            raise SystemExit("data/source-inventory.json differs from retained source bytes")
+        if not MANIFEST.is_file() or MANIFEST.read_text() != manifest:
+            raise SystemExit("data/MANIFEST.sha256 differs from retained source bytes")
+    else:
+        INVENTORY.write_text(inventory)
+        MANIFEST.write_text(manifest)
+    print(f"Verified {len(entries)} retained sources: " + ", ".join(
+        f"{role}={sum(entry['role'] == role for entry in entries)}" for role, _ in GROUPS))
 
 
 if __name__ == "__main__":

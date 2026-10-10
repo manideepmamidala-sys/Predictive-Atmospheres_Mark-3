@@ -8,10 +8,144 @@ from collections import defaultdict
 from pathlib import Path
 
 import numpy as np
+from scipy.stats import spearmanr
 
 from pa.config import RESULTS
 from pa.io.checkpoint import require_science_checkpoint
 from pa.io.metadata import load_rooms
+
+VALIDITY_SEED = 2718
+VALIDITY_BOOTSTRAP_DRAWS = 2000
+VALIDITY_PAIRS = (
+    ("eeg_composite", "report_arousal"),
+    ("alpha_suppression", "report_arousal"),
+    ("engagement", "report_arousal"),
+    ("heart_rate", "report_arousal"),
+    ("eeg_composite", "heart_rate"),
+    ("faa", "report_valence"),
+    ("ocular", "report_arousal"),
+    ("ocular", "heart_rate"),
+    ("muscle", "report_arousal"),
+    ("muscle", "heart_rate"),
+)
+
+
+def _validity_value(row: dict, name: str) -> float | None:
+    construction = row["construction"]
+    components = row["normalized_components"]
+    if name == "eeg_composite":
+        return construction.get("eeg_arousal")
+    if name in ("alpha_suppression", "engagement", "faa"):
+        return components.get(name)
+    if name == "heart_rate":
+        return components.get("heart_rate_bpm")
+    if name == "report_arousal":
+        return row["subjective"]["arousal"]
+    if name == "report_valence":
+        return row["subjective"]["valence"]
+    if name == "muscle":
+        return row.get("muscle_activity")
+    if name == "ocular":
+        return row.get("ocular_activity")
+    raise ValueError(f"unknown validity measure {name}")
+
+
+def _person_spearman(values: list[tuple[float, float]]) -> float | None:
+    if len(values) < 3:
+        return None
+    paired = np.asarray(values, dtype=float)
+    if len(np.unique(paired[:, 0])) < 2 or len(np.unique(paired[:, 1])) < 2:
+        return None
+    return float(spearmanr(paired[:, 0], paired[:, 1]).statistic)
+
+
+def _validity_pair(rows: list[dict], experiment: int, left: str, right: str) -> dict:
+    by_person: dict[str, list[tuple[float, float]]] = defaultdict(list)
+    rooms = set()
+    for row in rows:
+        if row["experiment"] != experiment:
+            continue
+        a, b = _validity_value(row, left), _validity_value(row, right)
+        if _finite(a) and _finite(b):
+            by_person[row["participant_id"]].append((a, b))
+            rooms.add(row["room_id"])
+    people = [{"participant_id": person, "n_trials": len(pairs),
+               "spearman_rho": _person_spearman(pairs)}
+              for person, pairs in sorted(by_person.items())]
+    available = [item["spearman_rho"] for item in people
+                 if item["spearman_rho"] is not None]
+    result = {"experiment": experiment, "left": left, "right": right,
+              "trials": sum(len(pairs) for pairs in by_person.values()),
+              "participants": len(by_person), "rooms": len(rooms),
+              "participant_results": people, "equal_participant_mean_rho": None,
+              "interval_95": None, "interval_status": "interval_unavailable_insufficient_people",
+              "bootstrap_unit": "participant_complete_observed_room_vector",
+              "bootstrap_draws": VALIDITY_BOOTSTRAP_DRAWS}
+    if not available:
+        result["status"] = ("unavailable_detector_not_validated" if left == "ocular" else
+                            "unavailable_few_or_constant_within_person_pairs")
+        return result
+    result["status"] = "descriptive"
+    result["equal_participant_mean_rho"] = float(np.mean(available))
+    if len(available) >= 4:
+        rng = np.random.default_rng(VALIDITY_SEED)
+        draws = np.mean(rng.choice(np.asarray(available),
+                                   size=(VALIDITY_BOOTSTRAP_DRAWS, len(available)),
+                                   replace=True), axis=1)
+        result["interval_95"] = [float(value) for value in np.quantile(draws, [0.025, 0.975])]
+        result["interval_status"] = "conditional_on_observed_rooms"
+    return result
+
+
+def _divergence(affect_detail: dict, experiment: int) -> list[dict]:
+    records = []
+    calibrations = affect_detail["descriptive_calibrations"]
+    for row in affect_detail["trials"]:
+        if row["experiment"] != experiment:
+            continue
+        key = f"E{experiment}:{row['participant_id']}"
+        person = calibrations.get(key, {})
+        raw = []
+        for name in ("alpha_suppression", "engagement", "heart_rate_bpm"):
+            calibration = person.get(name, {})
+            value = row.get(name)
+            if calibration.get("status") != "calibrated" or not _finite(value):
+                raw.append(None)
+            else:
+                raw.append((value - calibration["center"]) / calibration["scale"])
+        if any(value is None for value in raw):
+            continue
+        eeg_z = 0.5 * (raw[0] + raw[1])
+        hr_z = raw[2]
+        if eeg_z * hr_z < 0 and min(abs(eeg_z), abs(hr_z)) > 1:
+            records.append({"trial_id": row["id"], "participant_id": row["participant_id"],
+                            "room_id": row["room_id"], "eeg_robust_z": eeg_z,
+                            "heart_rate_robust_z": hr_z,
+                            "interpretation": "candidate disagreement; cause unknown"})
+    return records
+
+
+def validity_matrix(affect_detail: dict) -> dict:
+    rows = affect_detail["trials"]
+    return {"schema_version": "1.0.0", "method_version": affect_detail["method_version"],
+            "approved_spec_sha256": affect_detail["approved_spec_sha256"],
+            "qc_review_sha256": affect_detail.get("qc_review_sha256"),
+            "comparisons": [_validity_pair(rows, experiment, left, right)
+                            for experiment in (2, 3) for left, right in VALIDITY_PAIRS],
+            "divergence": {str(experiment): _divergence(affect_detail, experiment)
+                           for experiment in (2, 3)},
+            "limitations": ["Approximate forehead EEG and wrist ECG candidates are not validated emotion measures.",
+                            "Participant bootstrap intervals are conditional on the observed rooms.",
+                            "E2 and E3 use different elicitation and are reported separately."]}
+
+
+def write_validity(affect_path: Path = RESULTS / "affect_detail.json",
+                   destination: Path = RESULTS / "validity.json") -> dict:
+    require_science_checkpoint()
+    result = validity_matrix(json.loads(affect_path.read_text()))
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
+    return result
 
 
 def _finite(value: object) -> bool:

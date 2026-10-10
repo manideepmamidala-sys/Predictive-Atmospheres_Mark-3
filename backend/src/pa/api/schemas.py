@@ -6,7 +6,7 @@ from typing import Literal
 
 from pydantic import BaseModel, Field
 
-from pa.features.schema import DayNight, RoomInput, SpaceType
+from pa.features.schema import DayNight, RoomInput, SpaceType, StudioConstraints
 from pa.scoring.neuro_score import AffectPoint
 from pa.signals.common import decisions
 
@@ -51,7 +51,7 @@ class PredictionPayload(BaseModel):
     raw_valence: float
     raw_arousal: float
     projected: bool
-    neuro_score: float
+    neuro_score: float = Field(ge=0, le=1, description="Target proximity on the API 0–1 scale; display as 0–100 in Studio.")
 
 
 class SupportPayload(BaseModel):
@@ -71,8 +71,10 @@ class PredictResponse(BaseModel):
     limitations: list[str]
 
 
-class OptimizeRequest(BaseModel):
+class OptimizeRequest(StudioConstraints):
     target: AffectPoint
+    requested_score: float = Field(default=100.0, ge=0, le=100, allow_inf_nan=False,
+                                   description="Desired Neuro-Score on the Studio 0–100 scale. Omitted legacy requests mean 100.")
     space_type: SpaceType | None = None
     day_or_night: DayNight | None = None
     budget: int = Field(default=OPTIMIZER["default_budget"], ge=1, le=OPTIMIZER["max_budget"])
@@ -85,6 +87,9 @@ class OptimizeCandidate(BaseModel):
     room: RoomInput
     prediction: PredictionPayload
     support: SupportPayload
+    requested_score: float = Field(ge=0, le=100)
+    achieved_score: float = Field(ge=0, le=100)
+    absolute_difference: float = Field(ge=0, le=100)
 
 
 class OptimizeResponse(BaseModel):

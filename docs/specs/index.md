@@ -4,4 +4,5 @@ This project's analysis specification was written **after the original recording
 
 | Spec | Description |
 |------|-------------|
-| [analysis-v1.md](analysis-v1.md) | Frozen-before-reanalysis conditional-rate handling, signal QC, descriptive affect cohorts, model evaluation and export rules for the pilot rebuild. Changes require an explicit amendment and affected reruns. |
+| [analysis-v1.md](analysis-v1.md) | Historical v1.1 contract with a dated v1.2 approval amendment. The approved v1.2 source below governs changed methods; retained v1.1 products keep their historical meaning. |
+| [analysis-v1.2-draft.md](analysis-v1.2-draft.md) | **Approved 2026-10-10 at CP-Spec, SHA-256 `51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac`.** Filename and original proposal wording are preserved as the exact approved source. CP-B human QC decisions remain pending. |

@@ -2,7 +2,7 @@ import pytest
 from pydantic import ValidationError
 
 from pa.features.builder import FEATURE_ORDER, build_features
-from pa.features.schema import RoomInput
+from pa.features.schema import RoomInput, StudioConstraints, validate_studio_room
 from pa.io.metadata import load_rooms
 
 
@@ -46,7 +46,8 @@ def test_studied_support_separates_observed_from_physical():
                                       daylight_factor=1, illuminance=300, cct=5500,
                                       walkable_floor_area=20, day_or_night="Day",
                                       space_type="Bedroom")
-    assert support.assess(physical_but_unstudied).status == "outside_range"
+    outside = support.assess(physical_but_unstudied)
+    assert outside.status == "outside_range" and outside.nearest_room_id is not None
 
 
 def test_studied_support_checks_both_opening_counts_and_missingness():
@@ -60,3 +61,35 @@ def test_studied_support_checks_both_opening_counts_and_missingness():
         assert support.assess(absent).status == "unavailable"
         outside = base.model_copy(update={count: 99})
         assert support.assess(outside).status == "outside_range"
+
+
+def test_support_numeric_nearest_is_separate_from_observed_category():
+    from pa.features.support import load_studied_support
+
+    support = load_studied_support()
+    numeric_room = support.rooms[support.ids.index("Rm_023")]
+    classroom = numeric_room.model_copy(update={"space_type": "Classroom"})
+    assessed = support.assess(classroom)
+    assert assessed.status == "supported"
+    assert assessed.nearest_room_id == "Rm_023"
+    assert assessed.standardized_distance == 0
+    unseen = numeric_room.model_copy(update={"space_type": "General"})
+    assessed_unseen = support.assess(unseen)
+    assert assessed_unseen.status == "unseen_category"
+    assert assessed_unseen.nearest_room_id == "Rm_023"
+    assert "numeric only" in assessed_unseen.reason
+
+
+def test_studio_requires_all_independent_inputs_and_valid_constraints():
+    from pa.features.support import load_studied_support
+
+    room = load_studied_support().rooms[0]
+    assert validate_studio_room(room) is room
+    with pytest.raises(ValueError, match="complete E3 inputs"):
+        validate_studio_room(room.model_copy(update={"cct": None}))
+    for bad in ({"locked_fields": ["length"]},
+                {"base_room": room, "locked_fields": ["volume"]},
+                {"allowed_ranges": {"space_type": {"minimum": 1, "maximum": 2}}},
+                {"allowed_ranges": {"length": {"minimum": 6, "maximum": 4}}}):
+        with pytest.raises(ValidationError):
+            StudioConstraints.model_validate(bad)

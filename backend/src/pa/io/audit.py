@@ -13,6 +13,7 @@ import numpy as np
 from numpy.typing import NDArray
 
 from pa.config import RESULTS, ROOT, SCHEMA_VERSION
+from pa.io.checkpoint import require_science_checkpoint
 from pa.io.metadata import Trial, load_rooms, load_trials
 from pa.io.recordings import read_recording, recording_path
 from pa.signals.common import decisions
@@ -66,6 +67,8 @@ def audit_trials(trials: list[Trial] | None = None) -> dict:
             "filename_time": filename_time, "timestamp_kind": "filename chronology, not event timestamp",
             "logged_duration_s": trial.logged_duration_s, "samples": recording.samples,
             "samples_per_logged_second": round(ratios, 5),
+            "primary_onset_exclusion_s": settings["rate"]["onset_exclusion_primary_s"],
+            "onset_sensitivity_exclusion_s": settings["rate"]["onset_exclusion_sensitivity_s"],
             "numeric_finite": True, "counter_discontinuity_count": len(discontinuities),
             "counter_discontinuity_indices": discontinuities,
             "counter_interpretation": "integrity flag only; no packet-loss count or timestamps inferred",
@@ -89,6 +92,7 @@ def audit_trials(trials: list[Trial] | None = None) -> dict:
             "manifest_sha256": hashlib.sha256((ROOT / "data/MANIFEST.sha256").read_bytes()).hexdigest(),
             "rate_status": f"unconfirmed; {primary_rate} Hz conditional analytical scenario",
             "analysis_settings_version": settings["version"],
+            "approved_spec_sha256": settings.get("approved_spec_sha256"),
             "rate_evidence": [
                 "median sample/logged-duration ratios near 500 Hz; logged durations are not hardware timestamps",
                 "manufacturer Chords-Web docs do not identify this recording's firmware or selected rate",
@@ -114,6 +118,45 @@ def audit_trials(trials: list[Trial] | None = None) -> dict:
 
 def write_audit(destination: Path = RESULTS / "audit.json") -> dict:
     result = audit_trials()
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    destination.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
+    return result
+
+
+def write_timebase(audit: dict, destination: Path = RESULTS / "timebase.json") -> dict:
+    """Export inspectable rate evidence without asserting a hardware clock."""
+    require_science_checkpoint(stage="qc")
+    settings = decisions()
+    rows = []
+    for row in audit["files"]:
+        primary = next(item for item in row["rate_scenarios"]
+                       if item["rate_hz"] == settings["rate"]["primary_hz"])
+        rows.append({
+            "trial_id": f"E{row['experiment']}:{row['subject_id']}:{row['room_id']}",
+            "experiment": row["experiment"], "source_file": row["source_file"],
+            "samples": row["samples"], "logged_duration_s": row["logged_duration_s"],
+            "samples_per_logged_second": row["samples_per_logged_second"],
+            "counter_discontinuity_count": row["counter_discontinuity_count"],
+            "counter_discontinuity_indices": row["counter_discontinuity_indices"],
+            "duration_mismatch_over_10pct": primary["duration_disagreement"],
+            "rate_scenarios": row["rate_scenarios"],
+            "onset": {
+                "primary_excluded_s": settings["rate"]["onset_exclusion_primary_s"],
+                "sensitivity_excluded_s": settings["rate"]["onset_exclusion_sensitivity_s"],
+                "event_marker_available": False,
+            },
+        })
+    result = {
+        "schema_version": SCHEMA_VERSION,
+        "method_version": settings["version"],
+        "approved_spec_sha256": settings.get("approved_spec_sha256"),
+        "rate_status": settings["rate"]["primary_status"],
+        "rate_evidence": audit["provenance"]["rate_evidence"],
+        "summary": {"recordings": len(rows), "duration_mismatch_over_10pct": sum(
+            row["duration_mismatch_over_10pct"] for row in rows),
+            "counter_flagged": sum(row["counter_discontinuity_count"] > 0 for row in rows)},
+        "trials": rows,
+    }
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
     return result

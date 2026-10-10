@@ -4,4 +4,4 @@
 
 Experiment 1's sheet supplies dimensions only. Experiment 2 adds openings and lighting. Experiment 3 adds walkable area and space type. Sleep is recorded only in Experiment 3's biometric sheet. Missing fields are structural and are not zeros. Opening area values are totals: recomputed spreadsheet opening/wall percentages agree within rounding tolerance when areas are used once, without multiplying by count.
 
-Thirty source render files map by filename stem to populated `Room_ID`s. The source inventory and original hashes are in `data/MANIFEST.sha256` and `docs/reports/migration-inventory.json`. Display derivatives are separate and must identify any assumed panorama/eye extraction convention. The original file remains accessible.
+Thirty source render files map by filename stem to populated `Room_ID`s. The retained source inventory and hashes are in `data/source-inventory.json` and `data/MANIFEST.sha256`; the historical migration mapping remains in `docs/reports/migration-inventory.json`. Display derivatives are separate and must identify any assumed panorama/eye extraction convention. The original file remains accessible.

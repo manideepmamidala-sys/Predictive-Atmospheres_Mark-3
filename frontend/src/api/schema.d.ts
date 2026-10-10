@@ -134,25 +134,51 @@ export interface components {
             /** Schema Version */
             schema_version: string;
         };
+        /** NumericRange */
+        NumericRange: {
+            /** Maximum */
+            maximum: number;
+            /** Minimum */
+            minimum: number;
+        };
         /** OptimizeCandidate */
         OptimizeCandidate: {
+            /** Absolute Difference */
+            absolute_difference: number;
+            /** Achieved Score */
+            achieved_score: number;
             prediction: components["schemas"]["PredictionPayload"];
+            /** Requested Score */
+            requested_score: number;
             room: components["schemas"]["RoomInput"];
             support: components["schemas"]["SupportPayload"];
         };
         /** OptimizeRequest */
         OptimizeRequest: {
+            /** Allowed Ranges */
+            allowed_ranges?: {
+                [key: string]: components["schemas"]["NumericRange"];
+            };
+            base_room?: components["schemas"]["RoomInput"] | null;
             /**
              * Budget
              * @default 500
              */
             budget: number;
             day_or_night?: components["schemas"]["DayNight"] | null;
+            /** Locked Fields */
+            locked_fields?: string[];
             /**
              * N Candidates
              * @default 5
              */
             n_candidates: number;
+            /**
+             * Requested Score
+             * @description Desired Neuro-Score on the Studio 0–100 scale. Omitted legacy requests mean 100.
+             * @default 100
+             */
+            requested_score: number;
             /**
              * Seed
              * @default 2718
@@ -206,7 +232,10 @@ export interface components {
         PredictionPayload: {
             /** Arousal */
             arousal: number;
-            /** Neuro Score */
+            /**
+             * Neuro Score
+             * @description Target proximity on the API 0–1 scale; display as 0–100 in Studio.
+             */
             neuro_score: number;
             /** Projected */
             projected: boolean;

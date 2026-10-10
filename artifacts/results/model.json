@@ -2,22 +2,22 @@
   "schema_version": "1.0.0",
   "provenance": {
     "source": "Original investigator-supplied CSV metadata and raw channel recordings",
-    "method": "Analysis specification 1.1.0; conditional primary 500 Hz scenario",
+    "method": "Analysis specification 1.2.0; conditional primary 500 Hz scenario",
     "generated_at": null,
     "limitations": [
       "Acquisition sample rate, amplitude units and reference wiring are unconfirmed.",
       "Constructed affect axes are hypotheses, not validated emotion measurements."
     ],
-    "manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
-    "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7"
+    "manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "analysis_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac"
   },
   "model": {
-    "status": "not_better_than_baseline",
+    "status": "baseline_only",
     "explanation": "Experimental population-constructed coordinate prediction from original room attributes; grouped errors describe this small retrospective pilot.",
     "metrics": [
       {
         "name": "valence_mae",
-        "value": 0.3750165481446891,
+        "value": 0.3692429816741794,
         "unit": "constructed-coordinate MAE",
         "interval": null,
         "n": 10,
@@ -25,7 +25,7 @@
       },
       {
         "name": "arousal_mae",
-        "value": 0.48576372158717385,
+        "value": 0.33004408045904404,
         "unit": "constructed-coordinate MAE",
         "interval": null,
         "n": 10,
@@ -33,7 +33,7 @@
       },
       {
         "name": "mean_mae",
-        "value": 0.4303901348659315,
+        "value": 0.3496435310666118,
         "unit": "constructed-coordinate MAE",
         "interval": null,
         "n": 10,
@@ -41,7 +41,7 @@
       },
       {
         "name": "baseline_median_mae",
-        "value": 0.40994218952129924,
+        "value": 0.34605538214005377,
         "unit": "constructed-coordinate MAE",
         "interval": null,
         "n": 10,
@@ -49,7 +49,7 @@
       },
       {
         "name": "baseline_mean_mae",
-        "value": 0.42413919212047524,
+        "value": 0.34043750113477267,
         "unit": "constructed-coordinate MAE",
         "interval": null,
         "n": 10,
@@ -57,42 +57,42 @@
       },
       {
         "name": "valence_mae",
-        "value": 0.3635527699223094,
+        "value": 0.37130392128423295,
         "unit": "constructed-coordinate MAE",
         "interval": null,
-        "n": 3,
+        "n": 4,
         "group": "held_out_subject"
       },
       {
         "name": "arousal_mae",
-        "value": 0.49076709578133276,
+        "value": 0.3310567975574123,
         "unit": "constructed-coordinate MAE",
         "interval": null,
-        "n": 3,
+        "n": 4,
         "group": "held_out_subject"
       },
       {
         "name": "mean_mae",
-        "value": 0.42715993285182113,
+        "value": 0.3511803594208226,
         "unit": "constructed-coordinate MAE",
         "interval": null,
-        "n": 3,
+        "n": 4,
         "group": "held_out_subject"
       },
       {
         "name": "baseline_median_mae",
-        "value": 0.42715993285182113,
+        "value": 0.3511803594208226,
         "unit": "constructed-coordinate MAE",
         "interval": null,
-        "n": 3,
+        "n": 4,
         "group": "held_out_subject"
       },
       {
         "name": "baseline_mean_mae",
-        "value": 0.43687108041845013,
+        "value": 0.38000579365828807,
         "unit": "constructed-coordinate MAE",
         "interval": null,
-        "n": 3,
+        "n": 4,
         "group": "held_out_subject"
       }
     ],
@@ -104,20 +104,19 @@
     ],
     "artifact_version": "1.0.0",
     "summary": {
-      "cohort_trials": 14,
-      "cohort_participants": 3,
+      "cohort_trials": 23,
+      "cohort_participants": 4,
       "cohort_rooms": 10,
       "exclusions": {
         "not_experiment_3": 100,
-        "missing_raw_component:heart_rate_bpm,rmssd_ms": 24,
-        "missing_raw_component:rmssd_ms": 22
+        "missing_raw_component:heart_rate_bpm": 18,
+        "missing_raw_component:faa,alpha_suppression,engagement,heart_rate_bpm": 5,
+        "missing_raw_component:faa": 10,
+        "missing_raw_component:faa,heart_rate_bpm": 4
       },
       "selection_status": "selected",
       "selected_candidate": {
-        "name": "random_forest",
-        "n_estimators": 100,
-        "max_depth": 2,
-        "min_samples_leaf": 3
+        "name": "dummy_mean"
       },
       "preprocessing": [
         "Numeric inputs: training-fold median imputation, missingness indicators and standard scaling.",
@@ -125,11 +124,11 @@
         "Constructed affect targets: training-fold population median/MAD component calibration, then tanh mapping."
       ],
       "provenance": {
-        "dataset_manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
-        "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7",
-        "code_tree_sha256": "6417adaca920ef208e4cfaec65be2dbc1e81d15b8e9b280360de42e389ee6295",
-        "decisions_sha256": "8f938eac7d6f434a23cce3f919d2a6d70268d29701daf96e5047b013154ca053",
-        "model_sha256": "aecbb36c64b51b9c5b77cb20bf555b4a88b0ecea9f899c8b2d8536956fba59c0",
+        "dataset_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+        "analysis_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+        "code_tree_sha256": "9e6bd7cb97f84003d1777a09ca40517c43342117360cd193c3125216380438ce",
+        "decisions_sha256": "51e8722479eaa7c724fbd22b88f83a4a50da64e0c7b5e5c8b1689036b878a180",
+        "model_sha256": "17bfa472c30a9bb24034dd3800c85cd1fa9db36fec8c4a6cba2b8070b6b3544d",
         "uv_lock_sha256": "b477770af8fc9cfbecc7c9a78e6c5f98736ebd4c25c6bf32a3c1341753ab7f44"
       },
       "participant_baseline_fallback": "Held-out-participant outer folds use a fixed training-median baseline when fewer than four participant groups remain for inner selection; this is recorded as unavailable selection, while eligible held-out errors are still evaluated.",

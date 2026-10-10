@@ -8,15 +8,20 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 
 from pa.features.schema import RoomInput
+from pa.modeling import artifact
 from pa.modeling.artifact import ArtifactUnavailable, build_metadata, load_artifact, save_artifact
 from pa.modeling.predict import feature_frame, predict_room
 from pa.scoring.neuro_score import AffectPoint
 
 
 def test_synthetic_fitted_artifact_roundtrip_and_schema_guard(tmp_path):
-    rooms = [RoomInput(length=4, width=3, height=2.8),
-             RoomInput(length=5, width=4, height=3),
-             RoomInput(length=6, width=5, height=3.2)]
+    def room(length: float, width: float, height: float) -> RoomInput:
+        return RoomInput(length=length, width=width, height=height, num_doors=1,
+                         door_area=1.5, num_windows=1, window_area=2,
+                         daylight_factor=2, illuminance=300, cct=5000,
+                         walkable_floor_area=8, day_or_night="Day", space_type="Bedroom")
+
+    rooms = [room(4, 3, 2.8), room(5, 4, 3), room(6, 5, 3.2)]
     X = feature_frame(rooms)
     # A synthetic fitted pipeline validates serialization mechanics independent of real study eligibility.
     pipeline = Pipeline([("select", ColumnTransformer([
@@ -45,6 +50,26 @@ def test_synthetic_fitted_artifact_roundtrip_and_schema_guard(tmp_path):
 
 def test_missing_artifact_is_unavailable(tmp_path):
     with pytest.raises(ArtifactUnavailable, match="missing"):
+        load_artifact(tmp_path)
+
+
+def test_revision_provenance_does_not_replace_content_compatibility(tmp_path, monkeypatch):
+    pipeline = DummyRegressor().fit(np.array([[1], [2]]), np.array([[0, 0], [1, 1]]))
+    monkeypatch.setattr(artifact, "current_code_revision", lambda: "revision-a")
+    monkeypatch.setattr(artifact, "source_snapshot_status", lambda: "clean_committed_tree")
+    metadata = build_metadata(model_status="synthetic_test", training_scope={}, metrics={},
+                              limitations=[])
+    save_artifact(pipeline, metadata, tmp_path)
+    monkeypatch.setattr(artifact, "current_code_revision", lambda: "revision-b")
+    monkeypatch.setattr(artifact, "source_snapshot_status", lambda: "uncommitted_changes")
+    assert load_artifact(tmp_path).metadata["base_git_revision"] == "revision-a"
+    assert build_metadata(model_status="synthetic_test", training_scope={}, metrics={},
+                          limitations=[])["code_tree_sha256"] == metadata["code_tree_sha256"]
+    path = tmp_path / "metadata.json"
+    incompatible = json.loads(path.read_text())
+    incompatible["code_tree_sha256"] = "incorrect-content-hash"
+    path.write_text(json.dumps(incompatible))
+    with pytest.raises(ArtifactUnavailable, match="code_tree_sha256"):
         load_artifact(tmp_path)
 
 

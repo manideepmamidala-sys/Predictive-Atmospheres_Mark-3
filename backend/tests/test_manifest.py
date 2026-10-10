@@ -30,3 +30,22 @@ def test_missing_or_mismatched_sha_manifest_is_rejected(tmp_path):
     assert any("disagrees" in error.reason for error in verify_sources(inventory, manifest))
     manifest.write_text(f"{sha256(source)}  {source}\n")
     assert verify_sources(inventory, manifest) == []
+
+
+def test_canonical_inventory_checks_retained_path_and_digest(tmp_path):
+    retained = tmp_path / "retained.csv"
+    retained.write_text("raw evidence\n")
+    from pa.io.manifest import sha256
+
+    digest = sha256(retained)
+    inventory = tmp_path / "source-inventory.json"
+    inventory.write_text(json.dumps({"schema_version": "2.0.0", "entries": [
+        {"role": "recording", "path": str(retained), "size_bytes": retained.stat().st_size,
+         "sha256": digest}
+    ]}))
+    manifest = tmp_path / "MANIFEST.sha256"
+    manifest.write_text(f"{digest}  {retained}\n")
+    assert verify_sources(inventory, manifest) == []
+
+    retained.write_text("bad evidence\n")
+    assert any(error.reason == "sha256 mismatch" for error in verify_sources(inventory, manifest))

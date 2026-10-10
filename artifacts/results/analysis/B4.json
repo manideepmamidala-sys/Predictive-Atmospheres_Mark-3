@@ -1,0 +1,2251 @@
+{
+  "schema_version": "1.0.0",
+  "id": "B4",
+  "route": "/body",
+  "status": "available",
+  "question": "Do cortical candidates agree with reported arousal?",
+  "takeaway": "E2 eeg_composite: 37 trials/4 people, mean person \u03c1 0.02; E2 alpha_suppression: 37 trials/4 people, mean person \u03c1 0.04; E2 engagement: 37 trials/4 people, mean person \u03c1 0.06; E3 eeg_composite: 55 trials/6 people, mean person \u03c1 -0.08; E3 alpha_suppression: 55 trials/6 people, mean person \u03c1 -0.11; E3 engagement: 55 trials/6 people, mean person \u03c1 -0.17",
+  "method": "Compare normalized alpha suppression, engagement and their equal EEG composite with original signed arousal separately by experiment; participant-level Spearman summaries.",
+  "caveats": [
+    "Three candidate rows may describe the same source trial; counts use unique trials.",
+    "Within-person correlations and participant resampling retain repeated-room dependence.",
+    "These approximate forehead features are not validated arousal measurements."
+  ],
+  "counts": {
+    "trials": 92,
+    "participants": 8,
+    "rooms": 20
+  },
+  "units": {
+    "candidate_value": "signed descriptive coordinate",
+    "report_arousal": "signed source scale \u22121 to 1"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T13:06:19+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "scatter",
+    "rows": [
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_014",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.4781582682635902,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_014",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.8496956631146753,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_014",
+        "candidate": "engagement",
+        "candidate_value": 0.10662087341250517,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_016",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.7550196902476385,
+        "report_arousal": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_016",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.5252545624247038,
+        "report_arousal": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_016",
+        "candidate": "engagement",
+        "candidate_value": -0.9847848180705732,
+        "report_arousal": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_019",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.41739318130488157,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_019",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.2468602243471359,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_019",
+        "candidate": "engagement",
+        "candidate_value": 0.5879261382626272,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_015",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.45089129405300254,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_015",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.5879261382626272,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_015",
+        "candidate": "engagement",
+        "candidate_value": -0.31385644984337796,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_013",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.09237621170309157,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_013",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9885424249238582,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_013",
+        "candidate": "engagement",
+        "candidate_value": 0.8037900015176751,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_011",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.0,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_011",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.0,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_011",
+        "candidate": "engagement",
+        "candidate_value": 0.0,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_017",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.6548909562888259,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_017",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.3238814753129024,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_017",
+        "candidate": "engagement",
+        "candidate_value": 0.9859004372647494,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_012",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.3875281337596841,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_012",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.9497778420478795,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_012",
+        "candidate": "engagement",
+        "candidate_value": -0.1747215745285114,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_020",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.9096101880535636,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_020",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9922101383324696,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_020",
+        "candidate": "engagement",
+        "candidate_value": -0.8270102377746575,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_015",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.17278325551798615,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_015",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.734838918541868,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_015",
+        "candidate": "engagement",
+        "candidate_value": 0.3892724075058957,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_017",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.7480070414074904,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_017",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.8767423717769297,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_017",
+        "candidate": "engagement",
+        "candidate_value": -0.6192717110380512,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_019",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.34133795148762985,
+        "report_arousal": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_019",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.12796635868225903,
+        "report_arousal": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_019",
+        "candidate": "engagement",
+        "candidate_value": 0.5547095442930007,
+        "report_arousal": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_011",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.345473070645828,
+        "report_arousal": 0.3
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_011",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.10780984342879076,
+        "report_arousal": 0.3
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_011",
+        "candidate": "engagement",
+        "candidate_value": 0.7987559847204467,
+        "report_arousal": 0.3
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_013",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.40020740718836484,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_013",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.7137060347963817,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_013",
+        "candidate": "engagement",
+        "candidate_value": 0.08670877958034795,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_016",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.9946049522039284,
+        "report_arousal": -0.7
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_016",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9954759251778783,
+        "report_arousal": -0.7
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_016",
+        "candidate": "engagement",
+        "candidate_value": -0.9937339792299786,
+        "report_arousal": -0.7
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_018",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.3358375312784158,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_018",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.23931386148907038,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_018",
+        "candidate": "engagement",
+        "candidate_value": -0.910988924045902,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_012",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.06151177291094268,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_012",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.10780984342879076,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_012",
+        "candidate": "engagement",
+        "candidate_value": -0.23083338925067612,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_020",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.25606155353316007,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_020",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.42541432748597224,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_020",
+        "candidate": "engagement",
+        "candidate_value": -0.08670877958034795,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_014",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.8574408823216504,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_014",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.9461141285307927,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_014",
+        "candidate": "engagement",
+        "candidate_value": 0.768767636112508,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_011",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.5968681299788845,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_011",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9466868923377233,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_011",
+        "candidate": "engagement",
+        "candidate_value": -0.24704936762004565,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_012",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.9047314093019787,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_012",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.8169160839431173,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_012",
+        "candidate": "engagement",
+        "candidate_value": -0.9925467346608401,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_013",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.07089687868583533,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_013",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.49050972761723555,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_013",
+        "candidate": "engagement",
+        "candidate_value": -0.6323034849889062,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_014",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.38478464426914305,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_014",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.522519920918239,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_014",
+        "candidate": "engagement",
+        "candidate_value": 0.2470493676200472,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_015",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.19296474043688666,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_015",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.15377372636902897,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_015",
+        "candidate": "engagement",
+        "candidate_value": 0.5397032072428023,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_016",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.7195426583009696,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_016",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.6464533697933077,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_016",
+        "candidate": "engagement",
+        "candidate_value": -0.7926319468086315,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_017",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.4994215362094808,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_017",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.6532869646790848,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_017",
+        "candidate": "engagement",
+        "candidate_value": 0.3455561077398769,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_018",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.5124194593348262,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_018",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.15377372636902897,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_018",
+        "candidate": "engagement",
+        "candidate_value": 0.8710651923006235,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_015",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.0176146189926073,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_015",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.4336126652375215,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_015",
+        "candidate": "engagement",
+        "candidate_value": -0.4688419032227361,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_017",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.12889621618239522,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_017",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.833122224516019,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_017",
+        "candidate": "engagement",
+        "candidate_value": 0.5753297921512286,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_013",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.7451604899143067,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_013",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.6184008033711483,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_013",
+        "candidate": "engagement",
+        "candidate_value": 0.8719201764574651,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_019",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.07328753316661948,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_019",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.4536686033436315,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_019",
+        "candidate": "engagement",
+        "candidate_value": -0.6002436696768705,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_011",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.9544663032125371,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_011",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.9212701633142908,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_011",
+        "candidate": "engagement",
+        "candidate_value": 0.9876624431107833,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_018",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.15404990218290926,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_018",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.6916747921745018,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_018",
+        "candidate": "engagement",
+        "candidate_value": 0.9997745965403203,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_012",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.20619343722474798,
+        "report_arousal": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_012",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.5556859048732548,
+        "report_arousal": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_012",
+        "candidate": "engagement",
+        "candidate_value": 0.14329903042375877,
+        "report_arousal": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_016",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.3539958989571529,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_016",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.15372817241858067,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_016",
+        "candidate": "engagement",
+        "candidate_value": -0.554263625495725,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_014",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.3779770661927012,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_014",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.15372817241858067,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_014",
+        "candidate": "engagement",
+        "candidate_value": -0.909682304803983,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_020",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.5691470337204866,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_020",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9949950370172158,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_020",
+        "candidate": "engagement",
+        "candidate_value": -0.14329903042375727,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_021",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.04766005150271735,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_021",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9902809931547769,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_021",
+        "candidate": "engagement",
+        "candidate_value": 0.8949608901493422,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_022",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.3069363819461883,
+        "report_arousal": 1.0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_022",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.7178928423270375,
+        "report_arousal": 1.0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_022",
+        "candidate": "engagement",
+        "candidate_value": -0.104020078434661,
+        "report_arousal": 1.0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_023",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.1146258241625111,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_023",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.12523156989035672,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_023",
+        "candidate": "engagement",
+        "candidate_value": 0.10402007843466549,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_026",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.5677349343254314,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_026",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9369076792889904,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_026",
+        "candidate": "engagement",
+        "candidate_value": -0.19856218936187234,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_027",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.2420523439002299,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_027",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.12523156989034198,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_027",
+        "candidate": "engagement",
+        "candidate_value": 0.6093362576908018,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_028",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.07365142753913745,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_028",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.4183564721483859,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_028",
+        "candidate": "engagement",
+        "candidate_value": -0.5656593272266608,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_029",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.6052848207461109,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_029",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.21165151237550323,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_029",
+        "candidate": "engagement",
+        "candidate_value": 0.9989181291167185,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_030",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.9378180165276226,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_030",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.8756360891825931,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_030",
+        "candidate": "engagement",
+        "candidate_value": -0.9999999438726522,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_030",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.6229395908570017,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_030",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.5879261382626272,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_030",
+        "candidate": "engagement",
+        "candidate_value": 0.6579530434513763,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_029",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.7085276930111343,
+        "report_arousal": 0.34
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_029",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.8291292477596414,
+        "report_arousal": 0.34
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_029",
+        "candidate": "engagement",
+        "candidate_value": -0.5879261382626272,
+        "report_arousal": 0.34
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_028",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.3312120527521339,
+        "report_arousal": 0.52
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_028",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.0,
+        "report_arousal": 0.52
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_028",
+        "candidate": "engagement",
+        "candidate_value": -0.6624241055042678,
+        "report_arousal": 0.52
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_027",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.7533005845375464,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_027",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.9822906804239561,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_027",
+        "candidate": "engagement",
+        "candidate_value": 0.5243104886511367,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_026",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.7897784512331216,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_026",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.6074758243987443,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_026",
+        "candidate": "engagement",
+        "candidate_value": -0.9720810780674989,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_025",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.5120990281085346,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_025",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.7957939729442894,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_025",
+        "candidate": "engagement",
+        "candidate_value": 0.22840408327277972,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_024",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.3545027168344071,
+        "report_arousal": -0.74
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_024",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.14601238079571657,
+        "report_arousal": -0.74
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_024",
+        "candidate": "engagement",
+        "candidate_value": -0.8550178144645307,
+        "report_arousal": -0.74
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_023",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.1923332181110108,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_023",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.3846664362220216,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_023",
+        "candidate": "engagement",
+        "candidate_value": 0.0,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_022",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.05101764230271566,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_022",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.5333299671817193,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_022",
+        "candidate": "engagement",
+        "candidate_value": 0.431294682576288,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_021",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.8723697491196851,
+        "report_arousal": -1.0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_021",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.9086697402423813,
+        "report_arousal": -1.0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_021",
+        "candidate": "engagement",
+        "candidate_value": 0.8360697579969888,
+        "report_arousal": -1.0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_022",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.09590935305441839,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_022",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.678260848490383,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_022",
+        "candidate": "engagement",
+        "candidate_value": -0.8700795545992198,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_023",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.04017553392155246,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_023",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.0,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_023",
+        "candidate": "engagement",
+        "candidate_value": 0.08035106784310492,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_025",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.6207750893497026,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_025",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.6414954097933544,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_025",
+        "candidate": "engagement",
+        "candidate_value": -0.6000547689060509,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_026",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.21489616311391735,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_026",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.5879261382626272,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_026",
+        "candidate": "engagement",
+        "candidate_value": -0.1581338120347925,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_027",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.5025005359424249,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_027",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.41707493362222275,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_027",
+        "candidate": "engagement",
+        "candidate_value": 0.5879261382626272,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_028",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.22852271629288812,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_028",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.16172597678493061,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_028",
+        "candidate": "engagement",
+        "candidate_value": 0.6187714093707068,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_029",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.1046536786525715,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_029",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.209307357305143,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_029",
+        "candidate": "engagement",
+        "candidate_value": 0.0,
+        "report_arousal": -0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_030",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.40463482016490315,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_030",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.7109720517686217,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_030",
+        "candidate": "engagement",
+        "candidate_value": -0.09829758856118463,
+        "report_arousal": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_030",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.8059977773312469,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_030",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.6841742527524227,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_030",
+        "candidate": "engagement",
+        "candidate_value": 0.9278213019100711,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_029",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.5495606195886925,
+        "report_arousal": -0.85
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_029",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.7259589114881849,
+        "report_arousal": -0.85
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_029",
+        "candidate": "engagement",
+        "candidate_value": 0.37316232768920005,
+        "report_arousal": -0.85
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_028",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.895203619451683,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_028",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.8677160244529865,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_028",
+        "candidate": "engagement",
+        "candidate_value": 0.9226912144503796,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_027",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.293614111576052,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_027",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.44764932449349293,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_027",
+        "candidate": "engagement",
+        "candidate_value": 0.139578898658611,
+        "report_arousal": 0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_026",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.26329403275030616,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_026",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.26818224940668606,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_026",
+        "candidate": "engagement",
+        "candidate_value": -0.2584058160939263,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_025",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.30770934029106584,
+        "report_arousal": -0.45
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_025",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.2681822494066939,
+        "report_arousal": -0.45
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_025",
+        "candidate": "engagement",
+        "candidate_value": -0.8836009299888256,
+        "report_arousal": -0.45
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_024",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.0635091291435616,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_024",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.5804730202431628,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_024",
+        "candidate": "engagement",
+        "candidate_value": 0.707491278530286,
+        "report_arousal": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_023",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.5716652485307189,
+        "report_arousal": 0.3
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_023",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.7076891353376171,
+        "report_arousal": 0.3
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_023",
+        "candidate": "engagement",
+        "candidate_value": -0.43564136172382056,
+        "report_arousal": 0.3
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_022",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.6139315377735945,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_022",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.48592744862778336,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_022",
+        "candidate": "engagement",
+        "candidate_value": -0.7419356269194056,
+        "report_arousal": 0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_021",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.3674298264309336,
+        "report_arousal": -0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_021",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.5952807542032562,
+        "report_arousal": -0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_021",
+        "candidate": "engagement",
+        "candidate_value": -0.139578898658611,
+        "report_arousal": -0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_021",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.7309504221180472,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_021",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9862268322755726,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_021",
+        "candidate": "engagement",
+        "candidate_value": -0.4756740119605217,
+        "report_arousal": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_022",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.5234784685423036,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_022",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.36562099510956475,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_022",
+        "candidate": "engagement",
+        "candidate_value": 0.6813359419750425,
+        "report_arousal": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_023",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.8076760807642754,
+        "report_arousal": -0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_023",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.679594776417533,
+        "report_arousal": -0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_023",
+        "candidate": "engagement",
+        "candidate_value": 0.9357573851110179,
+        "report_arousal": -0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_024",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.5129733776858977,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_024",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.28980346279533514,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_024",
+        "candidate": "engagement",
+        "candidate_value": -0.7361432925764602,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_025",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.5202207102973313,
+        "report_arousal": -0.9
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_025",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.2898034627953283,
+        "report_arousal": -0.9
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_025",
+        "candidate": "engagement",
+        "candidate_value": 0.7506379577993343,
+        "report_arousal": -0.9
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_026",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.3248441048121098,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_026",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.478179050488098,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_026",
+        "candidate": "engagement",
+        "candidate_value": 0.1715091591361216,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_027",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.9023224533400298,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_027",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.9224641213517673,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_027",
+        "candidate": "engagement",
+        "candidate_value": 0.8821807853282924,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_028",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.5451145361791642,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_028",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9187199132222077,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_028",
+        "candidate": "engagement",
+        "candidate_value": -0.17150915913612058,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_029",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.3097867143651696,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_029",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.3631271093205106,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_029",
+        "candidate": "engagement",
+        "candidate_value": -0.2564463194098286,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_030",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.7112845175805006,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_030",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9975768777139405,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_030",
+        "candidate": "engagement",
+        "candidate_value": -0.4249921574470607,
+        "report_arousal": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_030",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.10525657053549786,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_030",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9754497088290517,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_030",
+        "candidate": "engagement",
+        "candidate_value": 0.764936567758056,
+        "report_arousal": 0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_029",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.39032502251525925,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_029",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.0,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_029",
+        "candidate": "engagement",
+        "candidate_value": 0.7806500450305185,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_027",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.12291030331604888,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_027",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.007560989099955298,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_027",
+        "candidate": "engagement",
+        "candidate_value": 0.23825961753214245,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_026",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.7312531502012756,
+        "report_arousal": 0.9
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_026",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.5879261382626272,
+        "report_arousal": 0.9
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_026",
+        "candidate": "engagement",
+        "candidate_value": -0.8745801621399241,
+        "report_arousal": 0.9
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_025",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.28853074343270857,
+        "report_arousal": -0.9
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_025",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.6796509329654342,
+        "report_arousal": -0.9
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_025",
+        "candidate": "engagement",
+        "candidate_value": 0.10258944610001713,
+        "report_arousal": -0.9
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_024",
+        "candidate": "eeg_composite",
+        "candidate_value": 0.37497014731185063,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_024",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.7499402946237013,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_024",
+        "candidate": "engagement",
+        "candidate_value": 0.0,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_023",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.23029456197208448,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_023",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.1273370143184582,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_023",
+        "candidate": "engagement",
+        "candidate_value": -0.5879261382626272,
+        "report_arousal": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_022",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.1862670936104221,
+        "report_arousal": 1.0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_022",
+        "candidate": "alpha_suppression",
+        "candidate_value": 0.24230600876092034,
+        "report_arousal": 1.0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_022",
+        "candidate": "engagement",
+        "candidate_value": -0.6148401959817645,
+        "report_arousal": 1.0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_021",
+        "candidate": "eeg_composite",
+        "candidate_value": -0.6458509557141207,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_021",
+        "candidate": "alpha_suppression",
+        "candidate_value": -0.9103718898832196,
+        "report_arousal": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_021",
+        "candidate": "engagement",
+        "candidate_value": -0.3813300215450217,
+        "report_arousal": -0.8
+      }
+    ],
+    "x": "candidate_value",
+    "y": "report_arousal",
+    "series": "candidate",
+    "facet": "experiment",
+    "x_label": "Cortical candidate",
+    "y_label": "Reported arousal",
+    "x_unit": "signed descriptive coordinate",
+    "y_unit": "signed source scale \u22121 to 1"
+  }
+}

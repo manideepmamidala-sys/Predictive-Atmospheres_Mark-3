@@ -3,33 +3,33 @@
   "products": {
     "study": {
       "file": "study.json",
-      "sha256": "a9d63537865613a291c306bc6c8d84dd91d09576ef2ee153f6350c018c74f697"
+      "sha256": "c38fbda5360c9b27f6d51ed5946c48b79b843ca8d84ffe89cf044ae88830745f"
     },
     "rooms": {
       "file": "rooms.json",
-      "sha256": "4106fd16557aec9a02f3434710781525fb7ac7587b84484a53da3ba376538f7f"
+      "sha256": "b56495a7581747103b10eecefdb5b2f077c4ea4ba83af66148f6ba3b30df08df"
     },
     "signals": {
       "file": "signals.json",
-      "sha256": "25f8cacb308d283d4c75730b41c02e4d00649efc1d91567318e4b79cdcc59593"
+      "sha256": "4f685d80c0e9c5564fc4be1f6f5703b22a59c09f6a20bf753439cab45e37a7f3"
     },
     "affect": {
       "file": "affect.json",
-      "sha256": "c2dca1b854c07e1b9b83139b8ea78ffef4d64cdcaa6251d79bde99573b0b9e15"
+      "sha256": "18f435dc898012b4bfb78f0a8f187c6c04f73d9f7b100865fe8498ed4da37732"
     },
     "people": {
       "file": "people.json",
-      "sha256": "cd496ccf9439c1bb87c8c63b9b472fd5049704be909018249bd81fed6371bc4c"
+      "sha256": "9baf27e869f42ba8f45ed3ce4a484ef1a4d09f9e3136d80373a502d0004ded15"
     },
     "model": {
       "file": "model.json",
-      "sha256": "aa1269ab8c882ebbf14a68623394661296663f52d0aa13597e7bc8133aabaac2"
+      "sha256": "707855509e7c8504c2d2daad66e8d6f5ce0d4d89f8fb89c8e4e1cc94b5916344"
     },
     "bundle": {
       "file": "bundle.json",
-      "sha256": "728ab1f6c606d834c99d9937087a06f7337c8035869154b0870c6c3ec2a385d7"
+      "sha256": "e0a6125c549d4215ceef98ade91e7eb03e049d2bf62a3b77ff8b3a9f5a847985"
     }
   },
-  "source_manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
-  "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7"
+  "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+  "analysis_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac"
 }

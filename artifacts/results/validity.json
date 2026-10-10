@@ -1,0 +1,764 @@
+{
+  "schema_version": "1.0.0",
+  "method_version": "1.2.0",
+  "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+  "qc_review_sha256": "41718a1d5204f6c195469aa5e45a6d500b8886eadeecb10f1187e293349de294",
+  "comparisons": [
+    {
+      "experiment": 2,
+      "left": "eeg_composite",
+      "right": "report_arousal",
+      "trials": 37,
+      "participants": 4,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_A",
+          "n_trials": 10,
+          "spearman_rho": 0.2024692293161501
+        },
+        {
+          "participant_id": "Subj_E",
+          "n_trials": 9,
+          "spearman_rho": 0.32111443149518853
+        },
+        {
+          "participant_id": "Subj_G",
+          "n_trials": 10,
+          "spearman_rho": -0.2991830368027063
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 8,
+          "spearman_rho": -0.14730858484207093
+        }
+      ],
+      "equal_participant_mean_rho": 0.019273009791640358,
+      "interval_95": [
+        -0.22324581082238865,
+        0.26179183040566933
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "alpha_suppression",
+      "right": "report_arousal",
+      "trials": 37,
+      "participants": 4,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_A",
+          "n_trials": 10,
+          "spearman_rho": 0.27609440361293197
+        },
+        {
+          "participant_id": "Subj_E",
+          "n_trials": 9,
+          "spearman_rho": -0.11009637651263607
+        },
+        {
+          "participant_id": "Subj_G",
+          "n_trials": 10,
+          "spearman_rho": 0.04986383946711772
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 8,
+          "spearman_rho": -0.049102861614023635
+        }
+      ],
+      "equal_participant_mean_rho": 0.0416897512383475,
+      "interval_95": [
+        -0.07959961906332985,
+        0.19479508730619305
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "engagement",
+      "right": "report_arousal",
+      "trials": 37,
+      "participants": 4,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_A",
+          "n_trials": 10,
+          "spearman_rho": 0.042948018339789416
+        },
+        {
+          "participant_id": "Subj_E",
+          "n_trials": 9,
+          "spearman_rho": 0.5413071845204606
+        },
+        {
+          "participant_id": "Subj_G",
+          "n_trials": 10,
+          "spearman_rho": -0.07479575920067658
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 8,
+          "spearman_rho": -0.28234145428063595
+        }
+      ],
+      "equal_participant_mean_rho": 0.056779497344734364,
+      "interval_95": [
+        -0.2010190861255296,
+        0.3872814485901763
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "heart_rate",
+      "right": "report_arousal",
+      "trials": 20,
+      "participants": 3,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_E",
+          "n_trials": 8,
+          "spearman_rho": -0.166013069377609
+        },
+        {
+          "participant_id": "Subj_G",
+          "n_trials": 3,
+          "spearman_rho": -0.8660254037844387
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 9,
+          "spearman_rho": -0.41558830972298877
+        }
+      ],
+      "equal_participant_mean_rho": -0.4825422609616788,
+      "interval_95": null,
+      "interval_status": "interval_unavailable_insufficient_people",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "eeg_composite",
+      "right": "heart_rate",
+      "trials": 19,
+      "participants": 3,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_E",
+          "n_trials": 8,
+          "spearman_rho": -0.7857142857142858
+        },
+        {
+          "participant_id": "Subj_G",
+          "n_trials": 3,
+          "spearman_rho": 0.5
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 8,
+          "spearman_rho": 0.21957751641341997
+        }
+      ],
+      "equal_participant_mean_rho": -0.02204558976695528,
+      "interval_95": null,
+      "interval_status": "interval_unavailable_insufficient_people",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "faa",
+      "right": "report_valence",
+      "trials": 37,
+      "participants": 4,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_A",
+          "n_trials": 10,
+          "spearman_rho": -0.19079181101796572
+        },
+        {
+          "participant_id": "Subj_E",
+          "n_trials": 9,
+          "spearman_rho": 0.03513641844631533
+        },
+        {
+          "participant_id": "Subj_G",
+          "n_trials": 10,
+          "spearman_rho": 0.43293487765656397
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 8,
+          "spearman_rho": 0.45420146992971866
+        }
+      ],
+      "equal_participant_mean_rho": 0.18287023875365804,
+      "interval_95": [
+        -0.0778276962858252,
+        0.44356817379314134
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "ocular",
+      "right": "report_arousal",
+      "trials": 0,
+      "participants": 0,
+      "rooms": 0,
+      "participant_results": [],
+      "equal_participant_mean_rho": null,
+      "interval_95": null,
+      "interval_status": "interval_unavailable_insufficient_people",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "unavailable_detector_not_validated"
+    },
+    {
+      "experiment": 2,
+      "left": "ocular",
+      "right": "heart_rate",
+      "trials": 0,
+      "participants": 0,
+      "rooms": 0,
+      "participant_results": [],
+      "equal_participant_mean_rho": null,
+      "interval_95": null,
+      "interval_status": "interval_unavailable_insufficient_people",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "unavailable_detector_not_validated"
+    },
+    {
+      "experiment": 2,
+      "left": "muscle",
+      "right": "report_arousal",
+      "trials": 37,
+      "participants": 4,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_A",
+          "n_trials": 10,
+          "spearman_rho": -0.12884405501936821
+        },
+        {
+          "participant_id": "Subj_E",
+          "n_trials": 9,
+          "spearman_rho": 0.5963553727767786
+        },
+        {
+          "participant_id": "Subj_G",
+          "n_trials": 10,
+          "spearman_rho": -0.16205747826813258
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 8,
+          "spearman_rho": -0.20868716185960046
+        }
+      ],
+      "equal_participant_mean_rho": 0.024191669407419347,
+      "interval_95": [
+        -0.1887263851495424,
+        0.4067521600155508
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "muscle",
+      "right": "heart_rate",
+      "trials": 19,
+      "participants": 3,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_E",
+          "n_trials": 8,
+          "spearman_rho": 0.0
+        },
+        {
+          "participant_id": "Subj_G",
+          "n_trials": 3,
+          "spearman_rho": 0.5
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 8,
+          "spearman_rho": -0.048795003647426664
+        }
+      ],
+      "equal_participant_mean_rho": 0.15040166545085779,
+      "interval_95": null,
+      "interval_status": "interval_unavailable_insufficient_people",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "eeg_composite",
+      "right": "report_arousal",
+      "trials": 55,
+      "participants": 6,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_A",
+          "n_trials": 8,
+          "spearman_rho": 0.8470243628419077
+        },
+        {
+          "participant_id": "Subj_B",
+          "n_trials": 10,
+          "spearman_rho": -0.6443798763008685
+        },
+        {
+          "participant_id": "Subj_D",
+          "n_trials": 9,
+          "spearman_rho": -0.2677847708018314
+        },
+        {
+          "participant_id": "Subj_H",
+          "n_trials": 10,
+          "spearman_rho": -0.14024650966339394
+        },
+        {
+          "participant_id": "Subj_I",
+          "n_trials": 9,
+          "spearman_rho": -0.17876387145933723
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 9,
+          "spearman_rho": -0.06780635036208103
+        }
+      ],
+      "equal_participant_mean_rho": -0.07532616929093405,
+      "interval_95": [
+        -0.39345187965100903,
+        0.3442059096164028
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "alpha_suppression",
+      "right": "report_arousal",
+      "trials": 55,
+      "participants": 6,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_A",
+          "n_trials": 8,
+          "spearman_rho": 0.5646829085612719
+        },
+        {
+          "participant_id": "Subj_B",
+          "n_trials": 10,
+          "spearman_rho": -0.5410359338752574
+        },
+        {
+          "participant_id": "Subj_D",
+          "n_trials": 9,
+          "spearman_rho": -0.48535989707831934
+        },
+        {
+          "participant_id": "Subj_H",
+          "n_trials": 10,
+          "spearman_rho": -0.15244185832977605
+        },
+        {
+          "participant_id": "Subj_I",
+          "n_trials": 9,
+          "spearman_rho": 0.331990046995912
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 9,
+          "spearman_rho": -0.389886514581966
+        }
+      ],
+      "equal_participant_mean_rho": -0.11200854138468914,
+      "interval_95": [
+        -0.43252000580314925,
+        0.22209349674578238
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "engagement",
+      "right": "report_arousal",
+      "trials": 55,
+      "participants": 6,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_A",
+          "n_trials": 8,
+          "spearman_rho": 0.4787529007367305
+        },
+        {
+          "participant_id": "Subj_B",
+          "n_trials": 10,
+          "spearman_rho": -0.6565379871744699
+        },
+        {
+          "participant_id": "Subj_D",
+          "n_trials": 9,
+          "spearman_rho": -0.2677847708018314
+        },
+        {
+          "participant_id": "Subj_H",
+          "n_trials": 10,
+          "spearman_rho": -0.03658604599914625
+        },
+        {
+          "participant_id": "Subj_I",
+          "n_trials": 9,
+          "spearman_rho": -0.5788544409159491
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 9,
+          "spearman_rho": 0.03390317518104052
+        }
+      ],
+      "equal_participant_mean_rho": -0.17118452816227092,
+      "interval_95": [
+        -0.4755031795612158,
+        0.1469418064428438
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "heart_rate",
+      "right": "report_arousal",
+      "trials": 31,
+      "participants": 4,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_B",
+          "n_trials": 10,
+          "spearman_rho": 0.5457317073170733
+        },
+        {
+          "participant_id": "Subj_H",
+          "n_trials": 6,
+          "spearman_rho": -0.2
+        },
+        {
+          "participant_id": "Subj_I",
+          "n_trials": 9,
+          "spearman_rho": 0.089756704399475
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 6,
+          "spearman_rho": -0.6667366910003157
+        }
+      ],
+      "equal_participant_mean_rho": -0.057812069820941864,
+      "interval_95": [
+        -0.4776133421503681,
+        0.359298780487805
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "eeg_composite",
+      "right": "heart_rate",
+      "trials": 31,
+      "participants": 4,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_B",
+          "n_trials": 10,
+          "spearman_rho": -0.41337576970244394
+        },
+        {
+          "participant_id": "Subj_H",
+          "n_trials": 6,
+          "spearman_rho": -0.7714285714285715
+        },
+        {
+          "participant_id": "Subj_I",
+          "n_trials": 9,
+          "spearman_rho": 0.23431167445160245
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 6,
+          "spearman_rho": -0.8285714285714287
+        }
+      ],
+      "equal_participant_mean_rho": -0.4447660238127104,
+      "interval_95": [
+        -0.8,
+        -0.017123387018441044
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "faa",
+      "right": "report_valence",
+      "trials": 41,
+      "participants": 5,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_A",
+          "n_trials": 8,
+          "spearman_rho": 0.04761904761904763
+        },
+        {
+          "participant_id": "Subj_B",
+          "n_trials": 10,
+          "spearman_rho": -0.15291163404532787
+        },
+        {
+          "participant_id": "Subj_D",
+          "n_trials": 9,
+          "spearman_rho": -0.2468643939200371
+        },
+        {
+          "participant_id": "Subj_I",
+          "n_trials": 5,
+          "spearman_rho": 0.0
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 9,
+          "spearman_rho": -0.1338923854009157
+        }
+      ],
+      "equal_participant_mean_rho": -0.0972098731494466,
+      "interval_95": [
+        -0.18796770561222015,
+        -0.002010898237636996
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "ocular",
+      "right": "report_arousal",
+      "trials": 0,
+      "participants": 0,
+      "rooms": 0,
+      "participant_results": [],
+      "equal_participant_mean_rho": null,
+      "interval_95": null,
+      "interval_status": "interval_unavailable_insufficient_people",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "unavailable_detector_not_validated"
+    },
+    {
+      "experiment": 3,
+      "left": "ocular",
+      "right": "heart_rate",
+      "trials": 0,
+      "participants": 0,
+      "rooms": 0,
+      "participant_results": [],
+      "equal_participant_mean_rho": null,
+      "interval_95": null,
+      "interval_status": "interval_unavailable_insufficient_people",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "unavailable_detector_not_validated"
+    },
+    {
+      "experiment": 3,
+      "left": "muscle",
+      "right": "report_arousal",
+      "trials": 55,
+      "participants": 6,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_A",
+          "n_trials": 8,
+          "spearman_rho": -0.31916860049115364
+        },
+        {
+          "participant_id": "Subj_B",
+          "n_trials": 10,
+          "spearman_rho": -0.10942299786241164
+        },
+        {
+          "participant_id": "Subj_D",
+          "n_trials": 9,
+          "spearman_rho": 0.3096261412396175
+        },
+        {
+          "participant_id": "Subj_H",
+          "n_trials": 10,
+          "spearman_rho": 0.31098139099274313
+        },
+        {
+          "participant_id": "Subj_I",
+          "n_trials": 9,
+          "spearman_rho": -0.017025130615174973
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 9,
+          "spearman_rho": -0.16951587590520262
+        }
+      ],
+      "equal_participant_mean_rho": 0.0009124878930696264,
+      "interval_95": [
+        -0.18396951354504987,
+        0.1860203642900434
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "muscle",
+      "right": "heart_rate",
+      "trials": 31,
+      "participants": 4,
+      "rooms": 10,
+      "participant_results": [
+        {
+          "participant_id": "Subj_B",
+          "n_trials": 10,
+          "spearman_rho": 0.32826899358723494
+        },
+        {
+          "participant_id": "Subj_H",
+          "n_trials": 6,
+          "spearman_rho": 0.6
+        },
+        {
+          "participant_id": "Subj_I",
+          "n_trials": 9,
+          "spearman_rho": 0.8117225864930513
+        },
+        {
+          "participant_id": "Subj_M",
+          "n_trials": 6,
+          "spearman_rho": 0.3714285714285715
+        }
+      ],
+      "equal_participant_mean_rho": 0.5278550378772144,
+      "interval_95": [
+        0.3498487825079032,
+        0.7058612932465257
+      ],
+      "interval_status": "conditional_on_observed_rooms",
+      "bootstrap_unit": "participant_complete_observed_room_vector",
+      "bootstrap_draws": 2000,
+      "status": "descriptive"
+    }
+  ],
+  "divergence": {
+    "2": [
+      {
+        "trial_id": "E2:Subj_E:Rm_017",
+        "participant_id": "Subj_E",
+        "room_id": "Rm_017",
+        "eeg_robust_z": 1.4049096862794606,
+        "heart_rate_robust_z": -1.7321171524451937,
+        "interpretation": "candidate disagreement; cause unknown"
+      },
+      {
+        "trial_id": "E2:Subj_E:Rm_020",
+        "participant_id": "Subj_E",
+        "room_id": "Rm_020",
+        "eeg_robust_z": -1.9753451416968009,
+        "heart_rate_robust_z": 1.4023742344436605,
+        "interpretation": "candidate disagreement; cause unknown"
+      }
+    ],
+    "3": [
+      {
+        "trial_id": "E3:Subj_B:Rm_030",
+        "participant_id": "Subj_B",
+        "room_id": "Rm_030",
+        "eeg_robust_z": 1.2397102148269,
+        "heart_rate_robust_z": -1.3420481999232055,
+        "interpretation": "candidate disagreement; cause unknown"
+      },
+      {
+        "trial_id": "E3:Subj_H:Rm_021",
+        "participant_id": "Subj_H",
+        "room_id": "Rm_021",
+        "eeg_robust_z": -1.50150655957354,
+        "heart_rate_robust_z": 1.5112349359648352,
+        "interpretation": "candidate disagreement; cause unknown"
+      },
+      {
+        "trial_id": "E3:Subj_H:Rm_023",
+        "participant_id": "Subj_H",
+        "room_id": "Rm_023",
+        "eeg_robust_z": 1.2655771222452636,
+        "heart_rate_robust_z": -1.0035371146490062,
+        "interpretation": "candidate disagreement; cause unknown"
+      }
+    ]
+  },
+  "limitations": [
+    "Approximate forehead EEG and wrist ECG candidates are not validated emotion measures.",
+    "Participant bootstrap intervals are conditional on the observed rooms.",
+    "E2 and E3 use different elicitation and are reported separately."
+  ]
+}
