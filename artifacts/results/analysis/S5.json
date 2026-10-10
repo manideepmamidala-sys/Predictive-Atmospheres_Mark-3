@@ -1,0 +1,186 @@
+{
+  "schema_version": "1.0.0",
+  "id": "S5",
+  "route": "/study",
+  "status": "available",
+  "question": "Who contributed to each experiment?",
+  "takeaway": "10 source people contributed, with repeated exposure across experiments.",
+  "method": "One observed dot per participant and experiment, from source demographic and trial metadata.",
+  "caveats": [
+    "Age/gender are descriptive; small cells do not support subgroup inference.",
+    "The same participant may appear in more than one experiment."
+  ],
+  "counts": {
+    "trials": 160,
+    "participants": 10,
+    "rooms": 30
+  },
+  "units": {
+    "age": "years",
+    "trial_count": "trials"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T16:03:30+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "scatter",
+    "rows": [
+      {
+        "experiment": 1,
+        "participant_id": "Subj_A",
+        "age": 25.0,
+        "gender": "Female",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 0
+      },
+      {
+        "experiment": 1,
+        "participant_id": "Subj_B",
+        "age": 26.0,
+        "gender": "Female",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 0
+      },
+      {
+        "experiment": 1,
+        "participant_id": "Subj_C",
+        "age": 28.0,
+        "gender": "Male",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 0
+      },
+      {
+        "experiment": 1,
+        "participant_id": "Subj_D",
+        "age": 27.0,
+        "gender": "Male",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 0
+      },
+      {
+        "experiment": 1,
+        "participant_id": "Subj_M",
+        "age": 25.0,
+        "gender": "Male",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "age": 25.0,
+        "gender": "Female",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "age": 26.0,
+        "gender": "Female",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 8
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_F",
+        "age": 25.0,
+        "gender": "Female",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "age": 28.0,
+        "gender": "Female",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 3
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "age": 25.0,
+        "gender": "Male",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "age": 25.0,
+        "gender": "Female",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "age": 26.0,
+        "gender": "Female",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "age": 27.0,
+        "gender": "Male",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "age": 25.0,
+        "gender": "Male",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "age": 25.0,
+        "gender": "Male",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "age": 25.0,
+        "gender": "Male",
+        "trial_count": 10,
+        "room_count": 10,
+        "complete_fusion_count": 6
+      }
+    ],
+    "x": "age",
+    "y": "trial_count",
+    "series": "experiment",
+    "facet": null,
+    "x_label": "Age",
+    "y_label": "Source trials",
+    "x_unit": "years",
+    "y_unit": "trials"
+  }
+}

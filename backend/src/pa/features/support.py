@@ -47,16 +47,16 @@ class StudiedSupport:
         if any(getattr(candidate, name) is None for name in SUPPORT_COLUMNS):
             return SupportResult("unavailable", None, None, self.threshold, "missing support attributes")
         vector = np.array([float(getattr(candidate, name)) for name in SUPPORT_COLUMNS])
-        if np.any(vector < self.minimum) or np.any(vector > self.maximum):
-            return SupportResult("outside_range", None, None, self.threshold,
-                                 "outside observed complete-room marginal range")
+        distances = np.linalg.norm((self.matrix - vector) / self.scale, axis=1)
+        index = min(range(len(self.rooms)), key=lambda item: (distances[item], self.ids[item]))
+        nearest = float(distances[index])
         categories = {(room.day_or_night, room.space_type) for room in self.rooms}
         if (candidate.day_or_night, candidate.space_type) not in categories:
-            return SupportResult("unseen_category", None, None, self.threshold,
-                                 "categorical combination was not observed")
-        distances = np.linalg.norm((self.matrix - vector) / self.scale, axis=1)
-        index = int(np.argmin(distances))
-        nearest = float(distances[index])
+            return SupportResult("unseen_category", self.ids[index], nearest, self.threshold,
+                                 "categorical combination was not observed; reference is numeric only")
+        if np.any(vector < self.minimum) or np.any(vector > self.maximum):
+            return SupportResult("outside_range", self.ids[index], nearest, self.threshold,
+                                 "outside observed complete-room marginal range")
         return SupportResult("supported" if nearest <= self.threshold else "sparse",
                              self.ids[index], nearest, self.threshold,
                              None if nearest <= self.threshold else "outside observed neighborhood")

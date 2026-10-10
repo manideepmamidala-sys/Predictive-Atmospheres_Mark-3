@@ -8,8 +8,8 @@ import numpy as np
 import pandas as pd
 
 from pa.features.builder import FEATURE_ORDER, build_features
-from pa.features.schema import RoomInput
-from pa.modeling.artifact import LoadedArtifact
+from pa.features.schema import RoomInput, validate_studio_room
+from pa.modeling.artifact import ArtifactUnavailable, LoadedArtifact
 from pa.scoring.neuro_score import AffectPoint, score_prediction
 
 
@@ -28,9 +28,13 @@ def feature_frame(rooms: list[RoomInput]) -> pd.DataFrame:
 
 
 def predict_room(artifact: LoadedArtifact, room: RoomInput, target: AffectPoint) -> Prediction:
-    output = np.asarray(artifact.pipeline.predict(feature_frame([room])), dtype=float)
+    validate_studio_room(room)
+    try:
+        output = np.asarray(artifact.pipeline.predict(feature_frame([room])), dtype=float)
+    except Exception as exc:
+        raise ArtifactUnavailable("fitted model failed to predict fused coordinates") from exc
     if output.shape != (1, 2) or not np.isfinite(output).all():
-        raise ValueError("model returned invalid valence/arousal shape or values")
+        raise ArtifactUnavailable("fitted model returned invalid fused coordinates")
     raw_valence, raw_arousal = map(float, output[0])
     scored = score_prediction(raw_valence, raw_arousal, target)
     return Prediction(scored.point_used.valence, scored.point_used.arousal,

@@ -1,0 +1,544 @@
+{
+  "schema_version": "1.0.0",
+  "id": "R8",
+  "route": "/rooms",
+  "status": "available",
+  "question": "How does E1's separate comfort response relate to room form?",
+  "takeaway": "E1 comfort versus geometric floor area has descriptive trial-level Spearman \u03c1 0.19.",
+  "method": "Each E1 source comfort rating against recorded length \u00d7 width; report Spearman as descriptive only.",
+  "caveats": [
+    "E1 comfort is not valence or arousal and never enters the fused target.",
+    "Repeated people and rooms make trial-level correlation exploratory."
+  ],
+  "counts": {
+    "trials": 50,
+    "participants": 5,
+    "rooms": 10
+  },
+  "units": {
+    "floor_area": "m\u00b2",
+    "volume": "m\u00b3",
+    "height": "m",
+    "comfort": "transformed source scale \u22121 to 1"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T16:03:32+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "scatter",
+    "rows": [
+      {
+        "participant_id": "Subj_A",
+        "room_id": "Rm_001",
+        "comfort": 0.4,
+        "floor_area": 12.0,
+        "volume": 33.599999999999994,
+        "length": 4.0,
+        "width": 3.0,
+        "height": 2.8
+      },
+      {
+        "participant_id": "Subj_A",
+        "room_id": "Rm_002",
+        "comfort": 0.6,
+        "floor_area": 23.4,
+        "volume": 65.52,
+        "length": 6.0,
+        "width": 3.9,
+        "height": 2.8
+      },
+      {
+        "participant_id": "Subj_A",
+        "room_id": "Rm_003",
+        "comfort": 0.2,
+        "floor_area": 28.68,
+        "volume": 146.268,
+        "length": 6.0,
+        "width": 4.78,
+        "height": 5.1
+      },
+      {
+        "participant_id": "Subj_A",
+        "room_id": "Rm_004",
+        "comfort": 0.4,
+        "floor_area": 30.838099999999997,
+        "volume": 107.93334999999999,
+        "length": 8.59,
+        "width": 3.59,
+        "height": 3.5
+      },
+      {
+        "participant_id": "Subj_A",
+        "room_id": "Rm_005",
+        "comfort": 0.6,
+        "floor_area": 125.90599999999999,
+        "volume": 503.62399999999997,
+        "length": 12.98,
+        "width": 9.7,
+        "height": 4.0
+      },
+      {
+        "participant_id": "Subj_A",
+        "room_id": "Rm_006",
+        "comfort": 0.2,
+        "floor_area": 106.88370000000002,
+        "volume": 823.0044900000001,
+        "length": 16.17,
+        "width": 6.61,
+        "height": 7.7
+      },
+      {
+        "participant_id": "Subj_A",
+        "room_id": "Rm_007",
+        "comfort": 0.4,
+        "floor_area": 280.5264,
+        "volume": 1346.52672,
+        "length": 19.36,
+        "width": 14.49,
+        "height": 4.8
+      },
+      {
+        "participant_id": "Subj_A",
+        "room_id": "Rm_008",
+        "comfort": 0.0,
+        "floor_area": 362.6847,
+        "volume": 2828.94066,
+        "length": 25.03,
+        "width": 14.49,
+        "height": 7.8
+      },
+      {
+        "participant_id": "Subj_A",
+        "room_id": "Rm_009",
+        "comfort": -0.2,
+        "floor_area": 117.8913,
+        "volume": 377.25216,
+        "length": 25.03,
+        "width": 4.71,
+        "height": 3.2
+      },
+      {
+        "participant_id": "Subj_A",
+        "room_id": "Rm_010",
+        "comfort": 0.0,
+        "floor_area": 60.736,
+        "volume": 528.4032,
+        "length": 10.4,
+        "width": 5.84,
+        "height": 8.7
+      },
+      {
+        "participant_id": "Subj_B",
+        "room_id": "Rm_010",
+        "comfort": 0.4,
+        "floor_area": 60.736,
+        "volume": 528.4032,
+        "length": 10.4,
+        "width": 5.84,
+        "height": 8.7
+      },
+      {
+        "participant_id": "Subj_B",
+        "room_id": "Rm_009",
+        "comfort": 0.4,
+        "floor_area": 117.8913,
+        "volume": 377.25216,
+        "length": 25.03,
+        "width": 4.71,
+        "height": 3.2
+      },
+      {
+        "participant_id": "Subj_B",
+        "room_id": "Rm_008",
+        "comfort": 0.5,
+        "floor_area": 362.6847,
+        "volume": 2828.94066,
+        "length": 25.03,
+        "width": 14.49,
+        "height": 7.8
+      },
+      {
+        "participant_id": "Subj_B",
+        "room_id": "Rm_007",
+        "comfort": 0.1,
+        "floor_area": 280.5264,
+        "volume": 1346.52672,
+        "length": 19.36,
+        "width": 14.49,
+        "height": 4.8
+      },
+      {
+        "participant_id": "Subj_B",
+        "room_id": "Rm_006",
+        "comfort": 0.6,
+        "floor_area": 106.88370000000002,
+        "volume": 823.0044900000001,
+        "length": 16.17,
+        "width": 6.61,
+        "height": 7.7
+      },
+      {
+        "participant_id": "Subj_B",
+        "room_id": "Rm_005",
+        "comfort": 0.1,
+        "floor_area": 125.90599999999999,
+        "volume": 503.62399999999997,
+        "length": 12.98,
+        "width": 9.7,
+        "height": 4.0
+      },
+      {
+        "participant_id": "Subj_B",
+        "room_id": "Rm_004",
+        "comfort": 0.0,
+        "floor_area": 30.838099999999997,
+        "volume": 107.93334999999999,
+        "length": 8.59,
+        "width": 3.59,
+        "height": 3.5
+      },
+      {
+        "participant_id": "Subj_B",
+        "room_id": "Rm_003",
+        "comfort": 0.0,
+        "floor_area": 28.68,
+        "volume": 146.268,
+        "length": 6.0,
+        "width": 4.78,
+        "height": 5.1
+      },
+      {
+        "participant_id": "Subj_B",
+        "room_id": "Rm_002",
+        "comfort": -0.1,
+        "floor_area": 23.4,
+        "volume": 65.52,
+        "length": 6.0,
+        "width": 3.9,
+        "height": 2.8
+      },
+      {
+        "participant_id": "Subj_B",
+        "room_id": "Rm_001",
+        "comfort": -0.1,
+        "floor_area": 12.0,
+        "volume": 33.599999999999994,
+        "length": 4.0,
+        "width": 3.0,
+        "height": 2.8
+      },
+      {
+        "participant_id": "Subj_C",
+        "room_id": "Rm_001",
+        "comfort": 0.0,
+        "floor_area": 12.0,
+        "volume": 33.599999999999994,
+        "length": 4.0,
+        "width": 3.0,
+        "height": 2.8
+      },
+      {
+        "participant_id": "Subj_C",
+        "room_id": "Rm_002",
+        "comfort": 0.2,
+        "floor_area": 23.4,
+        "volume": 65.52,
+        "length": 6.0,
+        "width": 3.9,
+        "height": 2.8
+      },
+      {
+        "participant_id": "Subj_C",
+        "room_id": "Rm_003",
+        "comfort": 0.3,
+        "floor_area": 28.68,
+        "volume": 146.268,
+        "length": 6.0,
+        "width": 4.78,
+        "height": 5.1
+      },
+      {
+        "participant_id": "Subj_C",
+        "room_id": "Rm_004",
+        "comfort": 0.1,
+        "floor_area": 30.838099999999997,
+        "volume": 107.93334999999999,
+        "length": 8.59,
+        "width": 3.59,
+        "height": 3.5
+      },
+      {
+        "participant_id": "Subj_C",
+        "room_id": "Rm_005",
+        "comfort": 0.4,
+        "floor_area": 125.90599999999999,
+        "volume": 503.62399999999997,
+        "length": 12.98,
+        "width": 9.7,
+        "height": 4.0
+      },
+      {
+        "participant_id": "Subj_C",
+        "room_id": "Rm_006",
+        "comfort": 0.5,
+        "floor_area": 106.88370000000002,
+        "volume": 823.0044900000001,
+        "length": 16.17,
+        "width": 6.61,
+        "height": 7.7
+      },
+      {
+        "participant_id": "Subj_C",
+        "room_id": "Rm_007",
+        "comfort": 0.5,
+        "floor_area": 280.5264,
+        "volume": 1346.52672,
+        "length": 19.36,
+        "width": 14.49,
+        "height": 4.8
+      },
+      {
+        "participant_id": "Subj_C",
+        "room_id": "Rm_008",
+        "comfort": 0.6,
+        "floor_area": 362.6847,
+        "volume": 2828.94066,
+        "length": 25.03,
+        "width": 14.49,
+        "height": 7.8
+      },
+      {
+        "participant_id": "Subj_C",
+        "room_id": "Rm_009",
+        "comfort": 0.6,
+        "floor_area": 117.8913,
+        "volume": 377.25216,
+        "length": 25.03,
+        "width": 4.71,
+        "height": 3.2
+      },
+      {
+        "participant_id": "Subj_C",
+        "room_id": "Rm_010",
+        "comfort": 0.6,
+        "floor_area": 60.736,
+        "volume": 528.4032,
+        "length": 10.4,
+        "width": 5.84,
+        "height": 8.7
+      },
+      {
+        "participant_id": "Subj_D",
+        "room_id": "Rm_010",
+        "comfort": 0.0,
+        "floor_area": 60.736,
+        "volume": 528.4032,
+        "length": 10.4,
+        "width": 5.84,
+        "height": 8.7
+      },
+      {
+        "participant_id": "Subj_D",
+        "room_id": "Rm_009",
+        "comfort": 0.1,
+        "floor_area": 117.8913,
+        "volume": 377.25216,
+        "length": 25.03,
+        "width": 4.71,
+        "height": 3.2
+      },
+      {
+        "participant_id": "Subj_D",
+        "room_id": "Rm_008",
+        "comfort": 0.3,
+        "floor_area": 362.6847,
+        "volume": 2828.94066,
+        "length": 25.03,
+        "width": 14.49,
+        "height": 7.8
+      },
+      {
+        "participant_id": "Subj_D",
+        "room_id": "Rm_007",
+        "comfort": 0.5,
+        "floor_area": 280.5264,
+        "volume": 1346.52672,
+        "length": 19.36,
+        "width": 14.49,
+        "height": 4.8
+      },
+      {
+        "participant_id": "Subj_D",
+        "room_id": "Rm_006",
+        "comfort": 0.0,
+        "floor_area": 106.88370000000002,
+        "volume": 823.0044900000001,
+        "length": 16.17,
+        "width": 6.61,
+        "height": 7.7
+      },
+      {
+        "participant_id": "Subj_D",
+        "room_id": "Rm_005",
+        "comfort": 0.6,
+        "floor_area": 125.90599999999999,
+        "volume": 503.62399999999997,
+        "length": 12.98,
+        "width": 9.7,
+        "height": 4.0
+      },
+      {
+        "participant_id": "Subj_D",
+        "room_id": "Rm_004",
+        "comfort": 0.56,
+        "floor_area": 30.838099999999997,
+        "volume": 107.93334999999999,
+        "length": 8.59,
+        "width": 3.59,
+        "height": 3.5
+      },
+      {
+        "participant_id": "Subj_D",
+        "room_id": "Rm_003",
+        "comfort": 0.3,
+        "floor_area": 28.68,
+        "volume": 146.268,
+        "length": 6.0,
+        "width": 4.78,
+        "height": 5.1
+      },
+      {
+        "participant_id": "Subj_D",
+        "room_id": "Rm_002",
+        "comfort": 0.5,
+        "floor_area": 23.4,
+        "volume": 65.52,
+        "length": 6.0,
+        "width": 3.9,
+        "height": 2.8
+      },
+      {
+        "participant_id": "Subj_D",
+        "room_id": "Rm_001",
+        "comfort": 0.0,
+        "floor_area": 12.0,
+        "volume": 33.599999999999994,
+        "length": 4.0,
+        "width": 3.0,
+        "height": 2.8
+      },
+      {
+        "participant_id": "Subj_M",
+        "room_id": "Rm_001",
+        "comfort": 0.2,
+        "floor_area": 12.0,
+        "volume": 33.599999999999994,
+        "length": 4.0,
+        "width": 3.0,
+        "height": 2.8
+      },
+      {
+        "participant_id": "Subj_M",
+        "room_id": "Rm_002",
+        "comfort": 0.6,
+        "floor_area": 23.4,
+        "volume": 65.52,
+        "length": 6.0,
+        "width": 3.9,
+        "height": 2.8
+      },
+      {
+        "participant_id": "Subj_M",
+        "room_id": "Rm_003",
+        "comfort": 0.0,
+        "floor_area": 28.68,
+        "volume": 146.268,
+        "length": 6.0,
+        "width": 4.78,
+        "height": 5.1
+      },
+      {
+        "participant_id": "Subj_M",
+        "room_id": "Rm_004",
+        "comfort": 0.4,
+        "floor_area": 30.838099999999997,
+        "volume": 107.93334999999999,
+        "length": 8.59,
+        "width": 3.59,
+        "height": 3.5
+      },
+      {
+        "participant_id": "Subj_M",
+        "room_id": "Rm_005",
+        "comfort": 0.6,
+        "floor_area": 125.90599999999999,
+        "volume": 503.62399999999997,
+        "length": 12.98,
+        "width": 9.7,
+        "height": 4.0
+      },
+      {
+        "participant_id": "Subj_M",
+        "room_id": "Rm_006",
+        "comfort": -0.1,
+        "floor_area": 106.88370000000002,
+        "volume": 823.0044900000001,
+        "length": 16.17,
+        "width": 6.61,
+        "height": 7.7
+      },
+      {
+        "participant_id": "Subj_M",
+        "room_id": "Rm_007",
+        "comfort": 0.5,
+        "floor_area": 280.5264,
+        "volume": 1346.52672,
+        "length": 19.36,
+        "width": 14.49,
+        "height": 4.8
+      },
+      {
+        "participant_id": "Subj_M",
+        "room_id": "Rm_008",
+        "comfort": -0.2,
+        "floor_area": 362.6847,
+        "volume": 2828.94066,
+        "length": 25.03,
+        "width": 14.49,
+        "height": 7.8
+      },
+      {
+        "participant_id": "Subj_M",
+        "room_id": "Rm_009",
+        "comfort": -0.3,
+        "floor_area": 117.8913,
+        "volume": 377.25216,
+        "length": 25.03,
+        "width": 4.71,
+        "height": 3.2
+      },
+      {
+        "participant_id": "Subj_M",
+        "room_id": "Rm_010",
+        "comfort": -0.4,
+        "floor_area": 60.736,
+        "volume": 528.4032,
+        "length": 10.4,
+        "width": 5.84,
+        "height": 8.7
+      }
+    ],
+    "x": "floor_area",
+    "y": "comfort",
+    "series": "participant_id",
+    "facet": null,
+    "x_label": "Geometric floor area",
+    "y_label": "E1 comfort",
+    "x_unit": "m\u00b2",
+    "y_unit": "transformed source scale \u22121 to 1"
+  }
+}

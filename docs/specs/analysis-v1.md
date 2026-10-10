@@ -1,5 +1,7 @@
 # Analysis specification v1.1.0 — retrospective pilot reanalysis
 
+> **V1.2 approval amendment, 2026-10-10:** The owner approved the complete [v1.2 source snapshot](analysis-v1.2-draft.md) with SHA-256 `51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac` at [CP-Spec](../reports/revision-2026-10/CP-Spec.md). Its PD-001–PD-007 sections supersede this document wherever the methods differ, including EEG candidates, complete physiology, E3-only deployable fusion, QC flags and model questions. This document preserves the reviewed v1.1 scientific provenance and remains authoritative for details the approved amendment explicitly retains. V1.2 QC evidence may run now; reviewed eligibility and dependent interpretation await signed CP-B decisions. Existing v1.1 artifacts are historical and are not v1.2 results.
+
 **Status:** reviewed for conditional retrospective analysis; the independent re-review and coordinator verdict are in `docs/reports/analysis-checkpoint.md`. This status sentence was updated after the reviewed snapshot without changing any analytical method; the review report retains its original hashes. **Date:** 2026-10-08. This specification is written after the recordings were collected, so it is not a prospective preregistration. Change affected settings through a dated, append-only decision amendment, rerun all affected outputs, and state which results changed. `backend/src/pa/decisions.yaml` is its machine-readable settings companion.
 
 ## Evidence boundary and estimands

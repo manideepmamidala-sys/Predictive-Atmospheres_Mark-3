@@ -78,3 +78,35 @@ This is an append-only record for this retrospective rebuild. A new decision may
 **Reason:** Opening counts are model inputs. Omitting them let a room with 99 doors be labelled an exact studied room.
 **Evidence:** `docs/reports/final-review.md` FR-05; focused support regression and regenerated result/artifact evidence will follow this amendment.
 **Supersedes:** The narrower numeric support neighborhood in the initial implementation. This amendment precedes regeneration; it does not alter source observations or physiological analysis.
+
+## Approved v1.2 amendment — 2026-10-10
+
+The owner approved the entire unchanged [v1.2 source snapshot](docs/specs/analysis-v1.2-draft.md) at [CP-Spec](docs/reports/revision-2026-10/CP-Spec.md), SHA-256 `51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac`. The original proposal text and filename remain byte-identical to the approved target. The following decisions supersede conflicting v1.1 method details while preserving D-001–D-011 and historical v1.1 outputs. CP-B remains unsigned; approval of methods is not approval of individual signal validity.
+
+### D-012 — Conditional timebase and review-only signal flags
+
+**Decision:** Retain conditional 500 Hz, 250/256/512 sensitivities and first-five-seconds-included primary analysis. Export per-file timebase evidence; add the exact v1.2 channel-imbalance, amplitude, raw line-noise and filtered muscle review flags and sensitivity thresholds. A flagged channel/trial has a pending CP-B disposition; no participant-wide exclusion is presumed.
+**Reason:** Counter continuity and logged duration do not prove hardware rate; unknown units and reference placement require inspectable screening and owner review.
+**Evidence:** Approved v1.2 source PD-002/003 and CP-Spec hash above.
+**Supersedes:** D-002/D-003/D-007 only where v1.2 adds review evidence. Their historical status remains intact.
+
+### D-013 — Complete and partial physiology/fusion definitions
+
+**Decision:** Expose FAA, alpha suppression, engagement, muscle and ocular-unavailable candidates separately. Require bilateral FAA, both cortical candidates and valid HR for complete physiology; RMSSD is descriptive. Within-participant/experiment descriptive mapping is separate from fold-fitted population calibration. Use equal EEG/HR arousal and equal physiology/report primary fusion, with declared partial labels and 0/0.25/0.75/1 fusion sensitivities.
+**Reason:** The approved contract retains EEG/ECG-led comparison without hiding component disagreement or replacing missing measurements.
+**Evidence:** Approved v1.2 source PD-001/004/005 and CP-Spec hash above.
+**Supersedes:** D-004's old RMSSD-gated complete objective and v1.1 beta/alpha candidate definition; historical outputs keep those meanings.
+
+### D-014 — E3-only deployed fused model and fixed evaluation
+
+**Decision:** The Studio's deployable target is complete fused E3 response with full independent Function-room attributes. E2 stays in common-feature research analysis. Fit all component calibrators within each nested training partition, use grouped room/person questions, fixed baselines and negative controls, and report unsupported tiers as unavailable.
+**Reason:** E2 has no walkable area or space type and the Studio request has no experiment input; an imputed or pooled target would change the deployment estimand.
+**Evidence:** Approved v1.2 source PD-006 and CP-Spec hash above.
+**Supersedes:** D-005/D-009's broader unspecified full-attribute cohort wording. Existing model artifacts remain v1.1.
+
+### D-015 — Requested numerical Studio score
+
+**Decision:** Keep API Neuro-Score on 0–1 and display it on 0–100. Bounded generation minimizes absolute distance from the visitor's requested score under locks, physical validity and studied support, exposing achieved difference and unavailable status.
+**Reason:** The score request is an objective, separate from the visitor's emotional target.
+**Evidence:** Approved v1.2 source PD-007 and CP-Spec hash above.
+**Supersedes:** D-005's optimizer objective only; score geometry is preserved.

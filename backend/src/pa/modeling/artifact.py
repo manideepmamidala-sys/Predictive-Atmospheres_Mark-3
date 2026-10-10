@@ -17,6 +17,7 @@ import sklearn
 
 from pa.config import MODEL, ROOT, SCHEMA_VERSION
 from pa.features.builder import FEATURE_ORDER
+from pa.signals.common import decisions
 
 
 class ArtifactUnavailable(RuntimeError):
@@ -60,9 +61,19 @@ def source_snapshot_status() -> str:
         return "git_status_unavailable"
 
 
+def revision_provenance() -> dict[str, str]:
+    """Record the producing checkout without making its revision a content identity."""
+    return {
+        "base_git_revision": current_code_revision(),
+        "source_snapshot_status": source_snapshot_status(),
+    }
+
+
 def build_metadata(*, model_status: str, training_scope: dict, metrics: dict,
                    limitations: list[str]) -> dict:
-    return {
+    settings = decisions()
+    active_spec = ROOT / settings.get("approved_spec_path", "docs/specs/analysis-v1.md")
+    scientific_metadata = {
         "schema_version": SCHEMA_VERSION,
         "artifact_version": "1.0.0",
         "model_status": model_status,
@@ -76,13 +87,15 @@ def build_metadata(*, model_status: str, training_scope: dict, metrics: dict,
         "decisions_sha256": source_hash(ROOT / "backend/src/pa/decisions.yaml"),
         "code_tree_sha256": code_tree_hash(),
         "dataset_manifest_sha256": source_hash(ROOT / "data/MANIFEST.sha256"),
-        "analysis_spec_sha256": source_hash(ROOT / "docs/specs/analysis-v1.md"),
-        "base_git_revision": current_code_revision(),
-        "source_snapshot_status": source_snapshot_status(),
+        "analysis_spec_sha256": source_hash(active_spec),
+        "approved_spec_sha256": settings.get("approved_spec_sha256"),
+        "qc_review_sha256": source_hash(ROOT / "artifacts/results/qc_review.json")
+        if settings["version"].startswith("1.2.") else None,
         "training_scope": training_scope,
         "metrics": metrics,
         "limitations": limitations,
     }
+    return {**scientific_metadata, **revision_provenance()}
 
 
 def save_artifact(pipeline: Any, metadata: dict, directory: Path = MODEL) -> None:
@@ -120,6 +133,8 @@ def load_artifact(directory: Path = MODEL) -> LoadedArtifact:
     if not isinstance(metadata, dict) or not all(isinstance(key, str) for key in metadata):
         raise ArtifactUnavailable("model metadata must be a JSON object with string keys")
     _validate_public_metadata(metadata)
+    settings = decisions()
+    active_spec = ROOT / settings.get("approved_spec_path", "docs/specs/analysis-v1.md")
     checks = {
         "schema_version": SCHEMA_VERSION,
         "feature_order": list(FEATURE_ORDER),
@@ -132,7 +147,10 @@ def load_artifact(directory: Path = MODEL) -> LoadedArtifact:
         "decisions_sha256": source_hash(ROOT / "backend/src/pa/decisions.yaml"),
         "code_tree_sha256": code_tree_hash(),
         "dataset_manifest_sha256": source_hash(ROOT / "data/MANIFEST.sha256"),
-        "analysis_spec_sha256": source_hash(ROOT / "docs/specs/analysis-v1.md"),
+        "analysis_spec_sha256": source_hash(active_spec),
+        "approved_spec_sha256": settings.get("approved_spec_sha256"),
+        "qc_review_sha256": source_hash(ROOT / "artifacts/results/qc_review.json")
+        if settings["version"].startswith("1.2.") else None,
         "model_sha256": source_hash(model_path),
     }
     differences = [field for field, expected in checks.items() if metadata.get(field) != expected]

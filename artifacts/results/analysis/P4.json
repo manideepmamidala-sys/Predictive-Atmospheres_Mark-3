@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "id": "P4",
+  "route": "/prediction",
+  "status": "unavailable",
+  "question": "Which room inputs matter to the fitted predictor?",
+  "takeaway": "The fitted E3 model selected a constant dummy baseline; it has no spatial feature attribution to estimate. Publishing nonzero importance would invent a learned effect.",
+  "method": "Exploratory model-specific feature importance would be shown only beside grouped performance and only for a nonconstant fitted model.",
+  "caveats": [
+    "A constant baseline has no feature-level explanation.",
+    "No causal feature effect can be read from small grouped predictive comparisons."
+  ],
+  "counts": {
+    "trials": 23,
+    "participants": 4,
+    "rooms": 10
+  },
+  "units": {
+    "importance": "unavailable"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T16:03:37+00:00"
+  },
+  "availability_reason": "The fitted E3 model selected a constant dummy baseline; it has no spatial feature attribution to estimate. Publishing nonzero importance would invent a learned effect.",
+  "chart": {
+    "type": "bar",
+    "rows": [],
+    "x": "feature",
+    "y": "importance",
+    "series": null,
+    "facet": null,
+    "x_label": "Independent room input",
+    "y_label": "Exploratory importance",
+    "x_unit": null,
+    "y_unit": "unavailable"
+  }
+}

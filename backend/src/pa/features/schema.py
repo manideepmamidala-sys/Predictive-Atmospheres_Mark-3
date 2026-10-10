@@ -63,3 +63,55 @@ class RoomInput(BaseModel):
         if opening_area > wall + 1e-7:
             raise ValueError("total opening area exceeds wall area")
         return self
+
+
+INDEPENDENT_FIELDS = tuple(RoomInput.model_fields)
+NUMERIC_FIELDS = tuple(name for name in INDEPENDENT_FIELDS
+                       if name not in ("day_or_night", "space_type"))
+COUNT_FIELDS = ("num_doors", "num_windows")
+REQUIRED_STUDIO_FIELDS = INDEPENDENT_FIELDS
+
+
+def validate_studio_room(room: RoomInput) -> RoomInput:
+    """The E3 deployable model uses every independent input, without imputation."""
+    missing = [name for name in REQUIRED_STUDIO_FIELDS if getattr(room, name) is None]
+    if missing:
+        raise ValueError("studio room requires complete E3 inputs: " + ", ".join(missing))
+    return room
+
+
+class NumericRange(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    minimum: float = Field(allow_inf_nan=False)
+    maximum: float = Field(allow_inf_nan=False)
+
+    @model_validator(mode="after")
+    def ordered(self) -> NumericRange:
+        if self.minimum > self.maximum:
+            raise ValueError("minimum exceeds maximum")
+        return self
+
+
+class StudioConstraints(BaseModel):
+    """Search controls refer only to independent room inputs."""
+    model_config = ConfigDict(extra="forbid")
+
+    base_room: RoomInput | None = None
+    locked_fields: list[str] = Field(default_factory=list)
+    allowed_ranges: dict[str, NumericRange] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def valid_fields(self) -> StudioConstraints:
+        unknown_locks = set(self.locked_fields) - set(INDEPENDENT_FIELDS)
+        unknown_ranges = set(self.allowed_ranges) - set(NUMERIC_FIELDS)
+        if unknown_locks or unknown_ranges:
+            raise ValueError("unknown independent room fields: " +
+                             ", ".join(sorted(unknown_locks | unknown_ranges)))
+        if len(self.locked_fields) != len(set(self.locked_fields)):
+            raise ValueError("locked_fields contains duplicates")
+        if self.locked_fields and self.base_room is None:
+            raise ValueError("base_room is required when fields are locked")
+        if self.base_room is not None:
+            validate_studio_room(self.base_room)
+        return self

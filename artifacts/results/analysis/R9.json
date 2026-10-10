@@ -1,0 +1,285 @@
+{
+  "schema_version": "1.0.0",
+  "id": "R9",
+  "route": "/rooms",
+  "status": "available",
+  "question": "What participant-characteristic and sleep patterns appear in reports?",
+  "takeaway": "E3 records sleep for 6 people; E2 has no sleep observations. These profiles are descriptive only.",
+  "method": "Observed per-person/experiment mean rating, age, source gender and mean reported sleep hours; E2 sleep remains null.",
+  "caveats": [
+    "E2 sleep was not recorded; null does not mean zero sleep.",
+    "Small overlapping cohorts cannot support demographic or sleep effect claims."
+  ],
+  "counts": {
+    "trials": 110,
+    "participants": 9,
+    "rooms": 20
+  },
+  "units": {
+    "mean_sleep_hours": "hours",
+    "age": "years",
+    "mean_rating": "signed source scale \u22121 to 1"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T16:03:32+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "scatter",
+    "rows": [
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "axis": "valence",
+        "age": 25.0,
+        "gender": "Female",
+        "mean_sleep_hours": null,
+        "mean_rating": 0.12999999999999998,
+        "rating_trials": 10,
+        "sleep_observations": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "axis": "arousal",
+        "age": 25.0,
+        "gender": "Female",
+        "mean_sleep_hours": null,
+        "mean_rating": 0.15,
+        "rating_trials": 10,
+        "sleep_observations": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "axis": "valence",
+        "age": 26.0,
+        "gender": "Female",
+        "mean_sleep_hours": null,
+        "mean_rating": 0.020000000000000007,
+        "rating_trials": 10,
+        "sleep_observations": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "axis": "arousal",
+        "age": 26.0,
+        "gender": "Female",
+        "mean_sleep_hours": null,
+        "mean_rating": 0.25,
+        "rating_trials": 10,
+        "sleep_observations": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_F",
+        "axis": "valence",
+        "age": 25.0,
+        "gender": "Female",
+        "mean_sleep_hours": null,
+        "mean_rating": 0.39,
+        "rating_trials": 10,
+        "sleep_observations": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_F",
+        "axis": "arousal",
+        "age": 25.0,
+        "gender": "Female",
+        "mean_sleep_hours": null,
+        "mean_rating": 0.09999999999999999,
+        "rating_trials": 10,
+        "sleep_observations": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "axis": "valence",
+        "age": 28.0,
+        "gender": "Female",
+        "mean_sleep_hours": null,
+        "mean_rating": 0.12000000000000002,
+        "rating_trials": 10,
+        "sleep_observations": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "axis": "arousal",
+        "age": 28.0,
+        "gender": "Female",
+        "mean_sleep_hours": null,
+        "mean_rating": -0.020000000000000018,
+        "rating_trials": 10,
+        "sleep_observations": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "axis": "valence",
+        "age": 25.0,
+        "gender": "Male",
+        "mean_sleep_hours": null,
+        "mean_rating": 0.040000000000000015,
+        "rating_trials": 10,
+        "sleep_observations": 0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "axis": "arousal",
+        "age": 25.0,
+        "gender": "Male",
+        "mean_sleep_hours": null,
+        "mean_rating": 0.12999999999999998,
+        "rating_trials": 10,
+        "sleep_observations": 0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "axis": "valence",
+        "age": 25.0,
+        "gender": "Female",
+        "mean_sleep_hours": 8.0,
+        "mean_rating": 0.491,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "axis": "arousal",
+        "age": 25.0,
+        "gender": "Female",
+        "mean_sleep_hours": 8.0,
+        "mean_rating": 0.07999999999999999,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "axis": "valence",
+        "age": 26.0,
+        "gender": "Female",
+        "mean_sleep_hours": 7.0,
+        "mean_rating": 0.275,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "axis": "arousal",
+        "age": 26.0,
+        "gender": "Female",
+        "mean_sleep_hours": 7.0,
+        "mean_rating": -0.32999999999999996,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "axis": "valence",
+        "age": 27.0,
+        "gender": "Male",
+        "mean_sleep_hours": 7.5,
+        "mean_rating": 0.29000000000000004,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "axis": "arousal",
+        "age": 27.0,
+        "gender": "Male",
+        "mean_sleep_hours": 7.5,
+        "mean_rating": -0.14999999999999997,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "axis": "valence",
+        "age": 25.0,
+        "gender": "Male",
+        "mean_sleep_hours": 6.5,
+        "mean_rating": 0.18,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "axis": "arousal",
+        "age": 25.0,
+        "gender": "Male",
+        "mean_sleep_hours": 6.5,
+        "mean_rating": 0.08,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "axis": "valence",
+        "age": 25.0,
+        "gender": "Male",
+        "mean_sleep_hours": 3.0,
+        "mean_rating": 0.25999999999999995,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "axis": "arousal",
+        "age": 25.0,
+        "gender": "Male",
+        "mean_sleep_hours": 3.0,
+        "mean_rating": 0.009999999999999998,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "axis": "valence",
+        "age": 25.0,
+        "gender": "Male",
+        "mean_sleep_hours": 8.5,
+        "mean_rating": 0.41600000000000004,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "axis": "arousal",
+        "age": 25.0,
+        "gender": "Male",
+        "mean_sleep_hours": 8.5,
+        "mean_rating": 0.002000000000000013,
+        "rating_trials": 10,
+        "sleep_observations": 10
+      }
+    ],
+    "x": "mean_sleep_hours",
+    "y": "mean_rating",
+    "series": "axis",
+    "facet": "experiment",
+    "x_label": "Mean reported sleep",
+    "y_label": "Mean signed report",
+    "x_unit": "hours",
+    "y_unit": "signed source scale \u22121 to 1"
+  }
+}

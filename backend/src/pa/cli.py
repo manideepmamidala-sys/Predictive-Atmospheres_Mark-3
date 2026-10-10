@@ -7,19 +7,25 @@ from dataclasses import asdict
 
 import typer
 
-from pa.affect.analysis import write_analysis
+from pa.affect.analysis import write_analysis, write_validity
 from pa.affect.run import write_affect
+from pa.analysis.run import write_rating_research
 from pa.config import RESULTS
-from pa.features.schema import RoomInput
+from pa.features.schema import RoomInput, StudioConstraints
 from pa.features.support import load_studied_support
-from pa.io.audit import write_audit
+from pa.io.audit import write_audit, write_timebase
 from pa.io.manifest import verify_sources
 from pa.modeling.artifact import ArtifactUnavailable, load_artifact
+from pa.modeling.cohort_guard import verify_or_create_null_guard
+from pa.modeling.learning import write_learning_curve
+from pa.modeling.nulls import run_full_spatial_null
 from pa.modeling.predict import predict_room
+from pa.modeling.report import write_model_poc
+from pa.modeling.report_comparator import write_report_comparator
 from pa.modeling.train import write_model_evaluation
 from pa.optimize.search import search
 from pa.results.build import write_research_exports
-from pa.results.review import write_review_panels
+from pa.results.review import write_qc_review
 from pa.scoring.neuro_score import AffectPoint
 from pa.signals.run import write_signals
 
@@ -46,6 +52,7 @@ def verify_data() -> None:
 def audit() -> None:
     """Export observed acquisition inventory and conditional rate scenarios."""
     result = write_audit()
+    write_timebase(result)
     typer.echo(f"Audited {result['summary']['recordings']} recordings")
 
 
@@ -76,10 +83,28 @@ def analyze() -> None:
     """Export crossed-design descriptive analyses without trial-iid inference."""
     try:
         result = write_analysis()
+        write_validity()
+        write_rating_research()
+        write_report_comparator()
     except (RuntimeError, FileNotFoundError, ValueError) as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
     typer.echo(f"Analyzed {sum(row['trials'] for row in result['experiments'])} trials")
+
+
+@app.command("model-controls")
+def model_controls() -> None:
+    """Compute all 1,000 full-refit nulls and all 455 unique room subsets."""
+    try:
+        verify_or_create_null_guard()
+        null = run_full_spatial_null()
+        curve = write_learning_curve()
+        write_model_poc()
+    except (RuntimeError, FileNotFoundError, ValueError) as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"Spatial control: {len(null['draws'])} draws; "
+               f"learning curve: {sum(len(point['subsets']) for point in curve['points'])} subsets")
 
 
 @app.command()
@@ -127,19 +152,21 @@ def pipeline() -> None:
     affect()
     analyze()
     train()
+    model_controls()
     export()
     openapi()
 
 
 @app.command("signal-review")
 def signal_review() -> None:
-    """Render deterministic representative raw/cleaned/QC plots for manual inspection."""
+    """Build pending per-signal CP-B queue and raw/cleaned review panels."""
     try:
-        panels = write_review_panels()
+        review = write_qc_review()
     except (RuntimeError, FileNotFoundError, ValueError) as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
-    typer.echo(f"Rendered {len(panels)} representative signal review panels")
+    typer.echo(f"Queued {review['summary']['queue_entries']} signal decisions and rendered "
+               f"{review['summary']['panels']} review panels")
 
 
 @app.command()
@@ -161,14 +188,25 @@ def predict(room_json: str, target_valence: float, target_arousal: float) -> Non
 def optimize(target_valence: float, target_arousal: float,
              budget: int | None = None, n_candidates: int | None = None,
              seed: int | None = None, space_type: str | None = None,
-             day_or_night: str | None = None) -> None:
-    """Search declared room support from the trusted model and a user target."""
+             day_or_night: str | None = None, requested_score: float = 100.0,
+             base_room_json: str | None = None, locked_fields_json: str | None = None,
+             allowed_ranges_json: str | None = None) -> None:
+    """Find supported rooms closest to a requested 0–100 Neuro-Score."""
     try:
         target = AffectPoint(valence=target_valence, arousal=target_arousal)
+        constraints = StudioConstraints.model_validate({
+            "base_room": json.loads(base_room_json) if base_room_json is not None else None,
+            "locked_fields": json.loads(locked_fields_json) if locked_fields_json is not None else [],
+            "allowed_ranges": json.loads(allowed_ranges_json)
+            if allowed_ranges_json is not None else {},
+        })
         artifact = load_artifact()
         outcome = search(artifact, load_studied_support(), target, space_type=space_type,
                          day_or_night=day_or_night, budget=budget,
-                         n_candidates=n_candidates, seed=seed)
+                         n_candidates=n_candidates, seed=seed,
+                         requested_score=requested_score, base_room=constraints.base_room,
+                         locked_fields=constraints.locked_fields,
+                         allowed_ranges=constraints.allowed_ranges)
     except (ValueError, ArtifactUnavailable) as exc:
         typer.echo(str(exc), err=True)
         raise typer.Exit(code=1) from exc
@@ -178,7 +216,10 @@ def optimize(target_valence: float, target_arousal: float,
                            "reason": outcome.reason,
                            "candidates": [{"room": item.room.model_dump(mode="json"),
                                            "prediction": asdict(item.prediction),
-                                           "support": asdict(item.support)}
+                                           "support": asdict(item.support),
+                                           "requested_score": item.requested_score,
+                                           "achieved_score": item.achieved_score,
+                                           "absolute_difference": item.absolute_difference}
                                           for item in outcome.candidates]}, allow_nan=False))
 
 

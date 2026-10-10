@@ -1,0 +1,498 @@
+import { Suspense, lazy, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import {
+  useResearch,
+  useSignalTrials,
+  type Research,
+  type Trial,
+} from "../lib/research";
+import { Notice, PageHeading, Value } from "../ui";
+
+const SignalTrace = lazy(() => import("../figures/SignalTrace"));
+type View = "trials" | "rooms" | "people" | "signals";
+const componentLabels = {
+  timebase: "Timebase",
+  eeg_right: "EEG right",
+  eeg_left: "EEG left",
+  eeg_bilateral: "EEG bilateral",
+  ecg_hr: "ECG heart rate",
+  ecg_rmssd: "ECG RMSSD",
+} as const;
+
+function TrialQuality({ trial }: { trial: Trial }) {
+  const timebaseDecision = trial.qc_components.timebase.review_decisions.find(
+    (decision) => decision.status !== "accept",
+  );
+  const otherReasons = trial.reasons.filter(
+    (reason) => !timebaseDecision || !reason.includes(timebaseDecision.reason),
+  );
+
+  return (
+    <>
+      {timebaseDecision && (
+        <p className="trial-review-reason">
+          Timebase review {timebaseDecision.status}: {timebaseDecision.reason}
+        </p>
+      )}
+      {otherReasons.length > 0 && (
+        <p className="trial-review-reason">{otherReasons.join("; ")}</p>
+      )}
+      <details className="trial-qc-details">
+        <summary>Inspect automated and reviewed QC</summary>
+        <dl>
+          {(
+            Object.keys(componentLabels) as (keyof typeof componentLabels)[]
+          ).map((key) => {
+            const component = trial.qc_components[key];
+            return (
+              <div key={key}>
+                <dt>{componentLabels[key]}</dt>
+                <dd>
+                  Automated:{" "}
+                  {component.automated_eligible ? "eligible" : "ineligible"};
+                  reviewed:{" "}
+                  {component.reviewed_eligible ? "eligible" : "withheld"}.
+                  {component.automated_reasons.length > 0 && (
+                    <>
+                      {" "}
+                      Automated reasons:{" "}
+                      {component.automated_reasons.join("; ")}.
+                    </>
+                  )}
+                  {component.review_decisions.map((decision) => (
+                    <span
+                      key={decision.entry_id}
+                      className="trial-review-decision"
+                    >
+                      Review {decision.status} ({decision.signal}):{" "}
+                      {decision.reason}
+                      {` · ${decision.reviewer} · ${decision.entry_id}`}
+                    </span>
+                  ))}
+                </dd>
+              </div>
+            );
+          })}
+        </dl>
+      </details>
+    </>
+  );
+}
+
+function SignalExplorer({
+  data,
+  visible,
+}: {
+  data: Research;
+  visible: Trial[];
+}) {
+  const state = useSignalTrials(data);
+  const [selected, setSelected] = useState("");
+  const [mode, setMode] = useState<"raw" | "cleaned">("raw");
+  const active =
+    state.status === "ready"
+      ? state.trials.find(
+          (trial) =>
+            trial.id === selected &&
+            visible.some((item) => item.id === selected),
+        ) || state.trials.find((trial) => trial.id === visible[0]?.id)
+      : null;
+  return (
+    <div className="signal-explorer">
+      <p>
+        Signal traces are a separate, larger export. Loading them does not
+        change the quality decisions shown in the trial table.
+      </p>
+      <p role="status" aria-live="polite">
+        {state.status === "loading"
+          ? "Loading signal traces…"
+          : state.status === "error"
+            ? state.message
+            : `Signal traces ready for ${state.trials.length} trial records.`}
+      </p>
+      {state.status === "ready" && (
+        <>
+          <div className="toolbar">
+            <label>
+              Trial
+              <select
+                value={active?.id || ""}
+                onChange={(event) => setSelected(event.target.value)}
+              >
+                {visible.map((trial) => (
+                  <option key={trial.id} value={trial.id}>
+                    {trial.id}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Trace state
+              <select
+                value={mode}
+                onChange={(event) => setMode(event.target.value as typeof mode)}
+              >
+                <option value="raw">Raw</option>
+                <option value="cleaned">Cleaned</option>
+              </select>
+            </label>
+          </div>
+          <Suspense fallback={<p role="status">Drawing traces…</p>}>
+            <div className="trace-grid">
+              <SignalTrace
+                title="EEG trace"
+                trace={active?.eeg || null}
+                mode={mode}
+              />
+              <SignalTrace
+                title="ECG trace"
+                trace={active?.ecg || null}
+                mode={mode}
+              />
+            </div>
+          </Suspense>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default function Explore() {
+  const state = useResearch();
+  const data = state.status === "ready" ? state.data : null;
+  const [params, setParams] = useSearchParams();
+  const viewCandidate = params.get("view");
+  const view: View =
+    viewCandidate === "rooms" ||
+    viewCandidate === "people" ||
+    viewCandidate === "signals"
+      ? viewCandidate
+      : "trials";
+  const experiment = params.get("experiment") || "all";
+  const room = params.get("room") || "all";
+  const person = params.get("person") || "all";
+  const analysis = params.get("analysis");
+  const analysisRoute =
+    analysis === "Methods"
+      ? "/methods"
+      : analysis?.startsWith("B")
+        ? "/body"
+        : analysis?.startsWith("P")
+          ? "/prediction"
+          : analysis?.startsWith("R") || analysis === "S4"
+            ? "/rooms"
+            : "/study";
+  const update = (key: string, value: string) =>
+    setParams((previous) => {
+      const next = new URLSearchParams(previous);
+      if (value === "all" || value === "") next.delete(key);
+      else next.set(key, value);
+      return next;
+    });
+  const trials =
+    data?.trials.filter(
+      (trial) =>
+        (experiment === "all" || String(trial.experiment) === experiment) &&
+        (room === "all" || trial.room_id === room) &&
+        (person === "all" || trial.participant_id === person),
+    ) || [];
+  const rooms =
+    data?.rooms.filter(
+      (item) =>
+        (experiment === "all" || String(item.experiment) === experiment) &&
+        (room === "all" || item.id === room),
+    ) || [];
+  const people =
+    data?.people.filter(
+      (item) =>
+        (person === "all" || item.id === person) &&
+        (experiment === "all" ||
+          item.by_experiment.some(
+            (summary) => String(summary.experiment) === experiment,
+          )) &&
+        (room === "all" ||
+          data.trials.some(
+            (trial) =>
+              trial.participant_id === item.id &&
+              trial.room_id === room &&
+              (experiment === "all" || String(trial.experiment) === experiment),
+          )),
+    ) || [];
+  return (
+    <>
+      <PageHeading
+        eyebrow="06 / Source-level records"
+        title="Data Explorer"
+        intro="Move from an analysis question to the room, participant and trial records behind it. Filters live in the address bar so a selected view can be shared."
+      />
+      {analysis && (
+        <div className="explore-context">
+          <strong>From analysis {analysis}</strong>
+          <span>
+            Use the filters below to inspect source-level records. These tables
+            do not recompute the analysis.
+          </span>
+          <Link to={`${analysisRoute}#analysis-${analysis}`}>
+            Return to the chart ↗
+          </Link>
+        </div>
+      )}
+      <div className="toolbar explorer-toolbar">
+        <label>
+          View
+          <select
+            value={view}
+            onChange={(event) => update("view", event.target.value)}
+          >
+            <option value="trials">Trial records</option>
+            <option value="rooms">Room metadata</option>
+            <option value="people">Participant summaries</option>
+            <option value="signals">Signal traces</option>
+          </select>
+        </label>
+        <label>
+          Experiment
+          <select
+            value={experiment}
+            onChange={(event) => update("experiment", event.target.value)}
+          >
+            <option value="all">All experiments</option>
+            <option value="1">Form · 1</option>
+            <option value="2">Lighting · 2</option>
+            <option value="3">Function · 3</option>
+          </select>
+        </label>
+        <label>
+          Room
+          <select
+            value={room}
+            onChange={(event) => update("room", event.target.value)}
+          >
+            <option value="all">All rooms</option>
+            {data?.rooms.map((item) => (
+              <option key={item.id}>{item.id}</option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Participant
+          <select
+            value={person}
+            onChange={(event) => update("person", event.target.value)}
+          >
+            <option value="all">All participant IDs</option>
+            {data?.people.map((item) => (
+              <option key={item.id}>{item.id}</option>
+            ))}
+          </select>
+        </label>
+      </div>
+      {!data ? (
+        <Notice title="Research records unavailable" warning>
+          <p>
+            {state.status === "error"
+              ? state.message
+              : "Loading validated records…"}
+          </p>
+        </Notice>
+      ) : (
+        <>
+          <p className="status">
+            {view === "rooms"
+              ? `${rooms.length} room records`
+              : view === "people"
+                ? `${people.length} participant summaries in this exposure scope`
+                : `${trials.length} trial records`}{" "}
+            match the current filters.
+          </p>
+          {view === "rooms" ? (
+            <div className="table-wrap">
+              <table className="data-table">
+                <caption>
+                  Source-linked room metadata; blanks mean unavailable.
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Room</th>
+                    <th scope="col">Experiment</th>
+                    <th scope="col">Space type</th>
+                    <th scope="col">Lighting</th>
+                    <th scope="col">Illuminance (lux)</th>
+                    <th scope="col">CCT (K)</th>
+                    <th scope="col">Render</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rooms.map((item) => (
+                    <tr key={item.id}>
+                      <th scope="row">{item.id}</th>
+                      <td>{item.experiment}</td>
+                      <td>{item.space_type || "Unavailable"}</td>
+                      <td>{item.lighting || "Unavailable"}</td>
+                      <td>
+                        <Value value={item.illuminance_lux} />
+                      </td>
+                      <td>
+                        <Value value={item.cct_kelvin} />
+                      </td>
+                      <td>
+                        <Link to={`/rooms?room=${item.id}`}>View room</Link>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : view === "people" ? (
+            <>
+              <p className="small-text">
+                Summaries are generated for{" "}
+                {experiment === "all"
+                  ? "all experiments"
+                  : `Experiment ${experiment}`}
+                .{" "}
+                {room !== "all" &&
+                  `The room filter selects people exposed to ${room}; summary metrics still cover the whole selected experiment, not just that room.`}
+              </p>
+              <div className="table-wrap">
+                <table className="data-table">
+                  <caption>
+                    Participant display codes and generated experiment
+                    summaries; trial counts are repeated observations.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Participant</th>
+                      <th scope="col">Trials</th>
+                      <th scope="col">Complete fusion</th>
+                      <th scope="col">Age</th>
+                      <th scope="col">Reported gender</th>
+                      <th scope="col">Sleep (h)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {people.map((item) => {
+                      const summary =
+                        experiment === "all"
+                          ? item
+                          : item.by_experiment.find(
+                              (row) => String(row.experiment) === experiment,
+                            )!;
+                      return (
+                        <tr key={item.id}>
+                          <th scope="row">{item.id}</th>
+                          <td>{summary.trials}</td>
+                          <td>{summary.valid_fused}</td>
+                          <td>
+                            <Value value={item.age} />
+                          </td>
+                          <td>{item.gender || "Unavailable"}</td>
+                          <td>
+                            <Value value={summary.sleep_hours} />
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="small-text">
+                EEG, heart rate and RMSSD have separate eligibility decisions.
+                The timebase uses a conditional sampling-rate assumption; an
+                uncertain or rejected review withholds affected physiology.
+                Expand a trial’s QC record to compare automated screening with
+                the reviewed decision and its source reason.
+              </p>
+              <div className="table-wrap">
+                <table className="data-table">
+                  <caption>
+                    Filtered trial records with separate reviewed component
+                    eligibility and quality-decision provenance.
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Trial</th>
+                      <th scope="col">Experiment</th>
+                      <th scope="col">Participant</th>
+                      <th scope="col">Room</th>
+                      <th scope="col">Timebase reviewed</th>
+                      <th scope="col">EEG bilateral eligible</th>
+                      <th scope="col">HR eligible</th>
+                      <th scope="col">RMSSD eligible</th>
+                      <th scope="col">Heart rate (bpm)</th>
+                      <th scope="col">RMSSD (ms)</th>
+                      <th scope="col">Self-reported</th>
+                      <th scope="col">Physiology-derived</th>
+                      <th scope="col">Fused</th>
+                      <th scope="col">QC reasons and decisions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {trials.map((trial) => (
+                      <tr key={trial.id}>
+                        <th scope="row">{trial.id}</th>
+                        <td>{trial.experiment}</td>
+                        <td>{trial.participant_id}</td>
+                        <td>
+                          <Link to={`/rooms?room=${trial.room_id}`}>
+                            {trial.room_id}
+                          </Link>
+                        </td>
+                        <td>
+                          {trial.reviewed_eligibility.timebase
+                            ? "Eligible"
+                            : "Withheld"}
+                        </td>
+                        <td>{trial.eeg_valid ? "Yes" : "No"}</td>
+                        <td>{trial.ecg_hr_valid ? "Yes" : "No"}</td>
+                        <td>{trial.ecg_rmssd_valid ? "Yes" : "No"}</td>
+                        <td>
+                          <Value value={trial.heart_rate_bpm} />
+                        </td>
+                        <td>
+                          <Value value={trial.rmssd_ms} />
+                        </td>
+                        <td>
+                          {trial.subjective
+                            ? `${trial.subjective.valence.toFixed(2)}, ${trial.subjective.arousal.toFixed(2)}`
+                            : "Unavailable"}
+                        </td>
+                        <td>
+                          {trial.objective
+                            ? `${trial.objective.valence.toFixed(2)}, ${trial.objective.arousal.toFixed(2)}`
+                            : "Unavailable"}
+                        </td>
+                        <td>
+                          {trial.fused
+                            ? `${trial.fused.valence.toFixed(2)}, ${trial.fused.arousal.toFixed(2)}`
+                            : "Unavailable"}
+                        </td>
+                        <td>
+                          <TrialQuality trial={trial} />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {view === "signals" &&
+                (trials.length ? (
+                  <SignalExplorer data={data} visible={trials} />
+                ) : (
+                  <p>
+                    No trial matches these filters, so no trace is selected.
+                  </p>
+                ))}
+            </>
+          )}
+          <p className="provenance">
+            Source: {data.provenance.source}. Method: {data.provenance.method}.
+          </p>
+        </>
+      )}
+    </>
+  );
+}

@@ -1,6 +1,6 @@
 ---
 type: memory
-description: "Python research pipeline, validated room schema, versioned exports, fitted artifact, and live API boundaries."
+description: "Python research pipeline, reviewed signal evidence, versioned exports, trusted fused-model artifact, shared room contract and live API."
 ---
 # Platform Architecture
 
@@ -8,34 +8,52 @@ description: "Python research pipeline, validated room schema, versioned exports
 
 ## Overview
 
-`backend/src/pa/` owns source ingestion, acquisition audit, signal and affect analysis, room features, grouped evaluation, model persistence, scoring, optimization, research exports and the FastAPI service. Preserved inputs live under `data/`; derived results and the fitted model live under `artifacts/`. The [website](/architecture/website.md) consumes the exports and API.
+`backend/src/pa/` owns source ingestion, conditional signal processing and review integration, constructed affect, room features, grouped evaluation, model persistence, research exports and the FastAPI service. The [website](/architecture/website.md) reads versioned static products for research and calls `/v1` only for Design Studio prediction and search. Original inputs remain under `data/`; derived results and the fitted model remain under `artifacts/`.
 
 ## Requirements
 
-### Reproducible data boundary
+### Source and export boundary
 
-`data/MANIFEST.sha256` identifies original source bytes. Pipeline outputs include versioned research JSON, `artifacts/results/manifest.json`, OpenAPI and room-input schema, and `artifacts/model/model.joblib` with compatibility metadata. Generated browser products are checked against their manifest before the site build. Source files and derived presentation assets remain distinct.
+`data/MANIFEST.sha256` verifies retained originals. The pipeline writes audit, signal, reviewed QC, affect, validity, model and comparator results; six website products and a joined bundle; and a 28-product analysis catalogue with a hash manifest. Strict browser staging validates schemas, paths and product hashes. The catalogue contains 27 available products and an explicit unavailable P4 because the selected estimator is constant. The larger Signals browser product loads on its route; full-rate recordings and detailed analysis products remain outside the browser bundle. Generated products carry method, approved-specification and source provenance. The [analysis memory](/research/analysis.md) records scientific eligibility and limits.
 
-### One room and inference contract
+Each public trial carries separate automated and reviewed status, reasons and decision provenance for timebase, right EEG, left EEG, bilateral EEG, heart rate and RMSSD. Final eligibility reconciles with the approved CP-B ledger; an uncertain or rejected component remains unavailable. Heart rate and RMSSD have independent gates, so eligible heart rate does not imply eligible RMSSD. See the [data card](../../data_card.md) and [CP-B record](../../reports/revision-2026-10/CP-B.md).
 
-`RoomInput` accepts independent physical and supplied room attributes; missing optional attributes stay unavailable. The shared feature builder derives ratios and geometry for training and inference. Physical validation and empirical studied support are separate. Support uses eleven observed numeric inputs, including both opening counts, plus observed day/night and space-type combinations; missing values or out-of-range values receive explicit status. A user-selected signed valence/arousal target drives Neuro-Score, `clip(1 - distance / sqrt(8), 0, 1)`.
+### One room and prediction contract
 
-### Artifact and service behavior
+`RoomInput` contains independent physical and supplied room attributes; optional absent attributes stay missing. One feature builder serves fitting, direct inference, CLI, API and constrained search. Studio prediction requires complete Experiment 3 independent inputs, without filling absent Experiment 1 or 2 fields. Physical validity and empirical studied support are separate: support checks eleven observed numeric inputs, including both opening counts, and observed day/night and space-type combinations. Unsupported inputs receive explicit status rather than an accuracy guarantee.
 
-The saved artifact includes fitted preprocessing, estimator, ordered features, training target calibration and provenance hashes. The loader checks public metadata fields, schema, package versions, code/data/specification/decision/lock hashes and model bytes before trusted deserialization. `/v1/health` separates process liveness from model readiness; `/v1/meta` reports status and limitations. `/v1/predict` and `/v1/optimize` return structured unavailable errors when the artifact is missing or incompatible. The service does not fit at request time.
+The trusted artifact contains fitted preprocessing, an estimator, ordered features, training-fold target calibration and provenance hashes. The current E3 artifact selects `dummy_mean` and returns the same constructed fused point, `[0.19933647676353913, -0.07416070665631107]`, for different valid rooms. Its status is `baseline_only`; it establishes no learned spatial gain. Prediction retains raw and clipped coordinates. For a visitor-selected signed target `t`, the API returns `clip(1 − ||clipped prediction − t|| / sqrt(8), 0, 1)` on a 0–1 scale; the Studio displays 0–100. The requested numerical score for generation is a separate 0–100 input. Search minimizes absolute achieved-versus-requested score difference over physically valid, empirically supported candidates, respecting locks, ranges and categorical constraints. A seeded search ranks ties by support distance and stable room-field order and may return an explicit empty result; it does not guarantee a global optimum.
+
+### Trusted service boundary
+
+The loader checks artifact metadata, schema, package versions, code/data/specification/decision/lock hashes and model bytes before trusted deserialization. The service never fits during a request. `/v1/health` separates process liveness from `ready`; `/v1/meta` reports status and limitations. `/v1/predict` and `/v1/optimize` return structured unavailable errors when the artifact is absent or incompatible. The [model card](../../model_card.md) defines the fitted cohort, evaluation and score interpretation.
 
 ## Design Decisions
 
 ### Shared physical and predictive contract
 
 **Decision**: Use one validated room input and feature builder across model fitting, direct inference, CLI, API and optimization.
-**Why**: The same independent inputs and derived features are required for reproducible predictions and physically valid search.
-**Rejected**: Separately supplied derived geometry or parallel endpoint-specific feature calculations, which can contradict source attributes.
+**Why**: Predictions and search need the same independent inputs and derived geometry.
+**Rejected**: Separately supplied derived geometry or endpoint-specific feature calculations that can contradict source attributes.
 *Introduced by*: 261008-ymhz-research-platform-rebuild
 
 ### Fitted artifact compatibility gate
 
 **Decision**: Treat fitted model files as trusted local artifacts and validate their metadata and bytes before loading.
-**Why**: Readiness and displayed model evidence must correspond to the source, methods and artifact actually served.
-**Rejected**: Startup refitting or permissive loading of stale or malformed artifacts, which would obscure the model used for a response.
+**Why**: Served predictions must correspond to the recorded source, methods and artifact.
+**Rejected**: Request-time refitting or permissive loading of stale or malformed artifacts.
 *Introduced by*: 261008-ymhz-research-platform-rebuild
+
+### Separate reviewed components in public evidence
+
+**Decision**: Export automated and CP-B-reviewed status and reasons for each signal component, including heart rate and RMSSD independently.
+**Why**: A single trial flag hides which measurements survive review and can imply an invalid cardiac or bilateral result is available.
+**Rejected**: Inferring component quality in the browser from a combined eligibility flag.
+*Introduced by*: 261010-tadj-research-atlas-design-studio
+
+### Closest requested score under constraints
+
+**Decision**: Keep the emotional target point separate from a requested numerical Neuro-Score and rank feasible candidates by absolute score difference.
+**Why**: A requested score describes a numerical goal, while the target point defines what proximity means.
+**Rejected**: Maximizing score regardless of the requested value or silently relaxing locks and ranges.
+*Introduced by*: 261010-tadj-research-atlas-design-studio

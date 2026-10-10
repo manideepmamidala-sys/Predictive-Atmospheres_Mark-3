@@ -1,0 +1,2441 @@
+{
+  "schema_version": "1.0.0",
+  "id": "S3",
+  "route": "/study",
+  "status": "available",
+  "question": "How do recorded room attributes vary?",
+  "takeaway": "Profiles cover 30 source rooms; each line is scaled within its experiment and attribute.",
+  "method": "Observed room attributes min\u2013max scaled separately by experiment and attribute for parallel profiles; raw values retained per row.",
+  "caveats": [
+    "The normalized profile is descriptive, not a causal feature effect.",
+    "E1/E2 lack some E3-only independent attributes."
+  ],
+  "counts": {
+    "trials": 0,
+    "participants": 0,
+    "rooms": 30
+  },
+  "units": {
+    "normalized_value": "unit interval"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T16:03:30+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "line",
+    "rows": [
+      {
+        "experiment": 1,
+        "room_id": "Rm_001",
+        "attribute": "length",
+        "value": 4.0,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_002",
+        "attribute": "length",
+        "value": 6.0,
+        "unit": "m",
+        "normalized_value": 0.0951022349025202,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_003",
+        "attribute": "length",
+        "value": 6.0,
+        "unit": "m",
+        "normalized_value": 0.0951022349025202,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_004",
+        "attribute": "length",
+        "value": 8.59,
+        "unit": "m",
+        "normalized_value": 0.21825962910128385,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_005",
+        "attribute": "length",
+        "value": 12.98,
+        "unit": "m",
+        "normalized_value": 0.4270090347123157,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_006",
+        "attribute": "length",
+        "value": 16.17,
+        "unit": "m",
+        "normalized_value": 0.5786970993818356,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_007",
+        "attribute": "length",
+        "value": 19.36,
+        "unit": "m",
+        "normalized_value": 0.7303851640513551,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_008",
+        "attribute": "length",
+        "value": 25.03,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_009",
+        "attribute": "length",
+        "value": 25.03,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_010",
+        "attribute": "length",
+        "value": 10.4,
+        "unit": "m",
+        "normalized_value": 0.3043271516880647,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_001",
+        "attribute": "width",
+        "value": 3.0,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_002",
+        "attribute": "width",
+        "value": 3.9,
+        "unit": "m",
+        "normalized_value": 0.07832898172323759,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_003",
+        "attribute": "width",
+        "value": 4.78,
+        "unit": "m",
+        "normalized_value": 0.15491731940818104,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_004",
+        "attribute": "width",
+        "value": 3.59,
+        "unit": "m",
+        "normalized_value": 0.05134899912967797,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_005",
+        "attribute": "width",
+        "value": 9.7,
+        "unit": "m",
+        "normalized_value": 0.5831157528285464,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_006",
+        "attribute": "width",
+        "value": 6.61,
+        "unit": "m",
+        "normalized_value": 0.3141862489120975,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_007",
+        "attribute": "width",
+        "value": 14.49,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_008",
+        "attribute": "width",
+        "value": 14.49,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_009",
+        "attribute": "width",
+        "value": 4.71,
+        "unit": "m",
+        "normalized_value": 0.14882506527415143,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_010",
+        "attribute": "width",
+        "value": 5.84,
+        "unit": "m",
+        "normalized_value": 0.24717145343777197,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_001",
+        "attribute": "height",
+        "value": 2.8,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_002",
+        "attribute": "height",
+        "value": 2.8,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_003",
+        "attribute": "height",
+        "value": 5.1,
+        "unit": "m",
+        "normalized_value": 0.3898305084745763,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_004",
+        "attribute": "height",
+        "value": 3.5,
+        "unit": "m",
+        "normalized_value": 0.11864406779661021,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_005",
+        "attribute": "height",
+        "value": 4.0,
+        "unit": "m",
+        "normalized_value": 0.20338983050847462,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_006",
+        "attribute": "height",
+        "value": 7.7,
+        "unit": "m",
+        "normalized_value": 0.8305084745762713,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_007",
+        "attribute": "height",
+        "value": 4.8,
+        "unit": "m",
+        "normalized_value": 0.33898305084745767,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_008",
+        "attribute": "height",
+        "value": 7.8,
+        "unit": "m",
+        "normalized_value": 0.8474576271186441,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_009",
+        "attribute": "height",
+        "value": 3.2,
+        "unit": "m",
+        "normalized_value": 0.0677966101694916,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 1,
+        "room_id": "Rm_010",
+        "attribute": "height",
+        "value": 8.7,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": null
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_011",
+        "attribute": "length",
+        "value": 7.33,
+        "unit": "m",
+        "normalized_value": 0.20135440180586908,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_012",
+        "attribute": "length",
+        "value": 8.02,
+        "unit": "m",
+        "normalized_value": 0.23250564334085777,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_013",
+        "attribute": "length",
+        "value": 5.68,
+        "unit": "m",
+        "normalized_value": 0.12686230248306996,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_014",
+        "attribute": "length",
+        "value": 20.84,
+        "unit": "m",
+        "normalized_value": 0.8112866817155756,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_015",
+        "attribute": "length",
+        "value": 2.87,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_016",
+        "attribute": "length",
+        "value": 7.33,
+        "unit": "m",
+        "normalized_value": 0.20135440180586908,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_017",
+        "attribute": "length",
+        "value": 8.02,
+        "unit": "m",
+        "normalized_value": 0.23250564334085777,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_018",
+        "attribute": "length",
+        "value": 25.02,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_019",
+        "attribute": "length",
+        "value": 23.63,
+        "unit": "m",
+        "normalized_value": 0.9372460496613996,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_020",
+        "attribute": "length",
+        "value": 2.87,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_011",
+        "attribute": "width",
+        "value": 3.99,
+        "unit": "m",
+        "normalized_value": 0.05355535553555357,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_012",
+        "attribute": "width",
+        "value": 4.08,
+        "unit": "m",
+        "normalized_value": 0.05760576057605762,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_013",
+        "attribute": "width",
+        "value": 25.02,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_014",
+        "attribute": "width",
+        "value": 13.51,
+        "unit": "m",
+        "normalized_value": 0.48199819981998204,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_015",
+        "attribute": "width",
+        "value": 3.86,
+        "unit": "m",
+        "normalized_value": 0.04770477047704771,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_016",
+        "attribute": "width",
+        "value": 3.99,
+        "unit": "m",
+        "normalized_value": 0.05355535553555357,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_017",
+        "attribute": "width",
+        "value": 4.08,
+        "unit": "m",
+        "normalized_value": 0.05760576057605762,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_018",
+        "attribute": "width",
+        "value": 2.8,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_019",
+        "attribute": "width",
+        "value": 13.51,
+        "unit": "m",
+        "normalized_value": 0.48199819981998204,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_020",
+        "attribute": "width",
+        "value": 3.07,
+        "unit": "m",
+        "normalized_value": 0.012151215121512153,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_011",
+        "attribute": "height",
+        "value": 2.59,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_012",
+        "attribute": "height",
+        "value": 3.88,
+        "unit": "m",
+        "normalized_value": 0.22395833333333334,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_013",
+        "attribute": "height",
+        "value": 2.64,
+        "unit": "m",
+        "normalized_value": 0.008680555555555603,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_014",
+        "attribute": "height",
+        "value": 6.87,
+        "unit": "m",
+        "normalized_value": 0.7430555555555556,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_015",
+        "attribute": "height",
+        "value": 2.94,
+        "unit": "m",
+        "normalized_value": 0.06076388888888891,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_016",
+        "attribute": "height",
+        "value": 2.59,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_017",
+        "attribute": "height",
+        "value": 3.18,
+        "unit": "m",
+        "normalized_value": 0.10243055555555561,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_018",
+        "attribute": "height",
+        "value": 3.35,
+        "unit": "m",
+        "normalized_value": 0.1319444444444445,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_019",
+        "attribute": "height",
+        "value": 8.35,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_020",
+        "attribute": "height",
+        "value": 2.76,
+        "unit": "m",
+        "normalized_value": 0.029513888888888878,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_011",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_012",
+        "attribute": "num_doors",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.2,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_013",
+        "attribute": "num_doors",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.2,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_014",
+        "attribute": "num_doors",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.2,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_015",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_016",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_017",
+        "attribute": "num_doors",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.2,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_018",
+        "attribute": "num_doors",
+        "value": 6.0,
+        "unit": "count",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_019",
+        "attribute": "num_doors",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.2,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_020",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_011",
+        "attribute": "door_area",
+        "value": 1.8,
+        "unit": "m\u00b2",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_012",
+        "attribute": "door_area",
+        "value": 4.66,
+        "unit": "m\u00b2",
+        "normalized_value": 0.2682926829268293,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_013",
+        "attribute": "door_area",
+        "value": 3.63,
+        "unit": "m\u00b2",
+        "normalized_value": 0.17166979362101312,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_014",
+        "attribute": "door_area",
+        "value": 3.83,
+        "unit": "m\u00b2",
+        "normalized_value": 0.1904315196998124,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_015",
+        "attribute": "door_area",
+        "value": 2.91,
+        "unit": "m\u00b2",
+        "normalized_value": 0.10412757973733584,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_016",
+        "attribute": "door_area",
+        "value": 1.8,
+        "unit": "m\u00b2",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_017",
+        "attribute": "door_area",
+        "value": 4.66,
+        "unit": "m\u00b2",
+        "normalized_value": 0.2682926829268293,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_018",
+        "attribute": "door_area",
+        "value": 11.02,
+        "unit": "m\u00b2",
+        "normalized_value": 0.8649155722326453,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_019",
+        "attribute": "door_area",
+        "value": 12.46,
+        "unit": "m\u00b2",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_020",
+        "attribute": "door_area",
+        "value": 1.87,
+        "unit": "m\u00b2",
+        "normalized_value": 0.006566604127579743,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_011",
+        "attribute": "num_windows",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.034482758620689655,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_012",
+        "attribute": "num_windows",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.034482758620689655,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_013",
+        "attribute": "num_windows",
+        "value": 6.0,
+        "unit": "count",
+        "normalized_value": 0.1724137931034483,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_014",
+        "attribute": "num_windows",
+        "value": 8.0,
+        "unit": "count",
+        "normalized_value": 0.2413793103448276,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_015",
+        "attribute": "num_windows",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_016",
+        "attribute": "num_windows",
+        "value": 3.0,
+        "unit": "count",
+        "normalized_value": 0.06896551724137931,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_017",
+        "attribute": "num_windows",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.034482758620689655,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_018",
+        "attribute": "num_windows",
+        "value": 8.0,
+        "unit": "count",
+        "normalized_value": 0.2413793103448276,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_019",
+        "attribute": "num_windows",
+        "value": 30.0,
+        "unit": "count",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_020",
+        "attribute": "num_windows",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_011",
+        "attribute": "window_area",
+        "value": 3.62,
+        "unit": "m\u00b2",
+        "normalized_value": 0.008083140877598153,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_012",
+        "attribute": "window_area",
+        "value": 7.43,
+        "unit": "m\u00b2",
+        "normalized_value": 0.025681293302540414,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_013",
+        "attribute": "window_area",
+        "value": 18.24,
+        "unit": "m\u00b2",
+        "normalized_value": 0.07561200923787528,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_014",
+        "attribute": "window_area",
+        "value": 70.63,
+        "unit": "m\u00b2",
+        "normalized_value": 0.3175981524249422,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_015",
+        "attribute": "window_area",
+        "value": 3.84,
+        "unit": "m\u00b2",
+        "normalized_value": 0.009099307159353347,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_016",
+        "attribute": "window_area",
+        "value": 17.59,
+        "unit": "m\u00b2",
+        "normalized_value": 0.07260969976905311,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_017",
+        "attribute": "window_area",
+        "value": 29.38,
+        "unit": "m\u00b2",
+        "normalized_value": 0.12706697459584296,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_018",
+        "attribute": "window_area",
+        "value": 38.25,
+        "unit": "m\u00b2",
+        "normalized_value": 0.16803695150115475,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_019",
+        "attribute": "window_area",
+        "value": 218.37,
+        "unit": "m\u00b2",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_020",
+        "attribute": "window_area",
+        "value": 1.87,
+        "unit": "m\u00b2",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_011",
+        "attribute": "daylight_factor",
+        "value": 1.18,
+        "unit": "%",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_012",
+        "attribute": "daylight_factor",
+        "value": 2.28,
+        "unit": "%",
+        "normalized_value": 0.1137538779731127,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_013",
+        "attribute": "daylight_factor",
+        "value": 1.6,
+        "unit": "%",
+        "normalized_value": 0.043433298862461237,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_014",
+        "attribute": "daylight_factor",
+        "value": 3.56,
+        "unit": "%",
+        "normalized_value": 0.24612202688728024,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_015",
+        "attribute": "daylight_factor",
+        "value": 2.95,
+        "unit": "%",
+        "normalized_value": 0.1830403309203723,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_016",
+        "attribute": "daylight_factor",
+        "value": 7.2,
+        "unit": "%",
+        "normalized_value": 0.6225439503619442,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_017",
+        "attribute": "daylight_factor",
+        "value": 10.85,
+        "unit": "%",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_018",
+        "attribute": "daylight_factor",
+        "value": 5.41,
+        "unit": "%",
+        "normalized_value": 0.43743536711478803,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_019",
+        "attribute": "daylight_factor",
+        "value": 8.26,
+        "unit": "%",
+        "normalized_value": 0.7321613236814891,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_020",
+        "attribute": "daylight_factor",
+        "value": 1.62,
+        "unit": "%",
+        "normalized_value": 0.04550155118924511,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_011",
+        "attribute": "illuminance",
+        "value": 150.0,
+        "unit": "lux",
+        "normalized_value": 0.045454545454545456,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_012",
+        "attribute": "illuminance",
+        "value": 300.0,
+        "unit": "lux",
+        "normalized_value": 0.18181818181818182,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_013",
+        "attribute": "illuminance",
+        "value": 100.0,
+        "unit": "lux",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_014",
+        "attribute": "illuminance",
+        "value": 200.0,
+        "unit": "lux",
+        "normalized_value": 0.09090909090909091,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_015",
+        "attribute": "illuminance",
+        "value": 500.0,
+        "unit": "lux",
+        "normalized_value": 0.36363636363636365,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_016",
+        "attribute": "illuminance",
+        "value": 600.0,
+        "unit": "lux",
+        "normalized_value": 0.45454545454545453,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_017",
+        "attribute": "illuminance",
+        "value": 800.0,
+        "unit": "lux",
+        "normalized_value": 0.6363636363636364,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_018",
+        "attribute": "illuminance",
+        "value": 1000.0,
+        "unit": "lux",
+        "normalized_value": 0.8181818181818182,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_019",
+        "attribute": "illuminance",
+        "value": 1200.0,
+        "unit": "lux",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_020",
+        "attribute": "illuminance",
+        "value": 400.0,
+        "unit": "lux",
+        "normalized_value": 0.2727272727272727,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_011",
+        "attribute": "cct",
+        "value": 3000.0,
+        "unit": "K",
+        "normalized_value": 0.06976744186046512,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_012",
+        "attribute": "cct",
+        "value": 4000.0,
+        "unit": "K",
+        "normalized_value": 0.3023255813953488,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_013",
+        "attribute": "cct",
+        "value": 2700.0,
+        "unit": "K",
+        "normalized_value": 0.0,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_014",
+        "attribute": "cct",
+        "value": 5000.0,
+        "unit": "K",
+        "normalized_value": 0.5348837209302325,
+        "space_type": null,
+        "lighting": "Night"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_015",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.6511627906976745,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_016",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.6511627906976745,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_017",
+        "attribute": "cct",
+        "value": 6000.0,
+        "unit": "K",
+        "normalized_value": 0.7674418604651163,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_018",
+        "attribute": "cct",
+        "value": 6500.0,
+        "unit": "K",
+        "normalized_value": 0.8837209302325582,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_019",
+        "attribute": "cct",
+        "value": 7000.0,
+        "unit": "K",
+        "normalized_value": 1.0,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 2,
+        "room_id": "Rm_020",
+        "attribute": "cct",
+        "value": 3500.0,
+        "unit": "K",
+        "normalized_value": 0.18604651162790697,
+        "space_type": null,
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "length",
+        "value": 3.51,
+        "unit": "m",
+        "normalized_value": 0.06195244055068835,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "length",
+        "value": 2.52,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "length",
+        "value": 4.77,
+        "unit": "m",
+        "normalized_value": 0.14080100125156442,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "length",
+        "value": 4.73,
+        "unit": "m",
+        "normalized_value": 0.13829787234042556,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "length",
+        "value": 7.33,
+        "unit": "m",
+        "normalized_value": 0.3010012515644556,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "length",
+        "value": 2.87,
+        "unit": "m",
+        "normalized_value": 0.021902377972465588,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "length",
+        "value": 18.5,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "length",
+        "value": 9.7,
+        "unit": "m",
+        "normalized_value": 0.44931163954943676,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "length",
+        "value": 14.0,
+        "unit": "m",
+        "normalized_value": 0.718397997496871,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "length",
+        "value": 9.8,
+        "unit": "m",
+        "normalized_value": 0.45556946182728414,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "width",
+        "value": 3.87,
+        "unit": "m",
+        "normalized_value": 0.1202651515151515,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "width",
+        "value": 2.6,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "width",
+        "value": 3.91,
+        "unit": "m",
+        "normalized_value": 0.1240530303030303,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "width",
+        "value": 8.92,
+        "unit": "m",
+        "normalized_value": 0.5984848484848485,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "width",
+        "value": 3.99,
+        "unit": "m",
+        "normalized_value": 0.13162878787878787,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "width",
+        "value": 3.86,
+        "unit": "m",
+        "normalized_value": 0.1193181818181818,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "width",
+        "value": 13.16,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "width",
+        "value": 8.72,
+        "unit": "m",
+        "normalized_value": 0.5795454545454546,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "width",
+        "value": 5.0,
+        "unit": "m",
+        "normalized_value": 0.22727272727272727,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "width",
+        "value": 5.0,
+        "unit": "m",
+        "normalized_value": 0.22727272727272727,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "height",
+        "value": 2.59,
+        "unit": "m",
+        "normalized_value": 0.27358490566037735,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "height",
+        "value": 2.8,
+        "unit": "m",
+        "normalized_value": 0.4716981132075471,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "height",
+        "value": 2.79,
+        "unit": "m",
+        "normalized_value": 0.4622641509433964,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "height",
+        "value": 2.56,
+        "unit": "m",
+        "normalized_value": 0.24528301886792472,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "height",
+        "value": 2.59,
+        "unit": "m",
+        "normalized_value": 0.27358490566037735,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "height",
+        "value": 2.94,
+        "unit": "m",
+        "normalized_value": 0.6037735849056605,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "height",
+        "value": 3.36,
+        "unit": "m",
+        "normalized_value": 1.0,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "height",
+        "value": 2.59,
+        "unit": "m",
+        "normalized_value": 0.27358490566037735,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "height",
+        "value": 2.7,
+        "unit": "m",
+        "normalized_value": 0.37735849056603804,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "height",
+        "value": 2.3,
+        "unit": "m",
+        "normalized_value": 0.0,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "num_doors",
+        "value": 3.0,
+        "unit": "count",
+        "normalized_value": 0.6666666666666666,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "num_doors",
+        "value": 4.0,
+        "unit": "count",
+        "normalized_value": 1.0,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "num_doors",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.3333333333333333,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "num_doors",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "door_area",
+        "value": 1.8,
+        "unit": "m\u00b2",
+        "normalized_value": 0.014120667522464709,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "door_area",
+        "value": 1.69,
+        "unit": "m\u00b2",
+        "normalized_value": 0.0,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "door_area",
+        "value": 6.58,
+        "unit": "m\u00b2",
+        "normalized_value": 0.6277278562259306,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "door_area",
+        "value": 8.1,
+        "unit": "m\u00b2",
+        "normalized_value": 0.8228498074454428,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "door_area",
+        "value": 1.8,
+        "unit": "m\u00b2",
+        "normalized_value": 0.014120667522464709,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "door_area",
+        "value": 2.28,
+        "unit": "m\u00b2",
+        "normalized_value": 0.07573812580231062,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "door_area",
+        "value": 9.48,
+        "unit": "m\u00b2",
+        "normalized_value": 1.0,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "door_area",
+        "value": 1.8,
+        "unit": "m\u00b2",
+        "normalized_value": 0.014120667522464709,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "door_area",
+        "value": 2.64,
+        "unit": "m\u00b2",
+        "normalized_value": 0.12195121951219513,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "door_area",
+        "value": 1.97,
+        "unit": "m\u00b2",
+        "normalized_value": 0.03594351732991014,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "num_windows",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "num_windows",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.08333333333333333,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "num_windows",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "num_windows",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "num_windows",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.08333333333333333,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "num_windows",
+        "value": 1.0,
+        "unit": "count",
+        "normalized_value": 0.0,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "num_windows",
+        "value": 13.0,
+        "unit": "count",
+        "normalized_value": 1.0,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "num_windows",
+        "value": 3.0,
+        "unit": "count",
+        "normalized_value": 0.16666666666666666,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "num_windows",
+        "value": 2.0,
+        "unit": "count",
+        "normalized_value": 0.08333333333333333,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "num_windows",
+        "value": 3.0,
+        "unit": "count",
+        "normalized_value": 0.16666666666666666,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "window_area",
+        "value": 2.14,
+        "unit": "m\u00b2",
+        "normalized_value": 0.0014347202295552379,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "window_area",
+        "value": 3.43,
+        "unit": "m\u00b2",
+        "normalized_value": 0.032281205164992825,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "window_area",
+        "value": 2.08,
+        "unit": "m\u00b2",
+        "normalized_value": 0.0,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "window_area",
+        "value": 7.85,
+        "unit": "m\u00b2",
+        "normalized_value": 0.13797226207556193,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "window_area",
+        "value": 2.43,
+        "unit": "m\u00b2",
+        "normalized_value": 0.008369201339072216,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "window_area",
+        "value": 3.84,
+        "unit": "m\u00b2",
+        "normalized_value": 0.04208512673362027,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "window_area",
+        "value": 43.9,
+        "unit": "m\u00b2",
+        "normalized_value": 1.0,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "window_area",
+        "value": 15.1,
+        "unit": "m\u00b2",
+        "normalized_value": 0.3113342898134864,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "window_area",
+        "value": 27.0,
+        "unit": "m\u00b2",
+        "normalized_value": 0.5958871353419417,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "window_area",
+        "value": 17.4,
+        "unit": "m\u00b2",
+        "normalized_value": 0.3663318986131037,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "daylight_factor",
+        "value": 1.44,
+        "unit": "%",
+        "normalized_value": 0.07233273056057864,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "daylight_factor",
+        "value": 3.93,
+        "unit": "%",
+        "normalized_value": 0.5226039783001808,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "daylight_factor",
+        "value": 1.04,
+        "unit": "%",
+        "normalized_value": 0.0,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "daylight_factor",
+        "value": 2.34,
+        "unit": "%",
+        "normalized_value": 0.23508137432188062,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "daylight_factor",
+        "value": 6.38,
+        "unit": "%",
+        "normalized_value": 0.965641952983725,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "daylight_factor",
+        "value": 3.05,
+        "unit": "%",
+        "normalized_value": 0.3634719710669077,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "daylight_factor",
+        "value": 2.46,
+        "unit": "%",
+        "normalized_value": 0.25678119349005424,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "daylight_factor",
+        "value": 2.62,
+        "unit": "%",
+        "normalized_value": 0.2857142857142857,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "daylight_factor",
+        "value": 4.66,
+        "unit": "%",
+        "normalized_value": 0.6546112115732369,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "daylight_factor",
+        "value": 6.57,
+        "unit": "%",
+        "normalized_value": 1.0,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "illuminance",
+        "value": 350.0,
+        "unit": "lux",
+        "normalized_value": 0.0,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "illuminance",
+        "value": 450.0,
+        "unit": "lux",
+        "normalized_value": 0.18181818181818182,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "illuminance",
+        "value": 400.0,
+        "unit": "lux",
+        "normalized_value": 0.09090909090909091,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "illuminance",
+        "value": 350.0,
+        "unit": "lux",
+        "normalized_value": 0.0,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "illuminance",
+        "value": 900.0,
+        "unit": "lux",
+        "normalized_value": 1.0,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "illuminance",
+        "value": 350.0,
+        "unit": "lux",
+        "normalized_value": 0.0,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "illuminance",
+        "value": 800.0,
+        "unit": "lux",
+        "normalized_value": 0.8181818181818182,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "illuminance",
+        "value": 850.0,
+        "unit": "lux",
+        "normalized_value": 0.9090909090909091,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "illuminance",
+        "value": 700.0,
+        "unit": "lux",
+        "normalized_value": 0.6363636363636364,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "illuminance",
+        "value": 850.0,
+        "unit": "lux",
+        "normalized_value": 0.9090909090909091,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.5,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.5,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.5,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.5,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.5,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.5,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.5,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.5,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.5,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "cct",
+        "value": 5500.0,
+        "unit": "K",
+        "normalized_value": 0.5,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_021",
+        "attribute": "walkable_floor_area",
+        "value": 8.9,
+        "unit": "m\u00b2",
+        "normalized_value": 0.02678721850957489,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_022",
+        "attribute": "walkable_floor_area",
+        "value": 4.13,
+        "unit": "m\u00b2",
+        "normalized_value": 0.0,
+        "space_type": "Bedroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_023",
+        "attribute": "walkable_floor_area",
+        "value": 12.8,
+        "unit": "m\u00b2",
+        "normalized_value": 0.04868871791991915,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_024",
+        "attribute": "walkable_floor_area",
+        "value": 33.15,
+        "unit": "m\u00b2",
+        "normalized_value": 0.1629696186892795,
+        "space_type": "Living Room",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_025",
+        "attribute": "walkable_floor_area",
+        "value": 12.45,
+        "unit": "m\u00b2",
+        "normalized_value": 0.04672319874206773,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_026",
+        "attribute": "walkable_floor_area",
+        "value": 4.38,
+        "unit": "m\u00b2",
+        "normalized_value": 0.001403942269893862,
+        "space_type": "Workplace",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_027",
+        "attribute": "walkable_floor_area",
+        "value": 182.2,
+        "unit": "m\u00b2",
+        "normalized_value": 1.0,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_028",
+        "attribute": "walkable_floor_area",
+        "value": 44.7,
+        "unit": "m\u00b2",
+        "normalized_value": 0.22783175155837593,
+        "space_type": "Classroom",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_029",
+        "attribute": "walkable_floor_area",
+        "value": 31.04,
+        "unit": "m\u00b2",
+        "normalized_value": 0.1511203459313753,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      },
+      {
+        "experiment": 3,
+        "room_id": "Rm_030",
+        "attribute": "walkable_floor_area",
+        "value": 21.45,
+        "unit": "m\u00b2",
+        "normalized_value": 0.09726512045824676,
+        "space_type": "Cafeteria",
+        "lighting": "Day"
+      }
+    ],
+    "x": "attribute",
+    "y": "normalized_value",
+    "series": "room_id",
+    "facet": "experiment",
+    "x_label": "Room attribute",
+    "y_label": "Within-experiment profile",
+    "x_unit": null,
+    "y_unit": "unit interval"
+  }
+}

@@ -8,5 +8,5 @@
 
 | File | Description |
 |------|-------------|
-| [platform](platform.md) | Python research pipeline, validated room schema, versioned exports, fitted artifact, and live API boundaries. |
-| [website](website.md) | Seven-page React research atlas, accessible themes and figures, static research data, and experimental simulator API use. |
+| [platform](platform.md) | Python research pipeline, reviewed signal evidence, versioned exports, trusted fused-model artifact, shared room contract and live API. |
+| [website](website.md) | Eight-route React research atlas, validated static catalogue, component-level evidence, accessible figures and fused-only live Design Studio. |

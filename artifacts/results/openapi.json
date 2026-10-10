@@ -164,10 +164,47 @@
         "title": "MetaResponse",
         "type": "object"
       },
+      "NumericRange": {
+        "additionalProperties": false,
+        "properties": {
+          "maximum": {
+            "title": "Maximum",
+            "type": "number"
+          },
+          "minimum": {
+            "title": "Minimum",
+            "type": "number"
+          }
+        },
+        "required": [
+          "minimum",
+          "maximum"
+        ],
+        "title": "NumericRange",
+        "type": "object"
+      },
       "OptimizeCandidate": {
         "properties": {
+          "absolute_difference": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Absolute Difference",
+            "type": "number"
+          },
+          "achieved_score": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Achieved Score",
+            "type": "number"
+          },
           "prediction": {
             "$ref": "#/components/schemas/PredictionPayload"
+          },
+          "requested_score": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Requested Score",
+            "type": "number"
           },
           "room": {
             "$ref": "#/components/schemas/RoomInput"
@@ -179,13 +216,34 @@
         "required": [
           "room",
           "prediction",
-          "support"
+          "support",
+          "requested_score",
+          "achieved_score",
+          "absolute_difference"
         ],
         "title": "OptimizeCandidate",
         "type": "object"
       },
       "OptimizeRequest": {
+        "additionalProperties": false,
         "properties": {
+          "allowed_ranges": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/NumericRange"
+            },
+            "title": "Allowed Ranges",
+            "type": "object"
+          },
+          "base_room": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RoomInput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "budget": {
             "default": 500,
             "maximum": 5000.0,
@@ -203,12 +261,27 @@
               }
             ]
           },
+          "locked_fields": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Locked Fields",
+            "type": "array"
+          },
           "n_candidates": {
             "default": 5,
             "maximum": 10.0,
             "minimum": 1.0,
             "title": "N Candidates",
             "type": "integer"
+          },
+          "requested_score": {
+            "default": 100.0,
+            "description": "Desired Neuro-Score on the Studio 0\u2013100 scale. Omitted legacy requests mean 100.",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Requested Score",
+            "type": "number"
           },
           "seed": {
             "default": 2718,
@@ -358,6 +431,9 @@
             "type": "number"
           },
           "neuro_score": {
+            "description": "Target proximity on the API 0\u20131 scale; display as 0\u2013100 in Studio.",
+            "maximum": 1.0,
+            "minimum": 0.0,
             "title": "Neuro Score",
             "type": "number"
           },

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from itertools import combinations
+from math import comb
 
 import numpy as np
 import pandas as pd
@@ -177,3 +179,114 @@ def evaluate_outer(X: pd.DataFrame, raw: pd.DataFrame, reports: NDArray[np.float
                              "train_indices": train.tolist(), "test_indices": test.tolist(),
                              "reason": str(exc)})
     return outcomes
+
+
+def _permuted_training_rooms(X: pd.DataFrame, groups: NDArray,
+                             rng: np.random.Generator) -> pd.DataFrame:
+    """Move whole observed room-attribute vectors, preserving trial group labels."""
+    room_ids = np.unique(groups)
+    source = {}
+    for room in room_ids:
+        members = X.loc[groups == room]
+        if len(members.drop_duplicates()) != 1:
+            raise ValueError(f"room {room} has inconsistent source attributes")
+        source[room] = members.iloc[0].copy()
+    shuffled = rng.permutation(room_ids)
+    output = X.copy()
+    for destination, origin in zip(room_ids, shuffled, strict=True):
+        output.loc[groups == destination, :] = source[origin].to_numpy()
+    return output
+
+
+def spatial_permutation_draw(X: pd.DataFrame, raw: pd.DataFrame,
+                             reports: NDArray[np.float64], room_groups: NDArray,
+                             *, draw: int, seed: int = 2718) -> dict:
+    """One full-refit null draw across frozen held-out-room folds."""
+    if draw < 0:
+        raise ValueError("negative permutation draw")
+    rng = np.random.default_rng(np.random.SeedSequence([seed, draw]))
+    folds = []
+    for train, test in outer_splits(room_groups):
+        room = str(room_groups[test][0])
+        try:
+            shuffled = _permuted_training_rooms(X.iloc[train], room_groups[train], rng)
+            selected = select_candidate(shuffled, raw.iloc[train], reports[train],
+                                        room_groups[train])
+            calibration = PopulationCalibrator.fit(raw.iloc[train])
+            y_train = calibration.fused(raw.iloc[train], reports[train])
+            y_test = calibration.fused(raw.iloc[test], reports[test])
+            estimator = make_estimator(selected.candidate)
+            estimator.fit(shuffled, y_train)
+            prediction = np.asarray(estimator.predict(X.iloc[test]), dtype=float)
+            valence, arousal, mean = group_mae(prediction, y_test, room_groups[test])
+            folds.append({"group": room, "status": "evaluated", "candidate": selected.candidate,
+                          "selection_status": selected.status, "valence_mae": valence,
+                          "arousal_mae": arousal, "mean_mae": mean})
+        except (CalibrationUnavailable, ValueError, TypeError) as exc:
+            folds.append({"group": room, "status": "unavailable", "reason": str(exc)})
+    evaluated = [fold for fold in folds if fold["status"] == "evaluated"]
+    return {"draw": draw, "seed": seed, "folds": folds,
+            "status": "evaluated" if len(evaluated) == len(folds) and folds else "unavailable",
+            "mean_mae": float(np.mean([fold["mean_mae"] for fold in evaluated]))
+            if len(evaluated) == len(folds) and folds else None}
+
+
+def _room_subsets(rooms: list[str], k: int, rng: np.random.Generator) -> list[tuple[str, ...]]:
+    all_count = comb(len(rooms), k)
+    if all_count <= 100:
+        return list(combinations(rooms, k))
+    chosen: set[tuple[str, ...]] = set()
+    while len(chosen) < 100:
+        chosen.add(tuple(sorted(rng.choice(rooms, size=k, replace=False).tolist())))
+    return sorted(chosen)
+
+
+def room_learning_curve(X: pd.DataFrame, raw: pd.DataFrame,
+                        reports: NDArray[np.float64], room_groups: NDArray,
+                        *, seed: int = 2718) -> dict:
+    """Unique seeded room subsets; every candidate is selected within its training rooms."""
+    rooms = sorted(str(value) for value in np.unique(room_groups))
+    result = {"seed": seed, "rooms": rooms, "points": [],
+              "note": "Overlapping subsets are descriptive, not independent repetitions."}
+    if len(rooms) < 5:
+        return {**result, "status": "unavailable_insufficient_rooms"}
+    rng = np.random.default_rng(seed)
+    for k in range(4, len(rooms)):
+        subsets = []
+        for training_rooms in _room_subsets(rooms, k, rng):
+            train = np.flatnonzero(np.isin(room_groups, training_rooms))
+            test = np.flatnonzero(~np.isin(room_groups, training_rooms))
+            try:
+                calibration = PopulationCalibrator.fit(raw.iloc[train])
+                y_train = calibration.fused(raw.iloc[train], reports[train])
+                y_test = calibration.fused(raw.iloc[test], reports[test])
+                selected = select_candidate(X.iloc[train], raw.iloc[train],
+                                            reports[train], room_groups[train])
+                estimator = make_estimator(selected.candidate)
+                estimator.fit(X.iloc[train], y_train)
+                prediction = np.asarray(estimator.predict(X.iloc[test]), dtype=float)
+                valence, arousal, mean = group_mae(prediction, y_test, room_groups[test])
+                baseline = make_estimator({"name": "dummy_median"})
+                baseline.fit(X.iloc[train], y_train)
+                baseline_prediction = np.asarray(baseline.predict(X.iloc[test]), dtype=float)
+                _, _, baseline_mae = group_mae(baseline_prediction, y_test, room_groups[test])
+                subsets.append({"training_rooms": training_rooms,
+                                "test_rooms": sorted(set(room_groups[test])),
+                                "status": "evaluated", "candidate": selected.candidate,
+                                "selection_status": selected.status,
+                                "valence_mae": valence, "arousal_mae": arousal,
+                                "mean_mae": mean, "baseline_median_mae": baseline_mae})
+            except (CalibrationUnavailable, ValueError, TypeError) as exc:
+                subsets.append({"training_rooms": training_rooms,
+                                "test_rooms": sorted(set(room_groups[test])),
+                                "status": "unavailable", "reason": str(exc)})
+        evaluated = [item for item in subsets if item["status"] == "evaluated"]
+        result["points"].append({"training_room_count": k, "subsets": subsets,
+                                 "evaluated_subsets": len(evaluated),
+                                 "mean_mae": float(np.mean([item["mean_mae"] for item in evaluated]))
+                                 if evaluated else None,
+                                 "baseline_median_mae": float(np.mean([
+                                     item["baseline_median_mae"] for item in evaluated]))
+                                 if evaluated else None})
+    result["status"] = "descriptive"
+    return result

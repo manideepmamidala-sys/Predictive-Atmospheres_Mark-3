@@ -2,13 +2,152 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from typing import Literal
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from pa.config import SCHEMA_VERSION
 
 
 class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid")
+
+
+CATALOGUE_IDS = (*(f"S{i}" for i in range(1, 6)),
+                 *(f"R{i}" for i in range(1, 10)),
+                 *(f"B{i}" for i in range(1, 9)),
+                 *(f"P{i}" for i in range(1, 6)), "Methods")
+CATALOGUE_ROUTES = {**{f"S{i}": "/study" for i in (1, 2, 3, 5)},
+                    "S4": "/rooms", **{f"R{i}": "/rooms" for i in range(1, 10)},
+                    **{f"B{i}": "/body" for i in range(1, 9)},
+                    **{f"P{i}": "/prediction" for i in range(1, 6)},
+                    "Methods": "/methods"}
+
+
+class CatalogueCounts(StrictModel):
+    trials: int = Field(ge=0)
+    participants: int = Field(ge=0)
+    rooms: int = Field(ge=0)
+
+
+class CatalogueProvenance(StrictModel):
+    method_version: str
+    approved_spec_sha256: str = Field(min_length=64, max_length=64)
+    source_manifest_sha256: str = Field(min_length=64, max_length=64)
+    generated_at_utc: str
+
+
+class CatalogueChart(StrictModel):
+    type: Literal["line", "bar", "scatter", "heatmap", "table"]
+    rows: list[dict[str, str | float | int | bool | None]]
+    x: str
+    y: str
+    series: str | None = None
+    facet: str | None = None
+    x_label: str
+    y_label: str
+    x_unit: str | None = None
+    y_unit: str | None = None
+
+    @model_validator(mode="after")
+    def columns_exist(self) -> CatalogueChart:
+        selected = (self.x, self.y, self.series, self.facet)
+        if self.rows:
+            for row in self.rows:
+                if any(key not in row for key in selected if key is not None):
+                    raise ValueError("catalogue chart encoding column absent in row")
+        return self
+
+
+class MethodSetting(StrictModel):
+    category: str
+    label: str
+    value: str | float | int | bool
+    unit: str | None = None
+    source: str
+
+
+class MethodReview(StrictModel):
+    verdict: str
+    reviewed_at_utc: str
+    reviewers: list[str]
+    decision_counts: dict[str, int]
+    reviewed_eligibility_counts: dict[str, int]
+    ledger_path: str
+
+
+class MethodSensitivity(StrictModel):
+    experiment: int
+    alpha: float = Field(allow_inf_nan=False)
+    n: int = Field(ge=0)
+    mean_valence: float | None = Field(allow_inf_nan=False)
+    mean_arousal: float | None = Field(allow_inf_nan=False)
+
+
+class MethodReference(StrictModel):
+    label: str
+    path: str
+
+
+class MethodsEvidence(StrictModel):
+    settings: list[MethodSetting]
+    review: MethodReview
+    sensitivity: list[MethodSensitivity]
+    references: list[MethodReference]
+
+
+class CatalogueProduct(StrictModel):
+    schema_version: Literal["1.0.0"]
+    id: str
+    route: str
+    status: Literal["available", "unavailable"]
+    question: str = Field(min_length=3)
+    takeaway: str = Field(min_length=3)
+    method: str = Field(min_length=3)
+    caveats: list[str]
+    counts: CatalogueCounts
+    units: dict[str, str]
+    provenance: CatalogueProvenance
+    availability_reason: str | None
+    chart: CatalogueChart
+    methods_evidence: MethodsEvidence | None = None
+
+    @model_validator(mode="after")
+    def validate_envelope(self) -> CatalogueProduct:
+        if self.id not in CATALOGUE_ROUTES or self.route != CATALOGUE_ROUTES[self.id]:
+            raise ValueError("catalogue ID/route mismatch")
+        if self.status == "available" and (not self.chart.rows or self.availability_reason):
+            raise ValueError("available product needs rows and no unavailability reason")
+        if self.status == "unavailable" and not self.availability_reason:
+            raise ValueError("unavailable product needs an explicit reason")
+        if (self.id == "Methods") != (self.methods_evidence is not None):
+            raise ValueError("Methods evidence must appear exactly on the Methods product")
+        return self
+
+
+class CatalogueIndexItem(StrictModel):
+    id: str
+    route: str
+    status: Literal["available", "unavailable"]
+    path: str
+
+
+class CatalogueIndex(StrictModel):
+    schema_version: Literal["1.0.0"]
+    method_version: str
+    approved_spec_sha256: str = Field(min_length=64, max_length=64)
+    products: list[CatalogueIndexItem]
+
+    @model_validator(mode="after")
+    def complete(self) -> CatalogueIndex:
+        ids = [item.id for item in self.products]
+        if len(ids) != len(set(ids)) or set(ids) != set(CATALOGUE_IDS):
+            raise ValueError("catalogue has missing or duplicate product ID")
+        if any(item.route != CATALOGUE_ROUTES[item.id] or
+               item.path != f"/research/analysis/{item.id}.json"
+               for item in self.products):
+            raise ValueError("catalogue index route/path mismatch")
+        return self
 
 
 class Provenance(StrictModel):
@@ -49,6 +188,7 @@ class RoomRecord(StrictModel):
     illuminance_lux: float | None = Field(default=None, allow_inf_nan=False)
     cct_kelvin: float | None = Field(default=None, allow_inf_nan=False)
     dimensions: dict[str, float | None]
+    independent_attributes: dict[str, float | str | None] = Field(default_factory=dict)
     mean_affect: Position | None = None
     n_affect: int | None = Field(default=None, ge=0)
 
@@ -65,6 +205,21 @@ class TraceRecord(StrictModel):
     rejected_segments: list[tuple[float, float]] = Field(default_factory=list)
 
 
+class ReviewDecisionRecord(StrictModel):
+    signal: str
+    status: Literal["accept", "reject", "uncertain"]
+    reason: str = Field(min_length=1)
+    reviewer: str = Field(min_length=1)
+    entry_id: str
+
+
+class ComponentQCRecord(StrictModel):
+    automated_eligible: bool
+    automated_reasons: list[str]
+    reviewed_eligible: bool
+    review_decisions: list[ReviewDecisionRecord]
+
+
 class TrialRecord(StrictModel):
     id: str
     experiment: int
@@ -72,6 +227,10 @@ class TrialRecord(StrictModel):
     room_id: str
     eeg_valid: bool
     ecg_valid: bool
+    ecg_hr_valid: bool = False
+    ecg_rmssd_valid: bool = False
+    reviewed_eligibility: dict[str, bool] = Field(default_factory=dict)
+    qc_components: dict[str, ComponentQCRecord] = Field(default_factory=dict)
     reasons: list[str] = Field(default_factory=list)
     eeg: TraceRecord | None = None
     ecg: TraceRecord | None = None
@@ -93,6 +252,22 @@ class TrialRecord(StrictModel):
     components: dict[str, float | None] = Field(default_factory=dict)
     available_components: list[str] = Field(default_factory=list)
     axis_availability: dict[str, bool] = Field(default_factory=dict)
+
+    @model_validator(mode="after")
+    def quality_matches_eligibility(self) -> TrialRecord:
+        if self.qc_components:
+            expected = {"timebase", "eeg_right", "eeg_left", "eeg_bilateral",
+                        "ecg_hr", "ecg_rmssd"}
+            if set(self.qc_components) != expected or set(self.reviewed_eligibility) != expected:
+                raise ValueError("trial quality components lack exact reviewed coverage")
+            if any(item.reviewed_eligible != self.reviewed_eligibility[key]
+                   for key, item in self.qc_components.items()):
+                raise ValueError("trial quality differs from reviewed eligibility")
+            if (self.eeg_valid != self.qc_components["eeg_bilateral"].reviewed_eligible or
+                    self.ecg_hr_valid != self.qc_components["ecg_hr"].reviewed_eligible or
+                    self.ecg_rmssd_valid != self.qc_components["ecg_rmssd"].reviewed_eligible):
+                raise ValueError("display eligibility differs from reviewed quality")
+        return self
 
 
 class SensitivityRecord(StrictModel):

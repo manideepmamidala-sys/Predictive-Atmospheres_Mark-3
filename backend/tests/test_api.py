@@ -7,6 +7,18 @@ from fastapi.testclient import TestClient
 from sklearn.dummy import DummyRegressor
 
 from pa.api.app import app
+from pa.features.support import load_studied_support
+from pa.modeling.artifact import LoadedArtifact
+
+
+class ConstantFusedModel:
+    def predict(self, frame):
+        return np.tile(np.array([[0.2, -0.1]]), (len(frame), 1))
+
+
+class InvalidFusedModel:
+    def predict(self, frame):
+        return np.array([[float("nan"), 0.0]])
 
 
 def test_liveness_separate_from_missing_model():
@@ -30,6 +42,59 @@ def test_invalid_requests_are_structured():
         too_many = client.post("/v1/optimize", json={"target": {"valence": 0, "arousal": 0},
                                                     "budget": 5001})
         assert too_many.status_code == 422
+
+
+def test_studio_full_room_and_constraint_boundary():
+    base = load_studied_support().rooms[0]
+    room = base.model_dump(mode="json")
+    target = {"valence": 0, "arousal": 0}
+    with TestClient(app) as client:
+        app.state.artifact = LoadedArtifact(ConstantFusedModel(),
+                                            {"model_status": "synthetic_test", "limitations": []})
+        app.state.reason = None
+        partial = client.post("/v1/predict", json={"room": {"length": 5, "width": 4,
+                              "height": 3}, "target": target})
+        assert partial.status_code == 422
+        assert partial.json()["error"]["code"] == "invalid_value"
+        forward = client.post("/v1/predict", json={"room": room, "target": target})
+        assert forward.status_code == 200, forward.text
+        assert 0 <= forward.json()["prediction"]["neuro_score"] <= 1
+        payload = {"target": target, "requested_score": 65, "base_room": room,
+                   "locked_fields": ["length", "width"], "budget": 30}
+        generated = client.post("/v1/optimize", json=payload)
+        assert generated.status_code == 200, generated.text
+        assert generated.json()["status"] == "ok"
+        for candidate in generated.json()["candidates"]:
+            assert candidate["room"]["length"] == room["length"]
+            assert candidate["room"]["width"] == room["width"]
+            assert candidate["achieved_score"] == pytest.approx(
+                100 * candidate["prediction"]["neuro_score"])
+            assert candidate["absolute_difference"] == pytest.approx(
+                abs(candidate["achieved_score"] - 65))
+        empty = client.post("/v1/optimize", json={**payload,
+             "allowed_ranges": {"length": {"minimum": room["length"] + 1,
+                                            "maximum": room["length"] + 2}}})
+        assert empty.status_code == 200 and empty.json()["status"] == "empty"
+        for invalid in ({**payload, "requested_score": 101},
+                        {**payload, "locked_fields": ["volume"]},
+                        {**payload, "base_room": None},
+                        {**payload, "allowed_ranges": {"space_type": {
+                            "minimum": 1, "maximum": 2}}}):
+            response = client.post("/v1/optimize", json=invalid)
+            assert response.status_code == 422, response.text
+            assert response.json()["error"]["code"] == "invalid_request"
+
+
+def test_invalid_loaded_model_output_is_structured_unavailable():
+    room = load_studied_support().rooms[0]
+    with TestClient(app) as client:
+        app.state.artifact = LoadedArtifact(InvalidFusedModel(),
+                                            {"model_status": "synthetic_test", "limitations": []})
+        app.state.reason = None
+        response = client.post("/v1/predict", json={"room": room.model_dump(mode="json"),
+                                                    "target": {"valence": 0, "arousal": 0}})
+        assert response.status_code == 503
+        assert response.json()["error"]["code"] == "model_unavailable"
 
 
 def test_malformed_metadata_keeps_health_live_and_prediction_unavailable(tmp_path, monkeypatch):

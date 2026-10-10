@@ -8,10 +8,18 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 from pa.affect.analysis import analyze_affect
+from pa.analysis.body import body_products
+from pa.analysis.catalogue import counts as catalogue_counts
+from pa.analysis.catalogue import product as catalogue_product
+from pa.analysis.prediction import prediction_products
+from pa.analysis.ratings import rating_products
+from pa.analysis.rooms import room_products
+from pa.analysis.study import study_products
 from pa.config import RESULTS, ROOT
 from pa.io.checkpoint import require_science_checkpoint
 from pa.io.metadata import Trial, load_demographics, load_rooms, load_trials
-from pa.results.export import write_products
+from pa.results.disposition import ECG_REVIEW, EEG_REVIEW, QUEUE, TIMEBASE
+from pa.results.export import write_catalogue_products, write_products
 from pa.results.schemas import (
     AffectExport,
     DisagreementRecord,
@@ -46,9 +54,118 @@ def _mean(values: list[float]) -> float | None:
     return sum(values) / len(values) if values else None
 
 
+def _review_sources() -> dict:
+    """Load the exact approved decision files behind the integrated CP-B ledger."""
+    queue = json.loads(QUEUE.read_text())
+    eeg = json.loads(EEG_REVIEW.read_text())
+    ecg = json.loads(ECG_REVIEW.read_text())
+    timebase = json.loads(TIMEBASE.read_text())
+    if (queue.get("eligibility_integrated") is not True or
+            queue.get("delegated_verdict") != "approved_for_reanalysis_with_exclusions" or
+            queue.get("reviewer_file_sha256") != {
+                "eeg": hashlib.sha256(EEG_REVIEW.read_bytes()).hexdigest(),
+                "ecg": hashlib.sha256(ECG_REVIEW.read_bytes()).hexdigest(),
+            }):
+        raise ValueError("public QC provenance differs from approved CP-B ledger")
+    indexed = {
+        "queue": {row["trial_id"]: row for row in queue["trials"]},
+        "channels": {row["id"]: row for row in eeg["channels"]},
+        "eeg_trials": {row["trial_id"]: row for row in eeg["trials"]},
+        "ecg_trials": {row["trial_id"]: row for row in ecg["trials"]},
+        "timebase": {row["trial_id"]: row for row in timebase["trials"]},
+    }
+    if any(len(items) != count for items, count in (
+            (indexed["queue"], 160), (indexed["channels"], 320),
+            (indexed["eeg_trials"], 160), (indexed["ecg_trials"], 160),
+            (indexed["timebase"], 160))):
+        raise ValueError("public QC provenance lacks exact trial/channel coverage")
+    return {"ledger": queue, **indexed}
+
+
+def _quality_components(identity: str, signal: dict, reviewed: dict,
+                        review_sources: dict | None) -> dict:
+    eeg, ecg = signal["eeg"], signal["ecg"]
+    channels = eeg.get("channel_qc", {})
+    right = channels.get("right", {"eligible": eeg["valid"], "reasons": eeg["reasons"]})
+    left = channels.get("left", {"eligible": eeg["valid"], "reasons": eeg["reasons"]})
+    cardiac = ecg.get("eligibility", {})
+    hr = cardiac.get("heart_rate", {})
+    rmssd = cardiac.get("rmssd_30s", {})
+    duration_flag = (review_sources is not None and
+                     review_sources["timebase"][identity]["duration_mismatch_over_10pct"])
+    automatic = {
+        "timebase": (True, ["duration_mismatch_over_10pct"] if duration_flag else []),
+        "eeg_right": (right["eligible"], right["reasons"]),
+        "eeg_left": (left["eligible"], left["reasons"]),
+        "eeg_bilateral": (eeg["valid"], eeg["reasons"]),
+        "ecg_hr": (ecg["valid_hr"], [hr["reason"]] if hr.get("reason") else []),
+        "ecg_rmssd": (ecg["valid_rmssd"], [rmssd["reason"]]
+                      if rmssd.get("reason") else []),
+    }
+    if review_sources is None:
+        return {key: {"automated_eligible": eligible,
+                      "automated_reasons": reasons,
+                      "reviewed_eligible": reviewed[key], "review_decisions": []}
+                for key, (eligible, reasons) in automatic.items()}
+    ledger_trial = review_sources["queue"][identity]
+    if ledger_trial["reviewed_eligibility"] != reviewed:
+        raise ValueError(f"export reviewed eligibility differs from CP-B: {identity}")
+    ecg_trial = review_sources["ecg_trials"][identity]
+    eeg_trial = review_sources["eeg_trials"][identity]
+
+    def decision(signal_name: str, source: dict, *, reviewer: str | None = None) -> dict:
+        return {"signal": signal_name, "status": source["status"],
+                "reason": source["reason"],
+                "reviewer": reviewer or source["reviewer"],
+                "entry_id": f"{identity}:{signal_name}"}
+
+    judgments = {
+        "timebase": decision("timebase", ecg_trial["timebase"],
+                             reviewer=ecg_trial["reviewer"]),
+        "eeg_right": decision("eeg_right", review_sources["channels"][
+            f"{identity}:eeg_right"]),
+        "eeg_left": decision("eeg_left", review_sources["channels"][
+            f"{identity}:eeg_left"]),
+        "eeg_trial": decision("eeg_trial", eeg_trial),
+        "ecg": decision("ecg", ecg_trial),
+    }
+    trial_entry_present = f"{identity}:eeg_trial" in ledger_trial["entry_ids"]
+    for key, judgment in judgments.items():
+        # The integrated ledger defaults an unqueued trial-level EEG gate to
+        # accept. Only queued trial gates are active decisions; channel gates
+        # still carry the reviewed exclusions for those trials.
+        if key == "eeg_trial" and not trial_entry_present:
+            continue
+        if judgment["status"] != ledger_trial["reviewed_disposition"][key]:
+            raise ValueError(f"export review decisions differ from CP-B: {identity}:{key}")
+    bilateral_dependencies = ["timebase", "eeg_right", "eeg_left"]
+    if trial_entry_present:
+        bilateral_dependencies.append("eeg_trial")
+    dependencies = {
+        "timebase": ("timebase",),
+        "eeg_right": ("timebase", "eeg_right"),
+        "eeg_left": ("timebase", "eeg_left"),
+        "eeg_bilateral": bilateral_dependencies,
+        "ecg_hr": ("timebase", "ecg"),
+        "ecg_rmssd": ("timebase", "ecg"),
+    }
+    return {key: {"automated_eligible": eligible,
+                  "automated_reasons": reasons,
+                  "reviewed_eligible": reviewed[key],
+                  "review_decisions": [judgments[name] for name in dependencies[key]]}
+            for key, (eligible, reasons) in automatic.items()}
+
+
+def _withheld_reasons(component: dict) -> list[str]:
+    return [f"CP-B {decision['signal']} {decision['status']}: {decision['reason']}"
+            for decision in component["review_decisions"]
+            if decision["status"] != "accept"]
+
+
 def build_products(trials: list[Trial], spatial: list[dict], signal_rows: list[dict],
                    affect_detail: dict, model_record: ModelRecord,
-                   demographics: dict[str, dict] | None = None) -> dict:
+                   demographics: dict[str, dict] | None = None,
+                   review_sources: dict | None = None) -> dict:
     """Require one anchored record per source trial; no synthetic null replacements."""
     signal_by_id = {row["id"]: row for row in signal_rows}
     affect_by_id = {row["id"]: row for row in affect_detail["trials"]}
@@ -58,7 +175,7 @@ def build_products(trials: list[Trial], spatial: list[dict], signal_rows: list[d
             len(affect_by_id) != len(affect_detail["trials"])):
         raise ValueError("export trial/source identity mismatch")
     manifest_hash = hashlib.sha256((ROOT / "data/MANIFEST.sha256").read_bytes()).hexdigest()
-    spec_hash = hashlib.sha256((ROOT / "docs/specs/analysis-v1.md").read_bytes()).hexdigest()
+    spec_hash = hashlib.sha256((ROOT / decisions()["approved_spec_path"]).read_bytes()).hexdigest()
     provenance = Provenance(
         source="Original investigator-supplied CSV metadata and raw channel recordings",
         method=f"Analysis specification {decisions()['version']}; conditional primary 500 Hz scenario",
@@ -91,23 +208,35 @@ def build_products(trials: list[Trial], spatial: list[dict], signal_rows: list[d
         affect = affect_by_id[identity]
         eeg, ecg = signal["eeg"], signal["ecg"]
         construction = affect["construction"]
+        reviewed = affect.get("reviewed_eligibility") or {
+            "timebase": True, "eeg_right": eeg["valid"], "eeg_left": eeg["valid"],
+            "eeg_bilateral": eeg["valid"], "ecg_hr": ecg["valid_hr"],
+            "ecg_rmssd": ecg["valid_rmssd"]}
+        quality = _quality_components(identity, signal, reviewed, review_sources)
+        eeg_reasons = list(dict.fromkeys([*eeg["reasons"],
+                                          *_withheld_reasons(quality["eeg_bilateral"])]))
+        ecg_reasons = list(dict.fromkeys([*ecg["reasons"],
+                                          *_withheld_reasons(quality["ecg_hr"]),
+                                          *_withheld_reasons(quality["ecg_rmssd"])]))
         exported_trials.append(TrialRecord(
             id=identity, experiment=trial.experiment, participant_id=trial.subject_id,
-            room_id=trial.room_id, eeg_valid=eeg["valid"],
-            ecg_valid=ecg["valid_hr"] and ecg["valid_rmssd"],
-            reasons=list(dict.fromkeys([*eeg["reasons"], *ecg["reasons"]])),
+            room_id=trial.room_id, eeg_valid=reviewed["eeg_bilateral"],
+            ecg_valid=reviewed["ecg_hr"] and reviewed["ecg_rmssd"],
+            ecg_hr_valid=reviewed["ecg_hr"], ecg_rmssd_valid=reviewed["ecg_rmssd"],
+            reviewed_eligibility=reviewed, qc_components=quality,
+            reasons=list(dict.fromkeys([*eeg_reasons, *ecg_reasons])),
             eeg=browser_trace(signal["eeg_trace"]),
             ecg=browser_trace(signal["ecg_trace"]),
             eeg_band_power=({"alpha_right": eeg["alpha_right"], "alpha_left": eeg["alpha_left"],
                              "beta_right": eeg["beta_right"], "beta_left": eeg["beta_left"]}
-                            if eeg["valid"] else None),
+                            if reviewed["eeg_bilateral"] else None),
             faa=affect["faa"], heart_rate_bpm=affect["heart_rate_bpm"],
             rmssd_ms=affect["rmssd_ms"],
             subjective=_position(construction["subjective"]),
             objective=_position(construction["objective"]),
             fused=_position(construction["fused"]), alpha=construction["alpha"],
             comfort=trial.comfort, cohort=construction["cohort"],
-            eeg_reasons=list(eeg["reasons"]), ecg_reasons=list(ecg["reasons"]),
+            eeg_reasons=eeg_reasons, ecg_reasons=ecg_reasons,
             logged_duration_s=trial.logged_duration_s,
             sample_duration_s=signal["sample_count"] / signal["primary_rate_hz"],
             rate_status=signal["rate_status"],
@@ -131,6 +260,10 @@ def build_products(trials: list[Trial], spatial: list[dict], signal_rows: list[d
             space_type=room["space_type"], lighting=room["day_or_night"],
             illuminance_lux=room["illuminance"], cct_kelvin=room["cct"],
             dimensions={name: room[name] for name in ("length", "width", "height")},
+            independent_attributes={name: room.get(name) for name in (
+                "length", "width", "height", "num_doors", "door_area", "num_windows",
+                "window_area", "daylight_factor", "illuminance", "cct",
+                "walkable_floor_area", "day_or_night", "space_type")},
             mean_affect=Position(valence=_mean([point.valence for point in points]),
                                  arousal=_mean([point.arousal for point in points])) if points else None,
             n_affect=len(points)))
@@ -236,6 +369,144 @@ def write_research_exports(destination: Path = RESULTS) -> dict:
     unknown = {trial.subject_id for trial in trial_rows} - demographics.keys()
     if unknown:
         raise ValueError(f"missing demographic metadata for supplied trial IDs: {sorted(unknown)}")
+    review_sources = _review_sources()
     products = build_products(trial_rows, load_rooms(), signals["trials"], affect, model,
-                              demographics=demographics)
-    return write_products(products, destination)
+                              demographics=demographics, review_sources=review_sources)
+    manifest = write_products(products, destination)
+    catalogue = build_catalogue_products(affect, signals, load_rooms(), trial_rows,
+                                         demographics, evaluation, review_sources["ledger"],
+                                         products["affect"].sensitivity)
+    manifest["analysis_catalogue"] = write_catalogue_products(
+        catalogue, destination / "analysis")
+    return manifest
+
+
+def build_catalogue_products(affect: dict, signals: dict, spatial: list[dict],
+                             trials: list[Trial], demographics: dict[str, dict],
+                             evaluation: dict, review: dict,
+                             sensitivity: list[SensitivityRecord]) -> dict:
+    """Compute all twenty-eight figure products from reviewed, versioned analyses."""
+    def saved(name: str) -> dict:
+        path = RESULTS / name
+        if not path.is_file():
+            raise FileNotFoundError(f"required research analysis missing: {path}")
+        result = json.loads(path.read_text())
+        approved = (result.get("approved_spec_sha256") or
+                    result.get("source_fingerprint", {}).get(
+                        "docs/specs/analysis-v1.2-draft.md"))
+        if approved != affect["approved_spec_sha256"]:
+            raise ValueError(f"research analysis spec mismatch: {name}")
+        return result
+
+    ratings = saved("rating_research.json")
+    validity = saved("validity.json")
+    comparator = saved("self_report_comparator.json")
+    null = saved("model_null.json")
+    learning = saved("model_learning_curve.json")
+    review = saved("qc_review.json")
+    products = {}
+    for family in (study_products(affect, spatial, demographics),
+                   rating_products(affect, ratings),
+                   room_products(affect, spatial, trials, demographics),
+                   body_products(affect, signals, review, validity, trials),
+                   prediction_products(affect, ratings, evaluation, comparator, null, learning)):
+        overlap = set(products) & set(family)
+        if overlap:
+            raise ValueError(f"duplicate catalogue product IDs: {sorted(overlap)}")
+        products.update(family)
+    methods = []
+    for experiment in (1, 2, 3):
+        own = [row for row in affect["trials"] if row["experiment"] == experiment]
+        methods.append({"experiment": experiment, "source_trials": len(own),
+                        "participants": len({row["participant_id"] for row in own}),
+                        "rooms": len({row["room_id"] for row in own}),
+                        "rating_question": "comfort (separate)" if experiment == 1 else
+                        "signed valence/arousal (different elicitation by experiment)",
+                        "complete_descriptive_fusion": sum(row["construction"]["cohort"] ==
+                                                           "complete_fusion" for row in own),
+                        "reviewed_timebase": sum(row["reviewed_eligibility"]["timebase"]
+                                                 for row in own),
+                        "reviewed_HR": sum(row["reviewed_eligibility"]["ecg_hr"]
+                                           for row in own)})
+    products["Methods"] = catalogue_product(
+        "Methods", question="What source and analysis rules support these figures?",
+        takeaway="Three source experiments are described separately; reviewed physiology, descriptive mapping and fold-fitted E3 prediction have different eligibility.",
+        method="Source-trial accounting plus approved v1.2 methods: conditional 500 Hz signal processing, delegated CP-B quality review, robust within-person descriptive calibration, E3 fold-contained population calibration, grouped evaluation and descriptive controls.",
+        rows=methods, x="experiment", y="source_trials", chart_type="table",
+        x_label="Experiment", y_label="Anchored source trials",
+        sample=catalogue_counts(affect["trials"]), source=affect,
+        caveats=["Acquisition rate/reference and absolute units remain unconfirmed.",
+                 "Neither constructed coordinates nor pilot associations validate a clinical emotion measure.",
+                 "E2/E3 rating protocols differ; no pooled deployed model or population p-value is claimed.",
+                 "All 160 source trials remain accounted for even when a component is invalid or unavailable."],
+        units={"source_trials": "trials"},
+        methods_evidence=_methods_evidence(review, sensitivity))
+    return products
+
+
+def _methods_evidence(review: dict, sensitivity: list[SensitivityRecord]) -> dict:
+    """Publish approved settings and existing computed sensitivity, without refitting."""
+    settings = decisions()
+    rate, eeg, ecg = settings["rate"], settings["eeg"], settings["ecg"]
+    affect, modeling = settings["affect"], settings["modeling"]
+    source = "backend/src/pa/decisions.yaml"
+
+    def item(category: str, label: str, value: str | float | bool,
+             unit: str | None = None) -> dict:
+        return {"category": category, "label": label, "value": value,
+                "unit": unit, "source": source}
+
+    methods = [
+        item("Timebase", "Primary conditional sample rate", rate["primary_hz"], "Hz"),
+        item("Timebase", "Alternative sample-rate scenarios",
+             ", ".join(map(str, rate["sensitivity_hz"])), "Hz"),
+        item("Timebase", "Duration disagreement review flag",
+             rate["duration_disagreement_fraction"] * 100, "%"),
+        item("Timebase", "Onset-exclusion sensitivity",
+             rate["onset_exclusion_sensitivity_s"], "s"),
+        item("EEG quality", "Band-pass filter", f"{eeg['filter_hz'][0]}–{eeg['filter_hz'][1]}", "Hz"),
+        item("EEG quality", "Epoch duration", eeg["epoch_s"], "s"),
+        item("EEG quality", "Minimum accepted epochs", eeg["min_valid_epochs"], "epochs"),
+        item("EEG quality", "Minimum accepted fraction", eeg["min_valid_fraction"] * 100, "%"),
+        item("EEG quality", "Maximum raw line-power ratio", eeg["raw_line_power_ratio_max"]),
+        item("EEG quality", "Maximum filtered muscle-power ratio",
+             eeg["filtered_muscle_power_ratio_max"]),
+        item("ECG quality", "QRS filter", f"{ecg['qrs_filter_hz'][0]}–{ecg['qrs_filter_hz'][1]}", "Hz"),
+        item("ECG quality", "Minimum HR beats", ecg["min_hr_beats"], "beats"),
+        item("ECG quality", "Minimum HR usable duration", ecg["min_hr_usable_duration_s"], "s"),
+        item("ECG quality", "Primary RMSSD contiguous run",
+             ecg["rmssd_scenarios"]["primary"]["duration_s"], "s"),
+        item("ECG quality", "Primary RMSSD minimum intervals",
+             ecg["rmssd_scenarios"]["primary"]["min_intervals"], "intervals"),
+        item("Affect mapping", "Component calibration", affect["mapping"]),
+        item("Affect mapping", "Descriptive calibration scope",
+             affect["descriptive_calibration_scope"]),
+        item("Affect mapping", "Primary physiology/report fusion weight",
+             affect["primary_alpha"]),
+        item("Affect mapping", "Primary physiology components",
+             ", ".join(affect["primary_complete_components"])),
+        item("Model evaluation", "Primary cohort", modeling["primary_cohort"]),
+        item("Model evaluation", "Held-out groups", ", ".join(modeling["outer_splits"])),
+        item("Model evaluation", "Inner folds", modeling["inner_splits"]),
+    ]
+    source_refs = [
+        ("Approved v1.2 specification", settings["approved_spec_path"]),
+        ("Decision record", "DECISIONS.md"),
+        ("Delegated CP-B decision record", settings["qc_review_checkpoint"]),
+        ("Data card", "docs/data_card.md"),
+        ("Model card", "docs/model_card.md"),
+        ("Independent CP-C review", "docs/reports/revision-2026-10/CP-C.md"),
+    ]
+    return {
+        "settings": methods,
+        "review": {"verdict": review["delegated_verdict"],
+                   "reviewed_at_utc": review["reviewed_at_utc"],
+                   "reviewers": review["reviewers"],
+                   "decision_counts": review["summary"]["decision_counts"],
+                   "reviewed_eligibility_counts": review["summary"]["reviewed_eligibility_counts"],
+                   "ledger_path": "artifacts/results/qc_review.json"},
+        "sensitivity": [row.model_dump(include={"experiment", "alpha", "n",
+                                                "mean_valence", "mean_arousal"})
+                        for row in sensitivity if row.participant_id is None],
+        "references": [{"label": label, "path": path} for label, path in source_refs],
+    }

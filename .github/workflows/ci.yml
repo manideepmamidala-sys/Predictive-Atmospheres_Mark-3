@@ -2,12 +2,17 @@ name: Research platform CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   reproduce-and-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 360
     env:
       CI: "true"
     steps:
@@ -34,8 +39,16 @@ jobs:
       - name: Install Chromium and host libraries
         run: cd frontend && corepack pnpm exec playwright install --with-deps chromium
 
+      - name: Preserve committed research artifacts
+        run: |
+          mkdir -p "$RUNNER_TEMP/committed-artifacts/artifacts"
+          cp -a artifacts/results artifacts/model "$RUNNER_TEMP/committed-artifacts/artifacts/"
+
       - name: Verify source and regenerate research products
         run: make pipeline
+
+      - name: Check regenerated research artifacts for drift
+        run: python3 scripts/compare_reproduction.py "$RUNNER_TEMP/committed-artifacts" .
 
       - name: Check source, contract, and browser behavior
         run: make lint test site

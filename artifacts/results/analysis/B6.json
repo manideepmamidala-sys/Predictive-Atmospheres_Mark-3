@@ -1,0 +1,589 @@
+{
+  "schema_version": "1.0.0",
+  "id": "B6",
+  "route": "/body",
+  "status": "available",
+  "question": "Does forehead alpha asymmetry agree with reported valence?",
+  "takeaway": "E2: 37 paired trials, 4 people, equal-person mean \u03c1 0.18; E3: 41 paired trials, 5 people, equal-person mean \u03c1 -0.10",
+  "method": "Reviewed eligible paired components; participant-level Spearman and equal-person descriptive summary, 2,000 participant-vector bootstrap draws only with \u22654 contributors.",
+  "caveats": [
+    "The plotted trials repeat rooms/people; relationship summaries use participants as units.",
+    "Acquisition and construct uncertainty limit physiological interpretation.",
+    "E2/E3 correlations are separate; absent interval reflects fewer than four contributing people."
+  ],
+  "counts": {
+    "trials": 78,
+    "participants": 7,
+    "rooms": 20
+  },
+  "units": {
+    "faa": "unverified log alpha ratio",
+    "subjective_valence": "signed source scale"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T16:03:37+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "scatter",
+    "rows": [
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_014",
+        "faa": -0.4387366091747458,
+        "subjective_valence": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_016",
+        "faa": -0.5490463200716844,
+        "subjective_valence": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_019",
+        "faa": -0.4915450769590439,
+        "subjective_valence": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_015",
+        "faa": -0.2834216787113881,
+        "subjective_valence": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_013",
+        "faa": -0.11083211680665706,
+        "subjective_valence": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_011",
+        "faa": -1.2269491696061072,
+        "subjective_valence": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_017",
+        "faa": -0.3562291290333768,
+        "subjective_valence": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_012",
+        "faa": -0.6385916078144085,
+        "subjective_valence": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_020",
+        "faa": -0.7455899546087625,
+        "subjective_valence": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_015",
+        "faa": 0.09646339547140492,
+        "subjective_valence": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_017",
+        "faa": -0.08068948021653188,
+        "subjective_valence": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_019",
+        "faa": -0.16709838090117923,
+        "subjective_valence": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_011",
+        "faa": -0.061189948491096935,
+        "subjective_valence": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_013",
+        "faa": 0.0845244161388159,
+        "subjective_valence": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_016",
+        "faa": -0.01990361259853657,
+        "subjective_valence": 0.7
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_018",
+        "faa": -0.02123781438797323,
+        "subjective_valence": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_012",
+        "faa": 0.027097594669415415,
+        "subjective_valence": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_020",
+        "faa": -0.08361329487386726,
+        "subjective_valence": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_014",
+        "faa": -0.029538917351311866,
+        "subjective_valence": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_011",
+        "faa": -1.5386647323128004,
+        "subjective_valence": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_012",
+        "faa": -0.6445284361822763,
+        "subjective_valence": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_013",
+        "faa": -0.5450182026428934,
+        "subjective_valence": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_014",
+        "faa": -0.06393108177024764,
+        "subjective_valence": 0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_015",
+        "faa": -0.13919541390435342,
+        "subjective_valence": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_016",
+        "faa": -0.31308469805971306,
+        "subjective_valence": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_017",
+        "faa": -0.1484428844845862,
+        "subjective_valence": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_018",
+        "faa": -1.1119154828539841,
+        "subjective_valence": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_015",
+        "faa": 0.0014307039690777401,
+        "subjective_valence": 0.3
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_017",
+        "faa": -0.25731299995345136,
+        "subjective_valence": 0.5
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_013",
+        "faa": 0.16779373185764435,
+        "subjective_valence": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_019",
+        "faa": 0.016611976132252515,
+        "subjective_valence": 0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_011",
+        "faa": -0.16001403316641838,
+        "subjective_valence": -0.4
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_018",
+        "faa": 0.36511691990315853,
+        "subjective_valence": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_012",
+        "faa": 0.6010667661121332,
+        "subjective_valence": 0.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_016",
+        "faa": 0.566186271583053,
+        "subjective_valence": 0.6
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_014",
+        "faa": 0.12079506438311327,
+        "subjective_valence": -0.2
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_020",
+        "faa": -0.4386191453560748,
+        "subjective_valence": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_021",
+        "faa": 0.04501611325956567,
+        "subjective_valence": 0.85
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_022",
+        "faa": -0.06513215353081758,
+        "subjective_valence": -0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_023",
+        "faa": 0.13845558739447839,
+        "subjective_valence": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_026",
+        "faa": 0.009169471940636775,
+        "subjective_valence": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_027",
+        "faa": 0.09094740146164249,
+        "subjective_valence": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_028",
+        "faa": 0.21238512546098232,
+        "subjective_valence": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_029",
+        "faa": -0.06906245998775873,
+        "subjective_valence": 0.82
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_A",
+        "room_id": "Rm_030",
+        "faa": 0.07892163765680404,
+        "subjective_valence": 0.94
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_030",
+        "faa": 0.7658021183341059,
+        "subjective_valence": 0.75
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_029",
+        "faa": 0.3007951686991124,
+        "subjective_valence": 0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_028",
+        "faa": 0.5772330763100362,
+        "subjective_valence": -0.1
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_027",
+        "faa": 0.9723771579094862,
+        "subjective_valence": 0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_026",
+        "faa": 0.5291691098414812,
+        "subjective_valence": 0.36
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_025",
+        "faa": 0.5754443659187798,
+        "subjective_valence": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_024",
+        "faa": 0.41866392221864945,
+        "subjective_valence": 0.9
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_023",
+        "faa": 0.827749255315025,
+        "subjective_valence": 0.65
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_022",
+        "faa": 0.6598337312366915,
+        "subjective_valence": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_021",
+        "faa": -0.24636983382884292,
+        "subjective_valence": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_022",
+        "faa": -0.009478317820272864,
+        "subjective_valence": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_023",
+        "faa": -0.12207830817978049,
+        "subjective_valence": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_025",
+        "faa": -0.47623781993778813,
+        "subjective_valence": 0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_026",
+        "faa": 0.010425508490556012,
+        "subjective_valence": -0.2
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_027",
+        "faa": -0.17867766170781163,
+        "subjective_valence": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_028",
+        "faa": -0.5292036603770054,
+        "subjective_valence": 0.6
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_029",
+        "faa": -0.6610907766938965,
+        "subjective_valence": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_030",
+        "faa": -0.9893369618053862,
+        "subjective_valence": -0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_030",
+        "faa": 0.27084752904444365,
+        "subjective_valence": 0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_029",
+        "faa": -0.12306941699039875,
+        "subjective_valence": 0.8
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_028",
+        "faa": 0.05381668454396671,
+        "subjective_valence": 0.65
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_027",
+        "faa": 0.2072737907212776,
+        "subjective_valence": 0.65
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_026",
+        "faa": 0.012489306531126232,
+        "subjective_valence": -0.3
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_025",
+        "faa": 0.054504217142891775,
+        "subjective_valence": 0.25
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_024",
+        "faa": 0.4318508911535144,
+        "subjective_valence": 0.5
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_023",
+        "faa": 0.23519781247468075,
+        "subjective_valence": -0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_022",
+        "faa": 0.08267902375405711,
+        "subjective_valence": -0.3
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_021",
+        "faa": 0.18309793826678433,
+        "subjective_valence": 0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_030",
+        "faa": -0.30771831433365726,
+        "subjective_valence": -0.4
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_029",
+        "faa": -0.48345281940613916,
+        "subjective_valence": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_027",
+        "faa": -0.24071971724774954,
+        "subjective_valence": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_025",
+        "faa": -0.0011126491990891552,
+        "subjective_valence": 0.7
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_021",
+        "faa": -0.32299180793907745,
+        "subjective_valence": 0.7
+      }
+    ],
+    "x": "faa",
+    "y": "subjective_valence",
+    "series": "participant_id",
+    "facet": "experiment",
+    "x_label": "faa",
+    "y_label": "report valence",
+    "x_unit": "unverified log alpha ratio",
+    "y_unit": "signed source scale"
+  }
+}

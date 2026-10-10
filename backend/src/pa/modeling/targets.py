@@ -10,14 +10,7 @@ from numpy.typing import NDArray
 
 from pa.signals.common import decisions
 
-COMPONENTS = ("faa", "beta_alpha", "heart_rate_bpm", "rmssd_ms")
-
-
-def _positive_log(values: NDArray[np.float64]) -> NDArray[np.float64]:
-    result = np.full(values.shape, np.nan, dtype=float)
-    valid = np.isfinite(values) & (values > 0)
-    result[valid] = np.log(values[valid])
-    return result
+COMPONENTS = ("faa", "alpha_suppression", "engagement", "heart_rate_bpm")
 
 
 class CalibrationUnavailable(ValueError):
@@ -38,8 +31,6 @@ class PopulationCalibrator:
             if name not in raw:
                 raise CalibrationUnavailable(f"missing component {name}")
             values = raw[name].to_numpy(dtype=float)
-            if name == "rmssd_ms":
-                values = _positive_log(values)
             values = values[np.isfinite(values)]
             if len(np.unique(values)) < cfg["min_population_distinct_values"]:
                 raise CalibrationUnavailable(f"uncalibratable component {name}: too few distinct values")
@@ -54,8 +45,6 @@ class PopulationCalibrator:
         values = []
         for name in COMPONENTS:
             component = raw[name].to_numpy(dtype=float)
-            if name == "rmssd_ms":
-                component = _positive_log(component)
             mapped = np.full(component.shape, np.nan, dtype=float)
             valid = np.isfinite(component)
             mapped[valid] = np.tanh((component[valid] - self.centers[name]) /
@@ -71,9 +60,9 @@ class PopulationCalibrator:
         if reports.shape != (len(raw), 2):
             raise ValueError("self-report shape mismatch")
         components = self.components(raw)
+        eeg_arousal = 0.5 * (components[:, 1] + components[:, 2])
         objective = np.stack((components[:, 0],
-                              np.mean(np.stack((components[:, 1], components[:, 2],
-                                                -components[:, 3])), axis=0)), axis=1)
+                              0.5 * eeg_arousal + 0.5 * components[:, 3]), axis=1)
         if not np.isfinite(objective).all() or not np.isfinite(reports).all():
             raise CalibrationUnavailable("missing or nonfinite component/report in complete target cohort")
         if np.any(np.abs(reports) > 1):

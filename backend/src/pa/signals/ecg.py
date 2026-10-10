@@ -32,6 +32,8 @@ class ECGResult:
     excluded_segments: tuple[dict, ...] = ()
     quality: dict = field(default_factory=dict)
     rmssd_scenarios: dict = field(default_factory=dict)
+    coverage: dict = field(default_factory=dict)
+    eligibility: dict = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -66,10 +68,16 @@ class _Run:
 
 
 def _empty(rate: float, duration: float, reasons: list[str],
-           excluded: list[dict] | None = None, quality: dict | None = None) -> ECGResult:
+           excluded: list[dict] | None = None, quality: dict | None = None,
+           segments: list[_Segment] | None = None) -> ECGResult:
+    coverage = _coverage(duration, rate, segments or [], [], None, None)
+    reason = reasons[0] if reasons else "no_qrs_quality"
     return ECGResult(False, False, tuple(dict.fromkeys(reasons)), rate, duration,
                      None, 0, 0, None, None, excluded_segments=tuple(excluded or []),
-                     quality=quality or {})
+                     quality=quality or {}, coverage=coverage,
+                     eligibility={"heart_rate": {"automated_eligible": False, "reason": reason},
+                                  "rmssd_30s": {"automated_eligible": False, "reason": reason},
+                                  "human_review": "pending_cp_b"})
 
 
 def _continuous_segments(raw: NDArray[np.float64], counter: NDArray[np.int64],
@@ -252,6 +260,31 @@ def _select_run(runs: list[_Run], minimum_intervals: int, minimum_seconds: float
                default=None)
 
 
+def _run_summary(run: _Run | None, rate: float) -> dict | None:
+    if run is None:
+        return None
+    return {"start_s": run.start_sample / rate,
+            "end_s": run.start_sample / rate + run.covered_seconds,
+            "covered_seconds": run.covered_seconds,
+            "valid_intervals": len(run.intervals)}
+
+
+def _coverage(duration: float, rate: float, segments: list[_Segment],
+              runs: list[_Run], hr_run: _Run | None, rmssd_run: _Run | None) -> dict:
+    """Separate filterable source seconds from seconds covered by accepted RR runs."""
+    filterable = sum((segment.stop - segment.start) / rate for segment in segments)
+    valid_rr = sum(run.covered_seconds for run in runs)
+    longest = max(runs, key=lambda run: (run.covered_seconds, -run.start_sample), default=None)
+    return {"source_seconds": duration, "filterable_seconds": filterable,
+            "filterable_fraction": filterable / duration if duration else 0.0,
+            "valid_rr_seconds": valid_rr,
+            "valid_rr_fraction": valid_rr / duration if duration else 0.0,
+            "filterable_segment_count": len(segments), "valid_run_count": len(runs),
+            "longest_valid_run": _run_summary(longest, rate),
+            "heart_rate_run": _run_summary(hr_run, rate),
+            "rmssd_30s_run": _run_summary(rmssd_run, rate)}
+
+
 def process_ecg(raw: NDArray[np.float64], sample_rate_hz: float,
                 counter: NDArray[np.int64]) -> ECGResult:
     cfg = decisions()["ecg"]
@@ -274,7 +307,7 @@ def process_ecg(raw: NDArray[np.float64], sample_rate_hz: float,
     quality = _quality_evidence(segments, scores)
     if polarity is None or polarity == "ambiguous":
         reason = "no_qrs_quality" if polarity is None else "ambiguous_polarity"
-        return _empty(sample_rate_hz, duration, [reason], excluded, quality)
+        return _empty(sample_rate_hz, duration, [reason], excluded, quality, segments)
     runs, peaks, rr, valid = _runs(segments, polarity, sample_rate_hz)
     hr_run = _select_run(runs, cfg["min_hr_beats"] - 1, cfg["min_hr_usable_duration_s"])
     hr = float(60 / np.median(hr_run.intervals)) if hr_run is not None else None
@@ -286,6 +319,7 @@ def process_ecg(raw: NDArray[np.float64], sample_rate_hz: float,
         scenarios[name] = {"valid": chosen is not None, "rmssd_ms": value,
                            "usable_duration_s": chosen.covered_seconds if chosen else None,
                            "valid_intervals": len(chosen.intervals) if chosen else 0,
+                           "run": _run_summary(chosen, sample_rate_hz),
                            "reason": None if chosen else "no_qualifying_contiguous_run"}
     primary = scenarios["primary"]
     reasons = [segment["reason"] for segment in excluded]
@@ -293,7 +327,97 @@ def process_ecg(raw: NDArray[np.float64], sample_rate_hz: float,
         reasons.append("insufficient_contiguous_beats_for_hr")
     if not primary["valid"]:
         reasons.append("insufficient_contiguous_coverage_for_rmssd")
+    rmssd_run = _select_run(runs, cfg["rmssd_scenarios"]["primary"]["min_intervals"],
+                            cfg["rmssd_scenarios"]["primary"]["duration_s"])
+    coverage = _coverage(duration, sample_rate_hz, segments, runs, hr_run, rmssd_run)
+    eligibility = {
+        "heart_rate": {"automated_eligible": hr is not None,
+                       "reason": None if hr is not None else "insufficient_contiguous_beats_for_hr"},
+        "rmssd_30s": {"automated_eligible": primary["valid"],
+                      "reason": None if primary["valid"] else "insufficient_contiguous_coverage_for_rmssd"},
+        "human_review": "pending_cp_b",
+    }
     return ECGResult(hr is not None, primary["valid"], tuple(dict.fromkeys(reasons)),
                      sample_rate_hz, duration, polarity, len(peaks), sum(valid), hr,
                      primary["rmssd_ms"], tuple(peaks), tuple(rr), tuple(valid),
-                     tuple(excluded), quality, scenarios)
+                     tuple(excluded), quality, scenarios, coverage, eligibility)
+
+
+def ecg_review_examples(raw: NDArray[np.float64], result: ECGResult) -> list[dict]:
+    """Provide bounded, source-indexed ECG examples for human trace/spectrum review.
+
+    Filtering is repeated only inside a QC-admitted continuous segment. Rejected
+    blocks and counter gaps keep raw evidence, with no synthetic filtered trace.
+    """
+    rate = result.sample_rate_hz
+    raw = np.asarray(raw, dtype=float)
+    if not math.isfinite(rate) or rate <= 0 or len(raw) == 0:
+        return []
+    cfg = decisions()["ecg"]
+    width = max(1, round(4 * rate))
+
+    def spectrum(values: NDArray[np.float64]) -> dict | None:
+        if len(values) < 2 or not np.isfinite(values).all():
+            return None
+        size = min(len(values), max(2, round(2 * rate)))
+        frequency, power = signal.welch(values, fs=rate, window="hann",
+                                         nperseg=size, noverlap=size // 2,
+                                         detrend="constant")
+        return {"frequency_hz": frequency.tolist(), "power_per_hz": power.tolist(),
+                "power_unit": "unverified raw amplitude squared per Hz"}
+
+    def example(kind: str, start: int, stop: int, reason: str | None,
+                cleaned: NDArray[np.float64] | None = None) -> dict:
+        values = raw[start:stop]
+        filtered = cleaned.tolist() if cleaned is not None else None
+        crosses_counter_gap = any(
+            start < round(item["start_s"] * rate) < stop
+            for item in result.excluded_segments
+            if item["reason"] == "counter_discontinuity"
+        )
+        return {"kind": kind, "reason": reason, "start_sample": start,
+                "stop_sample": stop, "start_s": start / rate, "end_s": stop / rate,
+                "sample_rate_hz": rate, "rate_status": decisions()["rate"]["primary_status"],
+                "amplitude_unit": "unverified raw amplitude",
+                "raw": [float(value) if math.isfinite(value) else None for value in values],
+                "filtered": filtered,
+                "raw_spectrum": None if crosses_counter_gap else spectrum(values),
+                "filtered_spectrum": spectrum(cleaned) if cleaned is not None else None}
+
+    examples: list[dict] = []
+    accepted = result.quality.get("segments", [])
+    longest = result.coverage.get("longest_valid_run")
+    target = round(longest["start_s"] * rate) if longest else None
+    span = next((item for item in accepted
+                 if target is not None and item["start_sample"] <= target < item["stop_sample"]),
+                accepted[0] if accepted else None)
+    if span is not None:
+        segment_start, segment_stop = span["start_sample"], span["stop_sample"]
+        start = min(max(target if target is not None else segment_start, segment_start),
+                    max(segment_start, segment_stop - width))
+        stop = min(start + width, segment_stop)
+        sos = signal.butter(cfg["filter_order"], cfg["qrs_filter_hz"],
+                            btype="bandpass", fs=rate, output="sos")
+        filtered_segment = signal.sosfiltfilt(sos, raw[segment_start:segment_stop])
+        examples.append(example("accepted_run" if longest else "filterable_segment",
+                                start, stop, None,
+                                filtered_segment[start - segment_start:stop - segment_start]))
+
+    seen_reasons: set[str] = set()
+    for item in result.excluded_segments:
+        reason = item["reason"]
+        if reason in seen_reasons:
+            continue
+        seen_reasons.add(reason)
+        center = round(item["start_s"] * rate)
+        start = max(0, center - width // 2)
+        stop = min(len(raw), start + width)
+        start = max(0, stop - width)
+        examples.append(example("flagged_source", start, stop, reason))
+    if not result.valid_hr and not any(item["kind"] == "flagged_source" for item in examples):
+        invalid = np.flatnonzero(~np.isfinite(raw))
+        center = int(invalid[0]) if len(invalid) else 0
+        start = min(max(0, center - width // 2), max(0, len(raw) - width))
+        examples.append(example("flagged_source", start, min(len(raw), start + width),
+                                result.eligibility.get("heart_rate", {}).get("reason")))
+    return examples

@@ -1,5 +1,9 @@
-version: "1.1.0"
-status: "reviewed conditional retrospective analysis; coordinator checkpoint PASS"
+version: "1.2.0"
+status: "owner-approved retrospective amendment; CP-B signal dispositions pending"
+approved_spec_sha256: "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac"
+approved_spec_path: "docs/specs/analysis-v1.2-draft.md"
+approval_record: "docs/reports/revision-2026-10/CP-Spec.md"
+qc_review_checkpoint: "docs/reports/revision-2026-10/CP-B.md"
 rate:
   primary_hz: 500
   primary_status: "conditional_unconfirmed"
@@ -22,7 +26,18 @@ eeg:
   min_valid_epochs: 3
   min_valid_fraction: 0.5
   alpha_hz: [8, 13]
+  theta_hz: [4, 8]
   beta_hz: [13, 30]
+  muscle_hz: [30, 45]
+  raw_line_hz: [48, 52]
+  raw_reference_hz: [1, 45]
+  channel_std_ratio_range: [0.5, 2.0]
+  channel_std_ratio_sensitivity_range: [0.4, 2.5]
+  amplitude_experiment_median_ratio_range: [0.1, 10.0]
+  raw_line_power_ratio_max: 0.20
+  filtered_muscle_power_ratio_max: 0.25
+  review_ratio_sensitivity_multipliers: [0.5, 2.0]
+  ocular_detector: "unavailable_detector_not_validated"
   max_peak_to_peak_median_multiple: 6
   max_step_median_multiple: 8
   threshold_sensitivity_multipliers: [0.75, 1.25]
@@ -57,8 +72,19 @@ affect:
   min_population_distinct_values: 3
   min_population_scale: 1.0e-9
   mapping: tanh_standardized_component
+  primary_complete_components: [bilateral_faa, alpha_suppression, engagement, heart_rate]
+  rmssd_role: descriptive_only
+  cortical_arousal_components: [alpha_suppression, engagement]
+  cortical_arousal_composite_weights: [0.5, 0.5]
+  physiology_arousal_weights: {eeg_composite: 0.5, heart_rate: 0.5}
+  descriptive_calibration_scope: participant_within_experiment
+  primary_fusion_required_reports: [valence, arousal]
 modeling:
   primary_cohort: experiment_03_complete_fusion_full_room_attributes
+  deployable_experiment: 3
+  studio_target: complete_fused_only
+  eeg_component_calibration: [faa, alpha_suppression, engagement]
+  ecg_component_calibration: heart_rate
   outer_splits: [room, subject]
   inner_splits: 3
   min_training_groups_for_inner_cv: 4

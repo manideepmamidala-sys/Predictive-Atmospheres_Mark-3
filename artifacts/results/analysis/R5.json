@@ -1,0 +1,240 @@
+{
+  "schema_version": "1.0.0",
+  "id": "R5",
+  "route": "/rooms",
+  "status": "available",
+  "question": "How do participants use the signed rating scales?",
+  "takeaway": "Across 11 participant-by-experiment profiles, observed within-person rating ranges span 0.90\u20131.90 source-scale units.",
+  "method": "Observed per-person mean, sample standard deviation and range for each experiment/axis.",
+  "caveats": [
+    "Few rooms per person cannot identify stable personal response style.",
+    "Scale use is not comparable across E2/E3 elicitation without calibration."
+  ],
+  "counts": {
+    "trials": 110,
+    "participants": 9,
+    "rooms": 20
+  },
+  "units": {
+    "mean_rating": "signed source scale \u22121 to 1",
+    "rating_sd": "source scale"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T16:03:32+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "scatter",
+    "rows": [
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "participant_id": "Subj_A",
+        "mean_rating": 0.12999999999999998,
+        "rating_sd": 0.3831158803518562,
+        "range": 1.1,
+        "trials": 10
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "participant_id": "Subj_E",
+        "mean_rating": 0.020000000000000007,
+        "rating_sd": 0.3190262963734773,
+        "range": 1.0,
+        "trials": 10
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "participant_id": "Subj_F",
+        "mean_rating": 0.39,
+        "rating_sd": 0.33482997343593823,
+        "range": 0.9,
+        "trials": 10
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "participant_id": "Subj_G",
+        "mean_rating": 0.12000000000000002,
+        "rating_sd": 0.42635405214185285,
+        "range": 1.2,
+        "trials": 10
+      },
+      {
+        "experiment": 2,
+        "axis": "valence",
+        "participant_id": "Subj_M",
+        "mean_rating": 0.040000000000000015,
+        "rating_sd": 0.3238655413730965,
+        "range": 1.0,
+        "trials": 10
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "participant_id": "Subj_A",
+        "mean_rating": 0.15,
+        "rating_sd": 0.45765100725819935,
+        "range": 1.4,
+        "trials": 10
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "participant_id": "Subj_E",
+        "mean_rating": 0.25,
+        "rating_sd": 0.2718251071716682,
+        "range": 0.9,
+        "trials": 10
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "participant_id": "Subj_F",
+        "mean_rating": 0.09999999999999999,
+        "rating_sd": 0.380058475033046,
+        "range": 1.0,
+        "trials": 10
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "participant_id": "Subj_G",
+        "mean_rating": -0.020000000000000018,
+        "rating_sd": 0.45655716448703826,
+        "range": 1.2,
+        "trials": 10
+      },
+      {
+        "experiment": 2,
+        "axis": "arousal",
+        "participant_id": "Subj_M",
+        "mean_rating": 0.12999999999999998,
+        "rating_sd": 0.32676869155073257,
+        "range": 1.0,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "participant_id": "Subj_A",
+        "mean_rating": 0.491,
+        "rating_sd": 0.5634901162497095,
+        "range": 1.54,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "participant_id": "Subj_B",
+        "mean_rating": 0.275,
+        "rating_sd": 0.44612529381080573,
+        "range": 1.2000000000000002,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "participant_id": "Subj_D",
+        "mean_rating": 0.29000000000000004,
+        "rating_sd": 0.6454111523328021,
+        "range": 1.7000000000000002,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "participant_id": "Subj_H",
+        "mean_rating": 0.18,
+        "rating_sd": 0.6828046735503663,
+        "range": 1.8,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "participant_id": "Subj_I",
+        "mean_rating": 0.25999999999999995,
+        "rating_sd": 0.7026932316294058,
+        "range": 1.8,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "valence",
+        "participant_id": "Subj_M",
+        "mean_rating": 0.41600000000000004,
+        "rating_sd": 0.5211141909409108,
+        "range": 1.7000000000000002,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "participant_id": "Subj_A",
+        "mean_rating": 0.07999999999999999,
+        "rating_sd": 0.6051629716218783,
+        "range": 1.8,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "participant_id": "Subj_B",
+        "mean_rating": -0.32999999999999996,
+        "rating_sd": 0.47795862210493123,
+        "range": 1.25,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "participant_id": "Subj_D",
+        "mean_rating": -0.14999999999999997,
+        "rating_sd": 0.6168918507773916,
+        "range": 1.7,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "participant_id": "Subj_H",
+        "mean_rating": 0.08,
+        "rating_sd": 0.702060459568041,
+        "range": 1.7000000000000002,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "participant_id": "Subj_I",
+        "mean_rating": 0.009999999999999998,
+        "rating_sd": 0.8451824260674932,
+        "range": 1.9,
+        "trials": 10
+      },
+      {
+        "experiment": 3,
+        "axis": "arousal",
+        "participant_id": "Subj_M",
+        "mean_rating": 0.002000000000000013,
+        "rating_sd": 0.47651046391681917,
+        "range": 1.54,
+        "trials": 10
+      }
+    ],
+    "x": "participant_id",
+    "y": "mean_rating",
+    "series": "axis",
+    "facet": "experiment",
+    "x_label": "Participant",
+    "y_label": "Mean signed rating",
+    "x_unit": null,
+    "y_unit": "signed source scale \u22121 to 1"
+  }
+}

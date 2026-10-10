@@ -1,30 +1,44 @@
 {
   "schema_version": "1.0.0",
-  "method_version": "1.1.0",
+  "method_version": "1.2.0",
+  "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+  "target_type": "E3_complete_fusion_population_calibrated",
+  "target_mapping": "FAA and equal alpha-suppression/engagement EEG arousal; equal EEG/HR physiology arousal; 0.5 physiology + 0.5 E3 reports",
   "cohort": {
-    "rows": 14,
+    "rows": 23,
     "ids": [
+      "E3:Subj_M:Rm_028",
+      "E3:Subj_M:Rm_026",
+      "E3:Subj_M:Rm_025",
+      "E3:Subj_M:Rm_024",
+      "E3:Subj_M:Rm_023",
+      "E3:Subj_M:Rm_022",
+      "E3:Subj_D:Rm_022",
+      "E3:Subj_D:Rm_023",
+      "E3:Subj_B:Rm_030",
       "E3:Subj_B:Rm_029",
+      "E3:Subj_B:Rm_028",
       "E3:Subj_B:Rm_027",
-      "E3:Subj_H:Rm_021",
-      "E3:Subj_H:Rm_023",
+      "E3:Subj_B:Rm_026",
+      "E3:Subj_B:Rm_025",
+      "E3:Subj_B:Rm_024",
+      "E3:Subj_B:Rm_023",
+      "E3:Subj_B:Rm_022",
+      "E3:Subj_B:Rm_021",
       "E3:Subj_I:Rm_030",
       "E3:Subj_I:Rm_029",
-      "E3:Subj_I:Rm_028",
       "E3:Subj_I:Rm_027",
-      "E3:Subj_I:Rm_026",
       "E3:Subj_I:Rm_025",
-      "E3:Subj_I:Rm_024",
-      "E3:Subj_I:Rm_023",
-      "E3:Subj_I:Rm_022",
       "E3:Subj_I:Rm_021"
     ],
     "rooms": 10,
-    "participants": 3,
+    "participants": 4,
     "exclusions": {
       "not_experiment_3": 100,
-      "missing_raw_component:heart_rate_bpm,rmssd_ms": 24,
-      "missing_raw_component:rmssd_ms": 22
+      "missing_raw_component:heart_rate_bpm": 18,
+      "missing_raw_component:faa,alpha_suppression,engagement,heart_rate_bpm": 5,
+      "missing_raw_component:faa": 10,
+      "missing_raw_component:faa,heart_rate_bpm": 4
     }
   },
   "evaluation": {
@@ -36,6 +50,7 @@
           "train_indices": [
             0,
             1,
+            2,
             3,
             4,
             5,
@@ -45,139 +60,171 @@
             9,
             10,
             11,
-            12
+            12,
+            13,
+            14,
+            15,
+            16,
+            18,
+            19,
+            20,
+            21
           ],
           "test_indices": [
-            2,
-            13
+            17,
+            22
           ],
           "selection": {
-            "name": "random_forest",
-            "n_estimators": 100,
-            "max_depth": 2,
-            "min_samples_leaf": 5
+            "name": "dummy_mean"
           },
           "selection_status": "selected",
-          "valence_mae": 0.23883761812812804,
-          "arousal_mae": 0.5008852996433517,
-          "mean_mae": 0.36986145888573985,
-          "r2_valence": -0.944591637752823,
-          "r2_arousal": -38.30556182915121,
-          "baseline_median_mae": 0.3841297507896881,
-          "baseline_mean_mae": 0.3691718510488261,
+          "valence_mae": 0.22175475907950143,
+          "arousal_mae": 0.27087033976095154,
+          "mean_mae": 0.24631254942022648,
+          "r2_valence": -0.09434966702716907,
+          "r2_arousal": -1.4653074217334607,
+          "baseline_median_mae": 0.23022914759338386,
+          "baseline_mean_mae": 0.24631254942022648,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.2858591061145198,
-              "arousal_mae": 0.48240039546485636,
-              "mean_mae": 0.3841297507896881
+              "valence_mae": 0.22175475907950143,
+              "arousal_mae": 0.2387035361072663,
+              "mean_mae": 0.23022914759338386
             },
             "dummy_mean": {
-              "valence_mae": 0.23883761812812807,
-              "arousal_mae": 0.4995060839695242,
-              "mean_mae": 0.3691718510488261
+              "valence_mae": 0.22175475907950143,
+              "arousal_mae": 0.27087033976095154,
+              "mean_mae": 0.24631254942022648
             }
           },
           "inner_selection": {
             "scores": {
-              "name=dummy_median": 0.4025620601286623,
-              "name=dummy_mean": 0.38696037859097393,
-              "alpha=10.0:name=ridge": 0.5017285776033396,
-              "alpha=1.0:name=ridge": 0.657757455448905,
-              "alpha=0.1:name=ridge": 0.7234765288481761,
-              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3818939003940909,
-              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.384581469144327,
-              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3818939003940909,
-              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.384581469144327
+              "name=dummy_median": 0.353073073956764,
+              "name=dummy_mean": 0.3453497315562991,
+              "alpha=10.0:name=ridge": 0.36112549524350346,
+              "alpha=1.0:name=ridge": 0.38126968572204184,
+              "alpha=0.1:name=ridge": 0.3864933806118158,
+              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3478922089278087,
+              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.35343853929696806,
+              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3478922089278087,
+              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.35343853929696806
             },
             "calibrations": [
               {
                 "centers": {
-                  "faa": 1.2546204164835961,
-                  "beta_alpha": 0.35974576874635156,
-                  "heart_rate_bpm": 114.72317276476265,
-                  "rmssd_ms": 2.354269257979581
+                  "faa": 0.15893841811436893,
+                  "alpha_suppression": 9.655048810255067,
+                  "engagement": -1.1414399042589118,
+                  "heart_rate_bpm": 77.27008873040882
                 },
                 "scales": {
-                  "faa": 2.1229390856818755,
-                  "beta_alpha": 0.18523942518782335,
-                  "heart_rate_bpm": 2.309362853788845,
-                  "rmssd_ms": 0.3045459675015625
+                  "faa": 0.4106277154657715,
+                  "alpha_suppression": 0.1820702081958061,
+                  "engagement": 0.569349065250216,
+                  "heart_rate_bpm": 2.7988351088777774
                 },
                 "training_indices": [
+                  0,
                   1,
-                  2,
+                  3,
+                  4,
                   5,
                   6,
                   7,
                   9,
                   10,
-                  11
+                  12,
+                  14,
+                  15,
+                  16,
+                  18
                 ],
                 "validation_indices": [
-                  0,
-                  3,
-                  4,
-                  8
+                  2,
+                  8,
+                  11,
+                  13,
+                  17,
+                  19,
+                  20
                 ]
               },
               {
                 "centers": {
-                  "faa": 0.1360799578112717,
-                  "beta_alpha": 0.28532001679337715,
-                  "heart_rate_bpm": 115.27473257590857,
-                  "rmssd_ms": 2.3578970183119496
+                  "faa": 0.14497640723766736,
+                  "alpha_suppression": 9.771104911417638,
+                  "engagement": -0.9182229876324834,
+                  "heart_rate_bpm": 77.36947123378783
                 },
                 "scales": {
-                  "faa": 0.9380023670921994,
-                  "beta_alpha": 0.2472534740001487,
-                  "heart_rate_bpm": 1.8200749966519396,
-                  "rmssd_ms": 0.25856082204124176
+                  "faa": 0.3173818425408531,
+                  "alpha_suppression": 0.18853178668160112,
+                  "engagement": 0.3385057205624375,
+                  "heart_rate_bpm": 2.651490609368044
                 },
                 "training_indices": [
                   0,
                   2,
                   3,
-                  4,
-                  7,
+                  5,
+                  6,
                   8,
                   10,
-                  11
+                  11,
+                  13,
+                  14,
+                  16,
+                  17,
+                  19,
+                  20
                 ],
                 "validation_indices": [
                   1,
-                  5,
-                  6,
-                  9
+                  4,
+                  7,
+                  9,
+                  12,
+                  15,
+                  18
                 ]
               },
               {
                 "centers": {
-                  "faa": -0.23440347339571677,
-                  "beta_alpha": 0.3158219662256223,
-                  "heart_rate_bpm": 116.16922696295629,
-                  "rmssd_ms": 2.3362020898379248
+                  "faa": 0.033496761837009004,
+                  "alpha_suppression": 9.794689824794686,
+                  "engagement": -0.9717518697220389,
+                  "heart_rate_bpm": 77.22020512548697
                 },
                 "scales": {
-                  "faa": 0.4114159312804806,
-                  "beta_alpha": 0.12416696950860924,
-                  "heart_rate_bpm": 1.6810231965682685,
-                  "rmssd_ms": 0.3417226770389019
+                  "faa": 0.32546911256857736,
+                  "alpha_suppression": 0.2654667020930724,
+                  "engagement": 0.6382609828288203,
+                  "heart_rate_bpm": 4.141671322531737
                 },
                 "training_indices": [
-                  0,
                   1,
-                  3,
+                  2,
                   4,
-                  5,
-                  6,
+                  7,
                   8,
-                  9
+                  9,
+                  11,
+                  12,
+                  13,
+                  15,
+                  17,
+                  18,
+                  19,
+                  20
                 ],
                 "validation_indices": [
-                  2,
-                  7,
+                  0,
+                  3,
+                  5,
+                  6,
                   10,
-                  11
+                  14,
+                  16
                 ]
               }
             ],
@@ -193,148 +240,175 @@
             2,
             3,
             4,
-            5,
-            6,
             7,
             8,
             9,
             10,
             11,
-            13
+            12,
+            13,
+            14,
+            15,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
           ],
           "test_indices": [
-            12
+            5,
+            6,
+            16
           ],
           "selection": {
-            "name": "random_forest",
-            "n_estimators": 100,
-            "max_depth": 2,
-            "min_samples_leaf": 3
+            "name": "dummy_mean"
           },
           "selection_status": "selected",
-          "valence_mae": 0.19245480464777914,
-          "arousal_mae": 0.7161940658001325,
-          "mean_mae": 0.4543244352239558,
-          "r2_valence": null,
-          "r2_arousal": null,
-          "baseline_median_mae": 0.471438293295114,
-          "baseline_mean_mae": 0.5286538049071446,
+          "valence_mae": 0.4664793831801624,
+          "arousal_mae": 0.23215871778556452,
+          "mean_mae": 0.3493190504828635,
+          "r2_valence": -3.6779866277848443,
+          "r2_arousal": -0.3860788926163463,
+          "baseline_median_mae": 0.3479607484585414,
+          "baseline_mean_mae": 0.3493190504828635,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.243142530527851,
-              "arousal_mae": 0.699734056062377,
-              "mean_mae": 0.471438293295114
+              "valence_mae": 0.46243696664713313,
+              "arousal_mae": 0.23348453026994975,
+              "mean_mae": 0.3479607484585414
             },
             "dummy_mean": {
-              "valence_mae": 0.29191923917066903,
-              "arousal_mae": 0.7653883706436202,
-              "mean_mae": 0.5286538049071446
+              "valence_mae": 0.4664793831801624,
+              "arousal_mae": 0.23215871778556452,
+              "mean_mae": 0.3493190504828635
             }
           },
           "inner_selection": {
             "scores": {
-              "name=dummy_median": 0.5221623627498045,
-              "name=dummy_mean": 0.49516280972940685,
-              "alpha=10.0:name=ridge": 0.51656712168072,
-              "alpha=1.0:name=ridge": 0.6880501308188197,
-              "alpha=0.1:name=ridge": 0.7470104951554065,
-              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.4972175682486981,
-              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.47964391055251787,
-              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.4972175682486981,
-              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.47964391055251787
+              "name=dummy_median": 0.34882281087383,
+              "name=dummy_mean": 0.33628343218966505,
+              "alpha=10.0:name=ridge": 0.34412128313661683,
+              "alpha=1.0:name=ridge": 0.3734543693360006,
+              "alpha=0.1:name=ridge": 0.38141168127086095,
+              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.337763985991108,
+              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.349670111167269,
+              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.337763985991108,
+              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.349670111167269
             },
             "calibrations": [
               {
                 "centers": {
-                  "faa": 0.1360799578112717,
-                  "beta_alpha": 0.24549434574833728,
-                  "heart_rate_bpm": 115.7185261231504,
-                  "rmssd_ms": 2.3341525620449546
+                  "faa": 0.012489306531126232,
+                  "alpha_suppression": 9.7829472803625,
+                  "engagement": -1.1325773424543344,
+                  "heart_rate_bpm": 77.12082262210797
                 },
                 "scales": {
-                  "faa": 0.6389242585414241,
-                  "beta_alpha": 0.24522655821231068,
-                  "heart_rate_bpm": 1.6513945406481159,
-                  "rmssd_ms": 0.2747209541088851
+                  "faa": 0.3754076986545612,
+                  "alpha_suppression": 0.2770024512760924,
+                  "engagement": 0.5918340502475841,
+                  "heart_rate_bpm": 4.585802070302309
                 },
                 "training_indices": [
                   1,
-                  3,
                   4,
+                  5,
                   6,
                   7,
-                  8,
                   9,
-                  11
+                  10,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17,
+                  19
                 ],
                 "validation_indices": [
                   0,
                   2,
-                  5,
-                  10,
-                  12
+                  3,
+                  8,
+                  11,
+                  12,
+                  18
                 ]
               },
               {
                 "centers": {
-                  "faa": 0.05643990717665304,
-                  "beta_alpha": 0.3128502828367191,
-                  "heart_rate_bpm": 114.50381679389312,
-                  "rmssd_ms": 2.3563187857725514
+                  "faa": 0.054504217142891775,
+                  "alpha_suppression": 9.7829472803625,
+                  "engagement": -0.9433278797306303,
+                  "heart_rate_bpm": 77.31958762886597
                 },
                 "scales": {
-                  "faa": 0.9626919394337172,
-                  "beta_alpha": 0.4540075497556486,
-                  "heart_rate_bpm": 3.3027890812962317,
-                  "rmssd_ms": 0.21567574233892026
+                  "faa": 0.5370311251671316,
+                  "alpha_suppression": 0.15433904369659945,
+                  "engagement": 0.35445334559167346,
+                  "heart_rate_bpm": 3.9922295737805897
                 },
                 "training_indices": [
                   0,
+                  1,
                   2,
                   3,
-                  5,
                   6,
-                  9,
+                  7,
+                  8,
                   10,
                   11,
-                  12
+                  12,
+                  15,
+                  16,
+                  18
                 ],
                 "validation_indices": [
-                  1,
                   4,
-                  7,
-                  8
+                  5,
+                  9,
+                  13,
+                  14,
+                  17,
+                  19
                 ]
               },
               {
                 "centers": {
-                  "faa": -0.09276938260679302,
-                  "beta_alpha": 0.25778975075003513,
-                  "heart_rate_bpm": 114.50381679389312,
-                  "rmssd_ms": 2.3530985001943994
+                  "faa": 0.19518586449403097,
+                  "alpha_suppression": 9.737495960330246,
+                  "engagement": -1.0459116209072308,
+                  "heart_rate_bpm": 77.22020512548697
                 },
                 "scales": {
-                  "faa": 0.4573663711747083,
-                  "beta_alpha": 0.24010176761505356,
-                  "heart_rate_bpm": 3.6401499933038792,
-                  "rmssd_ms": 0.27833121123395793
+                  "faa": 0.3411040684539347,
+                  "alpha_suppression": 0.3099827187171511,
+                  "engagement": 0.3732391508033333,
+                  "heart_rate_bpm": 1.997455166012995
                 },
                 "training_indices": [
                   0,
-                  1,
                   2,
+                  3,
                   4,
                   5,
-                  7,
                   8,
-                  10,
-                  12
+                  9,
+                  11,
+                  12,
+                  13,
+                  14,
+                  17,
+                  18,
+                  19
                 ],
                 "validation_indices": [
-                  3,
+                  1,
                   6,
-                  9,
-                  11
+                  7,
+                  10,
+                  15,
+                  16
                 ]
               }
             ],
@@ -348,147 +422,180 @@
             0,
             1,
             2,
-            4,
+            3,
             5,
             6,
-            7,
             8,
             9,
             10,
+            11,
             12,
-            13
+            13,
+            14,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
           ],
           "test_indices": [
-            3,
-            11
+            4,
+            7,
+            15
           ],
           "selection": {
             "name": "random_forest",
             "n_estimators": 100,
             "max_depth": 2,
-            "min_samples_leaf": 5
+            "min_samples_leaf": 3
           },
           "selection_status": "selected",
-          "valence_mae": 0.5817249414384347,
-          "arousal_mae": 0.6355902424645725,
-          "mean_mae": 0.6086575919515036,
-          "r2_valence": -8263875441.944337,
-          "r2_arousal": -0.034438690552382134,
-          "baseline_median_mae": 0.632502437145736,
-          "baseline_mean_mae": 0.6183782501893014,
+          "valence_mae": 0.31823115299784605,
+          "arousal_mae": 0.174605427533711,
+          "mean_mae": 0.24641829026577852,
+          "r2_valence": -0.03897334838965749,
+          "r2_arousal": -0.08879944278762975,
+          "baseline_median_mae": 0.23571242301475137,
+          "baseline_mean_mae": 0.2323460215934095,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.6294146318268993,
-              "arousal_mae": 0.6355902424645725,
-              "mean_mae": 0.632502437145736
+              "valence_mae": 0.3152191412931976,
+              "arousal_mae": 0.1562057047363051,
+              "mean_mae": 0.23571242301475137
             },
             "dummy_mean": {
-              "valence_mae": 0.6011662579140303,
-              "arousal_mae": 0.6355902424645725,
-              "mean_mae": 0.6183782501893014
+              "valence_mae": 0.30979865417816355,
+              "arousal_mae": 0.15489338900865546,
+              "mean_mae": 0.2323460215934095
             }
           },
           "inner_selection": {
             "scores": {
-              "name=dummy_median": 0.39073190416340303,
-              "name=dummy_mean": 0.392166486992166,
-              "alpha=10.0:name=ridge": 0.6293771903103585,
-              "alpha=1.0:name=ridge": 0.9959238145223682,
-              "alpha=0.1:name=ridge": 1.1307904748044022,
-              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3895726196257347,
-              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.39685335824076956,
-              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3895726196257347,
-              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.39685335824076956
+              "name=dummy_median": 0.3800409723683351,
+              "name=dummy_mean": 0.36765404257384293,
+              "alpha=10.0:name=ridge": 0.3788739753846092,
+              "alpha=1.0:name=ridge": 0.39563948045318936,
+              "alpha=0.1:name=ridge": 0.401599895033094,
+              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.36651070470820435,
+              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3663863535764453,
+              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.36651070470820435,
+              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3663863535764453
             },
             "calibrations": [
               {
                 "centers": {
-                  "faa": 0.24099854434954615,
-                  "beta_alpha": 0.27599629518058244,
-                  "heart_rate_bpm": 114.72317276476265,
-                  "rmssd_ms": 2.3547086429834754
+                  "faa": 0.012489306531126232,
+                  "alpha_suppression": 9.7829472803625,
+                  "engagement": -1.1325773424543344,
+                  "heart_rate_bpm": 77.41935483870968
                 },
                 "scales": {
-                  "faa": 0.8673104279190952,
-                  "beta_alpha": 0.40783738227325983,
-                  "heart_rate_bpm": 2.309362853788845,
-                  "rmssd_ms": 0.24939067448552318
+                  "faa": 0.3754076986545612,
+                  "alpha_suppression": 0.2770024512760924,
+                  "engagement": 0.7133551837918539,
+                  "heart_rate_bpm": 4.1401444390948665
                 },
                 "training_indices": [
                   1,
-                  2,
+                  4,
                   5,
                   6,
                   7,
                   9,
                   10,
-                  11
+                  13,
+                  14,
+                  15,
+                  16,
+                  17,
+                  19
                 ],
                 "validation_indices": [
                   0,
+                  2,
                   3,
-                  4,
-                  8
+                  8,
+                  11,
+                  12,
+                  18
                 ]
               },
               {
                 "centers": {
-                  "faa": -0.01816473771506999,
-                  "beta_alpha": 0.07095337391528841,
-                  "heart_rate_bpm": 115.27473257590857,
-                  "rmssd_ms": 2.3583364033158443
+                  "faa": 0.054504217142891775,
+                  "alpha_suppression": 9.7829472803625,
+                  "engagement": -0.9433278797306303,
+                  "heart_rate_bpm": 77.31958762886597
                 },
                 "scales": {
-                  "faa": 0.4769097466584987,
-                  "beta_alpha": 0.332147254456394,
-                  "heart_rate_bpm": 1.8200749966519396,
-                  "rmssd_ms": 0.19737557934965883
+                  "faa": 0.5370311251671316,
+                  "alpha_suppression": 0.15433904369659945,
+                  "engagement": 0.35445334559167346,
+                  "heart_rate_bpm": 3.9922295737805897
+                },
+                "training_indices": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  6,
+                  7,
+                  8,
+                  10,
+                  11,
+                  12,
+                  15,
+                  16,
+                  18
+                ],
+                "validation_indices": [
+                  4,
+                  5,
+                  9,
+                  13,
+                  14,
+                  17,
+                  19
+                ]
+              },
+              {
+                "centers": {
+                  "faa": 0.13288848101042072,
+                  "alpha_suppression": 9.737495960330246,
+                  "engagement": -1.0459116209072308,
+                  "heart_rate_bpm": 77.36947123378783
+                },
+                "scales": {
+                  "faa": 0.3173818425408531,
+                  "alpha_suppression": 0.28931745292874567,
+                  "engagement": 0.42880615280020484,
+                  "heart_rate_bpm": 1.997455166012995
                 },
                 "training_indices": [
                   0,
                   2,
                   3,
                   4,
-                  7,
+                  5,
                   8,
-                  10,
-                  11
+                  9,
+                  11,
+                  12,
+                  13,
+                  14,
+                  17,
+                  18,
+                  19
                 ],
                 "validation_indices": [
                   1,
-                  5,
                   6,
-                  9
-                ]
-              },
-              {
-                "centers": {
-                  "faa": -0.23440347339571677,
-                  "beta_alpha": 0.3158219662256223,
-                  "heart_rate_bpm": 116.16922696295629,
-                  "rmssd_ms": 2.3362020898379248
-                },
-                "scales": {
-                  "faa": 0.4114159312804806,
-                  "beta_alpha": 0.12416696950860924,
-                  "heart_rate_bpm": 1.6810231965682685,
-                  "rmssd_ms": 0.3417226770389019
-                },
-                "training_indices": [
-                  0,
-                  1,
-                  3,
-                  4,
-                  5,
-                  6,
-                  8,
-                  9
-                ],
-                "validation_indices": [
-                  2,
                   7,
                   10,
-                  11
+                  15,
+                  16
                 ]
               }
             ],
@@ -502,150 +609,180 @@
             0,
             1,
             2,
-            3,
             4,
             5,
             6,
             7,
             8,
             9,
+            10,
             11,
             12,
-            13
+            13,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
           ],
           "test_indices": [
-            10
+            3,
+            14
           ],
           "selection": {
-            "name": "random_forest",
-            "n_estimators": 100,
-            "max_depth": 2,
-            "min_samples_leaf": 3
+            "name": "dummy_mean"
           },
           "selection_status": "selected",
-          "valence_mae": 0.7367368981713206,
-          "arousal_mae": 0.3289304385297939,
-          "mean_mae": 0.5328336683505572,
-          "r2_valence": null,
-          "r2_arousal": null,
-          "baseline_median_mae": 0.5056270818937314,
-          "baseline_mean_mae": 0.4711321030959261,
+          "valence_mae": 0.6185656279038309,
+          "arousal_mae": 0.29022571166622896,
+          "mean_mae": 0.4543956697850299,
+          "r2_valence": -40.446293584432645,
+          "r2_arousal": -3.401557211789277,
+          "baseline_median_mae": 0.4704432641309263,
+          "baseline_mean_mae": 0.4543956697850299,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.723530976522958,
-              "arousal_mae": 0.28772318726450474,
-              "mean_mae": 0.5056270818937314
+              "valence_mae": 0.6809828387680857,
+              "arousal_mae": 0.25990368949376685,
+              "mean_mae": 0.4704432641309263
             },
             "dummy_mean": {
-              "valence_mae": 0.678525542740408,
-              "arousal_mae": 0.2637386634514442,
-              "mean_mae": 0.4711321030959261
+              "valence_mae": 0.6185656279038309,
+              "arousal_mae": 0.29022571166622896,
+              "mean_mae": 0.4543956697850299
             }
           },
           "inner_selection": {
             "scores": {
-              "name=dummy_median": 0.47900734979382203,
-              "name=dummy_mean": 0.45037945502072296,
-              "alpha=10.0:name=ridge": 0.5834162478134738,
-              "alpha=1.0:name=ridge": 0.9267946841537609,
-              "alpha=0.1:name=ridge": 1.0270504662077258,
-              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.44874604276141955,
-              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.4274585427462031,
-              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.44874604276141955,
-              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.4274585427462031
+              "name=dummy_median": 0.33617004798346545,
+              "name=dummy_mean": 0.3330971070562508,
+              "alpha=10.0:name=ridge": 0.3460325307108414,
+              "alpha=1.0:name=ridge": 0.3961514535319831,
+              "alpha=0.1:name=ridge": 0.40547296247930625,
+              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3345118863504468,
+              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3386538019697809,
+              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3345118863504468,
+              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3386538019697809
             },
             "calibrations": [
               {
                 "centers": {
-                  "faa": 0.1360799578112717,
-                  "beta_alpha": 0.24549434574833728,
-                  "heart_rate_bpm": 115.7185261231504,
-                  "rmssd_ms": 2.3341525620449546
+                  "faa": 0.06824785414901191,
+                  "alpha_suppression": 9.655048810255067,
+                  "engagement": -1.2225946760239494,
+                  "heart_rate_bpm": 77.27008873040882
                 },
                 "scales": {
-                  "faa": 0.6389242585414241,
-                  "beta_alpha": 0.24522655821231068,
-                  "heart_rate_bpm": 1.6513945406481159,
-                  "rmssd_ms": 0.2747209541088851
+                  "faa": 0.2829122772299789,
+                  "alpha_suppression": 0.2404889539152947,
+                  "engagement": 0.7455665029018853,
+                  "heart_rate_bpm": 2.7988351088777774
                 },
                 "training_indices": [
+                  0,
                   1,
                   3,
                   4,
+                  5,
                   6,
-                  7,
                   8,
                   9,
-                  10
+                  11,
+                  13,
+                  14,
+                  15,
+                  17,
+                  20
                 ],
                 "validation_indices": [
-                  0,
                   2,
-                  5,
-                  11,
-                  12
+                  7,
+                  10,
+                  12,
+                  16,
+                  18,
+                  19
                 ]
               },
               {
                 "centers": {
-                  "faa": 0.05643990717665304,
-                  "beta_alpha": 0.3128502828367191,
-                  "heart_rate_bpm": 114.50381679389312,
-                  "rmssd_ms": 2.3635743064372887
+                  "faa": 0.06859162044847444,
+                  "alpha_suppression": 9.794689824794686,
+                  "engagement": -0.9512868895453788,
+                  "heart_rate_bpm": 77.36947123378783
                 },
                 "scales": {
-                  "faa": 0.9626919394337172,
-                  "beta_alpha": 0.2523877705928946,
-                  "heart_rate_bpm": 3.3027890812962317,
-                  "rmssd_ms": 0.20491870740138068
+                  "faa": 0.25273739786542093,
+                  "alpha_suppression": 0.23562881246913694,
+                  "engagement": 0.3875262615384961,
+                  "heart_rate_bpm": 2.651490609368044
                 },
                 "training_indices": [
                   0,
                   2,
-                  3,
+                  4,
                   5,
-                  6,
+                  7,
                   9,
                   10,
-                  11,
-                  12
+                  12,
+                  14,
+                  15,
+                  16,
+                  18,
+                  19,
+                  20
                 ],
                 "validation_indices": [
                   1,
-                  4,
-                  7,
-                  8
+                  3,
+                  6,
+                  8,
+                  11,
+                  13,
+                  17
                 ]
               },
               {
                 "centers": {
-                  "faa": -0.09276938260679302,
-                  "beta_alpha": 0.25778975075003513,
-                  "heart_rate_bpm": 114.94252873563218,
-                  "rmssd_ms": 2.3530985001943994
+                  "faa": 0.033496761837009004,
+                  "alpha_suppression": 9.794689824794686,
+                  "engagement": -0.9717518697220389,
+                  "heart_rate_bpm": 77.22020512548697
                 },
                 "scales": {
-                  "faa": 0.4573663711747083,
-                  "beta_alpha": 0.24010176761505356,
-                  "heart_rate_bpm": 2.9897156684815522,
-                  "rmssd_ms": 0.27833121123395793
+                  "faa": 0.32546911256857736,
+                  "alpha_suppression": 0.2654667020930724,
+                  "engagement": 0.6382609828288203,
+                  "heart_rate_bpm": 4.141671322531737
                 },
                 "training_indices": [
-                  0,
                   1,
                   2,
-                  4,
-                  5,
-                  7,
-                  8,
-                  11,
-                  12
-                ],
-                "validation_indices": [
                   3,
                   6,
+                  7,
+                  8,
+                  10,
+                  11,
+                  12,
+                  13,
+                  16,
+                  17,
+                  18,
+                  19
+                ],
+                "validation_indices": [
+                  0,
+                  4,
+                  5,
                   9,
-                  10
+                  14,
+                  15,
+                  20
                 ]
               }
             ],
@@ -658,20 +795,29 @@
           "train_indices": [
             0,
             1,
-            2,
             3,
             4,
             5,
             6,
             7,
             8,
+            9,
             10,
             11,
             12,
-            13
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            22
           ],
           "test_indices": [
-            9
+            2,
+            13,
+            21
           ],
           "selection": {
             "name": "random_forest",
@@ -680,129 +826,150 @@
             "min_samples_leaf": 3
           },
           "selection_status": "selected",
-          "valence_mae": 0.20044825482466572,
-          "arousal_mae": 0.6420362578859788,
-          "mean_mae": 0.4212422563553223,
-          "r2_valence": null,
-          "r2_arousal": null,
-          "baseline_median_mae": 0.3321471695557579,
-          "baseline_mean_mae": 0.30624952967315666,
+          "valence_mae": 0.3294829001066595,
+          "arousal_mae": 0.24391701610445915,
+          "mean_mae": 0.2866999581055593,
+          "r2_valence": -0.9812832310773145,
+          "r2_arousal": -0.08755702657405084,
+          "baseline_median_mae": 0.2728432830654643,
+          "baseline_mean_mae": 0.25759893539623724,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.09345283545301478,
-              "arousal_mae": 0.5708415036585011,
-              "mean_mae": 0.3321471695557579
+              "valence_mae": 0.2952143899003007,
+              "arousal_mae": 0.2504721762306279,
+              "mean_mae": 0.2728432830654643
             },
             "dummy_mean": {
-              "valence_mae": 0.026570497687386063,
-              "arousal_mae": 0.5859285616589273,
-              "mean_mae": 0.30624952967315666
+              "valence_mae": 0.2772348351552257,
+              "arousal_mae": 0.23796303563724877,
+              "mean_mae": 0.25759893539623724
             }
           },
           "inner_selection": {
             "scores": {
-              "name=dummy_median": 0.4585692899945186,
-              "name=dummy_mean": 0.4719671383001908,
-              "alpha=10.0:name=ridge": 0.5201009879586803,
-              "alpha=1.0:name=ridge": 0.7966656050217034,
-              "alpha=0.1:name=ridge": 0.8771781870579064,
-              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.46877283270894665,
-              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.43223113656210693,
-              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.46877283270894665,
-              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.43223113656210693
+              "name=dummy_median": 0.3498454309672711,
+              "name=dummy_mean": 0.34774610480827106,
+              "alpha=10.0:name=ridge": 0.42765204552606484,
+              "alpha=1.0:name=ridge": 0.49649538216670247,
+              "alpha=0.1:name=ridge": 0.5153928880277229,
+              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3460258817080255,
+              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.33544454711247335,
+              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3460258817080255,
+              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.33544454711247335
             },
             "calibrations": [
               {
                 "centers": {
-                  "faa": 0.24099854434954615,
-                  "beta_alpha": 0.28829170018228034,
-                  "heart_rate_bpm": 115.16696631200448,
-                  "rmssd_ms": 2.3341525620449546
+                  "faa": 0.012489306531126232,
+                  "alpha_suppression": 9.7829472803625,
+                  "engagement": -1.1325773424543344,
+                  "heart_rate_bpm": 77.41935483870968
                 },
                 "scales": {
-                  "faa": 1.023624625057467,
-                  "beta_alpha": 0.1817752005285467,
-                  "heart_rate_bpm": 2.319603605744339,
-                  "rmssd_ms": 0.2747209541088851
+                  "faa": 0.3754076986545612,
+                  "alpha_suppression": 0.2770024512760924,
+                  "engagement": 0.7133551837918539,
+                  "heart_rate_bpm": 4.1401444390948665
                 },
                 "training_indices": [
                   1,
-                  3,
                   4,
-                  6,
+                  5,
                   7,
                   8,
-                  9,
-                  10
+                  10,
+                  11,
+                  14,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19
                 ],
                 "validation_indices": [
                   0,
                   2,
-                  5,
-                  11,
-                  12
+                  3,
+                  6,
+                  9,
+                  12,
+                  13
                 ]
               },
               {
                 "centers": {
-                  "faa": 2.2429637527139903,
-                  "beta_alpha": 0.3187936496145255,
-                  "heart_rate_bpm": 114.50381679389312,
-                  "rmssd_ms": 2.3563187857725514
+                  "faa": 0.23519781247468075,
+                  "alpha_suppression": 9.6961078468751,
+                  "engagement": -0.9592458993601274,
+                  "heart_rate_bpm": 77.12082262210797
                 },
                 "scales": {
-                  "faa": 2.167913115505469,
-                  "beta_alpha": 0.24357613500811884,
-                  "heart_rate_bpm": 3.3027890812962317,
-                  "rmssd_ms": 0.21567574233892026
+                  "faa": 0.4358418454760184,
+                  "alpha_suppression": 0.20445152592892638,
+                  "engagement": 0.4795589041060438,
+                  "heart_rate_bpm": 3.6975405747611654
+                },
+                "training_indices": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  6,
+                  7,
+                  8,
+                  9,
+                  11,
+                  12,
+                  13,
+                  16,
+                  17
+                ],
+                "validation_indices": [
+                  4,
+                  5,
+                  10,
+                  14,
+                  15,
+                  18,
+                  19
+                ]
+              },
+              {
+                "centers": {
+                  "faa": 0.19518586449403097,
+                  "alpha_suppression": 9.687477434218895,
+                  "engagement": -1.2076406456293554,
+                  "heart_rate_bpm": 77.27008873040882
+                },
+                "scales": {
+                  "faa": 0.3411040684539347,
+                  "alpha_suppression": 0.2543446511636339,
+                  "engagement": 0.587495616474612,
+                  "heart_rate_bpm": 1.6002237180176455
                 },
                 "training_indices": [
                   0,
                   2,
                   3,
+                  4,
                   5,
                   6,
                   9,
                   10,
-                  11,
-                  12
+                  12,
+                  13,
+                  14,
+                  15,
+                  18,
+                  19
                 ],
                 "validation_indices": [
                   1,
-                  4,
-                  7,
-                  8
-                ]
-              },
-              {
-                "centers": {
-                  "faa": -0.09276938260679302,
-                  "beta_alpha": 0.25778975075003513,
-                  "heart_rate_bpm": 114.94252873563218,
-                  "rmssd_ms": 2.3530985001943994
-                },
-                "scales": {
-                  "faa": 0.4573663711747083,
-                  "beta_alpha": 0.24010176761505356,
-                  "heart_rate_bpm": 2.9897156684815522,
-                  "rmssd_ms": 0.27833121123395793
-                },
-                "training_indices": [
-                  0,
-                  1,
-                  2,
-                  4,
-                  5,
                   7,
                   8,
                   11,
-                  12
-                ],
-                "validation_indices": [
-                  3,
-                  6,
-                  9,
-                  10
+                  16,
+                  17
                 ]
               }
             ],
@@ -814,152 +981,182 @@
           "status": "evaluated",
           "train_indices": [
             0,
-            1,
             2,
             3,
             4,
             5,
             6,
             7,
+            8,
             9,
             10,
             11,
-            12,
-            13
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
           ],
           "test_indices": [
-            8
+            1,
+            12
           ],
           "selection": {
-            "name": "random_forest",
-            "n_estimators": 100,
-            "max_depth": 2,
-            "min_samples_leaf": 3
+            "name": "dummy_median"
           },
           "selection_status": "selected",
-          "valence_mae": 0.7313534393637962,
-          "arousal_mae": 0.6294002973893086,
-          "mean_mae": 0.6803768683765523,
-          "r2_valence": null,
-          "r2_arousal": null,
-          "baseline_median_mae": 0.5453509959479684,
-          "baseline_mean_mae": 0.6185135049586811,
+          "valence_mae": 0.4461224256428892,
+          "arousal_mae": 0.29045181440680357,
+          "mean_mae": 0.36828712002484637,
+          "r2_valence": -0.029809385503517527,
+          "r2_arousal": -0.14958893286858377,
+          "baseline_median_mae": 0.36828712002484637,
+          "baseline_mean_mae": 0.36828712002484637,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.564716076732354,
-              "arousal_mae": 0.5259859151635828,
-              "mean_mae": 0.5453509959479684
+              "valence_mae": 0.4461224256428892,
+              "arousal_mae": 0.29045181440680357,
+              "mean_mae": 0.36828712002484637
             },
             "dummy_mean": {
-              "valence_mae": 0.6303782769024213,
-              "arousal_mae": 0.6066487330149408,
-              "mean_mae": 0.6185135049586811
+              "valence_mae": 0.4461224256428892,
+              "arousal_mae": 0.29045181440680357,
+              "mean_mae": 0.36828712002484637
             }
           },
           "inner_selection": {
             "scores": {
-              "name=dummy_median": 0.39024559654104907,
-              "name=dummy_mean": 0.4104584632665296,
-              "alpha=10.0:name=ridge": 0.5007338300428312,
-              "alpha=1.0:name=ridge": 0.9103171904221868,
-              "alpha=0.1:name=ridge": 1.0464901357673078,
-              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.4074662430400655,
-              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3805660428786589,
-              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.4074662430400655,
-              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3805660428786589
+              "name=dummy_median": 0.3268598490541452,
+              "name=dummy_mean": 0.33338820043793016,
+              "alpha=10.0:name=ridge": 0.4002533580636533,
+              "alpha=1.0:name=ridge": 0.4452741601912849,
+              "alpha=0.1:name=ridge": 0.44735958112763935,
+              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.33730026311072925,
+              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3408325227007687,
+              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.33730026311072925,
+              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3408325227007687
             },
             "calibrations": [
               {
                 "centers": {
-                  "faa": 0.1613584937149275,
-                  "beta_alpha": 0.28829170018228034,
-                  "heart_rate_bpm": 115.05537660503904,
-                  "rmssd_ms": 2.354269257979581
+                  "faa": 0.13288848101042072,
+                  "alpha_suppression": 9.687477434218895,
+                  "engagement": -1.2076406456293554,
+                  "heart_rate_bpm": 77.27008873040882
                 },
                 "scales": {
-                  "faa": 0.9055502859865814,
-                  "beta_alpha": 0.1817752005285467,
-                  "heart_rate_bpm": 2.485046505291289,
-                  "rmssd_ms": 0.23408183126594778
+                  "faa": 0.4015869243556674,
+                  "alpha_suppression": 0.2543446511636339,
+                  "engagement": 0.6290684737923484,
+                  "heart_rate_bpm": 1.997455166012995
                 },
                 "training_indices": [
-                  1,
-                  3,
-                  4,
-                  6,
-                  7,
-                  8,
-                  9,
-                  10
-                ],
-                "validation_indices": [
                   0,
                   2,
+                  3,
+                  4,
                   5,
+                  6,
+                  8,
+                  9,
+                  12,
+                  13,
+                  14,
+                  15,
+                  17,
+                  20
+                ],
+                "validation_indices": [
+                  1,
+                  7,
+                  10,
                   11,
-                  12
+                  16,
+                  18,
+                  19
                 ]
               },
               {
                 "centers": {
-                  "faa": 2.2429637527139903,
-                  "beta_alpha": 0.3187936496145255,
-                  "heart_rate_bpm": 114.50381679389312,
-                  "rmssd_ms": 2.3563187857725514
+                  "faa": 0.06859162044847444,
+                  "alpha_suppression": 9.794689824794686,
+                  "engagement": -0.9512868895453788,
+                  "heart_rate_bpm": 77.36947123378783
                 },
                 "scales": {
-                  "faa": 2.167913115505469,
-                  "beta_alpha": 0.24357613500811884,
-                  "heart_rate_bpm": 3.3027890812962317,
-                  "rmssd_ms": 0.21567574233892026
+                  "faa": 0.25273739786542093,
+                  "alpha_suppression": 0.23562881246913694,
+                  "engagement": 0.3875262615384961,
+                  "heart_rate_bpm": 2.651490609368044
                 },
                 "training_indices": [
                   0,
-                  2,
-                  3,
+                  1,
+                  4,
                   5,
-                  6,
+                  7,
                   9,
                   10,
                   11,
-                  12
+                  14,
+                  15,
+                  16,
+                  18,
+                  19,
+                  20
                 ],
                 "validation_indices": [
-                  1,
-                  4,
-                  7,
-                  8
+                  2,
+                  3,
+                  6,
+                  8,
+                  12,
+                  13,
+                  17
                 ]
               },
               {
                 "centers": {
-                  "faa": -0.09276938260679302,
-                  "beta_alpha": 0.25778975075003513,
-                  "heart_rate_bpm": 114.94252873563218,
-                  "rmssd_ms": 2.3635743064372887
+                  "faa": 0.1308890039320847,
+                  "alpha_suppression": 9.794689824794686,
+                  "engagement": -0.9182229876324834,
+                  "heart_rate_bpm": 77.22020512548697
                 },
                 "scales": {
-                  "faa": 0.45594642357597315,
-                  "beta_alpha": 0.24010176761505356,
-                  "heart_rate_bpm": 2.9897156684815522,
-                  "rmssd_ms": 0.20491870740138068
+                  "faa": 0.4015869243556674,
+                  "alpha_suppression": 0.1942363183523497,
+                  "engagement": 0.5625503184964737,
+                  "heart_rate_bpm": 3.8448850742708776
                 },
                 "training_indices": [
-                  0,
                   1,
                   2,
-                  4,
-                  5,
-                  7,
-                  8,
-                  11,
-                  12
-                ],
-                "validation_indices": [
                   3,
                   6,
+                  7,
+                  8,
+                  10,
+                  11,
+                  12,
+                  13,
+                  16,
+                  17,
+                  18,
+                  19
+                ],
+                "validation_indices": [
+                  0,
+                  4,
+                  5,
                   9,
-                  10
+                  14,
+                  15,
+                  20
                 ]
               }
             ],
@@ -971,149 +1168,182 @@
           "status": "evaluated",
           "train_indices": [
             0,
+            1,
             2,
             3,
             4,
             5,
             6,
+            7,
             8,
             9,
             10,
-            11,
             12,
-            13
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            21,
+            22
           ],
           "test_indices": [
-            1,
-            7
+            11,
+            20
           ],
           "selection": {
-            "name": "random_forest",
-            "n_estimators": 100,
-            "max_depth": 2,
-            "min_samples_leaf": 3
+            "name": "dummy_median"
           },
           "selection_status": "selected",
-          "valence_mae": 0.09735798685706361,
-          "arousal_mae": 0.41408525722212597,
-          "mean_mae": 0.2557216220395948,
-          "r2_valence": -0.04305103406020194,
-          "r2_arousal": -1.392980552800719,
-          "baseline_median_mae": 0.2886420693153517,
-          "baseline_mean_mae": 0.25128338720717625,
+          "valence_mae": 0.28072177852723257,
+          "arousal_mae": 0.5565909905444884,
+          "mean_mae": 0.41865638453586046,
+          "r2_valence": -0.22049868311206677,
+          "r2_arousal": -2.316870188792716,
+          "baseline_median_mae": 0.41865638453586046,
+          "baseline_mean_mae": 0.4230210852253338,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.09735798685706361,
-              "arousal_mae": 0.47992615177363973,
-              "mean_mae": 0.2886420693153517
+              "valence_mae": 0.28072177852723257,
+              "arousal_mae": 0.5565909905444884,
+              "mean_mae": 0.41865638453586046
             },
             "dummy_mean": {
-              "valence_mae": 0.09735798685706361,
-              "arousal_mae": 0.40520878755728884,
-              "mean_mae": 0.25128338720717625
+              "valence_mae": 0.28072177852723257,
+              "arousal_mae": 0.5653203919234351,
+              "mean_mae": 0.4230210852253338
             }
           },
           "inner_selection": {
             "scores": {
-              "name=dummy_median": 0.4676660352618344,
-              "name=dummy_mean": 0.447996218640797,
-              "alpha=10.0:name=ridge": 0.5548495305800122,
-              "alpha=1.0:name=ridge": 0.8078270970762044,
-              "alpha=0.1:name=ridge": 0.8864676562894961,
-              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.4503351581810517,
-              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.4451774968022309,
-              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.4503351581810517,
-              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.4451774968022309
+              "name=dummy_median": 0.322801396099842,
+              "name=dummy_mean": 0.3240718878701092,
+              "alpha=10.0:name=ridge": 0.35759850070997445,
+              "alpha=1.0:name=ridge": 0.42073234682601385,
+              "alpha=0.1:name=ridge": 0.4378809045657202,
+              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.327154884111547,
+              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3332803315433573,
+              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.327154884111547,
+              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3332803315433573
             },
             "calibrations": [
               {
                 "centers": {
-                  "faa": 2.4586666380633524,
-                  "beta_alpha": 0.09299019513139088,
-                  "heart_rate_bpm": 114.50381679389312,
-                  "rmssd_ms": 2.3547086429834754
+                  "faa": 0.13288848101042072,
+                  "alpha_suppression": 9.687477434218895,
+                  "engagement": -1.2076406456293554,
+                  "heart_rate_bpm": 77.27008873040882
                 },
                 "scales": {
-                  "faa": 1.3744801371926156,
-                  "beta_alpha": 0.42643951847840206,
-                  "heart_rate_bpm": 1.6262285012285085,
-                  "rmssd_ms": 0.115603586337314
+                  "faa": 0.4015869243556674,
+                  "alpha_suppression": 0.2543446511636339,
+                  "engagement": 0.6290684737923484,
+                  "heart_rate_bpm": 1.997455166012995
                 },
                 "training_indices": [
-                  1,
-                  2,
+                  0,
+                  3,
+                  4,
                   5,
                   6,
-                  8,
+                  7,
                   9,
                   10,
-                  11
+                  13,
+                  14,
+                  15,
+                  16,
+                  18,
+                  20
                 ],
                 "validation_indices": [
-                  0,
-                  3,
-                  4,
-                  7
+                  1,
+                  2,
+                  8,
+                  11,
+                  12,
+                  17,
+                  19
                 ]
               },
               {
                 "centers": {
-                  "faa": -0.01816473771506999,
-                  "beta_alpha": 0.07095337391528841,
-                  "heart_rate_bpm": 115.27473257590857,
-                  "rmssd_ms": 2.3583364033158443
+                  "faa": 0.06859162044847444,
+                  "alpha_suppression": 9.749338329275108,
+                  "engagement": -0.9797108795367874,
+                  "heart_rate_bpm": 77.36947123378783
                 },
                 "scales": {
-                  "faa": 0.4769097466584987,
-                  "beta_alpha": 0.332147254456394,
-                  "heart_rate_bpm": 1.8200749966519396,
-                  "rmssd_ms": 0.19737557934965883
+                  "faa": 0.2348158384409051,
+                  "alpha_suppression": 0.22427705054081246,
+                  "engagement": 0.4296676690997585,
+                  "heart_rate_bpm": 3.391889920424405
                 },
                 "training_indices": [
                   0,
                   1,
-                  3,
-                  4,
-                  6,
-                  7,
-                  10,
-                  11
-                ],
-                "validation_indices": [
                   2,
                   5,
+                  6,
                   8,
-                  9
+                  10,
+                  11,
+                  12,
+                  15,
+                  16,
+                  17,
+                  19,
+                  20
+                ],
+                "validation_indices": [
+                  3,
+                  4,
+                  7,
+                  9,
+                  13,
+                  14,
+                  18
                 ]
               },
               {
                 "centers": {
-                  "faa": -0.11146548528963063,
-                  "beta_alpha": 0.3158219662256223,
-                  "heart_rate_bpm": 115.05537660503904,
-                  "rmssd_ms": 2.354269257979581
+                  "faa": 0.14485101480878626,
+                  "alpha_suppression": 9.749338329275108,
+                  "engagement": -0.9717518697220389,
+                  "heart_rate_bpm": 77.22020512548697
                 },
                 "scales": {
-                  "faa": 0.6438253661268271,
-                  "beta_alpha": 0.15507190984712266,
-                  "heart_rate_bpm": 2.6537269612951127,
-                  "rmssd_ms": 0.32252391506540096
+                  "faa": 0.4015869243556674,
+                  "alpha_suppression": 0.19822857483574677,
+                  "engagement": 0.48318839791049883,
+                  "heart_rate_bpm": 4.141671322531737
                 },
                 "training_indices": [
-                  0,
+                  1,
                   2,
                   3,
                   4,
-                  5,
                   7,
                   8,
-                  9
+                  9,
+                  11,
+                  12,
+                  13,
+                  14,
+                  17,
+                  18,
+                  19
                 ],
                 "validation_indices": [
-                  1,
+                  0,
+                  5,
                   6,
                   10,
-                  11
+                  15,
+                  16,
+                  20
                 ]
               }
             ],
@@ -1124,153 +1354,183 @@
           "group": "Rm_028",
           "status": "evaluated",
           "train_indices": [
-            0,
             1,
             2,
             3,
             4,
             5,
+            6,
             7,
             8,
             9,
-            10,
             11,
             12,
-            13
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
           ],
           "test_indices": [
-            6
+            0,
+            10
           ],
           "selection": {
-            "name": "random_forest",
-            "n_estimators": 100,
-            "max_depth": 2,
-            "min_samples_leaf": 3
+            "name": "dummy_median"
           },
           "selection_status": "selected",
-          "valence_mae": 0.13185244018121467,
-          "arousal_mae": 0.007095718063058323,
-          "mean_mae": 0.06947407912213649,
-          "r2_valence": null,
-          "r2_arousal": null,
-          "baseline_median_mae": 0.13044990838102682,
-          "baseline_mean_mae": 0.17066145202180955,
+          "valence_mae": 0.26616863302628857,
+          "arousal_mae": 0.33983190341454567,
+          "mean_mae": 0.30300026822041715,
+          "r2_valence": -15.648297880296639,
+          "r2_arousal": -0.07032767394171424,
+          "baseline_median_mae": 0.30300026822041715,
+          "baseline_mean_mae": 0.24974855959424383,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.21420359024256894,
-              "arousal_mae": 0.04669622651948474,
-              "mean_mae": 0.13044990838102682
+              "valence_mae": 0.26616863302628857,
+              "arousal_mae": 0.33983190341454567,
+              "mean_mae": 0.30300026822041715
             },
             "dummy_mean": {
-              "valence_mae": 0.28671729677735863,
-              "arousal_mae": 0.05460560726626047,
-              "mean_mae": 0.17066145202180955
+              "valence_mae": 0.159665215773942,
+              "arousal_mae": 0.33983190341454567,
+              "mean_mae": 0.24974855959424383
             }
           },
           "inner_selection": {
             "scores": {
-              "name=dummy_median": 0.4316043732962057,
-              "name=dummy_mean": 0.42083184612517077,
-              "alpha=10.0:name=ridge": 0.47300207008180944,
-              "alpha=1.0:name=ridge": 0.773051693056909,
-              "alpha=0.1:name=ridge": 0.9032289875866852,
-              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.41614827749499494,
-              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3920778011339896,
-              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.41614827749499494,
-              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3920778011339896
+              "name=dummy_median": 0.3361255897998157,
+              "name=dummy_mean": 0.34370472354737414,
+              "alpha=10.0:name=ridge": 0.4258593944178472,
+              "alpha=1.0:name=ridge": 0.5176282218274169,
+              "alpha=0.1:name=ridge": 0.5436417263132587,
+              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3478548850113371,
+              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.36071558193315034,
+              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3478548850113371,
+              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.36072135375754866
             },
             "calibrations": [
               {
                 "centers": {
-                  "faa": 0.24099854434954615,
-                  "beta_alpha": 0.24549434574833728,
-                  "heart_rate_bpm": 115.05537660503904,
-                  "rmssd_ms": 2.354269257979581
+                  "faa": 0.13288848101042072,
+                  "alpha_suppression": 9.727685194673938,
+                  "engagement": -1.2976579791989704,
+                  "heart_rate_bpm": 77.27008873040882
                 },
                 "scales": {
-                  "faa": 0.7944765549430698,
-                  "beta_alpha": 0.3980632009988969,
-                  "heart_rate_bpm": 2.2944375663247314,
-                  "rmssd_ms": 0.23408183126594778
+                  "faa": 0.4015869243556674,
+                  "alpha_suppression": 0.3139566768142814,
+                  "engagement": 0.6804675023567783,
+                  "heart_rate_bpm": 2.6167663462799187
                 },
                 "training_indices": [
-                  1,
+                  2,
                   3,
                   4,
+                  5,
                   6,
-                  7,
                   8,
                   9,
-                  10
+                  12,
+                  13,
+                  14,
+                  15,
+                  17,
+                  18,
+                  20
                 ],
                 "validation_indices": [
                   0,
-                  2,
-                  5,
+                  1,
+                  7,
+                  10,
                   11,
-                  12
+                  16,
+                  19
                 ]
               },
               {
                 "centers": {
-                  "faa": 2.2429637527139903,
-                  "beta_alpha": 0.3128502828367191,
-                  "heart_rate_bpm": 114.50381679389312,
-                  "rmssd_ms": 2.3563187857725514
+                  "faa": 0.06859162044847444,
+                  "alpha_suppression": 9.771104911417638,
+                  "engagement": -1.0663766010838909,
+                  "heart_rate_bpm": 77.36947123378783
                 },
                 "scales": {
-                  "faa": 2.167913115505469,
-                  "beta_alpha": 0.4540075497556486,
-                  "heart_rate_bpm": 1.9663709511037855,
-                  "rmssd_ms": 0.21567574233892026
+                  "faa": 0.25273739786542093,
+                  "alpha_suppression": 0.2565481852253263,
+                  "engagement": 0.695467779404322,
+                  "heart_rate_bpm": 3.789582528825791
                 },
                 "training_indices": [
                   0,
-                  2,
-                  3,
+                  1,
+                  4,
                   5,
                   7,
                   9,
                   10,
                   11,
-                  12
+                  14,
+                  15,
+                  16,
+                  18,
+                  19,
+                  20
                 ],
                 "validation_indices": [
-                  1,
-                  4,
+                  2,
+                  3,
                   6,
-                  8
+                  8,
+                  12,
+                  13,
+                  17
                 ]
               },
               {
                 "centers": {
-                  "faa": -0.09276938260679302,
-                  "beta_alpha": 0.25778975075003513,
-                  "heart_rate_bpm": 114.94252873563218,
-                  "rmssd_ms": 2.3635743064372887
+                  "faa": 0.14485101480878626,
+                  "alpha_suppression": 9.749338329275108,
+                  "engagement": -0.9717518697220389,
+                  "heart_rate_bpm": 77.22020512548697
                 },
                 "scales": {
-                  "faa": 0.45594642357597315,
-                  "beta_alpha": 0.24010176761505356,
-                  "heart_rate_bpm": 2.9897156684815522,
-                  "rmssd_ms": 0.20491870740138068
+                  "faa": 0.4015869243556674,
+                  "alpha_suppression": 0.19822857483574677,
+                  "engagement": 0.48318839791049883,
+                  "heart_rate_bpm": 4.141671322531737
                 },
                 "training_indices": [
                   0,
                   1,
                   2,
-                  4,
-                  5,
+                  3,
                   6,
+                  7,
                   8,
+                  10,
                   11,
-                  12
+                  12,
+                  13,
+                  16,
+                  17,
+                  19
                 ],
                 "validation_indices": [
-                  3,
-                  7,
+                  4,
+                  5,
                   9,
-                  10
+                  14,
+                  15,
+                  18,
+                  20
                 ]
               }
             ],
@@ -1281,147 +1541,183 @@
           "group": "Rm_029",
           "status": "evaluated",
           "train_indices": [
+            0,
             1,
             2,
             3,
             4,
+            5,
             6,
             7,
             8,
-            9,
             10,
             11,
             12,
-            13
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            20,
+            21,
+            22
           ],
           "test_indices": [
-            0,
-            5
+            9,
+            19
           ],
           "selection": {
             "name": "dummy_mean"
           },
           "selection_status": "selected",
-          "valence_mae": 0.17704181531577634,
-          "arousal_mae": 0.38157934123789183,
-          "mean_mae": 0.2793105782768341,
-          "r2_valence": -5.4453219923125,
-          "r2_arousal": -1.2871472186847535,
-          "baseline_median_mae": 0.24673326259758327,
-          "baseline_mean_mae": 0.2793105782768341,
+          "valence_mae": 0.16855998424229426,
+          "arousal_mae": 0.3477299875261208,
+          "mean_mae": 0.25814498588420753,
+          "r2_valence": -3.6642208014703517,
+          "r2_arousal": -0.4117824016914515,
+          "baseline_median_mae": 0.24822014841501838,
+          "baseline_mean_mae": 0.25814498588420753,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.13686428279671603,
-              "arousal_mae": 0.3566022423984505,
-              "mean_mae": 0.24673326259758327
+              "valence_mae": 0.14871030930391596,
+              "arousal_mae": 0.3477299875261208,
+              "mean_mae": 0.24822014841501838
             },
             "dummy_mean": {
-              "valence_mae": 0.17704181531577634,
-              "arousal_mae": 0.38157934123789183,
-              "mean_mae": 0.2793105782768341
+              "valence_mae": 0.16855998424229426,
+              "arousal_mae": 0.3477299875261208,
+              "mean_mae": 0.25814498588420753
             }
           },
           "inner_selection": {
             "scores": {
-              "name=dummy_median": 0.5073146064883693,
-              "name=dummy_mean": 0.4672637811615526,
-              "alpha=10.0:name=ridge": 0.5054196796030531,
-              "alpha=1.0:name=ridge": 0.7345873490732795,
-              "alpha=0.1:name=ridge": 0.8028972846891026,
-              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.4700136528295162,
-              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.47106572257641205,
-              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.4700136528295162,
-              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.47106572257641205
+              "name=dummy_median": 0.3572906300418699,
+              "name=dummy_mean": 0.3566978544738355,
+              "alpha=10.0:name=ridge": 0.406556323224236,
+              "alpha=1.0:name=ridge": 0.46581445287630097,
+              "alpha=0.1:name=ridge": 0.4886462830231832,
+              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3631551778497802,
+              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3671249144291257,
+              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3631551778497802,
+              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3672295023788172
             },
             "calibrations": [
               {
                 "centers": {
-                  "faa": 2.4586666380633524,
-                  "beta_alpha": 0.09299019513139088,
-                  "heart_rate_bpm": 114.50381679389312,
-                  "rmssd_ms": 2.3547086429834754
+                  "faa": 0.19518586449403097,
+                  "alpha_suppression": 9.687477434218895,
+                  "engagement": -1.2076406456293554,
+                  "heart_rate_bpm": 77.27008873040882
                 },
                 "scales": {
-                  "faa": 1.3744801371926156,
-                  "beta_alpha": 0.42643951847840206,
-                  "heart_rate_bpm": 1.6262285012285085,
-                  "rmssd_ms": 0.115603586337314
+                  "faa": 0.3411040684539347,
+                  "alpha_suppression": 0.2543446511636339,
+                  "engagement": 0.587495616474612,
+                  "heart_rate_bpm": 1.6002237180176455
                 },
                 "training_indices": [
-                  1,
-                  2,
+                  0,
+                  3,
                   4,
+                  5,
                   6,
-                  8,
+                  7,
                   9,
                   10,
-                  11
+                  13,
+                  14,
+                  15,
+                  16,
+                  18,
+                  20
                 ],
                 "validation_indices": [
-                  0,
-                  3,
-                  5,
-                  7
+                  1,
+                  2,
+                  8,
+                  11,
+                  12,
+                  17,
+                  19
                 ]
               },
               {
                 "centers": {
-                  "faa": 0.1360799578112717,
-                  "beta_alpha": 0.058657968913590576,
-                  "heart_rate_bpm": 115.27473257590857,
-                  "rmssd_ms": 2.3583364033158443
+                  "faa": 0.06859162044847444,
+                  "alpha_suppression": 9.771104911417638,
+                  "engagement": -1.0663766010838909,
+                  "heart_rate_bpm": 77.36947123378783
                 },
                 "scales": {
-                  "faa": 0.41095104675343747,
-                  "beta_alpha": 0.3037709369768888,
-                  "heart_rate_bpm": 1.6513945406481159,
-                  "rmssd_ms": 0.19737557934965883
+                  "faa": 0.25273739786542093,
+                  "alpha_suppression": 0.2565481852253263,
+                  "engagement": 0.695467779404322,
+                  "heart_rate_bpm": 3.789582528825791
                 },
                 "training_indices": [
-                  0,
                   1,
-                  3,
+                  2,
                   5,
                   6,
-                  7,
+                  8,
                   10,
-                  11
+                  11,
+                  12,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19,
+                  20
                 ],
                 "validation_indices": [
-                  2,
+                  0,
+                  3,
                   4,
-                  8,
-                  9
+                  7,
+                  9,
+                  13,
+                  14
                 ]
               },
               {
                 "centers": {
-                  "faa": 0.1613584937149275,
-                  "beta_alpha": 0.28829170018228034,
-                  "heart_rate_bpm": 115.05537660503904,
-                  "rmssd_ms": 2.354269257979581
+                  "faa": 0.2530226707595622,
+                  "alpha_suppression": 9.705918612531407,
+                  "engagement": -0.9512868895453788,
+                  "heart_rate_bpm": 77.22020512548697
                 },
                 "scales": {
-                  "faa": 0.9055502859865814,
-                  "beta_alpha": 0.1817752005285467,
-                  "heart_rate_bpm": 2.485046505291289,
-                  "rmssd_ms": 0.23408183126594778
+                  "faa": 0.3666978955878878,
+                  "alpha_suppression": 0.15990297849660146,
+                  "engagement": 0.3446530991538931,
+                  "heart_rate_bpm": 3.5682805966589295
                 },
                 "training_indices": [
                   0,
+                  1,
                   2,
                   3,
                   4,
-                  5,
                   7,
                   8,
-                  9
+                  9,
+                  11,
+                  12,
+                  13,
+                  14,
+                  17,
+                  19
                 ],
                 "validation_indices": [
-                  1,
+                  5,
                   6,
                   10,
-                  11
+                  15,
+                  16,
+                  18,
+                  20
                 ]
               }
             ],
@@ -1436,149 +1732,179 @@
             1,
             2,
             3,
+            4,
             5,
             6,
             7,
-            8,
             9,
             10,
             11,
             12,
-            13
+            13,
+            14,
+            15,
+            16,
+            17,
+            19,
+            20,
+            21,
+            22
           ],
           "test_indices": [
-            4
+            8,
+            18
           ],
           "selection": {
-            "name": "random_forest",
-            "n_estimators": 100,
-            "max_depth": 2,
-            "min_samples_leaf": 3
+            "name": "dummy_median"
           },
           "selection_status": "selected",
-          "valence_mae": 0.6623572825187127,
-          "arousal_mae": 0.6018402976355243,
-          "mean_mae": 0.6320987900771184,
-          "r2_valence": null,
-          "r2_arousal": null,
-          "baseline_median_mae": 0.5624009262910346,
-          "baseline_mean_mae": 0.6280374598258962,
+          "valence_mae": 0.5763431720350892,
+          "arousal_mae": 0.5540588958475674,
+          "mean_mae": 0.5652010339413283,
+          "r2_valence": -0.07506952154312652,
+          "r2_arousal": -0.06940927335756775,
+          "baseline_median_mae": 0.5652010339413283,
+          "baseline_mean_mae": 0.5652010339413284,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.670285018051483,
-              "arousal_mae": 0.4545168345305862,
-              "mean_mae": 0.5624009262910346
+              "valence_mae": 0.5763431720350892,
+              "arousal_mae": 0.5540588958475674,
+              "mean_mae": 0.5652010339413283
             },
             "dummy_mean": {
-              "valence_mae": 0.7674574554360637,
-              "arousal_mae": 0.4886174642157287,
-              "mean_mae": 0.6280374598258962
+              "valence_mae": 0.5763431720350892,
+              "arousal_mae": 0.5540588958475675,
+              "mean_mae": 0.5652010339413284
             }
           },
           "inner_selection": {
             "scores": {
-              "name=dummy_median": 0.366623056682445,
-              "name=dummy_mean": 0.3696078151385487,
-              "alpha=10.0:name=ridge": 0.3772118963262754,
-              "alpha=1.0:name=ridge": 0.4253462795154671,
-              "alpha=0.1:name=ridge": 0.45464879250727325,
-              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.36531888109776367,
-              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3481039421998311,
-              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.36531888109776367,
-              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3481039421998311
+              "name=dummy_median": 0.3218011252594577,
+              "name=dummy_mean": 0.3261558812639965,
+              "alpha=10.0:name=ridge": 0.4191060670267068,
+              "alpha=1.0:name=ridge": 0.5148619466996139,
+              "alpha=0.1:name=ridge": 0.5462595582292613,
+              "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.32983540008388973,
+              "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3308431819797611,
+              "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.32983540008388973,
+              "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3308431819797611
             },
             "calibrations": [
               {
                 "centers": {
-                  "faa": 0.24099854434954615,
-                  "beta_alpha": 0.27599629518058244,
-                  "heart_rate_bpm": 115.05537660503904,
-                  "rmssd_ms": 2.354269257979581
+                  "faa": 0.19518586449403097,
+                  "alpha_suppression": 9.687477434218895,
+                  "engagement": -1.2076406456293554,
+                  "heart_rate_bpm": 77.27008873040882
                 },
                 "scales": {
-                  "faa": 0.8673104279190952,
-                  "beta_alpha": 0.3618867132446551,
-                  "heart_rate_bpm": 2.2944375663247314,
-                  "rmssd_ms": 0.3045459675015625
+                  "faa": 0.3411040684539347,
+                  "alpha_suppression": 0.2543446511636339,
+                  "engagement": 0.587495616474612,
+                  "heart_rate_bpm": 1.6002237180176455
                 },
                 "training_indices": [
-                  1,
+                  0,
                   3,
+                  4,
                   5,
                   6,
-                  7,
-                  8,
-                  9,
-                  10
-                ],
-                "validation_indices": [
-                  0,
-                  2,
-                  4,
-                  11,
-                  12
-                ]
-              },
-              {
-                "centers": {
-                  "faa": 2.2429637527139903,
-                  "beta_alpha": 0.3128502828367191,
-                  "heart_rate_bpm": 114.50381679389312,
-                  "rmssd_ms": 2.3563187857725514
-                },
-                "scales": {
-                  "faa": 2.167913115505469,
-                  "beta_alpha": 0.4540075497556486,
-                  "heart_rate_bpm": 1.9663709511037855,
-                  "rmssd_ms": 0.21567574233892026
-                },
-                "training_indices": [
-                  0,
-                  2,
-                  3,
-                  4,
                   7,
                   9,
                   10,
-                  11,
-                  12
+                  13,
+                  14,
+                  15,
+                  16,
+                  18,
+                  20
                 ],
                 "validation_indices": [
                   1,
-                  5,
-                  6,
-                  8
+                  2,
+                  8,
+                  11,
+                  12,
+                  17,
+                  19
                 ]
               },
               {
                 "centers": {
-                  "faa": -0.09276938260679302,
-                  "beta_alpha": 0.3128502828367191,
-                  "heart_rate_bpm": 114.94252873563218,
-                  "rmssd_ms": 2.3635743064372887
+                  "faa": 0.033496761837009004,
+                  "alpha_suppression": 9.782847455849824,
+                  "engagement": -1.317004726864441,
+                  "heart_rate_bpm": 77.36947123378783
                 },
                 "scales": {
-                  "faa": 0.5323222858362285,
-                  "beta_alpha": 0.15846902274333588,
-                  "heart_rate_bpm": 2.6523547564739043,
-                  "rmssd_ms": 0.2938626415696657
+                  "faa": 0.24488341987666568,
+                  "alpha_suppression": 0.2777356886479368,
+                  "engagement": 0.7214633973287071,
+                  "heart_rate_bpm": 3.789582528825791
+                },
+                "training_indices": [
+                  1,
+                  2,
+                  5,
+                  6,
+                  8,
+                  10,
+                  11,
+                  12,
+                  15,
+                  16,
+                  17,
+                  18,
+                  19,
+                  20
+                ],
+                "validation_indices": [
+                  0,
+                  3,
+                  4,
+                  7,
+                  9,
+                  13,
+                  14
+                ]
+              },
+              {
+                "centers": {
+                  "faa": 0.14485101480878626,
+                  "alpha_suppression": 9.705918612531407,
+                  "engagement": -0.9797108795367874,
+                  "heart_rate_bpm": 77.22020512548697
+                },
+                "scales": {
+                  "faa": 0.4015869243556674,
+                  "alpha_suppression": 0.1893345408346161,
+                  "engagement": 0.42880615280020484,
+                  "heart_rate_bpm": 3.5682805966589295
                 },
                 "training_indices": [
                   0,
                   1,
                   2,
+                  3,
                   4,
-                  5,
-                  6,
+                  7,
                   8,
+                  9,
                   11,
-                  12
+                  12,
+                  13,
+                  14,
+                  17,
+                  19
                 ],
                 "validation_indices": [
-                  3,
-                  7,
-                  9,
-                  10
+                  5,
+                  6,
+                  10,
+                  15,
+                  16,
+                  18,
+                  20
                 ]
               }
             ],
@@ -1590,11 +1916,11 @@
         "evaluated_folds": 10,
         "unavailable_folds": 0,
         "mean_metrics": {
-          "valence_mae": 0.3750165481446891,
-          "arousal_mae": 0.48576372158717385,
-          "mean_mae": 0.4303901348659315,
-          "baseline_median_mae": 0.40994218952129924,
-          "baseline_mean_mae": 0.42413919212047524
+          "valence_mae": 0.3692429816741794,
+          "arousal_mae": 0.33004408045904404,
+          "mean_mae": 0.3496435310666118,
+          "baseline_median_mae": 0.34605538214005377,
+          "baseline_mean_mae": 0.34043750113477267
         },
         "unavailable_reasons": {}
       }
@@ -1605,44 +1931,53 @@
           "group": "Subj_B",
           "status": "evaluated",
           "train_indices": [
+            0,
+            1,
             2,
             3,
             4,
             5,
             6,
             7,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "test_indices": [
             8,
             9,
             10,
             11,
             12,
-            13
-          ],
-          "test_indices": [
-            0,
-            1
+            13,
+            14,
+            15,
+            16,
+            17
           ],
           "selection": {
             "name": "dummy_median"
           },
           "selection_status": "fixed_baseline_insufficient_groups",
-          "valence_mae": 0.09185321770582047,
-          "arousal_mae": 0.3538655253108221,
-          "mean_mae": 0.2228593715083213,
-          "r2_valence": -0.7715062360814804,
-          "r2_arousal": -1.1600006852323728,
-          "baseline_median_mae": 0.2228593715083213,
-          "baseline_mean_mae": 0.228676454352003,
+          "valence_mae": 0.21722240057038578,
+          "arousal_mae": 0.3880370334414289,
+          "mean_mae": 0.30262971700590735,
+          "r2_valence": -0.028435759061341992,
+          "r2_arousal": -3.410028253759479,
+          "baseline_median_mae": 0.30262971700590735,
+          "baseline_mean_mae": 0.35226336498325905,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.09185321770582047,
-              "arousal_mae": 0.3538655253108221,
-              "mean_mae": 0.2228593715083213
+              "valence_mae": 0.21722240057038578,
+              "arousal_mae": 0.3880370334414289,
+              "mean_mae": 0.30262971700590735
             },
             "dummy_mean": {
-              "valence_mae": 0.09185321770582047,
-              "arousal_mae": 0.3654996909981855,
-              "mean_mae": 0.228676454352003
+              "valence_mae": 0.20994052658741197,
+              "arousal_mae": 0.49458620337910614,
+              "mean_mae": 0.35226336498325905
             }
           },
           "inner_selection": {
@@ -1654,47 +1989,56 @@
           }
         },
         {
-          "group": "Subj_H",
+          "group": "Subj_D",
           "status": "evaluated",
           "train_indices": [
             0,
             1,
+            2,
+            3,
             4,
             5,
-            6,
-            7,
             8,
             9,
             10,
             11,
             12,
-            13
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
           ],
           "test_indices": [
-            2,
-            3
+            6,
+            7
           ],
           "selection": {
             "name": "dummy_median"
           },
           "selection_status": "fixed_baseline_insufficient_groups",
-          "valence_mae": 0.5794192806789696,
-          "arousal_mae": 0.6121698672035545,
-          "mean_mae": 0.595794573941262,
-          "r2_valence": -134.28127939662255,
-          "r2_arousal": -11.058525121295043,
-          "baseline_median_mae": 0.595794573941262,
-          "baseline_mean_mae": 0.5935479720723491,
+          "valence_mae": 0.4587673629650165,
+          "arousal_mae": 0.1552722206534861,
+          "mean_mae": 0.3070197918092513,
+          "r2_valence": -2.3375528332049234,
+          "r2_arousal": -3.6434490416464156,
+          "baseline_median_mae": 0.3070197918092513,
+          "baseline_mean_mae": 0.34343723862992526,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.5794192806789696,
-              "arousal_mae": 0.6121698672035545,
-              "mean_mae": 0.595794573941262
+              "valence_mae": 0.4587673629650165,
+              "arousal_mae": 0.1552722206534861,
+              "mean_mae": 0.3070197918092513
             },
             "dummy_mean": {
-              "valence_mae": 0.5428383482414456,
-              "arousal_mae": 0.6442575959032526,
-              "mean_mae": 0.5935479720723491
+              "valence_mae": 0.4976432733307157,
+              "arousal_mae": 0.1892312039291349,
+              "mean_mae": 0.34343723862992526
             }
           },
           "inner_selection": {
@@ -1712,9 +2056,7 @@
             0,
             1,
             2,
-            3
-          ],
-          "test_indices": [
+            3,
             4,
             5,
             6,
@@ -1724,29 +2066,101 @@
             10,
             11,
             12,
-            13
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "test_indices": [
+            18,
+            19,
+            20,
+            21,
+            22
           ],
           "selection": {
             "name": "dummy_median"
           },
           "selection_status": "fixed_baseline_insufficient_groups",
-          "valence_mae": 0.4193858113821382,
-          "arousal_mae": 0.5062658948296217,
-          "mean_mae": 0.46282585310588,
-          "r2_valence": -0.6272036856731886,
-          "r2_arousal": -1.2268256963837754,
-          "baseline_median_mae": 0.46282585310588,
-          "baseline_mean_mae": 0.4883888148309983,
+          "valence_mae": 0.30624427064221915,
+          "arousal_mae": 0.40855818149031026,
+          "mean_mae": 0.3574012260662647,
+          "r2_valence": -1.5759004927955562,
+          "r2_arousal": -1.2419253777880717,
+          "baseline_median_mae": 0.3574012260662647,
+          "baseline_mean_mae": 0.37561022232457175,
           "baselines": {
             "dummy_median": {
-              "valence_mae": 0.4193858113821382,
-              "arousal_mae": 0.5062658948296217,
-              "mean_mae": 0.46282585310588
+              "valence_mae": 0.30624427064221915,
+              "arousal_mae": 0.40855818149031026,
+              "mean_mae": 0.3574012260662647
             },
             "dummy_mean": {
-              "valence_mae": 0.4463028367122715,
-              "arousal_mae": 0.530474792949725,
-              "mean_mae": 0.4883888148309983
+              "valence_mae": 0.35171971108679584,
+              "arousal_mae": 0.39950073356234767,
+              "mean_mae": 0.37561022232457175
+            }
+          },
+          "inner_selection": {
+            "scores": {},
+            "calibrations": [],
+            "ineligibility_reasons": {
+              "inner_cv": "fewer than four independent training groups"
+            }
+          }
+        },
+        {
+          "group": "Subj_M",
+          "status": "evaluated",
+          "train_indices": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "test_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "selection": {
+            "name": "dummy_median"
+          },
+          "selection_status": "fixed_baseline_insufficient_groups",
+          "valence_mae": 0.5029816509593104,
+          "arousal_mae": 0.37235975464442395,
+          "mean_mae": 0.43767070280186715,
+          "r2_valence": -2.7576327633123268,
+          "r2_arousal": -2.619396422010666,
+          "baseline_median_mae": 0.43767070280186715,
+          "baseline_mean_mae": 0.44871234869539633,
+          "baselines": {
+            "dummy_median": {
+              "valence_mae": 0.5029816509593104,
+              "arousal_mae": 0.37235975464442395,
+              "mean_mae": 0.43767070280186715
+            },
+            "dummy_mean": {
+              "valence_mae": 0.5144602246283698,
+              "arousal_mae": 0.3829644727624229,
+              "mean_mae": 0.44871234869539633
             }
           },
           "inner_selection": {
@@ -1759,151 +2173,182 @@
         }
       ],
       "aggregate": {
-        "evaluated_folds": 3,
+        "evaluated_folds": 4,
         "unavailable_folds": 0,
         "mean_metrics": {
-          "valence_mae": 0.3635527699223094,
-          "arousal_mae": 0.49076709578133276,
-          "mean_mae": 0.42715993285182113,
-          "baseline_median_mae": 0.42715993285182113,
-          "baseline_mean_mae": 0.43687108041845013
+          "valence_mae": 0.37130392128423295,
+          "arousal_mae": 0.3310567975574123,
+          "mean_mae": 0.3511803594208226,
+          "baseline_median_mae": 0.3511803594208226,
+          "baseline_mean_mae": 0.38000579365828807
         },
         "unavailable_reasons": {}
       }
     }
   },
-  "status": "not_better_than_baseline",
+  "status": "baseline_only",
   "final_selection": {
     "candidate": {
-      "name": "random_forest",
-      "n_estimators": 100,
-      "max_depth": 2,
-      "min_samples_leaf": 3
+      "name": "dummy_mean"
     },
     "status": "selected",
     "scores": {
-      "name=dummy_median": 0.5681516037148153,
-      "name=dummy_mean": 0.5223268134998423,
-      "alpha=10.0:name=ridge": 0.5576318345632989,
-      "alpha=1.0:name=ridge": 0.6877905257563514,
-      "alpha=0.1:name=ridge": 0.7388337128865778,
-      "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.5244292537545802,
-      "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.520763109193651,
-      "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.5244292537545802,
-      "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.520763109193651
+      "name=dummy_median": 0.3341317689850717,
+      "name=dummy_mean": 0.32798371036429197,
+      "alpha=10.0:name=ridge": 0.35131408491920824,
+      "alpha=1.0:name=ridge": 0.3679348006678946,
+      "alpha=0.1:name=ridge": 0.3734379607326388,
+      "max_depth=2:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3309763554335491,
+      "max_depth=2:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.3372934614739341,
+      "max_depth=4:min_samples_leaf=5:n_estimators=100:name=random_forest": 0.3309763554335491,
+      "max_depth=4:min_samples_leaf=3:n_estimators=100:name=random_forest": 0.33739571078392927
     },
     "inner_fold_calibrations": [
       {
         "centers": {
-          "faa": 0.21572000844589034,
-          "beta_alpha": 0.25778975075003513,
-          "heart_rate_bpm": 115.60693641618496,
-          "rmssd_ms": 2.352219730186611
+          "faa": 0.15893841811436893,
+          "alpha_suppression": 9.655048810255067,
+          "engagement": -1.1414399042589118,
+          "heart_rate_bpm": 77.27008873040882
         },
         "scales": {
-          "faa": 0.9133127947506815,
-          "beta_alpha": 0.24211917740740285,
-          "heart_rate_bpm": 1.667303929286346,
-          "rmssd_ms": 0.27702834682041094
+          "faa": 0.4106277154657715,
+          "alpha_suppression": 0.1820702081958061,
+          "engagement": 0.569349065250216,
+          "heart_rate_bpm": 2.7988351088777774
         },
         "training_indices": [
+          0,
           1,
           3,
           4,
-          6,
-          7,
-          8,
-          9,
-          11,
-          12
-        ],
-        "validation_indices": [
-          0,
-          2,
-          5,
-          10,
-          13
-        ]
-      },
-      {
-        "centers": {
-          "faa": 0.05643990717665304,
-          "beta_alpha": 0.3128502828367191,
-          "heart_rate_bpm": 114.50381679389312,
-          "rmssd_ms": 2.3563187857725514
-        },
-        "scales": {
-          "faa": 0.9626919394337172,
-          "beta_alpha": 0.4540075497556486,
-          "heart_rate_bpm": 3.3027890812962317,
-          "rmssd_ms": 0.21567574233892026
-        },
-        "training_indices": [
-          0,
-          2,
-          3,
           5,
           6,
+          7,
           9,
-          10,
-          11,
-          13
-        ],
-        "validation_indices": [
-          1,
-          4,
-          7,
-          8,
-          12
-        ]
-      },
-      {
-        "centers": {
-          "faa": 0.061475312919548664,
-          "beta_alpha": 0.28532001679337715,
-          "heart_rate_bpm": 114.72317276476265,
-          "rmssd_ms": 2.3547086429834754
-        },
-        "scales": {
-          "faa": 0.5949840857293843,
-          "beta_alpha": 0.24624476910397403,
-          "heart_rate_bpm": 3.146252374888892,
-          "rmssd_ms": 0.24939067448552318
-        },
-        "training_indices": [
-          0,
-          1,
-          2,
-          4,
-          5,
-          7,
-          8,
           10,
           12,
-          13
+          14,
+          15,
+          16,
+          19
         ],
         "validation_indices": [
+          2,
+          8,
+          11,
+          13,
+          17,
+          18,
+          20,
+          21,
+          22
+        ]
+      },
+      {
+        "centers": {
+          "faa": 0.13288848101042072,
+          "alpha_suppression": 9.771104911417638,
+          "engagement": -0.9512868895453788,
+          "heart_rate_bpm": 77.36947123378783
+        },
+        "scales": {
+          "faa": 0.3173818425408531,
+          "alpha_suppression": 0.24272360686535951,
+          "engagement": 0.3875262615384961,
+          "heart_rate_bpm": 2.651490609368044
+        },
+        "training_indices": [
+          0,
+          2,
           3,
+          5,
           6,
+          8,
+          10,
+          11,
+          13,
+          14,
+          16,
+          17,
+          18,
+          20,
+          21,
+          22
+        ],
+        "validation_indices": [
+          1,
+          4,
+          7,
           9,
-          11
+          12,
+          15,
+          19
+        ]
+      },
+      {
+        "centers": {
+          "faa": 0.033496761837009004,
+          "alpha_suppression": 9.794689824794686,
+          "engagement": -1.0663766010838909,
+          "heart_rate_bpm": 77.22020512548697
+        },
+        "scales": {
+          "faa": 0.32546911256857736,
+          "alpha_suppression": 0.274838918794823,
+          "engagement": 0.5909493396393425,
+          "heart_rate_bpm": 4.141671322531737
+        },
+        "training_indices": [
+          1,
+          2,
+          4,
+          7,
+          8,
+          9,
+          11,
+          12,
+          13,
+          15,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22
+        ],
+        "validation_indices": [
+          0,
+          3,
+          5,
+          6,
+          10,
+          14,
+          16
         ]
       }
     ],
     "ineligibility_reasons": {},
     "target_calibration": {
       "centers": {
-        "faa": 0.1360799578112717,
-        "beta_alpha": 0.28532001679337715,
-        "heart_rate_bpm": 114.72317276476265,
-        "rmssd_ms": 2.3547086429834754
+        "faa": 0.08267902375405711,
+        "alpha_suppression": 9.759262542472776,
+        "engagement": -1.0001758597134474,
+        "heart_rate_bpm": 77.31958762886597
       },
       "scales": {
-        "faa": 0.8680723286558213,
-        "beta_alpha": 0.2472534740001487,
-        "heart_rate_bpm": 2.9775719188850682,
-        "rmssd_ms": 0.24939067448552318
-      }
+        "faa": 0.30504263824773026,
+        "alpha_suppression": 0.24188745888078786,
+        "engagement": 0.46321783581226167,
+        "heart_rate_bpm": 3.439020618556694
+      },
+      "component_order": [
+        "faa",
+        "alpha_suppression",
+        "engagement",
+        "heart_rate_bpm"
+      ],
+      "mapping": "FAA and equal alpha-suppression/engagement EEG arousal; equal EEG/HR physiology arousal; 0.5 physiology + 0.5 E3 reports"
     }
   },
   "limitations": [
@@ -1913,12 +2358,12 @@
     "No calibrated prediction interval or individual response guarantee is available."
   ],
   "model_record": {
-    "status": "not_better_than_baseline",
+    "status": "baseline_only",
     "explanation": "Experimental population-constructed coordinate prediction from original room attributes; grouped errors describe this small retrospective pilot.",
     "metrics": [
       {
         "name": "valence_mae",
-        "value": 0.3750165481446891,
+        "value": 0.3692429816741794,
         "unit": "constructed-coordinate MAE",
         "interval": null,
         "n": 10,
@@ -1926,7 +2371,7 @@
       },
       {
         "name": "arousal_mae",
-        "value": 0.48576372158717385,
+        "value": 0.33004408045904404,
         "unit": "constructed-coordinate MAE",
         "interval": null,
         "n": 10,
@@ -1934,7 +2379,7 @@
       },
       {
         "name": "mean_mae",
-        "value": 0.4303901348659315,
+        "value": 0.3496435310666118,
         "unit": "constructed-coordinate MAE",
         "interval": null,
         "n": 10,
@@ -1942,7 +2387,7 @@
       },
       {
         "name": "baseline_median_mae",
-        "value": 0.40994218952129924,
+        "value": 0.34605538214005377,
         "unit": "constructed-coordinate MAE",
         "interval": null,
         "n": 10,
@@ -1950,7 +2395,7 @@
       },
       {
         "name": "baseline_mean_mae",
-        "value": 0.42413919212047524,
+        "value": 0.34043750113477267,
         "unit": "constructed-coordinate MAE",
         "interval": null,
         "n": 10,
@@ -1958,42 +2403,42 @@
       },
       {
         "name": "valence_mae",
-        "value": 0.3635527699223094,
+        "value": 0.37130392128423295,
         "unit": "constructed-coordinate MAE",
         "interval": null,
-        "n": 3,
+        "n": 4,
         "group": "held_out_subject"
       },
       {
         "name": "arousal_mae",
-        "value": 0.49076709578133276,
+        "value": 0.3310567975574123,
         "unit": "constructed-coordinate MAE",
         "interval": null,
-        "n": 3,
+        "n": 4,
         "group": "held_out_subject"
       },
       {
         "name": "mean_mae",
-        "value": 0.42715993285182113,
+        "value": 0.3511803594208226,
         "unit": "constructed-coordinate MAE",
         "interval": null,
-        "n": 3,
+        "n": 4,
         "group": "held_out_subject"
       },
       {
         "name": "baseline_median_mae",
-        "value": 0.42715993285182113,
+        "value": 0.3511803594208226,
         "unit": "constructed-coordinate MAE",
         "interval": null,
-        "n": 3,
+        "n": 4,
         "group": "held_out_subject"
       },
       {
         "name": "baseline_mean_mae",
-        "value": 0.43687108041845013,
+        "value": 0.38000579365828807,
         "unit": "constructed-coordinate MAE",
         "interval": null,
-        "n": 3,
+        "n": 4,
         "group": "held_out_subject"
       }
     ],
@@ -2005,5 +2450,1955 @@
     ],
     "artifact_version": "1.0.0",
     "summary": null
+  },
+  "outer_prediction_evidence": {
+    "room": {
+      "folds": [
+        {
+          "group": "Rm_021",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_021"
+          ],
+          "train_group_ids": [
+            "Rm_022",
+            "Rm_023",
+            "Rm_024",
+            "Rm_025",
+            "Rm_026",
+            "Rm_027",
+            "Rm_028",
+            "Rm_029",
+            "Rm_030"
+          ],
+          "test_group_ids": [
+            "Rm_021"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.35889922577052535,
+              -0.5515601023049568
+            ],
+            [
+              -0.0846102923884775,
+              -0.10402503221601078
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_mean"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.20525952534187394,
+                  -0.05692222749953223
+                ],
+                [
+                  0.20525952534187394,
+                  -0.05692222749953223
+                ]
+              ],
+              "valence_mae": 0.22175475907950143,
+              "arousal_mae": 0.27087033976095154,
+              "mean_mae": 0.24631254942022648
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.10603693086868643,
+                  -0.08908903115321748
+                ],
+                [
+                  0.10603693086868643,
+                  -0.08908903115321748
+                ]
+              ],
+              "valence_mae": 0.22175475907950143,
+              "arousal_mae": 0.2387035361072663,
+              "mean_mae": 0.23022914759338386
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.20525952534187394,
+                  -0.05692222749953223
+                ],
+                [
+                  0.20525952534187394,
+                  -0.05692222749953223
+                ]
+              ],
+              "valence_mae": 0.22175475907950143,
+              "arousal_mae": 0.27087033976095154,
+              "mean_mae": 0.24631254942022648
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.08267902375405711,
+              "alpha_suppression": 9.759262542472776,
+              "engagement": -0.9592458993601274,
+              "heart_rate_bpm": 77.31958762886597
+            },
+            "scales": {
+              "faa": 0.30504263824773026,
+              "alpha_suppression": 0.23609391917456024,
+              "engagement": 0.4795589041060438,
+              "heart_rate_bpm": 3.439020618556694
+            }
+          }
+        },
+        {
+          "group": "Rm_022",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_B:Rm_022"
+          ],
+          "train_group_ids": [
+            "Rm_021",
+            "Rm_023",
+            "Rm_024",
+            "Rm_025",
+            "Rm_026",
+            "Rm_027",
+            "Rm_028",
+            "Rm_029",
+            "Rm_030"
+          ],
+          "test_group_ids": [
+            "Rm_022"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.036699746386324394,
+              0.541326879938408
+            ],
+            [
+              -0.5544962619933744,
+              -0.15459917065979994
+            ],
+            [
+              -0.194853241625214,
+              -0.10038891211905052
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_mean"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.22892946410274106,
+                  -0.10093901487753613
+                ],
+                [
+                  0.22892946410274106,
+                  -0.10093901487753613
+                ],
+                [
+                  0.22892946410274106,
+                  -0.10093901487753613
+                ]
+              ],
+              "valence_mae": 0.4664793831801624,
+              "arousal_mae": 0.23215871778556452,
+              "mean_mae": 0.3493190504828635
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.22488704756971184,
+                  -0.0958613719074092
+                ],
+                [
+                  0.22488704756971184,
+                  -0.0958613719074092
+                ],
+                [
+                  0.22488704756971184,
+                  -0.0958613719074092
+                ]
+              ],
+              "valence_mae": 0.46243696664713313,
+              "arousal_mae": 0.23348453026994975,
+              "mean_mae": 0.3479607484585414
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.22892946410274106,
+                  -0.10093901487753613
+                ],
+                [
+                  0.22892946410274106,
+                  -0.10093901487753613
+                ],
+                [
+                  0.22892946410274106,
+                  -0.10093901487753613
+                ]
+              ],
+              "valence_mae": 0.4664793831801624,
+              "arousal_mae": 0.23215871778556452,
+              "mean_mae": 0.3493190504828635
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.11880107770483805,
+              "alpha_suppression": 9.771104911417638,
+              "engagement": -0.9797108795367874,
+              "heart_rate_bpm": 77.22020512548697
+            },
+            "scales": {
+              "faa": 0.4015869243556674,
+              "alpha_suppression": 0.24940830161933825,
+              "engagement": 0.42880615280020484,
+              "heart_rate_bpm": 3.8448850742708776
+            }
+          }
+        },
+        {
+          "group": "Rm_023",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_023"
+          ],
+          "train_group_ids": [
+            "Rm_021",
+            "Rm_022",
+            "Rm_024",
+            "Rm_025",
+            "Rm_026",
+            "Rm_027",
+            "Rm_028",
+            "Rm_029",
+            "Rm_030"
+          ],
+          "test_group_ids": [
+            "Rm_023"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.8070796261332319,
+              0.10761943134449141
+            ],
+            [
+              0.06784626810016964,
+              -0.34337509196945043
+            ],
+            [
+              0.006545951237318298,
+              -0.09113638340496044
+            ]
+          ],
+          "selected_candidate": {
+            "name": "random_forest",
+            "n_estimators": 100,
+            "max_depth": 2,
+            "min_samples_leaf": 3
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.22200605219779415,
+                  -0.16395814269215161
+                ],
+                [
+                  0.22200605219779415,
+                  -0.16395814269215161
+                ],
+                [
+                  0.22200605219779415,
+                  -0.16395814269215161
+                ]
+              ],
+              "valence_mae": 0.31823115299784605,
+              "arousal_mae": 0.174605427533711,
+              "mean_mae": 0.24641829026577852
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.21297001708384883,
+                  -0.10875897429993393
+                ],
+                [
+                  0.21297001708384883,
+                  -0.10875897429993393
+                ],
+                [
+                  0.21297001708384883,
+                  -0.10875897429993393
+                ]
+              ],
+              "valence_mae": 0.3152191412931976,
+              "arousal_mae": 0.1562057047363051,
+              "mean_mae": 0.23571242301475137
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.1967085557387466,
+                  -0.07745073969293584
+                ],
+                [
+                  0.1967085557387466,
+                  -0.07745073969293584
+                ],
+                [
+                  0.1967085557387466,
+                  -0.07745073969293584
+                ]
+              ],
+              "valence_mae": 0.30979865417816355,
+              "arousal_mae": 0.15489338900865546,
+              "mean_mae": 0.2323460215934095
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.06859162044847444,
+              "alpha_suppression": 9.771104911417638,
+              "engagement": -0.9797108795367874,
+              "heart_rate_bpm": 77.36947123378783
+            },
+            "scales": {
+              "faa": 0.37922479967640277,
+              "alpha_suppression": 0.24940830161933825,
+              "engagement": 0.45007904079568134,
+              "heart_rate_bpm": 3.789582528825791
+            }
+          }
+        },
+        {
+          "group": "Rm_024",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_B:Rm_024"
+          ],
+          "train_group_ids": [
+            "Rm_021",
+            "Rm_022",
+            "Rm_023",
+            "Rm_025",
+            "Rm_026",
+            "Rm_027",
+            "Rm_028",
+            "Rm_029",
+            "Rm_030"
+          ],
+          "test_group_ids": [
+            "Rm_024"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.8881188740498689,
+              -0.18785553466719435
+            ],
+            [
+              0.6935934304240639,
+              -0.5025774535650315
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_mean"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.1722905243331355,
+                  -0.054990782449883945
+                ],
+                [
+                  0.1722905243331355,
+                  -0.054990782449883945
+                ]
+              ],
+              "valence_mae": 0.6185656279038309,
+              "arousal_mae": 0.29022571166622896,
+              "mean_mae": 0.4543956697850299
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.10987331346888063,
+                  -0.08531280462234606
+                ],
+                [
+                  0.10987331346888063,
+                  -0.08531280462234606
+                ]
+              ],
+              "valence_mae": 0.6809828387680857,
+              "arousal_mae": 0.25990368949376685,
+              "mean_mae": 0.4704432641309263
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.1722905243331355,
+                  -0.054990782449883945
+                ],
+                [
+                  0.1722905243331355,
+                  -0.054990782449883945
+                ]
+              ],
+              "valence_mae": 0.6185656279038309,
+              "arousal_mae": 0.29022571166622896,
+              "mean_mae": 0.4543956697850299
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.054504217142891775,
+              "alpha_suppression": 9.7829472803625,
+              "engagement": -1.0001758597134474,
+              "heart_rate_bpm": 77.31958762886597
+            },
+            "scales": {
+              "faa": 0.2678963244389103,
+              "alpha_suppression": 0.27120891156986476,
+              "engagement": 0.4812819367051511,
+              "heart_rate_bpm": 3.439020618556694
+            }
+          }
+        },
+        {
+          "group": "Rm_025",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_I:Rm_025"
+          ],
+          "train_group_ids": [
+            "Rm_021",
+            "Rm_022",
+            "Rm_023",
+            "Rm_024",
+            "Rm_026",
+            "Rm_027",
+            "Rm_028",
+            "Rm_029",
+            "Rm_030"
+          ],
+          "test_group_ids": [
+            "Rm_025"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.8006113001164067,
+              0.21775463599132333
+            ],
+            [
+              0.028627610486007968,
+              -0.49149463300723595
+            ],
+            [
+              0.1890886733094174,
+              -0.04053476154540786
+            ]
+          ],
+          "selected_candidate": {
+            "name": "random_forest",
+            "n_estimators": 100,
+            "max_depth": 2,
+            "min_samples_leaf": 3
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.009959627863951192,
+                  -0.018032982230589648
+                ],
+                [
+                  0.009959627863951192,
+                  -0.018032982230589648
+                ],
+                [
+                  0.009959627863951192,
+                  -0.018032982230589648
+                ]
+              ],
+              "valence_mae": 0.3294829001066595,
+              "arousal_mae": 0.24391701610445915,
+              "mean_mae": 0.2866999581055593
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.07542919323891406,
+                  -0.08270202123873219
+                ],
+                [
+                  0.07542919323891406,
+                  -0.08270202123873219
+                ],
+                [
+                  0.07542919323891406,
+                  -0.08270202123873219
+                ]
+              ],
+              "valence_mae": 0.2952143899003007,
+              "arousal_mae": 0.2504721762306279,
+              "mean_mae": 0.2728432830654643
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.1293678574741389,
+                  -0.04517459945859502
+                ],
+                [
+                  0.1293678574741389,
+                  -0.04517459945859502
+                ],
+                [
+                  0.1293678574741389,
+                  -0.04517459945859502
+                ]
+              ],
+              "valence_mae": 0.2772348351552257,
+              "arousal_mae": 0.23796303563724877,
+              "mean_mae": 0.25759893539623724
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.13288848101042072,
+              "alpha_suppression": 9.727685194673938,
+              "engagement": -1.0663766010838909,
+              "heart_rate_bpm": 77.27008873040882
+            },
+            "scales": {
+              "faa": 0.4015869243556674,
+              "alpha_suppression": 0.23208326449052535,
+              "engagement": 0.5365579934763676,
+              "heart_rate_bpm": 3.668494398036353
+            }
+          }
+        },
+        {
+          "group": "Rm_026",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_B:Rm_026"
+          ],
+          "train_group_ids": [
+            "Rm_021",
+            "Rm_022",
+            "Rm_023",
+            "Rm_024",
+            "Rm_025",
+            "Rm_027",
+            "Rm_028",
+            "Rm_029",
+            "Rm_030"
+          ],
+          "test_group_ids": [
+            "Rm_026"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.6291841542588099,
+              0.07204076459234128
+            ],
+            [
+              -0.2630606970269684,
+              -0.5088628642212658
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_median"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.10603693086868643,
+                  -0.10607379008709214
+                ],
+                [
+                  0.10603693086868643,
+                  -0.10607379008709214
+                ]
+              ],
+              "valence_mae": 0.4461224256428892,
+              "arousal_mae": 0.29045181440680357,
+              "mean_mae": 0.36828712002484637
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.10603693086868643,
+                  -0.10607379008709214
+                ],
+                [
+                  0.10603693086868643,
+                  -0.10607379008709214
+                ]
+              ],
+              "valence_mae": 0.4461224256428892,
+              "arousal_mae": 0.29045181440680357,
+              "mean_mae": 0.36828712002484637
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.20088645277759803,
+                  -0.07455610689573126
+                ],
+                [
+                  0.20088645277759803,
+                  -0.07455610689573126
+                ]
+              ],
+              "valence_mae": 0.4461224256428892,
+              "arousal_mae": 0.29045181440680357,
+              "mean_mae": 0.36828712002484637
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.08267902375405711,
+              "alpha_suppression": 9.7829472803625,
+              "engagement": -0.9592458993601274,
+              "heart_rate_bpm": 77.31958762886597
+            },
+            "scales": {
+              "faa": 0.30504263824773026,
+              "alpha_suppression": 0.2578395220619073,
+              "engagement": 0.4795589041060438,
+              "heart_rate_bpm": 3.3447592222921165
+            }
+          }
+        },
+        {
+          "group": "Rm_027",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_I:Rm_027"
+          ],
+          "train_group_ids": [
+            "Rm_021",
+            "Rm_022",
+            "Rm_023",
+            "Rm_024",
+            "Rm_025",
+            "Rm_026",
+            "Rm_028",
+            "Rm_029",
+            "Rm_030"
+          ],
+          "test_group_ids": [
+            "Rm_027"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.5185780414689397,
+              0.08942970051754881
+            ],
+            [
+              -0.04286551558552543,
+              0.8207629472616566
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_median"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.10603693086868643,
+                  -0.10149466665488563
+                ],
+                [
+                  0.10603693086868643,
+                  -0.10149466665488563
+                ]
+              ],
+              "valence_mae": 0.28072177852723257,
+              "arousal_mae": 0.5565909905444884,
+              "mean_mae": 0.41865638453586046
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.10603693086868643,
+                  -0.10149466665488563
+                ],
+                [
+                  0.10603693086868643,
+                  -0.10149466665488563
+                ]
+              ],
+              "valence_mae": 0.28072177852723257,
+              "arousal_mae": 0.5565909905444884,
+              "mean_mae": 0.41865638453586046
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.1956679256989517,
+                  -0.11022406803383249
+                ],
+                [
+                  0.1956679256989517,
+                  -0.11022406803383249
+                ]
+              ],
+              "valence_mae": 0.28072177852723257,
+              "arousal_mae": 0.5653203919234351,
+              "mean_mae": 0.4230210852253338
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.08267902375405711,
+              "alpha_suppression": 9.715729378187715,
+              "engagement": -1.0001758597134474,
+              "heart_rate_bpm": 77.31958762886597
+            },
+            "scales": {
+              "faa": 0.30504263824773026,
+              "alpha_suppression": 0.20132389215747468,
+              "engagement": 0.46321783581226167,
+              "heart_rate_bpm": 3.439020618556694
+            }
+          }
+        },
+        {
+          "group": "Rm_028",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_B:Rm_028"
+          ],
+          "train_group_ids": [
+            "Rm_021",
+            "Rm_022",
+            "Rm_023",
+            "Rm_024",
+            "Rm_025",
+            "Rm_026",
+            "Rm_027",
+            "Rm_029",
+            "Rm_030"
+          ],
+          "test_group_ids": [
+            "Rm_028"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.41240354546391494,
+              0.3602002866250666
+            ],
+            [
+              0.2778319759981878,
+              -0.31946352020402474
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_median"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.07894912770476281,
+                  -0.06975288088632625
+                ],
+                [
+                  0.07894912770476281,
+                  -0.06975288088632625
+                ]
+              ],
+              "valence_mae": 0.26616863302628857,
+              "arousal_mae": 0.33983190341454567,
+              "mean_mae": 0.30300026822041715
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.07894912770476281,
+                  -0.06975288088632625
+                ],
+                [
+                  0.07894912770476281,
+                  -0.06975288088632625
+                ]
+              ],
+              "valence_mae": 0.26616863302628857,
+              "arousal_mae": 0.33983190341454567,
+              "mean_mae": 0.30300026822041715
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.1854525449571094,
+                  -0.06320798046395512
+                ],
+                [
+                  0.1854525449571094,
+                  -0.06320798046395512
+                ]
+              ],
+              "valence_mae": 0.159665215773942,
+              "arousal_mae": 0.33983190341454567,
+              "mean_mae": 0.24974855959424383
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.08267902375405711,
+              "alpha_suppression": 9.759262542472776,
+              "engagement": -1.1325773424543344,
+              "heart_rate_bpm": 77.31958762886597
+            },
+            "scales": {
+              "faa": 0.30504263824773026,
+              "alpha_suppression": 0.24188745888078786,
+              "engagement": 0.6350345990258373,
+              "heart_rate_bpm": 3.9922295737805897
+            }
+          }
+        },
+        {
+          "group": "Rm_029",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_I:Rm_029"
+          ],
+          "train_group_ids": [
+            "Rm_021",
+            "Rm_022",
+            "Rm_023",
+            "Rm_024",
+            "Rm_025",
+            "Rm_026",
+            "Rm_027",
+            "Rm_028",
+            "Rm_030"
+          ],
+          "test_group_ids": [
+            "Rm_029"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.04763345041140177,
+              -0.6130685093619941
+            ],
+            [
+              -0.1284804598131724,
+              0.08239146569024747
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_mean"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.12813647954140894,
+                  -0.042199237369408435
+                ],
+                [
+                  0.12813647954140894,
+                  -0.042199237369408435
+                ]
+              ],
+              "valence_mae": 0.16855998424229426,
+              "arousal_mae": 0.3477299875261208,
+              "mean_mae": 0.25814498588420753
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.10828680460303064,
+                  -0.09542118738467784
+                ],
+                [
+                  0.10828680460303064,
+                  -0.09542118738467784
+                ]
+              ],
+              "valence_mae": 0.14871030930391596,
+              "arousal_mae": 0.3477299875261208,
+              "mean_mae": 0.24822014841501838
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.12813647954140894,
+                  -0.042199237369408435
+                ],
+                [
+                  0.12813647954140894,
+                  -0.042199237369408435
+                ]
+              ],
+              "valence_mae": 0.16855998424229426,
+              "arousal_mae": 0.3477299875261208,
+              "mean_mae": 0.25814498588420753
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.18309793826678433,
+              "alpha_suppression": 9.715729378187715,
+              "engagement": -1.0001758597134474,
+              "heart_rate_bpm": 77.31958762886597
+            },
+            "scales": {
+              "faa": 0.3492501278070352,
+              "alpha_suppression": 0.1773451895117575,
+              "engagement": 0.4387361607141981,
+              "heart_rate_bpm": 3.3447592222921165
+            }
+          }
+        },
+        {
+          "group": "Rm_030",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_I:Rm_030"
+          ],
+          "train_group_ids": [
+            "Rm_021",
+            "Rm_022",
+            "Rm_023",
+            "Rm_024",
+            "Rm_025",
+            "Rm_026",
+            "Rm_027",
+            "Rm_028",
+            "Rm_029"
+          ],
+          "test_group_ids": [
+            "Rm_030"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.5244688874430543,
+              -0.47322224927673967
+            ],
+            [
+              -0.6282174566271241,
+              0.6348955424183953
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_median"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.10603693086868643,
+                  -0.06513371410454485
+                ],
+                [
+                  0.10603693086868643,
+                  -0.06513371410454485
+                ]
+              ],
+              "valence_mae": 0.5763431720350892,
+              "arousal_mae": 0.5540588958475674,
+              "mean_mae": 0.5652010339413283
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.10603693086868643,
+                  -0.06513371410454485
+                ],
+                [
+                  0.10603693086868643,
+                  -0.06513371410454485
+                ]
+              ],
+              "valence_mae": 0.5763431720350892,
+              "arousal_mae": 0.5540588958475674,
+              "mean_mae": 0.5652010339413283
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.22326131117835568,
+                  -0.0554144544251862
+                ],
+                [
+                  0.22326131117835568,
+                  -0.0554144544251862
+                ]
+              ],
+              "valence_mae": 0.5763431720350892,
+              "arousal_mae": 0.5540588958475675,
+              "mean_mae": 0.5652010339413284
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.08267902375405711,
+              "alpha_suppression": 9.715729378187715,
+              "engagement": -1.1325773424543344,
+              "heart_rate_bpm": 77.31958762886597
+            },
+            "scales": {
+              "faa": 0.30504263824773026,
+              "alpha_suppression": 0.25136995242434473,
+              "engagement": 0.5918340502475841,
+              "heart_rate_bpm": 3.3447592222921165
+            }
+          }
+        }
+      ],
+      "target_type": "E3_complete_fusion_population_calibrated",
+      "calibration_rule": "fit on outer-training raw components only"
+    },
+    "subject": {
+      "folds": [
+        {
+          "group": "Subj_B",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021"
+          ],
+          "train_group_ids": [
+            "Subj_D",
+            "Subj_I",
+            "Subj_M"
+          ],
+          "test_group_ids": [
+            "Subj_B"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.4555696772358364,
+              -0.6298942710738801
+            ],
+            [
+              0.30325599251364477,
+              -0.7165935318195344
+            ],
+            [
+              0.36901558772911724,
+              -0.5468068080677382
+            ],
+            [
+              0.4864280249046517,
+              -0.08207142767001924
+            ],
+            [
+              -0.1390740293654247,
+              -0.5133952879172677
+            ],
+            [
+              0.1695636122984806,
+              -0.5695727376839923
+            ],
+            [
+              0.5508090745351661,
+              -0.6581000292928658
+            ],
+            [
+              -0.018776486248185786,
+              -0.20985266115523774
+            ],
+            [
+              -0.08308621195126839,
+              -0.23853127455126663
+            ],
+            [
+              0.3438178692789541,
+              -0.6309606722296656
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_median"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ]
+              ],
+              "valence_mae": 0.21722240057038578,
+              "arousal_mae": 0.3880370334414289,
+              "mean_mae": 0.30262971700590735
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ],
+                [
+                  0.20402266787995527,
+                  -0.09390818896339251
+                ]
+              ],
+              "valence_mae": 0.21722240057038578,
+              "arousal_mae": 0.3880370334414289,
+              "mean_mae": 0.30262971700590735
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.2404320377948246,
+                  0.01500833323295932
+                ],
+                [
+                  0.2404320377948246,
+                  0.01500833323295932
+                ],
+                [
+                  0.2404320377948246,
+                  0.01500833323295932
+                ],
+                [
+                  0.2404320377948246,
+                  0.01500833323295932
+                ],
+                [
+                  0.2404320377948246,
+                  0.01500833323295932
+                ],
+                [
+                  0.2404320377948246,
+                  0.01500833323295932
+                ],
+                [
+                  0.2404320377948246,
+                  0.01500833323295932
+                ],
+                [
+                  0.2404320377948246,
+                  0.01500833323295932
+                ],
+                [
+                  0.2404320377948246,
+                  0.01500833323295932
+                ],
+                [
+                  0.2404320377948246,
+                  0.01500833323295932
+                ]
+              ],
+              "valence_mae": 0.20994052658741197,
+              "arousal_mae": 0.49458620337910614,
+              "mean_mae": 0.35226336498325905
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": -0.0011126491990891552,
+              "alpha_suppression": 9.806432369226872,
+              "engagement": -0.8332888015380113,
+              "heart_rate_bpm": 80.86253369272237
+            },
+            "scales": {
+              "faa": 0.6223607447839392,
+              "alpha_suppression": 0.28137885334730667,
+              "engagement": 0.23385518425424964,
+              "heart_rate_bpm": 6.422506738544475
+            }
+          }
+        },
+        {
+          "group": "Subj_D",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023"
+          ],
+          "train_group_ids": [
+            "Subj_B",
+            "Subj_I",
+            "Subj_M"
+          ],
+          "test_group_ids": [
+            "Subj_D"
+          ],
+          "observed_fused_coordinates": [
+            [
+              -0.63968588684687,
+              -0.16104374507323332
+            ],
+            [
+              -0.03956078566365595,
+              -0.3237361990829659
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_median"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.11914402670975355,
+                  -0.08711775142461353
+                ],
+                [
+                  0.11914402670975355,
+                  -0.08711775142461353
+                ]
+              ],
+              "valence_mae": 0.4587673629650165,
+              "arousal_mae": 0.1552722206534861,
+              "mean_mae": 0.3070197918092513
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.11914402670975355,
+                  -0.08711775142461353
+                ],
+                [
+                  0.11914402670975355,
+                  -0.08711775142461353
+                ]
+              ],
+              "valence_mae": 0.4587673629650165,
+              "arousal_mae": 0.1552722206534861,
+              "mean_mae": 0.3070197918092513
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.1580199370754527,
+                  -0.05315876814896473
+                ],
+                [
+                  0.1580199370754527,
+                  -0.05315876814896473
+                ]
+              ],
+              "valence_mae": 0.4976432733307157,
+              "arousal_mae": 0.1892312039291349,
+              "mean_mae": 0.34343723862992526
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.18309793826678433,
+              "alpha_suppression": 9.715729378187715,
+              "engagement": -0.9592458993601274,
+              "heart_rate_bpm": 77.41935483870968
+            },
+            "scales": {
+              "faa": 0.36880112794986597,
+              "alpha_suppression": 0.1773451895117575,
+              "engagement": 0.4205991774853189,
+              "heart_rate_bpm": 4.1401444390948665
+            }
+          }
+        },
+        {
+          "group": "Subj_I",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022",
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "train_group_ids": [
+            "Subj_B",
+            "Subj_D",
+            "Subj_M"
+          ],
+          "test_group_ids": [
+            "Subj_I"
+          ],
+          "observed_fused_coordinates": [
+            [
+              -0.667798992177344,
+              0.6636382017370459
+            ],
+            [
+              -0.13937238220105402,
+              0.08217536815586524
+            ],
+            [
+              -0.10129261947973706,
+              0.8511505544009808
+            ],
+            [
+              0.043024075728255284,
+              -0.008773835855675705
+            ],
+            [
+              -0.12072441424351227,
+              -0.007465400037603209
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_median"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.10901140416754077,
+                  -0.09241320381018761
+                ],
+                [
+                  0.10901140416754077,
+                  -0.09241320381018761
+                ],
+                [
+                  0.10901140416754077,
+                  -0.09241320381018761
+                ],
+                [
+                  0.10901140416754077,
+                  -0.09241320381018761
+                ],
+                [
+                  0.10901140416754077,
+                  -0.09241320381018761
+                ]
+              ],
+              "valence_mae": 0.30624427064221915,
+              "arousal_mae": 0.40855818149031026,
+              "mean_mae": 0.3574012260662647
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.10901140416754077,
+                  -0.09241320381018761
+                ],
+                [
+                  0.10901140416754077,
+                  -0.09241320381018761
+                ],
+                [
+                  0.10901140416754077,
+                  -0.09241320381018761
+                ],
+                [
+                  0.10901140416754077,
+                  -0.09241320381018761
+                ],
+                [
+                  0.10901140416754077,
+                  -0.09241320381018761
+                ]
+              ],
+              "valence_mae": 0.30624427064221915,
+              "arousal_mae": 0.40855818149031026,
+              "mean_mae": 0.3574012260662647
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.1544868446121174,
+                  -0.08335575588222507
+                ],
+                [
+                  0.1544868446121174,
+                  -0.08335575588222507
+                ],
+                [
+                  0.1544868446121174,
+                  -0.08335575588222507
+                ],
+                [
+                  0.1544868446121174,
+                  -0.08335575588222507
+                ],
+                [
+                  0.1544868446121174,
+                  -0.08335575588222507
+                ]
+              ],
+              "valence_mae": 0.35171971108679584,
+              "arousal_mae": 0.39950073356234767,
+              "mean_mae": 0.37561022232457175
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.22123580159797918,
+              "alpha_suppression": 9.687477434218895,
+              "engagement": -1.2976579791989704,
+              "heart_rate_bpm": 76.87383039495715
+            },
+            "scales": {
+              "faa": 0.3108727426805763,
+              "alpha_suppression": 0.19292310346949929,
+              "engagement": 0.6715120731593636,
+              "heart_rate_bpm": 1.997455166012995
+            }
+          }
+        },
+        {
+          "group": "Subj_M",
+          "status": "evaluated",
+          "train_trial_ids": [
+            "E3:Subj_D:Rm_022",
+            "E3:Subj_D:Rm_023",
+            "E3:Subj_B:Rm_030",
+            "E3:Subj_B:Rm_029",
+            "E3:Subj_B:Rm_028",
+            "E3:Subj_B:Rm_027",
+            "E3:Subj_B:Rm_026",
+            "E3:Subj_B:Rm_025",
+            "E3:Subj_B:Rm_024",
+            "E3:Subj_B:Rm_023",
+            "E3:Subj_B:Rm_022",
+            "E3:Subj_B:Rm_021",
+            "E3:Subj_I:Rm_030",
+            "E3:Subj_I:Rm_029",
+            "E3:Subj_I:Rm_027",
+            "E3:Subj_I:Rm_025",
+            "E3:Subj_I:Rm_021"
+          ],
+          "test_trial_ids": [
+            "E3:Subj_M:Rm_028",
+            "E3:Subj_M:Rm_026",
+            "E3:Subj_M:Rm_025",
+            "E3:Subj_M:Rm_024",
+            "E3:Subj_M:Rm_023",
+            "E3:Subj_M:Rm_022"
+          ],
+          "train_group_ids": [
+            "Subj_B",
+            "Subj_D",
+            "Subj_I"
+          ],
+          "test_group_ids": [
+            "Subj_M"
+          ],
+          "observed_fused_coordinates": [
+            [
+              0.43863020075697456,
+              0.4399040344804739
+            ],
+            [
+              0.6634604641783721,
+              0.16648454278842956
+            ],
+            [
+              0.8884701211054482,
+              0.22847441695063023
+            ],
+            [
+              0.9112674689838445,
+              -0.11869753121161963
+            ],
+            [
+              0.8234159108963985,
+              0.18703388500415835
+            ],
+            [
+              0.09405045336646006,
+              0.616409746151086
+            ]
+          ],
+          "selected_candidate": {
+            "name": "dummy_median"
+          },
+          "predictions": {
+            "selected": {
+              "coordinates": [
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ],
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ],
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ],
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ],
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ],
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ]
+              ],
+              "valence_mae": 0.5029816509593104,
+              "arousal_mae": 0.37235975464442395,
+              "mean_mae": 0.43767070280186715
+            },
+            "dummy_median": {
+              "coordinates": [
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ],
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ],
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ],
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ],
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ],
+                [
+                  0.153325951699679,
+                  -0.11909157228389756
+                ]
+              ],
+              "valence_mae": 0.5029816509593104,
+              "arousal_mae": 0.37235975464442395,
+              "mean_mae": 0.43767070280186715
+            },
+            "dummy_mean": {
+              "coordinates": [
+                [
+                  0.1361080911960897,
+                  -0.12969629040189654
+                ],
+                [
+                  0.1361080911960897,
+                  -0.12969629040189654
+                ],
+                [
+                  0.1361080911960897,
+                  -0.12969629040189654
+                ],
+                [
+                  0.1361080911960897,
+                  -0.12969629040189654
+                ],
+                [
+                  0.1361080911960897,
+                  -0.12969629040189654
+                ],
+                [
+                  0.1361080911960897,
+                  -0.12969629040189654
+                ]
+              ],
+              "valence_mae": 0.5144602246283698,
+              "arousal_mae": 0.3829644727624229,
+              "mean_mae": 0.44871234869539633
+            }
+          },
+          "outer_training_calibrator": {
+            "centers": {
+              "faa": 0.012489306531126232,
+              "alpha_suppression": 9.83400851187505,
+              "engagement": -1.3126120095935645,
+              "heart_rate_bpm": 76.82458386683739
+            },
+            "scales": {
+              "faa": 0.2529443574112867,
+              "alpha_suppression": 0.3469122934103718,
+              "engagement": 0.6323795580555639,
+              "heart_rate_bpm": 2.705128040973109
+            }
+          }
+        }
+      ],
+      "target_type": "E3_complete_fusion_population_calibrated",
+      "calibration_rule": "fit on outer-training raw components only"
+    }
   }
 }

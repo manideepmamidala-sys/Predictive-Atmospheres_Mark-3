@@ -1,7 +1,9 @@
+import json
+
 import numpy as np
 import pytest
 
-from pa.signals.ecg import process_ecg
+from pa.signals.ecg import ecg_review_examples, process_ecg
 
 
 def synthetic_ecg(beat_times, duration=36, sample_rate=500):
@@ -73,3 +75,90 @@ def test_usable_coverage_not_source_length_controls_rmssd():
     assert not result.valid_rmssd
     assert result.rmssd_scenarios["sensitivity_20s"]["valid"]
     assert result.rmssd_scenarios["sensitivity_10s"]["valid"]
+
+
+def test_coverage_and_examples_keep_filterable_and_valid_rr_seconds_distinct():
+    fs = 500
+    raw = synthetic_ecg(np.arange(1.0, 35.0, 0.8))
+    result = process_ecg(raw, fs, np.arange(len(raw)) % 256)
+    coverage = result.coverage
+    assert coverage["source_seconds"] == 36
+    assert coverage["filterable_seconds"] == 36
+    assert 0 < coverage["valid_rr_seconds"] <= coverage["filterable_seconds"]
+    assert coverage["longest_valid_run"]["covered_seconds"] >= 30
+    assert coverage["heart_rate_run"]["valid_intervals"] >= 5
+    assert result.eligibility["heart_rate"]["automated_eligible"]
+    assert result.eligibility["rmssd_30s"]["automated_eligible"]
+    assert result.eligibility["human_review"] == "pending_cp_b"
+    examples = ecg_review_examples(raw, result)
+    accepted = next(item for item in examples if item["kind"] == "accepted_run")
+    assert accepted["sample_rate_hz"] == fs
+    assert accepted["start_s"] == pytest.approx(accepted["start_sample"] / fs)
+    assert len(accepted["raw"]) == len(accepted["filtered"]) == fs * 4
+    assert accepted["raw_spectrum"]["frequency_hz"] == \
+        accepted["filtered_spectrum"]["frequency_hz"]
+    assert accepted["amplitude_unit"] == "unverified raw amplitude"
+
+
+def test_gap_coverage_and_review_example_never_filter_across_discontinuity():
+    fs = 500
+    raw = synthetic_ecg(np.arange(1.0, 35.0, 0.8))
+    counter = np.arange(len(raw)) % 256
+    counter[18 * fs:] = (counter[18 * fs:] + 2) % 256
+    result = process_ecg(raw, fs, counter)
+    coverage = result.coverage
+    assert coverage["filterable_seconds"] == 36
+    assert coverage["valid_rr_seconds"] > coverage["longest_valid_run"]["covered_seconds"]
+    assert coverage["longest_valid_run"]["covered_seconds"] < 30
+    assert coverage["rmssd_30s_run"] is None
+    assert not result.eligibility["rmssd_30s"]["automated_eligible"]
+    assert result.rmssd_scenarios["sensitivity_10s"]["valid"]
+    examples = ecg_review_examples(raw, result)
+    gap = next(item for item in examples if item["reason"] == "counter_discontinuity")
+    assert gap["filtered"] is None and gap["filtered_spectrum"] is None
+    assert gap["raw_spectrum"] is None
+
+
+def test_rejected_channel_has_explicit_coverage_and_raw_review_evidence():
+    fs = 500
+    raw = np.zeros(fs * 8)
+    result = process_ecg(raw, fs, np.arange(len(raw)) % 256)
+    assert result.coverage["filterable_seconds"] == 0
+    assert result.coverage["valid_rr_seconds"] == 0
+    assert result.eligibility["heart_rate"]["automated_eligible"] is False
+    assert result.eligibility["rmssd_30s"]["automated_eligible"] is False
+    examples = ecg_review_examples(raw, result)
+    assert examples and all(item["filtered"] is None for item in examples)
+    assert any(item["reason"] == "flat_dropout" for item in examples)
+
+
+def test_nonfinite_channel_keeps_serializable_raw_review_evidence():
+    fs = 500
+    raw = synthetic_ecg(np.arange(1.0, 7.0, 0.8), duration=8)
+    raw[3 * fs] = np.nan
+    result = process_ecg(raw, fs, np.arange(len(raw)) % 256)
+    assert not result.valid_hr and result.heart_rate_bpm is None
+    examples = ecg_review_examples(raw, result)
+    assert examples[0]["reason"] == "nonfinite_samples"
+    assert None in examples[0]["raw"]
+    assert examples[0]["raw_spectrum"] is None
+    json.dumps(examples, allow_nan=False)
+
+
+def test_every_ecg_example_spanning_counter_gap_suppresses_raw_spectrum():
+    fs = 500
+    raw = synthetic_ecg(np.arange(1.0, 11.0, 0.8), duration=12)
+    counter = np.arange(len(raw)) % 256
+    counter[5 * fs:] = (counter[5 * fs:] + 2) % 256
+    counter[6 * fs:] = (counter[6 * fs:] + 2) % 256
+    result = process_ecg(raw, fs, counter)
+    gaps = [round(item["start_s"] * fs) for item in result.excluded_segments
+            if item["reason"] == "counter_discontinuity"]
+    examples = ecg_review_examples(raw, result)
+    assert gaps == [5 * fs, 6 * fs]
+    assert any(item["reason"] != "counter_discontinuity" and
+               any(item["start_sample"] < gap < item["stop_sample"] for gap in gaps)
+               for item in examples)
+    assert all(item["raw_spectrum"] is None
+               for item in examples
+               if any(item["start_sample"] < gap < item["stop_sample"] for gap in gaps))

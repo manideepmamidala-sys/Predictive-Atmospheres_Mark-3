@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.0.0",
+  "method_version": "1.2.0",
+  "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+  "products": [
+    {
+      "id": "S1",
+      "route": "/study",
+      "status": "available",
+      "path": "/research/analysis/S1.json"
+    },
+    {
+      "id": "S2",
+      "route": "/study",
+      "status": "available",
+      "path": "/research/analysis/S2.json"
+    },
+    {
+      "id": "S3",
+      "route": "/study",
+      "status": "available",
+      "path": "/research/analysis/S3.json"
+    },
+    {
+      "id": "S4",
+      "route": "/rooms",
+      "status": "available",
+      "path": "/research/analysis/S4.json"
+    },
+    {
+      "id": "S5",
+      "route": "/study",
+      "status": "available",
+      "path": "/research/analysis/S5.json"
+    },
+    {
+      "id": "R1",
+      "route": "/rooms",
+      "status": "available",
+      "path": "/research/analysis/R1.json"
+    },
+    {
+      "id": "R2",
+      "route": "/rooms",
+      "status": "available",
+      "path": "/research/analysis/R2.json"
+    },
+    {
+      "id": "R3",
+      "route": "/rooms",
+      "status": "available",
+      "path": "/research/analysis/R3.json"
+    },
+    {
+      "id": "R4",
+      "route": "/rooms",
+      "status": "available",
+      "path": "/research/analysis/R4.json"
+    },
+    {
+      "id": "R5",
+      "route": "/rooms",
+      "status": "available",
+      "path": "/research/analysis/R5.json"
+    },
+    {
+      "id": "R6",
+      "route": "/rooms",
+      "status": "available",
+      "path": "/research/analysis/R6.json"
+    },
+    {
+      "id": "R7",
+      "route": "/rooms",
+      "status": "available",
+      "path": "/research/analysis/R7.json"
+    },
+    {
+      "id": "R8",
+      "route": "/rooms",
+      "status": "available",
+      "path": "/research/analysis/R8.json"
+    },
+    {
+      "id": "R9",
+      "route": "/rooms",
+      "status": "available",
+      "path": "/research/analysis/R9.json"
+    },
+    {
+      "id": "B1",
+      "route": "/body",
+      "status": "available",
+      "path": "/research/analysis/B1.json"
+    },
+    {
+      "id": "B2",
+      "route": "/body",
+      "status": "available",
+      "path": "/research/analysis/B2.json"
+    },
+    {
+      "id": "B3",
+      "route": "/body",
+      "status": "available",
+      "path": "/research/analysis/B3.json"
+    },
+    {
+      "id": "B4",
+      "route": "/body",
+      "status": "available",
+      "path": "/research/analysis/B4.json"
+    },
+    {
+      "id": "B5",
+      "route": "/body",
+      "status": "available",
+      "path": "/research/analysis/B5.json"
+    },
+    {
+      "id": "B6",
+      "route": "/body",
+      "status": "available",
+      "path": "/research/analysis/B6.json"
+    },
+    {
+      "id": "B7",
+      "route": "/body",
+      "status": "available",
+      "path": "/research/analysis/B7.json"
+    },
+    {
+      "id": "B8",
+      "route": "/body",
+      "status": "available",
+      "path": "/research/analysis/B8.json"
+    },
+    {
+      "id": "P1",
+      "route": "/prediction",
+      "status": "available",
+      "path": "/research/analysis/P1.json"
+    },
+    {
+      "id": "P2",
+      "route": "/prediction",
+      "status": "available",
+      "path": "/research/analysis/P2.json"
+    },
+    {
+      "id": "P3",
+      "route": "/prediction",
+      "status": "available",
+      "path": "/research/analysis/P3.json"
+    },
+    {
+      "id": "P4",
+      "route": "/prediction",
+      "status": "unavailable",
+      "path": "/research/analysis/P4.json"
+    },
+    {
+      "id": "P5",
+      "route": "/prediction",
+      "status": "available",
+      "path": "/research/analysis/P5.json"
+    },
+    {
+      "id": "Methods",
+      "route": "/methods",
+      "status": "available",
+      "path": "/research/analysis/Methods.json"
+    }
+  ]
+}

@@ -1,0 +1,408 @@
+{
+  "schema_version": "1.0.0",
+  "id": "B5",
+  "route": "/body",
+  "status": "available",
+  "question": "Do cortical arousal and heart rate move together?",
+  "takeaway": "E2: 19 plotted raw-HR pairs from 3 people; 19 calibrated-HR correlation pairs from 3 people, equal-person mean \u03c1 -0.02; E3: 33 plotted raw-HR pairs from 5 people; 31 calibrated-HR correlation pairs from 4 people, equal-person mean \u03c1 -0.44",
+  "method": "Scatter reviewed EEG arousal against raw heart rate in beats/min. Within-person Spearman uses calibrated normalized heart rate with at least three variable pairs per contributing person; the equal-person summary uses that smaller cohort, with 2,000 participant-vector bootstrap draws only when at least four people contribute.",
+  "caveats": [
+    "The plotted trials repeat rooms/people; relationship summaries use participants as units.",
+    "Acquisition and construct uncertainty limit physiological interpretation.",
+    "E2/E3 correlations are separate; absent interval reflects fewer than four contributing people.",
+    "Raw heart-rate pairs can remain visible when within-person calibration is unavailable; those pairs do not enter the correlation cohort."
+  ],
+  "counts": {
+    "trials": 52,
+    "participants": 7,
+    "rooms": 20
+  },
+  "units": {
+    "eeg_arousal": "signed descriptive coordinate",
+    "heart_rate_bpm": "beats/min"
+  },
+  "provenance": {
+    "method_version": "1.2.0",
+    "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "generated_at_utc": "2026-10-10T16:03:37+00:00"
+  },
+  "availability_reason": null,
+  "chart": {
+    "type": "scatter",
+    "rows": [
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_014",
+        "eeg_arousal": 0.4781582682635902,
+        "heart_rate_bpm": 81.52173913043478
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_016",
+        "eeg_arousal": -0.7550196902476385,
+        "heart_rate_bpm": 86.70520231213874
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_019",
+        "eeg_arousal": 0.41739318130488157,
+        "heart_rate_bpm": 86.45533141210375
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_015",
+        "eeg_arousal": -0.45089129405300254,
+        "heart_rate_bpm": 87.2093023255814
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_011",
+        "eeg_arousal": 0.0,
+        "heart_rate_bpm": 86.33093525179855
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_017",
+        "eeg_arousal": 0.6548909562888259,
+        "heart_rate_bpm": 79.6812749003984
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_012",
+        "eeg_arousal": 0.3875281337596841,
+        "heart_rate_bpm": 91.32420091324201
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_E",
+        "room_id": "Rm_020",
+        "eeg_arousal": -0.9096101880535636,
+        "heart_rate_bpm": 92.16589861751152
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_011",
+        "eeg_arousal": -0.5968681299788845,
+        "heart_rate_bpm": 96.7741935483871
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_012",
+        "eeg_arousal": -0.9047314093019787,
+        "heart_rate_bpm": 100.0
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_013",
+        "eeg_arousal": -0.07089687868583533,
+        "heart_rate_bpm": 99.33774834437087
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_014",
+        "eeg_arousal": 0.38478464426914305,
+        "heart_rate_bpm": 101.01010101010101
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_015",
+        "eeg_arousal": 0.19296474043688666,
+        "heart_rate_bpm": 98.03921568627452
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_016",
+        "eeg_arousal": -0.7195426583009696,
+        "heart_rate_bpm": 102.73972602739727
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_017",
+        "eeg_arousal": 0.4994215362094808,
+        "heart_rate_bpm": 101.01010101010101
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_018",
+        "eeg_arousal": 0.5124194593348262,
+        "heart_rate_bpm": 101.01010101010101
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_011",
+        "eeg_arousal": 0.9544663032125371,
+        "heart_rate_bpm": 91.46341463414633
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_012",
+        "eeg_arousal": -0.20619343722474798,
+        "heart_rate_bpm": 95.54140127388536
+      },
+      {
+        "experiment": 2,
+        "participant_id": "Subj_G",
+        "room_id": "Rm_014",
+        "eeg_arousal": -0.3779770661927012,
+        "heart_rate_bpm": 86.33093525179856
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_028",
+        "eeg_arousal": -0.3312120527521339,
+        "heart_rate_bpm": 78.74015748031496
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_026",
+        "eeg_arousal": -0.7897784512331216,
+        "heart_rate_bpm": 81.41112618724559
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_025",
+        "eeg_arousal": 0.5120990281085346,
+        "heart_rate_bpm": 77.31958762886597
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_024",
+        "eeg_arousal": -0.3545027168344071,
+        "heart_rate_bpm": 80.86253369272237
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_023",
+        "eeg_arousal": -0.1923332181110108,
+        "heart_rate_bpm": 80.21390374331551
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_M",
+        "room_id": "Rm_022",
+        "eeg_arousal": -0.05101764230271566,
+        "heart_rate_bpm": 79.57559681697613
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_022",
+        "eeg_arousal": -0.09590935305441839,
+        "heart_rate_bpm": 76.33587786259541
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_D",
+        "room_id": "Rm_023",
+        "eeg_arousal": 0.04017553392155246,
+        "heart_rate_bpm": 76.53061224489795
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_030",
+        "eeg_arousal": 0.8059977773312469,
+        "heart_rate_bpm": 74.62686567164178
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_029",
+        "eeg_arousal": 0.5495606195886925,
+        "heart_rate_bpm": 74.62686567164178
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_028",
+        "eeg_arousal": 0.895203619451683,
+        "heart_rate_bpm": 76.82458386683739
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_027",
+        "eeg_arousal": 0.293614111576052,
+        "heart_rate_bpm": 76.92307692307692
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_026",
+        "eeg_arousal": -0.26329403275030616,
+        "heart_rate_bpm": 72.99270072992701
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_025",
+        "eeg_arousal": -0.30770934029106584,
+        "heart_rate_bpm": 75.0
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_024",
+        "eeg_arousal": 0.0635091291435616,
+        "heart_rate_bpm": 76.72634271099744
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_023",
+        "eeg_arousal": -0.5716652485307189,
+        "heart_rate_bpm": 77.12082262210797
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_022",
+        "eeg_arousal": -0.6139315377735945,
+        "heart_rate_bpm": 77.41935483870968
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_B",
+        "room_id": "Rm_021",
+        "eeg_arousal": -0.3674298264309336,
+        "heart_rate_bpm": 76.04562737642586
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_021",
+        "eeg_arousal": -0.7309504221180472,
+        "heart_rate_bpm": 107.5268817204301
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_022",
+        "eeg_arousal": 0.5234784685423036,
+        "heart_rate_bpm": 104.71204188481676
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_023",
+        "eeg_arousal": 0.8076760807642754,
+        "heart_rate_bpm": 102.38907849829351
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_025",
+        "eeg_arousal": 0.5202207102973313,
+        "heart_rate_bpm": 106.38297872340426
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_027",
+        "eeg_arousal": 0.9023224533400298,
+        "heart_rate_bpm": 103.62694300518136
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_H",
+        "room_id": "Rm_029",
+        "eeg_arousal": -0.3097867143651696,
+        "heart_rate_bpm": 104.16666666666667
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_030",
+        "eeg_arousal": -0.10525657053549786,
+        "heart_rate_bpm": 117.6470588235294
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_029",
+        "eeg_arousal": 0.39032502251525925,
+        "heart_rate_bpm": 116.95906432748538
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_027",
+        "eeg_arousal": 0.12291030331604888,
+        "heart_rate_bpm": 116.73151750972762
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_026",
+        "eeg_arousal": -0.7312531502012756,
+        "heart_rate_bpm": 115.83011583011583
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_025",
+        "eeg_arousal": -0.28853074343270857,
+        "heart_rate_bpm": 115.60693641618496
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_024",
+        "eeg_arousal": 0.37497014731185063,
+        "heart_rate_bpm": 113.63636363636363
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_023",
+        "eeg_arousal": -0.23029456197208448,
+        "heart_rate_bpm": 114.50381679389312
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_022",
+        "eeg_arousal": -0.1862670936104221,
+        "heart_rate_bpm": 114.94252873563218
+      },
+      {
+        "experiment": 3,
+        "participant_id": "Subj_I",
+        "room_id": "Rm_021",
+        "eeg_arousal": -0.6458509557141207,
+        "heart_rate_bpm": 114.50381679389312
+      }
+    ],
+    "x": "eeg_arousal",
+    "y": "heart_rate_bpm",
+    "series": "participant_id",
+    "facet": "experiment",
+    "x_label": "eeg composite",
+    "y_label": "heart rate",
+    "x_unit": "signed descriptive coordinate",
+    "y_unit": "beats/min"
+  }
+}

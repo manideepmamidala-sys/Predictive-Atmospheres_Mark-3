@@ -1,6 +1,6 @@
 ---
 type: memory
-description: "Seven-page React research atlas, accessible themes and figures, static research data, and experimental simulator API use."
+description: "Eight-route React research atlas, validated static catalogue, component-level evidence, accessible figures and fused-only live Design Studio."
 ---
 # Website Architecture
 
@@ -8,32 +8,48 @@ description: "Seven-page React research atlas, accessible themes and figures, st
 
 ## Overview
 
-`frontend/src/` is a React, Vite and TypeScript research atlas with The study, Rooms, Signals, Affect, People, Room simulator and Model report routes. It presents generated evidence through a responsive reading layout, room imagery, comparison views, signal traces and accessible chart alternatives. The [platform](/architecture/platform.md) produces its data.
+`frontend/src/` is a React, Vite and TypeScript research atlas. Its eight routes are `/` (Predictive Atmospheres), `/study`, `/rooms`, `/body`, `/prediction`, `/studio`, `/explore` and `/methods`. The landing page presents the architectural question, hypothesis, three experiments, contribution and researcher context before directing readers to findings. Legacy route redirects preserve older links. The [platform](/architecture/platform.md) produces its evidence.
 
 ## Requirements
 
-### Research and live-data boundaries
+### Static research and live Studio
 
-The research routes read schema-validated static products from `artifacts/results/`. A small joined bundle serves shared views; the larger Signals product loads on its route. Product hashes are checked when staged for a production build. Only experimental prediction and optimization require the `/v1` API. If that service is unavailable, static research remains readable and the simulator reports unavailability without fabricating output.
+Research routes read schema-validated, hash-checked products from `artifacts/results/`. A joined bundle serves shared views; the larger anti-aliased Signals product loads only when needed. The 28-card analysis catalogue is staged with versioned paths, including honest unavailable status for P4. Research routes remain readable if the API is asleep or unavailable. Only Studio prediction and generation call `/v1`; they expose readiness and errors without fabricated output.
 
-### Navigation, themes and evidence
+Studio presents the fitted **fused** valence/arousal prediction only. Visitors can start from a complete E3 studied-room preset or supply all required independent room fields, choose a signed emotional target, and request direct prediction. A separate 0–100 numerical Neuro-Score drives constrained generation. Candidate results show requested, achieved and absolute score difference, support and the nearest studied room. Locks, ranges and category limits stay visible. The current `baseline_only` model gives a constant fused point across room geometries; moving the emotional target can change the score. Generated geometry is labelled schematic, and studied-room imagery is labelled as a reference rather than as the generated outcome.
 
-React Router provides deep links to seven routes. Light, Dark and System themes share design tokens and persist user preference. Layouts support desktop and mobile, keyboard interaction and reduced motion. Figures carry method and source context, units and sample counts where applicable. Experiment and participant filters, explicit missing states, comfort as a separate construct, partial versus complete affect categories, and weak-model status remain visible in the interface.
+### Evidence and interaction
 
-Room previews are derived WebP presentation images from preserved Lumion renders; the original images remain source-accessible. Top-eye extraction from stacked stereo images is a documented inference, not source-verified viewing convention.
+The Study, Rooms, Body, Prediction and Methods routes distinguish observed inputs, reviewed physiology, reports, constructed fusion and model output. Figures show method, units, available-record denominators and limits. Data Explorer filters trials, rooms and people and exposes six component-level automated/reviewed QC records, reasons and reviewer provenance; heart rate and RMSSD remain distinct. Methods publishes 22 approved numerical settings, ten existing fusion-weight sensitivity summaries, CP-B review provenance and eight pinned references. Experiment 1 comfort remains separate from affect axes, and Experiment 2/3 rating procedures and complete/partial fusion states remain visible.
+
+Light, Dark and System themes share design tokens and persist preference. Routes support deep links, keyboard access, responsive desktop/mobile layouts, reduced motion and chart alternatives. Room previews are WebP derivatives of retained Lumion renders; extraction of a top eye from stacked stereo imagery is an inferred presentation convention. The researcher portrait and approved contact/project links appear on the landing page; personal booklet, CV and portfolio files are not offered as downloads.
 
 ## Design Decisions
 
 ### Static research products with a narrow live API
 
-**Decision**: Serve the seven-route research narrative from generated JSON and use the API for simulator actions only.
-**Why**: The atlas can show reproducible evidence even when a free-tier API is asleep or unavailable.
-**Rejected**: Making research pages depend on live computation, which would make archived results and basic reading depend on service readiness.
+**Decision**: Serve research routes from validated generated JSON and use the API for Studio actions only.
+**Why**: The evidence remains readable during API cold starts and service outages.
+**Rejected**: Making archived research pages depend on live computation.
 *Introduced by*: 261008-ymhz-research-platform-rebuild
 
 ### Dual-theme evidence display
 
 **Decision**: Use shared tokens and Light, Dark and System preferences for routes, figures and controls.
-**Why**: Scientific plots, tables and source distinctions need readable contrast across device sizes and user settings.
-**Rejected**: A single dark cinematic presentation that does not serve the complete research atlas accessibly.
+**Why**: Scientific plots, tables and source distinctions need readable contrast across devices and user settings.
+**Rejected**: A single dark presentation for the complete research atlas.
 *Introduced by*: 261008-ymhz-research-platform-rebuild
+
+### Concept-led route structure
+
+**Decision**: Lead with the research question and place component evidence, model findings, Studio, Explorer and Methods on distinct linked routes.
+**Why**: Readers can understand the study's purpose before inspecting results, while detailed evidence remains accessible.
+**Rejected**: Opening with numerical findings or merging all methods and interactions into the landing page.
+*Introduced by*: 261010-tadj-research-atlas-design-studio
+
+### Fused-only experimental Studio
+
+**Decision**: Keep physiology and self-report comparisons on research routes and expose only the fitted fused model in Studio.
+**Why**: The deployable artifact has one declared target and a weak baseline-only status; offering other prediction modes would imply unfit models exist.
+**Rejected**: Fabricating separate objective or self-report live predictors.
+*Introduced by*: 261010-tadj-research-atlas-design-studio

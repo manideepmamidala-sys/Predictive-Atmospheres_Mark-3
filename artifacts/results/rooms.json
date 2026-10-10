@@ -2,14 +2,14 @@
   "schema_version": "1.0.0",
   "provenance": {
     "source": "Original investigator-supplied CSV metadata and raw channel recordings",
-    "method": "Analysis specification 1.1.0; conditional primary 500 Hz scenario",
+    "method": "Analysis specification 1.2.0; conditional primary 500 Hz scenario",
     "generated_at": null,
     "limitations": [
       "Acquisition sample rate, amplitude units and reference wiring are unconfirmed.",
       "Constructed affect axes are hypotheses, not validated emotion measurements."
     ],
-    "manifest_sha256": "2119a2245bc71b0266343e28f9873f39f7753fc549eebd5ce954e47e2ef4392f",
-    "analysis_spec_sha256": "57de97c45e7e06b7b68cf802765f6c1179368cf5a6de26c2744759fd4e10cbe7"
+    "manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+    "analysis_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac"
   },
   "rooms": [
     {
@@ -23,6 +23,21 @@
         "length": 4.0,
         "width": 3.0,
         "height": 2.8
+      },
+      "independent_attributes": {
+        "length": 4.0,
+        "width": 3.0,
+        "height": 2.8,
+        "num_doors": null,
+        "door_area": null,
+        "num_windows": null,
+        "window_area": null,
+        "daylight_factor": null,
+        "illuminance": null,
+        "cct": null,
+        "walkable_floor_area": null,
+        "day_or_night": null,
+        "space_type": null
       },
       "mean_affect": null,
       "n_affect": 0
@@ -39,6 +54,21 @@
         "width": 3.9,
         "height": 2.8
       },
+      "independent_attributes": {
+        "length": 6.0,
+        "width": 3.9,
+        "height": 2.8,
+        "num_doors": null,
+        "door_area": null,
+        "num_windows": null,
+        "window_area": null,
+        "daylight_factor": null,
+        "illuminance": null,
+        "cct": null,
+        "walkable_floor_area": null,
+        "day_or_night": null,
+        "space_type": null
+      },
       "mean_affect": null,
       "n_affect": 0
     },
@@ -53,6 +83,21 @@
         "length": 6.0,
         "width": 4.78,
         "height": 5.1
+      },
+      "independent_attributes": {
+        "length": 6.0,
+        "width": 4.78,
+        "height": 5.1,
+        "num_doors": null,
+        "door_area": null,
+        "num_windows": null,
+        "window_area": null,
+        "daylight_factor": null,
+        "illuminance": null,
+        "cct": null,
+        "walkable_floor_area": null,
+        "day_or_night": null,
+        "space_type": null
       },
       "mean_affect": null,
       "n_affect": 0
@@ -69,6 +114,21 @@
         "width": 3.59,
         "height": 3.5
       },
+      "independent_attributes": {
+        "length": 8.59,
+        "width": 3.59,
+        "height": 3.5,
+        "num_doors": null,
+        "door_area": null,
+        "num_windows": null,
+        "window_area": null,
+        "daylight_factor": null,
+        "illuminance": null,
+        "cct": null,
+        "walkable_floor_area": null,
+        "day_or_night": null,
+        "space_type": null
+      },
       "mean_affect": null,
       "n_affect": 0
     },
@@ -83,6 +143,21 @@
         "length": 12.98,
         "width": 9.7,
         "height": 4.0
+      },
+      "independent_attributes": {
+        "length": 12.98,
+        "width": 9.7,
+        "height": 4.0,
+        "num_doors": null,
+        "door_area": null,
+        "num_windows": null,
+        "window_area": null,
+        "daylight_factor": null,
+        "illuminance": null,
+        "cct": null,
+        "walkable_floor_area": null,
+        "day_or_night": null,
+        "space_type": null
       },
       "mean_affect": null,
       "n_affect": 0
@@ -99,6 +174,21 @@
         "width": 6.61,
         "height": 7.7
       },
+      "independent_attributes": {
+        "length": 16.17,
+        "width": 6.61,
+        "height": 7.7,
+        "num_doors": null,
+        "door_area": null,
+        "num_windows": null,
+        "window_area": null,
+        "daylight_factor": null,
+        "illuminance": null,
+        "cct": null,
+        "walkable_floor_area": null,
+        "day_or_night": null,
+        "space_type": null
+      },
       "mean_affect": null,
       "n_affect": 0
     },
@@ -113,6 +203,21 @@
         "length": 19.36,
         "width": 14.49,
         "height": 4.8
+      },
+      "independent_attributes": {
+        "length": 19.36,
+        "width": 14.49,
+        "height": 4.8,
+        "num_doors": null,
+        "door_area": null,
+        "num_windows": null,
+        "window_area": null,
+        "daylight_factor": null,
+        "illuminance": null,
+        "cct": null,
+        "walkable_floor_area": null,
+        "day_or_night": null,
+        "space_type": null
       },
       "mean_affect": null,
       "n_affect": 0
@@ -129,6 +234,21 @@
         "width": 14.49,
         "height": 7.8
       },
+      "independent_attributes": {
+        "length": 25.03,
+        "width": 14.49,
+        "height": 7.8,
+        "num_doors": null,
+        "door_area": null,
+        "num_windows": null,
+        "window_area": null,
+        "daylight_factor": null,
+        "illuminance": null,
+        "cct": null,
+        "walkable_floor_area": null,
+        "day_or_night": null,
+        "space_type": null
+      },
       "mean_affect": null,
       "n_affect": 0
     },
@@ -143,6 +263,21 @@
         "length": 25.03,
         "width": 4.71,
         "height": 3.2
+      },
+      "independent_attributes": {
+        "length": 25.03,
+        "width": 4.71,
+        "height": 3.2,
+        "num_doors": null,
+        "door_area": null,
+        "num_windows": null,
+        "window_area": null,
+        "daylight_factor": null,
+        "illuminance": null,
+        "cct": null,
+        "walkable_floor_area": null,
+        "day_or_night": null,
+        "space_type": null
       },
       "mean_affect": null,
       "n_affect": 0
@@ -159,6 +294,21 @@
         "width": 5.84,
         "height": 8.7
       },
+      "independent_attributes": {
+        "length": 10.4,
+        "width": 5.84,
+        "height": 8.7,
+        "num_doors": null,
+        "door_area": null,
+        "num_windows": null,
+        "window_area": null,
+        "daylight_factor": null,
+        "illuminance": null,
+        "cct": null,
+        "walkable_floor_area": null,
+        "day_or_night": null,
+        "space_type": null
+      },
       "mean_affect": null,
       "n_affect": 0
     },
@@ -174,8 +324,26 @@
         "width": 3.99,
         "height": 2.59
       },
-      "mean_affect": null,
-      "n_affect": 0
+      "independent_attributes": {
+        "length": 7.33,
+        "width": 3.99,
+        "height": 2.59,
+        "num_doors": 1.0,
+        "door_area": 1.8,
+        "num_windows": 2.0,
+        "window_area": 3.62,
+        "daylight_factor": 1.18,
+        "illuminance": 150.0,
+        "cct": 3000.0,
+        "walkable_floor_area": null,
+        "day_or_night": "Night",
+        "space_type": null
+      },
+      "mean_affect": {
+        "valence": -0.4858857165504025,
+        "arousal": 0.1132189338163751
+      },
+      "n_affect": 3
     },
     {
       "id": "Rm_012",
@@ -189,8 +357,26 @@
         "width": 4.08,
         "height": 3.88
       },
-      "mean_affect": null,
-      "n_affect": 0
+      "independent_attributes": {
+        "length": 8.02,
+        "width": 4.08,
+        "height": 3.88,
+        "num_doors": 2.0,
+        "door_area": 4.66,
+        "num_windows": 2.0,
+        "window_area": 7.43,
+        "daylight_factor": 2.28,
+        "illuminance": 300.0,
+        "cct": 4000.0,
+        "walkable_floor_area": null,
+        "day_or_night": "Night",
+        "space_type": null
+      },
+      "mean_affect": {
+        "valence": -0.02989630017457477,
+        "arousal": 0.14243145966038093
+      },
+      "n_affect": 3
     },
     {
       "id": "Rm_013",
@@ -204,9 +390,24 @@
         "width": 25.02,
         "height": 2.64
       },
+      "independent_attributes": {
+        "length": 5.68,
+        "width": 25.02,
+        "height": 2.64,
+        "num_doors": 2.0,
+        "door_area": 3.63,
+        "num_windows": 6.0,
+        "window_area": 18.24,
+        "daylight_factor": 1.6,
+        "illuminance": 100.0,
+        "cct": 2700.0,
+        "walkable_floor_area": null,
+        "day_or_night": "Night",
+        "space_type": null
+      },
       "mean_affect": {
-        "valence": -0.32560924537859787,
-        "arousal": 0.3308587811649361
+        "valence": -0.13377700306634455,
+        "arousal": 0.13529424576288435
       },
       "n_affect": 1
     },
@@ -222,11 +423,26 @@
         "width": 13.51,
         "height": 6.87
       },
-      "mean_affect": {
-        "valence": -0.32936436012373027,
-        "arousal": -0.1490085516114979
+      "independent_attributes": {
+        "length": 20.84,
+        "width": 13.51,
+        "height": 6.87,
+        "num_doors": 2.0,
+        "door_area": 3.83,
+        "num_windows": 8.0,
+        "window_area": 70.63,
+        "daylight_factor": 3.56,
+        "illuminance": 200.0,
+        "cct": 5000.0,
+        "walkable_floor_area": null,
+        "day_or_night": "Night",
+        "space_type": null
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": 0.2114380266790885,
+        "arousal": 0.11172194829120824
+      },
+      "n_affect": 3
     },
     {
       "id": "Rm_015",
@@ -240,11 +456,26 @@
         "width": 3.86,
         "height": 2.94
       },
-      "mean_affect": {
-        "valence": -0.28695526854413633,
-        "arousal": -0.261512669744953
+      "independent_attributes": {
+        "length": 2.87,
+        "width": 3.86,
+        "height": 2.94,
+        "num_doors": 1.0,
+        "door_area": 2.91,
+        "num_windows": 1.0,
+        "window_area": 3.84,
+        "daylight_factor": 2.95,
+        "illuminance": 500.0,
+        "cct": 5500.0,
+        "walkable_floor_area": null,
+        "day_or_night": "Day",
+        "space_type": null
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": 0.23422838712379151,
+        "arousal": -0.06680057246699965
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_016",
@@ -258,8 +489,26 @@
         "width": 3.99,
         "height": 2.59
       },
-      "mean_affect": null,
-      "n_affect": 0
+      "independent_attributes": {
+        "length": 7.33,
+        "width": 3.99,
+        "height": 2.59,
+        "num_doors": 1.0,
+        "door_area": 1.8,
+        "num_windows": 3.0,
+        "window_area": 17.59,
+        "daylight_factor": 7.2,
+        "illuminance": 600.0,
+        "cct": 5500.0,
+        "walkable_floor_area": null,
+        "day_or_night": "Day",
+        "space_type": null
+      },
+      "mean_affect": {
+        "valence": 0.20243773392867276,
+        "arousal": -0.20504620591264672
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_017",
@@ -273,8 +522,26 @@
         "width": 4.08,
         "height": 3.18
       },
-      "mean_affect": null,
-      "n_affect": 0
+      "independent_attributes": {
+        "length": 8.02,
+        "width": 4.08,
+        "height": 3.18,
+        "num_doors": 2.0,
+        "door_area": 4.66,
+        "num_windows": 2.0,
+        "window_area": 29.38,
+        "daylight_factor": 10.85,
+        "illuminance": 800.0,
+        "cct": 6000.0,
+        "walkable_floor_area": null,
+        "day_or_night": "Day",
+        "space_type": null
+      },
+      "mean_affect": {
+        "valence": 0.433082361443432,
+        "arousal": 0.07687585794388803
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_018",
@@ -288,9 +555,24 @@
         "width": 2.8,
         "height": 3.35
       },
+      "independent_attributes": {
+        "length": 25.02,
+        "width": 2.8,
+        "height": 3.35,
+        "num_doors": 6.0,
+        "door_area": 11.02,
+        "num_windows": 8.0,
+        "window_area": 38.25,
+        "daylight_factor": 5.41,
+        "illuminance": 1000.0,
+        "cct": 6500.0,
+        "walkable_floor_area": null,
+        "day_or_night": "Day",
+        "space_type": null
+      },
       "mean_affect": {
-        "valence": -0.5856161151720689,
-        "arousal": 0.22854769523595103
+        "valence": -0.561931146834413,
+        "arousal": 0.22810486483370657
       },
       "n_affect": 1
     },
@@ -306,8 +588,26 @@
         "width": 13.51,
         "height": 8.35
       },
-      "mean_affect": null,
-      "n_affect": 0
+      "independent_attributes": {
+        "length": 23.63,
+        "width": 13.51,
+        "height": 8.35,
+        "num_doors": 2.0,
+        "door_area": 12.46,
+        "num_windows": 30.0,
+        "window_area": 218.37,
+        "daylight_factor": 8.26,
+        "illuminance": 1200.0,
+        "cct": 7000.0,
+        "walkable_floor_area": null,
+        "day_or_night": "Day",
+        "space_type": null
+      },
+      "mean_affect": {
+        "valence": 0.1,
+        "arousal": 0.346509038100996
+      },
+      "n_affect": 1
     },
     {
       "id": "Rm_020",
@@ -321,8 +621,26 @@
         "width": 3.07,
         "height": 2.76
       },
-      "mean_affect": null,
-      "n_affect": 0
+      "independent_attributes": {
+        "length": 2.87,
+        "width": 3.07,
+        "height": 2.76,
+        "num_doors": 1.0,
+        "door_area": 1.87,
+        "num_windows": 1.0,
+        "window_area": 1.87,
+        "daylight_factor": 1.62,
+        "illuminance": 400.0,
+        "cct": 3500.0,
+        "walkable_floor_area": null,
+        "day_or_night": "Day",
+        "space_type": null
+      },
+      "mean_affect": {
+        "valence": -0.6113771722878867,
+        "arousal": 0.19406339482716847
+      },
+      "n_affect": 1
     },
     {
       "id": "Rm_021",
@@ -336,11 +654,26 @@
         "width": 3.87,
         "height": 2.59
       },
-      "mean_affect": {
-        "valence": 0.291922762200199,
-        "arousal": -0.6849770423339386
+      "independent_attributes": {
+        "length": 3.51,
+        "width": 3.87,
+        "height": 2.59,
+        "num_doors": 1.0,
+        "door_area": 1.8,
+        "num_windows": 1.0,
+        "window_area": 2.14,
+        "daylight_factor": 1.44,
+        "illuminance": 350.0,
+        "cct": 5500.0,
+        "walkable_floor_area": 8.9,
+        "day_or_night": "Day",
+        "space_type": "Bedroom"
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": 0.3261048661330172,
+        "arousal": -0.5568982814143764
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_022",
@@ -354,11 +687,26 @@
         "width": 2.6,
         "height": 2.8
       },
-      "mean_affect": {
-        "valence": -0.0008471567975481542,
-        "arousal": 0.5009716798021198
+      "independent_attributes": {
+        "length": 2.52,
+        "width": 2.6,
+        "height": 2.8,
+        "num_doors": 1.0,
+        "door_area": 1.69,
+        "num_windows": 2.0,
+        "window_area": 3.43,
+        "daylight_factor": 3.93,
+        "illuminance": 450.0,
+        "cct": 5500.0,
+        "walkable_floor_area": 4.13,
+        "day_or_night": "Day",
+        "space_type": "Bedroom"
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": -0.2798520177073992,
+        "arousal": 0.22405218626529755
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_023",
@@ -372,11 +720,26 @@
         "width": 3.91,
         "height": 2.79
       },
-      "mean_affect": {
-        "valence": 0.7998317222420521,
-        "arousal": 0.35573716716583426
+      "independent_attributes": {
+        "length": 4.77,
+        "width": 3.91,
+        "height": 2.79,
+        "num_doors": 3.0,
+        "door_area": 6.58,
+        "num_windows": 1.0,
+        "window_area": 2.08,
+        "daylight_factor": 1.04,
+        "illuminance": 400.0,
+        "cct": 5500.0,
+        "walkable_floor_area": 12.8,
+        "day_or_night": "Day",
+        "space_type": "Living Room"
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": 0.41985126898225833,
+        "arousal": 0.04306887643712841
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_024",
@@ -390,11 +753,26 @@
         "width": 8.92,
         "height": 2.56
       },
-      "mean_affect": {
-        "valence": 0.8997801199009526,
-        "arousal": -0.42371976151035773
+      "independent_attributes": {
+        "length": 4.73,
+        "width": 8.92,
+        "height": 2.56,
+        "num_doors": 4.0,
+        "door_area": 8.1,
+        "num_windows": 1.0,
+        "window_area": 7.85,
+        "daylight_factor": 2.34,
+        "illuminance": 350.0,
+        "cct": 5500.0,
+        "walkable_floor_area": 33.15,
+        "day_or_night": "Day",
+        "space_type": "Living Room"
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": 0.44722905893175013,
+        "arousal": -0.2711613953120722
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_025",
@@ -408,11 +786,26 @@
         "width": 3.99,
         "height": 2.59
       },
-      "mean_affect": {
-        "valence": 0.40807723779980093,
-        "arousal": -0.7512033863962422
+      "independent_attributes": {
+        "length": 7.33,
+        "width": 3.99,
+        "height": 2.59,
+        "num_doors": 1.0,
+        "door_area": 1.8,
+        "num_windows": 2.0,
+        "window_area": 2.43,
+        "daylight_factor": 6.38,
+        "illuminance": 900.0,
+        "cct": 5500.0,
+        "walkable_floor_area": 12.45,
+        "day_or_night": "Day",
+        "space_type": "Workplace"
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": 0.36890240475538943,
+        "arousal": -0.3413183618745679
+      },
+      "n_affect": 3
     },
     {
       "id": "Rm_026",
@@ -426,11 +819,26 @@
         "width": 3.86,
         "height": 2.94
       },
-      "mean_affect": {
-        "valence": -0.2248463252297373,
-        "arousal": 0.45533212320174277
+      "independent_attributes": {
+        "length": 2.87,
+        "width": 3.86,
+        "height": 2.94,
+        "num_doors": 1.0,
+        "door_area": 2.28,
+        "num_windows": 1.0,
+        "window_area": 3.84,
+        "daylight_factor": 3.05,
+        "illuminance": 350.0,
+        "cct": 5500.0,
+        "walkable_floor_area": 4.38,
+        "day_or_night": "Day",
+        "space_type": "Workplace"
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": -0.21392869113522786,
+        "arousal": -0.2369851740308998
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_027",
@@ -444,11 +852,26 @@
         "width": 13.16,
         "height": 3.36
       },
-      "mean_affect": {
-        "valence": 0.21918046134033317,
-        "arousal": 0.597131308183882
+      "independent_attributes": {
+        "length": 18.5,
+        "width": 13.16,
+        "height": 3.36,
+        "num_doors": 2.0,
+        "door_area": 9.48,
+        "num_windows": 13.0,
+        "window_area": 43.9,
+        "daylight_factor": 2.46,
+        "illuminance": 800.0,
+        "cct": 5500.0,
+        "walkable_floor_area": 182.2,
+        "day_or_night": "Day",
+        "space_type": "Classroom"
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": 0.6102147079555574,
+        "arousal": 0.4751541503140997
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_028",
@@ -462,11 +885,26 @@
         "width": 8.72,
         "height": 2.59
       },
-      "mean_affect": {
-        "valence": -0.017968820541251374,
-        "arousal": -0.02544004792471205
+      "independent_attributes": {
+        "length": 9.7,
+        "width": 8.72,
+        "height": 2.59,
+        "num_doors": 1.0,
+        "door_area": 1.8,
+        "num_windows": 3.0,
+        "window_area": 15.1,
+        "daylight_factor": 2.62,
+        "illuminance": 850.0,
+        "cct": 5500.0,
+        "walkable_floor_area": 44.7,
+        "day_or_night": "Day",
+        "space_type": "Classroom"
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": 0.005371890516499243,
+        "arousal": -0.03734636939817487
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_029",
@@ -480,11 +918,26 @@
         "width": 5.0,
         "height": 2.7
       },
-      "mean_affect": {
-        "valence": -0.007871488669635496,
-        "arousal": -0.04860213305453248
+      "independent_attributes": {
+        "length": 14.0,
+        "width": 5.0,
+        "height": 2.7,
+        "num_doors": 1.0,
+        "door_area": 2.64,
+        "num_windows": 2.0,
+        "window_area": 27.0,
+        "daylight_factor": 4.66,
+        "illuminance": 700.0,
+        "cct": 5500.0,
+        "walkable_floor_area": 31.04,
+        "day_or_night": "Day",
+        "space_type": "Cafeteria"
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": -0.1000161235860669,
+        "arousal": -0.3191942178755466
+      },
+      "n_affect": 2
     },
     {
       "id": "Rm_030",
@@ -498,11 +951,26 @@
         "width": 5.0,
         "height": 2.3
       },
-      "mean_affect": {
-        "valence": -0.4676906219931587,
-        "arousal": 0.38931894828133273
+      "independent_attributes": {
+        "length": 9.8,
+        "width": 5.0,
+        "height": 2.3,
+        "num_doors": 1.0,
+        "door_area": 1.97,
+        "num_windows": 3.0,
+        "window_area": 17.4,
+        "daylight_factor": 6.57,
+        "illuminance": 850.0,
+        "cct": 5500.0,
+        "walkable_floor_area": 21.45,
+        "day_or_night": "Day",
+        "space_type": "Cafeteria"
       },
-      "n_affect": 1
+      "mean_affect": {
+        "valence": 0.21807876322596473,
+        "arousal": 0.00951674695512758
+      },
+      "n_affect": 2
     }
   ]
 }

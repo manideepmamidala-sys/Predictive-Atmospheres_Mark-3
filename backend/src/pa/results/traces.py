@@ -36,7 +36,9 @@ def eeg_window(right: NDArray[np.float64], result: EEGResult,
     if len(raw) != width:
         return TraceRecord(sample_rate_hz=sample_rate_hz, unit="unverified raw amplitude",
                            channel="Channel1 / approximate right forehead", raw=raw.tolist())
-    rejected = any(item["index"] == 0 for item in result.rejected_epochs)
+    right_rejections = result.channel_qc.get("right", {}).get("rejected_epochs",
+                                                              result.rejected_epochs)
+    rejected = any(item["index"] == 0 for item in right_rejections)
     cleaned = []
     if not rejected and result.total_epochs > 0:
         cfg = decisions()["eeg"]

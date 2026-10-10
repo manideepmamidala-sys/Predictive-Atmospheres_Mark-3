@@ -1,0 +1,437 @@
+{
+  "schema_version": "1.0.0",
+  "method_version": "1.2.0",
+  "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
+  "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
+  "model_status": "baseline_only",
+  "final_candidate": {
+    "name": "dummy_mean"
+  },
+  "fused_target": {
+    "type": "E3_complete_fusion_population_calibrated",
+    "mapping": "FAA and equal alpha-suppression/engagement EEG arousal; equal EEG/HR physiology arousal; 0.5 physiology + 0.5 E3 reports",
+    "E3_trials": 23,
+    "participants": 4,
+    "rooms": 10
+  },
+  "fused_grouped_comparison": {
+    "held_out_room": {
+      "valence_mae": 0.3692429816741794,
+      "arousal_mae": 0.33004408045904404,
+      "mean_mae": 0.3496435310666118,
+      "baseline_median_mae": 0.34605538214005377,
+      "baseline_mean_mae": 0.34043750113477267
+    },
+    "room_folds": 10,
+    "held_out_person": {
+      "valence_mae": 0.37130392128423295,
+      "arousal_mae": 0.3310567975574123,
+      "mean_mae": 0.3511803594208226,
+      "baseline_median_mae": 0.3511803594208226,
+      "baseline_mean_mae": 0.38000579365828807
+    },
+    "person_folds": 4,
+    "prediction_evidence": "artifacts/results/model_evaluation.json#/outer_prediction_evidence"
+  },
+  "self_report_only_research_comparators": [
+    {
+      "experiment": 2,
+      "target_type": "original_signed_self_report",
+      "deployment": "research_only",
+      "trials": 50,
+      "participants": 5,
+      "rooms": 10,
+      "features": [
+        "length",
+        "width",
+        "height",
+        "num_doors",
+        "door_area",
+        "num_windows",
+        "window_area",
+        "daylight_factor",
+        "illuminance",
+        "cct",
+        "day_or_night",
+        "length_width_ratio",
+        "floor_area",
+        "wall_area",
+        "volume",
+        "door_wall_ratio",
+        "window_wall_ratio"
+      ],
+      "status": "evaluated",
+      "room_question": {
+        "mean_mae": 0.2737257201146911,
+        "median_baseline_mae": 0.353,
+        "mean_baseline_mae": 0.3375111111111111
+      },
+      "person_question": {
+        "mean_mae": 0.269715999183565,
+        "median_baseline_mae": 0.337,
+        "mean_baseline_mae": 0.32795
+      }
+    },
+    {
+      "experiment": 3,
+      "target_type": "original_signed_self_report",
+      "deployment": "research_only",
+      "trials": 60,
+      "participants": 6,
+      "rooms": 10,
+      "features": [
+        "length",
+        "width",
+        "height",
+        "num_doors",
+        "door_area",
+        "num_windows",
+        "window_area",
+        "daylight_factor",
+        "illuminance",
+        "cct",
+        "walkable_floor_area",
+        "day_or_night",
+        "space_type",
+        "length_width_ratio",
+        "floor_area",
+        "wall_area",
+        "volume",
+        "door_wall_ratio",
+        "window_wall_ratio",
+        "walkable_floor_ratio"
+      ],
+      "status": "evaluated",
+      "room_question": {
+        "mean_mae": 0.4893518518518518,
+        "median_baseline_mae": 0.5020833333333333,
+        "mean_baseline_mae": 0.547030864197531
+      },
+      "person_question": {
+        "mean_mae": 0.4366621021375417,
+        "median_baseline_mae": 0.4958333333333333,
+        "mean_baseline_mae": 0.5262633333333332
+      }
+    }
+  ],
+  "rating_and_relative_transfer_questions": [
+    {
+      "experiment": 2,
+      "axis": "valence",
+      "trials": 50,
+      "room_incremental_share": 0.46507462686567175,
+      "person_share": 0.13044776119402968,
+      "residual_share": 0.4044776119402985,
+      "unique_rater_partitions": 10,
+      "known_room_relative_mae": 0.24000000000000005,
+      "relative_zero_baseline_mae": 0.294,
+      "rating_null_draws": 1000,
+      "transfer_null_draws": 1000
+    },
+    {
+      "experiment": 2,
+      "axis": "arousal",
+      "trials": 50,
+      "room_incremental_share": 0.3897364771151181,
+      "person_share": 0.0536103484389594,
+      "residual_share": 0.5566531744459225,
+      "unique_rater_partitions": 10,
+      "known_room_relative_mae": 0.29569999999999996,
+      "relative_zero_baseline_mae": 0.30800000000000005,
+      "rating_null_draws": 1000,
+      "transfer_null_draws": 1000
+    },
+    {
+      "experiment": 3,
+      "axis": "valence",
+      "trials": 60,
+      "room_incremental_share": 0.4896335198535749,
+      "person_share": 0.03208084118928667,
+      "residual_share": 0.47828563895713844,
+      "unique_rater_partitions": 10,
+      "known_room_relative_mae": 0.361,
+      "relative_zero_baseline_mae": 0.49043333333333333,
+      "rating_null_draws": 1000,
+      "transfer_null_draws": 1000
+    },
+    {
+      "experiment": 3,
+      "axis": "arousal",
+      "trials": 60,
+      "room_incremental_share": 0.3790076776757662,
+      "person_share": 0.05593842999744014,
+      "residual_share": 0.5650538923267937,
+      "unique_rater_partitions": 10,
+      "known_room_relative_mae": 0.49421333333333334,
+      "relative_zero_baseline_mae": 0.5340666666666667,
+      "rating_null_draws": 1000,
+      "transfer_null_draws": 1000
+    }
+  ],
+  "component_relationships": [
+    {
+      "experiment": 2,
+      "left": "eeg_composite",
+      "right": "report_arousal",
+      "trials": 37,
+      "participants": 4,
+      "equal_participant_mean_rho": 0.019273009791640358,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "alpha_suppression",
+      "right": "report_arousal",
+      "trials": 37,
+      "participants": 4,
+      "equal_participant_mean_rho": 0.0416897512383475,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "engagement",
+      "right": "report_arousal",
+      "trials": 37,
+      "participants": 4,
+      "equal_participant_mean_rho": 0.056779497344734364,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "heart_rate",
+      "right": "report_arousal",
+      "trials": 20,
+      "participants": 3,
+      "equal_participant_mean_rho": -0.4825422609616788,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "eeg_composite",
+      "right": "heart_rate",
+      "trials": 19,
+      "participants": 3,
+      "equal_participant_mean_rho": -0.02204558976695528,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "faa",
+      "right": "report_valence",
+      "trials": 37,
+      "participants": 4,
+      "equal_participant_mean_rho": 0.18287023875365804,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "ocular",
+      "right": "report_arousal",
+      "trials": 0,
+      "participants": 0,
+      "equal_participant_mean_rho": null,
+      "status": "unavailable_detector_not_validated"
+    },
+    {
+      "experiment": 2,
+      "left": "ocular",
+      "right": "heart_rate",
+      "trials": 0,
+      "participants": 0,
+      "equal_participant_mean_rho": null,
+      "status": "unavailable_detector_not_validated"
+    },
+    {
+      "experiment": 2,
+      "left": "muscle",
+      "right": "report_arousal",
+      "trials": 37,
+      "participants": 4,
+      "equal_participant_mean_rho": 0.024191669407419347,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 2,
+      "left": "muscle",
+      "right": "heart_rate",
+      "trials": 19,
+      "participants": 3,
+      "equal_participant_mean_rho": 0.15040166545085779,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "eeg_composite",
+      "right": "report_arousal",
+      "trials": 55,
+      "participants": 6,
+      "equal_participant_mean_rho": -0.07532616929093405,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "alpha_suppression",
+      "right": "report_arousal",
+      "trials": 55,
+      "participants": 6,
+      "equal_participant_mean_rho": -0.11200854138468914,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "engagement",
+      "right": "report_arousal",
+      "trials": 55,
+      "participants": 6,
+      "equal_participant_mean_rho": -0.17118452816227092,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "heart_rate",
+      "right": "report_arousal",
+      "trials": 31,
+      "participants": 4,
+      "equal_participant_mean_rho": -0.057812069820941864,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "eeg_composite",
+      "right": "heart_rate",
+      "trials": 31,
+      "participants": 4,
+      "equal_participant_mean_rho": -0.4447660238127104,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "faa",
+      "right": "report_valence",
+      "trials": 41,
+      "participants": 5,
+      "equal_participant_mean_rho": -0.0972098731494466,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "ocular",
+      "right": "report_arousal",
+      "trials": 0,
+      "participants": 0,
+      "equal_participant_mean_rho": null,
+      "status": "unavailable_detector_not_validated"
+    },
+    {
+      "experiment": 3,
+      "left": "ocular",
+      "right": "heart_rate",
+      "trials": 0,
+      "participants": 0,
+      "equal_participant_mean_rho": null,
+      "status": "unavailable_detector_not_validated"
+    },
+    {
+      "experiment": 3,
+      "left": "muscle",
+      "right": "report_arousal",
+      "trials": 55,
+      "participants": 6,
+      "equal_participant_mean_rho": 0.0009124878930696264,
+      "status": "descriptive"
+    },
+    {
+      "experiment": 3,
+      "left": "muscle",
+      "right": "heart_rate",
+      "trials": 31,
+      "participants": 4,
+      "equal_participant_mean_rho": 0.5278550378772144,
+      "status": "descriptive"
+    }
+  ],
+  "spatial_negative_control": {
+    "status": "descriptive",
+    "draws": 1000,
+    "observed_mae": 0.3496435310666118,
+    "null_median_mae": 0.34899592858756306,
+    "null_2_5_percentile_mae": 0.3334784641674735,
+    "null_97_5_percentile_mae": 0.4101804617224629,
+    "interpretation": "whole training-room attribute shuffle with full refit; not a calibrated population p-value"
+  },
+  "room_learning_curve": {
+    "status": "descriptive",
+    "unique_subsets": 455,
+    "points": [
+      {
+        "training_room_count": 4,
+        "subsets": 100,
+        "evaluated_subsets": 100,
+        "mean_mae": 0.37603750375398365,
+        "baseline_median_mae": 0.358276870810502
+      },
+      {
+        "training_room_count": 5,
+        "subsets": 100,
+        "evaluated_subsets": 100,
+        "mean_mae": 0.3581741464046671,
+        "baseline_median_mae": 0.3477303221033
+      },
+      {
+        "training_room_count": 6,
+        "subsets": 100,
+        "evaluated_subsets": 100,
+        "mean_mae": 0.3529965627896744,
+        "baseline_median_mae": 0.3467005969665316
+      },
+      {
+        "training_room_count": 7,
+        "subsets": 100,
+        "evaluated_subsets": 100,
+        "mean_mae": 0.34197344090418835,
+        "baseline_median_mae": 0.33822189268677966
+      },
+      {
+        "training_room_count": 8,
+        "subsets": 45,
+        "evaluated_subsets": 45,
+        "mean_mae": 0.34268900098740246,
+        "baseline_median_mae": 0.3420852105130109
+      },
+      {
+        "training_room_count": 9,
+        "subsets": 10,
+        "evaluated_subsets": 10,
+        "mean_mae": 0.3496435310666118,
+        "baseline_median_mae": 0.34605538214005377
+      }
+    ],
+    "interpretation": "overlapping descriptive room subsets, not independent replications"
+  },
+  "artifact": {
+    "model_sha256": "17bfa472c30a9bb24034dd3800c85cd1fa9db36fec8c4a6cba2b8070b6b3544d",
+    "code_tree_sha256": "e4e4e8ebd2ab891945769a0d91d18070f0b9f6803fabc3d79132ac375b161a7d",
+    "decisions_sha256": "51e8722479eaa7c724fbd22b88f83a4a50da64e0c7b5e5c8b1689036b878a180",
+    "uv_lock_sha256": "b477770af8fc9cfbecc7c9a78e6c5f98736ebd4c25c6bf32a3c1341753ab7f44"
+  },
+  "limitations": [
+    "Acquisition rate, channel units/reference and physiological validity remain unconfirmed.",
+    "Only observed Experiment 3 complete raw-component trials enter this model.",
+    "Small repeated participant/room sample; no causal or clinical interpretation.",
+    "No calibrated prediction interval or individual response guarantee is available.",
+    "Final Studio fit is baseline-only; no spatial gain or personal-accuracy claim.",
+    "E2 and E3 report-only comparators use different targets and are not interchangeable with fused error.",
+    "Neither null distribution nor learning subsets define a population p-value or forecasted improvement."
+  ],
+  "source_artifacts": {
+    "model_evaluation.json": "314406620445bf0d82463ea3e3791bbff34b272618e309d2bba14ec4c85d5e8a",
+    "self_report_comparator.json": "888d7337705387d1dd3f304470fb7cdf0f4dfef5831194eeab6a5e41548f4f0e",
+    "rating_research.json": "e82b6a6d1c6d68e43f28759d8389db77ea78f79f3679533b7ecacd7ab4f0e30f",
+    "validity.json": "19d1b30ad08f3d3a5e8529a94e1dea0cd8ffed30bb3447ba1447b3380a5dda5d",
+    "model_null.json": "8b592089e70000a80cc44ef5fb27461ce0f8850ff35681fede168227329b8c10",
+    "model_learning_curve.json": "b00a155aaf03926063110c6c61d1a5127d5c911466659095b4d57493b4e9da83",
+    "artifacts/model/metadata.json": "ee8578c5961b926baf29574ae16a3e326de9ef6ec01993d23574166fde5fb9c0",
+    "data/MANIFEST.sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7"
+  },
+  "source_artifacts_digest_rule": "Canonical sorted JSON; omit only wall-clock run timing in model_null/model_learning_curve and checkout revision/status in model metadata."
+}

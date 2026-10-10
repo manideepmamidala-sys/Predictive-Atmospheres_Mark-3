@@ -9,7 +9,7 @@ from pathlib import Path
 
 from pa.config import ROOT
 
-INVENTORY = ROOT / "docs/reports/migration-inventory.json"
+INVENTORY = ROOT / "data/source-inventory.json"
 SHA_MANIFEST = ROOT / "data/MANIFEST.sha256"
 
 
@@ -31,7 +31,8 @@ def verify_sources(inventory_path: Path = INVENTORY,
                    manifest_path: Path = SHA_MANIFEST) -> list[Discrepancy]:
     inventory = json.loads(inventory_path.read_text())
     errors: list[Discrepancy] = []
-    expected = {entry["source"]: entry["sha256"] for entry in inventory["entries"]}
+    expected = {entry.get("path", entry.get("source")): entry["sha256"]
+                for entry in inventory["entries"]}
     if not manifest_path.is_file():
         errors.append(Discrepancy(str(manifest_path), "SHA manifest missing"))
     else:
@@ -45,14 +46,15 @@ def verify_sources(inventory_path: Path = INVENTORY,
         if observed != expected:
             errors.append(Discrepancy(str(manifest_path), "SHA manifest disagrees with inventory"))
     for entry in inventory["entries"]:
-        source = ROOT / entry["source"]
-        destination = ROOT / entry["destination"] if entry["destination"] else None
+        entry_path = entry.get("path", entry.get("source"))
+        source = ROOT / entry_path
+        destination = ROOT / entry["destination"] if entry.get("destination") else None
         paths = [source]
         if destination is not None:
             paths.append(destination)
         found = [path for path in paths if path.is_file()]
         if not found:
-            errors.append(Discrepancy(entry["source"], "missing source and migration destination"))
+            errors.append(Discrepancy(entry_path, "missing source and migration destination"))
             continue
         for path in found:
             relative = path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else path.as_posix()

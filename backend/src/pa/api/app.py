@@ -93,11 +93,19 @@ async def predict(payload: PredictRequest, request: Request) -> PredictResponse:
 async def optimize(payload: OptimizeRequest, request: Request) -> OptimizeResponse:
     artifact = _artifact(request)
     outcome = await run_in_threadpool(search, artifact, request.app.state.support, payload.target,
+                                      requested_score=payload.requested_score,
+                                      base_room=payload.base_room,
+                                      locked_fields=payload.locked_fields,
+                                      allowed_ranges=payload.allowed_ranges,
                                       space_type=payload.space_type, day_or_night=payload.day_or_night,
                                       budget=payload.budget, n_candidates=payload.n_candidates,
                                       seed=payload.seed)
     candidates = [OptimizeCandidate(room=item.room, prediction=asdict(item.prediction),
-                                    support=asdict(item.support)) for item in outcome.candidates]
+                                    support=asdict(item.support),
+                                    requested_score=item.requested_score,
+                                    achieved_score=item.achieved_score,
+                                    absolute_difference=item.absolute_difference)
+                  for item in outcome.candidates]
     return OptimizeResponse(schema_version=SCHEMA_VERSION, status=outcome.status,
                             model_status=artifact.metadata["model_status"], candidates=candidates,
                             samples_evaluated=outcome.samples_evaluated, reason=outcome.reason,
