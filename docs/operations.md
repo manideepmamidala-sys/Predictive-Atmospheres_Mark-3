@@ -13,6 +13,15 @@ make pipeline
 make lint test site
 ```
 
+For byte-exact regeneration of the approved CP-B signal product on an x86-64
+machine with newer CPU features, set `NPY_DISABLE_CPU_FEATURES=X86_V4,AVX512_ICL,AVX512_SPR`
+and `OPENBLAS_CORETYPE=Haswell` before `make pipeline` or `make all`. CI sets both
+variables and verifies NumPy uses X86_V3 and OpenBLAS uses Haswell before processing.
+An AVX-512 runner produced small floating-point differences in signal powers and
+traces while leaving QC flags and eligibility unchanged; those differences still
+change the exact source hash recorded in the reviewed CP-B ledger. The hash guard
+remains mandatory, so use the recorded numerical runtime to reproduce that ledger.
+
 After the final reference products are generated, `make reproduce-isolated` creates a temporary source-only Git snapshot and clean clone, regenerates a pending QC queue and reconstructs the approved CP-B ledger from the two documented delegated AI decision files and recorded review time, checks its exact SHA-256 against the reference, runs `make all` in that clone and compares the outputs. The ledger cannot be inferred from raw signals alone; the script reconstructs it from actual reviewed decisions and does not copy the completed ledger, models, analysis products, signal products or the partial spatial-null checkpoint. Its default four-hour workflow timeout permits the prescribed 1000 full-refit null draws and 455 learning-curve fits. The comparator checks nested catalogue products and model bytes while excluding only recorded checkout provenance, explicit generation/wall times and the transient null checkpoint. Run this only after scientific sources and the reference products are stable. For an ordinary checkout missing all generated artifacts, `make restore-cp-b` runs setup/QC and reconstructs the same review input before `make pipeline`; it does not create a new human signoff.
 
 The 2026-10-10 validation record distinguishes the completed **fresh** 1,000-draw/455-subset clone run from the later review correction. That correction affected exported CP-B provenance, Methods evidence and code-tree metadata; a separate final-source clone reused only the earlier clean scientific artifacts, rebuilt the affected products, and matched all 53 products and model bytes. This targeted replay does not replace a fresh-control run for a future change to scientific inputs or numerical code. Public trial status comes from the approved CP-B ledger: automated flags, reviewed component outcomes and reasons must remain distinguishable, especially HR versus RMSSD and uncertain timebase decisions.
