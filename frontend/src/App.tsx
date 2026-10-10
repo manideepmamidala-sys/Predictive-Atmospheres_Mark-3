@@ -98,7 +98,7 @@ export default function App() {
       <Route path="/signals" element={<OldRoute to="/explore" additions={{ view: 'signals' }} />} /><Route path="/affect" element={<OldRoute to="/body" />} /><Route path="/people" element={<OldRoute to="/explore" additions={{ view: 'people' }} />} /><Route path="/simulator" element={<OldRoute to="/studio" />} /><Route path="/model" element={<OldRoute to="/prediction" />} />
       <Route path="*" element={<NotFound />} />
     </Routes></Suspense></PageBoundary>
-      <footer className="site-footer"><span>Predictive Atmospheres · Manideep Mamidala</span><span><Link to="/methods">Methods and provenance</Link> · <a href="mailto:manideepmamidala2@gmail.com">Contact</a></span></footer>
+      <footer className="site-footer"><span>Predictive Atmospheres · Manideep Mamidala</span><span><Link to="/methods">Methods and provenance</Link> · <a href="mailto:manideepmamidala2@gmail.com">Contact: manideepmamidala2@gmail.com</a></span></footer>
     </main>
   </div></>;
 }
