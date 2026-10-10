@@ -10,6 +10,8 @@ description: "Eight-route React research atlas, validated static catalogue, comp
 
 `frontend/src/` is a React, Vite and TypeScript research atlas. Its eight routes are `/` (Predictive Atmospheres), `/study`, `/rooms`, `/body`, `/prediction`, `/studio`, `/explore` and `/methods`. The landing page presents the architectural question, hypothesis, three experiments, contribution and researcher context before directing readers to findings. Legacy route redirects preserve older links. The [platform](/architecture/platform.md) produces its evidence.
 
+The public entry point is https://predictive-atmospheres.vercel.app. The repository About website field uses this origin, and the README provides direct links to all eight pages. Root `vercel.json` hosts the static site and same-origin `/v1/*` FastAPI service together. The site service checks static assets before rewriting direct page requests to `index.html`. Publication is manual; the [deployment record](../../reports/revision-2026-10/deployment.md) distinguishes verified hosted checks from local test evidence.
+
 ## Requirements
 
 ### Static research and live Studio
@@ -22,7 +24,7 @@ Studio presents the fitted **fused** valence/arousal prediction only. Visitors c
 
 The Study, Rooms, Body, Prediction and Methods routes distinguish observed inputs, reviewed physiology, reports, constructed fusion and model output. Figures show method, units, available-record denominators and limits. Data Explorer filters trials, rooms and people and exposes six component-level automated/reviewed QC records, reasons and reviewer provenance; heart rate and RMSSD remain distinct. Methods publishes 22 approved numerical settings, ten existing fusion-weight sensitivity summaries, CP-B review provenance and eight pinned references. Experiment 1 comfort remains separate from affect axes, and Experiment 2/3 rating procedures and complete/partial fusion states remain visible.
 
-Light, Dark and System themes share design tokens and persist preference. Routes support deep links, keyboard access, responsive desktop/mobile layouts, reduced motion and chart alternatives. Room previews are WebP derivatives of retained Lumion renders; extraction of a top eye from stacked stereo imagery is an inferred presentation convention. The researcher portrait and approved contact/project links appear on the landing page; personal booklet, CV and portfolio files are not offered as downloads.
+Light, Dark and System themes share design tokens and persist preference. Routes support deep links, keyboard access, responsive desktop/mobile layouts, reduced motion and chart alternatives. Room previews are WebP derivatives of retained Lumion renders; extraction of a top eye from stacked stereo imagery is an inferred presentation convention. The researcher portrait and approved contact/project links appear on the landing page. The landing page and footer display `manideepmamidala2@gmail.com` in working `mailto:` links; personal booklet, CV and portfolio files are not offered as downloads.
 
 ## Design Decisions
 

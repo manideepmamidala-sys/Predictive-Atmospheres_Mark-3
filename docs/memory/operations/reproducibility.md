@@ -1,6 +1,6 @@
 ---
 type: memory
-description: "Pinned source verification, v1.2 clean scientific reproduction, final-source replay, artifact drift checks, local validation and candidate hosting boundaries."
+description: "Pinned source verification, v1.2 clean scientific reproduction, final-source replay, artifact drift checks, local validation and verified Vercel hosting boundaries."
 ---
 # Reproducibility and Release
 
@@ -28,7 +28,13 @@ A subsequent final-source replay used clean scientific artifacts from that run a
 
 Final local checks passed source verification, lint, strict site staging/build, 123 backend tests, 32 browser tests with two expected opt-in live skips, and two separately enabled live Studio tests. The approved screenshot manifest hashes 80 captures; Lighthouse 13.5.0 reported accessibility 100 on each of eight built routes. Independent [CP-E2](../../reports/revision-2026-10/CP-E2.md) records its delegated presentation check. A local no-dev API install loaded the trusted model and returned `ready=true` and `model_status=baseline_only`; local RSS was 215,688 KiB. These are local checks, not hosted service results.
 
-`frontend/vercel.json` and `render.yaml` configure Vercel Hobby static-site and Render Free API **candidates**. The static atlas remains readable during API cold starts; Studio exposes unavailability. [Hosting assessment](../../reports/revision-2026-10/hosting-assessment.md) records dated provider constraints and local asset measurements. No production deployment, custom domain, DOI or new license is established by the configuration. The repository is public and the owner authorized public research recordings, metadata, renders and results. Named biometric association lacks a verified participant-name mapping and specific permission; code/data/asset licenses and third-party rights require separate release decisions. Hosted readiness requires actual build, origin/CORS, API, memory, cold-start and asset checks at the deployed URLs.
+The public atlas and Studio API share https://predictive-atmospheres.vercel.app in the `predictive-atmospheres` Vercel Hobby project under `manideep-personal`. Root `vercel.json` routes `/v1/*` to FastAPI and other paths to the Vite site, with service-local SPA fallback after static-file lookup. Research reproduction uses the canonical Python 3.11 backend project/lock; deployment uses isolated root Python 3.12 requirements and `VERCEL_SUPPORT_LARGE_FUNCTIONS=1`. The trusted model and its scientific source/dependency checks remain intact. Publication uses manual CLI prebuilt deployment; GitHub automatic deployment is not connected. The public production alias requires no login; preview and unique deployment URLs retain Standard protection.
+
+The [deployment report](../../reports/revision-2026-10/deployment.md) records source revision `69e223fa0f42457c51cec0a6cad8e89c8f9d1d53`, the approved package audit, eight direct browser routes, visible contact links, live Studio prediction/generation and 20 unauthenticated HTTP checks with scoped response parity. Deployed memory, sustained latency, cold-start distribution and quota headroom remain unmeasured. The separate [hosting assessment](../../reports/revision-2026-10/hosting-assessment.md) describes the two-provider fallback represented by `frontend/vercel.json` and `render.yaml`; those files do not describe the active hosting split. Static research remains readable during API unavailability, which Studio reports explicitly.
+
+The upload allowlist excludes private documents, raw recordings, original renders and local credentials. The render manifest is included for site compilation; derived WebP images and approved research exports serve the browser. Git ignores generated root `pyproject.toml` and `uv.lock`, while the prebuilt upload includes both files listed in the function map. The canonical lock/project remain under `backend/`. The [operations guide](../../operations.md) describes clean-source builds and auditing mapped files before publication.
+
+The repository is public and the owner authorized public research recordings, metadata, renders and results. No custom domain, DOI or new license is established. Named biometric association lacks a verified participant-name mapping and specific permission; code/data/asset licenses and third-party rights remain separate release decisions.
 
 ## Design Decisions
 
@@ -39,12 +45,12 @@ Final local checks passed source verification, lint, strict site staging/build, 
 **Rejected**: Treating historical figures or an unverified saved model as reproducible current evidence.
 *Introduced by*: 261008-ymhz-research-platform-rebuild
 
-### Candidate hosting with explicit readiness
+### Verified hosting with explicit readiness
 
-**Decision**: Keep static research reading independent of API readiness and label hosting files as deployment candidates.
-**Why**: Free-tier service availability and external account behavior cannot be established by a local build.
-**Rejected**: Claiming a deployed or validated hosted model service from configuration files alone.
-*Introduced by*: 261008-ymhz-research-platform-rebuild
+**Decision**: Keep static research independent of API readiness and publish both services on one verified Vercel origin with an isolated deployment runtime.
+**Why**: Visitors can read the research during API outages, and hosting compatibility remains separate from canonical scientific reproduction. Recorded public checks support the deployment claim without implying model validity or unmeasured performance.
+**Rejected**: Describing local configuration alone as proof of a hosted service, or changing scientific dependencies to fit hosting.
+*Introduced by*: 261010-oom7-public-deployment-docs
 
 ### Separate fresh scientific and final-source evidence
 

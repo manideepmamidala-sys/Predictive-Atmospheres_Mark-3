@@ -8,4 +8,4 @@
 
 | File | Description |
 |------|-------------|
-| [reproducibility](reproducibility.md) | Pinned source verification, v1.2 clean scientific reproduction, final-source replay, artifact drift checks, local validation and candidate hosting boundaries. |
+| [reproducibility](reproducibility.md) | Pinned source verification, v1.2 clean scientific reproduction, final-source replay, artifact drift checks, local validation and verified Vercel hosting boundaries. |

@@ -45,7 +45,25 @@ jobs:
           cp -a artifacts/results artifacts/model "$RUNNER_TEMP/committed-artifacts/artifacts/"
 
       - name: Verify source and regenerate research products
+        id: pipeline
         run: make pipeline
+
+      - name: Diagnose CP-B source drift
+        if: failure() && steps.pipeline.outcome == 'failure'
+        run: |
+          mkdir -p "$RUNNER_TEMP/cp-b-failure-evidence/approved" "$RUNNER_TEMP/cp-b-failure-evidence/regenerated"
+          cp "$RUNNER_TEMP/committed-artifacts/artifacts/results/"{signals_detail,timebase,qc_review}.json "$RUNNER_TEMP/cp-b-failure-evidence/approved/"
+          cp artifacts/results/{signals_detail,timebase,qc_review}.json "$RUNNER_TEMP/cp-b-failure-evidence/regenerated/"
+          cd backend
+          uv run --frozen python ../scripts/diagnose_cp_b_drift.py "$RUNNER_TEMP/committed-artifacts" ..
+
+      - name: Upload CP-B failure evidence
+        if: failure() && steps.pipeline.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cp-b-failure-evidence
+          retention-days: 7
+          path: ${{ runner.temp }}/cp-b-failure-evidence/
 
       - name: Check regenerated research artifacts for drift
         run: python3 scripts/compare_reproduction.py "$RUNNER_TEMP/committed-artifacts" .
