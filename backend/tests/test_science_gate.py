@@ -101,7 +101,7 @@ def test_conditional_trial_processing_preserves_missing_ecg_and_rate_scenarios()
     sample_rate = 500
     t = np.arange(sample_rate * 12) / sample_rate
     eeg = np.sin(2 * np.pi * 10 * t)
-    trial = Trial(1, "P1", "R1", "synthetic.csv", 12, 0.2, None, None, None,
+    trial = Trial(1, "P1", "R1", "synthetic.csv", 12, 0.2, None, None,
                   "synthetic_test_fixture")
     recording = Recording(np.arange(len(t)) % 256, eeg, eeg, np.zeros(len(t)))
     result = process_trial(trial, recording)

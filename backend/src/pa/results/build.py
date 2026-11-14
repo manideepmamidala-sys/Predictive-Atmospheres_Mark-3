@@ -17,11 +17,18 @@ from pa.analysis.rooms import room_products
 from pa.analysis.study import study_products
 from pa.config import RESULTS, ROOT
 from pa.io.checkpoint import require_science_checkpoint
-from pa.io.metadata import Trial, load_demographics, load_rooms, load_trials
+from pa.io.metadata import (
+    ParticipantSummary,
+    Trial,
+    load_participant_summary,
+    load_rooms,
+    load_trials,
+)
 from pa.results.disposition import ECG_REVIEW, EEG_REVIEW, QUEUE, TIMEBASE
 from pa.results.export import write_catalogue_products, write_products
 from pa.results.schemas import (
     AffectExport,
+    CohortSummary,
     DisagreementRecord,
     ExperimentRecord,
     ModelExport,
@@ -164,7 +171,7 @@ def _withheld_reasons(component: dict) -> list[str]:
 
 def build_products(trials: list[Trial], spatial: list[dict], signal_rows: list[dict],
                    affect_detail: dict, model_record: ModelRecord,
-                   demographics: dict[str, dict] | None = None,
+                   participant_summary: ParticipantSummary | None = None,
                    review_sources: dict | None = None) -> dict:
     """Require one anchored record per source trial; no synthetic null replacements."""
     signal_by_id = {row["id"]: row for row in signal_rows}
@@ -275,21 +282,15 @@ def build_products(trials: list[Trial], spatial: list[dict], signal_rows: list[d
         for experiment in sorted({trial.experiment for trial in own}):
             subset = [trial for trial in own if trial.experiment == experiment]
             subset_points = complete_by_person_experiment[(person, experiment)]
-            sleep = [trial.sleep_hours for trial in subset if trial.sleep_hours is not None]
             by_experiment.append(PersonExperimentRecord(
                 experiment=experiment, trials=len(subset), valid_fused=len(subset_points),
                 mean_valence=_mean([point.valence for point in subset_points]),
-                mean_arousal=_mean([point.arousal for point in subset_points]),
-                sleep_hours=_mean(sleep), sleep_min_hours=min(sleep) if sleep else None,
-                sleep_max_hours=max(sleep) if sleep else None,
-                sleep_observations=len(sleep)))
-        source = (demographics or {}).get(person, {})
+                mean_arousal=_mean([point.arousal for point in subset_points])))
         people.append(PersonRecord(
             id=person, experiments=sorted({trial.experiment for trial in own}),
             trials=len(own), valid_fused=len(points),
             mean_valence=_mean([point.valence for point in points]),
             mean_arousal=_mean([point.arousal for point in points]),
-            age=source.get("age"), gender=source.get("gender"),
             by_experiment=by_experiment))
     sensitivity = []
     for experiment in (2, 3):
@@ -327,7 +328,8 @@ def build_products(trials: list[Trial], spatial: list[dict], signal_rows: list[d
                                disagreement=disagreement,
                                cohorts=dict(Counter(row.cohort for row in exported_trials)),
                                analysis=analysis),
-        "people": PeopleExport(provenance=provenance, people=people),
+        "people": PeopleExport(provenance=provenance, people=people,
+                               cohort=CohortSummary(**vars(participant_summary or load_participant_summary()))),
         "model": ModelExport(provenance=provenance, model=model_record),
     }
 
@@ -365,16 +367,15 @@ def write_research_exports(destination: Path = RESULTS) -> dict:
                         "model_card": "docs/model_card.md"},
     )
     trial_rows = load_trials()
-    demographics = load_demographics()
-    unknown = {trial.subject_id for trial in trial_rows} - demographics.keys()
-    if unknown:
-        raise ValueError(f"missing demographic metadata for supplied trial IDs: {sorted(unknown)}")
+    cohort = load_participant_summary()
+    if len({trial.subject_id for trial in trial_rows}) != cohort.participants:
+        raise ValueError("participant summary count disagrees with supplied trial participant IDs")
     review_sources = _review_sources()
     products = build_products(trial_rows, load_rooms(), signals["trials"], affect, model,
-                              demographics=demographics, review_sources=review_sources)
+                              participant_summary=cohort, review_sources=review_sources)
     manifest = write_products(products, destination)
     catalogue = build_catalogue_products(affect, signals, load_rooms(), trial_rows,
-                                         demographics, evaluation, review_sources["ledger"],
+                                         cohort, evaluation, review_sources["ledger"],
                                          products["affect"].sensitivity)
     manifest["analysis_catalogue"] = write_catalogue_products(
         catalogue, destination / "analysis")
@@ -382,7 +383,7 @@ def write_research_exports(destination: Path = RESULTS) -> dict:
 
 
 def build_catalogue_products(affect: dict, signals: dict, spatial: list[dict],
-                             trials: list[Trial], demographics: dict[str, dict],
+                             trials: list[Trial], cohort: ParticipantSummary,
                              evaluation: dict, review: dict,
                              sensitivity: list[SensitivityRecord]) -> dict:
     """Compute all twenty-eight figure products from reviewed, versioned analyses."""
@@ -405,9 +406,9 @@ def build_catalogue_products(affect: dict, signals: dict, spatial: list[dict],
     learning = saved("model_learning_curve.json")
     review = saved("qc_review.json")
     products = {}
-    for family in (study_products(affect, spatial, demographics),
+    for family in (study_products(affect, spatial),
                    rating_products(affect, ratings),
-                   room_products(affect, spatial, trials, demographics),
+                   room_products(affect, spatial, cohort),
                    body_products(affect, signals, review, validity, trials),
                    prediction_products(affect, ratings, evaluation, comparator, null, learning)):
         overlap = set(products) & set(family)

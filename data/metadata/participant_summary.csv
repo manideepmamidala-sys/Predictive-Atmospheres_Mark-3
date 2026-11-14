@@ -1,0 +1,2 @@
+scope,participants,age_min,age_max,age_mean,female,male,occupation,e3_sleep_trials,e3_sleep_hours_mean,e3_sleep_hours_min,e3_sleep_hours_max
+all,10,25,28,26.0,5,5,Architect,60,6.75,3.0,8.5

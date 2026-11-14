@@ -21,7 +21,11 @@ test('physiology-led component view distinguishes report, fusion and E1 comfort'
 test('participant and room filters persist in explorer URL', async ({ page }) => {
   await useSyntheticResearch(page);
   await page.goto('/explore?view=people&person=P02');
-  await expect(page.getByRole('row', { name: /P02/ })).toContainText('Unavailable');
+  const row = page.getByRole('row', { name: /P02/ });
+  await expect(row.locator('td')).toHaveText(['1', '0']);
+  await expect(page.getByRole('columnheader', { name: /Age|gender|Sleep/i })).toHaveCount(0);
+  await expect(page.getByTestId('cohort-summary')).toContainText('2 participants, all architects, aged 26–29');
+  await expect(page.getByTestId('cohort-summary')).toContainText('withheld for privacy');
   await page.getByRole('combobox', { name: 'View' }).selectOption('trials');
   await page.getByRole('combobox', { name: 'Room' }).selectOption('Rm_021');
   await expect(page).toHaveURL(/person=P02/);

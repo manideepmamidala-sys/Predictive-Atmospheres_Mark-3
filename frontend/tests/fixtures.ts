@@ -48,14 +48,15 @@ export const SYNTHETIC_RESEARCH: Research = {
     { experiment: 2, participant_id: 'P01', cohort: 'complete_fusion', axis: 'valence', n: 1, mean_objective_minus_subjective: -0.4 },
   ],
   people: [
-    { id: 'P01', experiments: [1, 2], trials: 2, valid_fused: 1, mean_valence: 0.2, mean_arousal: 0.1, age: 26, gender: 'Female', sleep_hours: null, by_experiment: [
-      { experiment: 1, trials: 1, valid_fused: 0, mean_valence: null, mean_arousal: null, sleep_hours: null, sleep_min_hours: null, sleep_max_hours: null, sleep_observations: 0 },
-      { experiment: 2, trials: 1, valid_fused: 1, mean_valence: 0.2, mean_arousal: 0.1, sleep_hours: null, sleep_min_hours: null, sleep_max_hours: null, sleep_observations: 0 },
+    { id: 'P01', experiments: [1, 2], trials: 2, valid_fused: 1, mean_valence: 0.2, mean_arousal: 0.1, by_experiment: [
+      { experiment: 1, trials: 1, valid_fused: 0, mean_valence: null, mean_arousal: null },
+      { experiment: 2, trials: 1, valid_fused: 1, mean_valence: 0.2, mean_arousal: 0.1 },
     ] },
-    { id: 'P02', experiments: [3], trials: 1, valid_fused: 0, mean_valence: null, mean_arousal: null, age: 29, gender: 'Male', sleep_hours: null, by_experiment: [
-      { experiment: 3, trials: 1, valid_fused: 0, mean_valence: null, mean_arousal: null, sleep_hours: 7, sleep_min_hours: 7, sleep_max_hours: 7, sleep_observations: 1 },
+    { id: 'P02', experiments: [3], trials: 1, valid_fused: 0, mean_valence: null, mean_arousal: null, by_experiment: [
+      { experiment: 3, trials: 1, valid_fused: 0, mean_valence: null, mean_arousal: null },
     ] },
   ],
+  cohort: { participants: 2, age_min: 26, age_max: 29, age_mean: 27.5, female: 1, male: 1, occupation: 'Architect', e3_sleep_trials: 1, e3_sleep_hours_mean: 7, e3_sleep_hours_min: 7, e3_sleep_hours_max: 7 },
   model: { status: 'weak', explanation: 'Synthetic weak-model status for browser testing.', metrics: [{ name: 'Room holdout MAE', value: null, unit: null, interval: null, n: 0, group: 'room-held-out' }], limitations: ['No validated prediction from synthetic records.'], artifact_version: null, summary: { cohort_trials: 1, cohort_participants: 1, cohort_rooms: 1, exclusions: { missing_features: 2 }, selection_status: 'synthetic_only', selected_candidate: { name: 'fixture' }, preprocessing: ['Synthetic test-only step'], provenance: { code_tree_sha256: 'synthetic-test-hash' }, participant_baseline_fallback: 'Synthetic fixture fallback; not a research finding.', evidence_links: { model_card: 'docs/model_card.md' } } },
 };
 

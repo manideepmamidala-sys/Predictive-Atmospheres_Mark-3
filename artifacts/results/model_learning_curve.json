@@ -32,7 +32,7 @@
     "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
     "decisions_sha256": "51e8722479eaa7c724fbd22b88f83a4a50da64e0c7b5e5c8b1689036b878a180"
   },
-  "elapsed_wall_seconds": 1023.7642185619989,
+  "elapsed_wall_seconds": 980.6862735430004,
   "seed": 2718,
   "rooms": [
     "Rm_021",

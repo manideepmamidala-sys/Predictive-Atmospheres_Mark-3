@@ -8,7 +8,7 @@ This crosswalk retains the full catalogue from the original October revision gui
 | S2 | Which records can enter each analysis? | `/study` · branching eligibility by modality/experiment, never a falsely nested funnel |
 | S3 | What do thirty rooms look like and how do their attributes vary? | `/study` · original-render gallery and display-scaled parallel-coordinate profiles; original values/units retained |
 | S4 | Which spatial attributes move together across independent rooms? | `/rooms` · room-level correlation matrix, n rooms |
-| S5 | Who took part? | `/study` · per-person age/gender/sleep dots, scope labeled |
+| S5 | Who took part? | `/study` · per-code trial counts by experiment; characteristics in aggregate only |
 | R1 | How do person, room and residual shares compare for ratings? | `/rooms` · E2/E3 axis-specific variation, E1 comfort separate |
 | R2 | Which rated rooms have higher/lower reported valence or arousal? | `/rooms` · ranked room means with valid uncertainty or unavailable interval |
 | R3 | Where do reported rooms sit on the affect plane? | `/rooms` · report-only positions/density, E2/E3 distinction |
@@ -17,7 +17,7 @@ This crosswalk retains the full catalogue from the original October revision gui
 | R6 | How do supplied E2 lighting attributes relate to ratings? | `/rooms` · room-level scatter and valid paired day/night contrasts |
 | R7 | How do E3 space types compare? | `/rooms` · individual dots with room/person counts |
 | R8 | Does E1 comfort vary with form? | `/rooms` · separate comfort/volume/height chart |
-| R9 | Do participant characteristics relate to reports? | `/rooms` · per-person sleep/ratings dots with n people |
+| R9 | Who took part, and how were reports distributed per experiment? | `/rooms` · experiment × axis mean reports with participant counts and the cohort E3 sleep aggregate |
 | B1 | Which EEG/ECG traces are usable and why? | `/body` · delegated review eligibility by experiment and component; trial traces remain in source bundle |
 | B2 | What EEG spectrum/band pattern remains after QC? | `/body` · per-experiment/channel median first-accepted-epoch spectrum and reviewed all-epoch band powers |
 | B3 | What cardiac features are available? | `/body` · HR, eligible RMSSD and R-peak trace examples |
@@ -45,7 +45,7 @@ These are the generated v1.2 product contracts in `artifacts/results/analysis/in
 | S2 | `/study` | available | `bar`: `branch` → `trials`; facet `experiment` | 21 |
 | S3 | `/study` | available | `line`: `attribute` → `normalized_value`; series `room_id`; facet `experiment` | 240 |
 | S4 | `/rooms` | available | `heatmap`: `attribute_x` → `attribute_y`; series `spearman_rho`; facet `experiment` | 209 |
-| S5 | `/study` | available | `scatter`: `age` → `trial_count`; series `experiment` | 16 |
+| S5 | `/study` | available | `scatter`: `experiment` → `trial_count`; series `experiment` | 16 |
 | R1 | `/rooms` | available | `bar`: `axis` → `room_share`; series `experiment` | 4 |
 | R2 | `/rooms` | available | `bar`: `room_id` → `mean_rating`; series `axis`; facet `experiment` | 40 |
 | R3 | `/rooms` | available | `heatmap`: `valence` → `arousal`; series `density`; facet `experiment` | 994 |
@@ -54,7 +54,7 @@ These are the generated v1.2 product contracts in `artifacts/results/analysis/in
 | R6 | `/rooms` | available | `scatter`: `illuminance` → `rating`; series `axis`; facet `experiment` | 230 |
 | R7 | `/rooms` | available | `scatter`: `space_type` → `mean_rating`; series `kind`; facet `axis` | 130 |
 | R8 | `/rooms` | available | `scatter`: `floor_area` → `comfort`; series `participant_id` | 50 |
-| R9 | `/rooms` | available | `scatter`: `mean_sleep_hours` → `mean_rating`; series `axis`; facet `experiment` | 22 |
+| R9 | `/rooms` | available | `bar`: `experiment` → `mean_rating`; series `axis` | 4 |
 | B1 | `/body` | available | `bar`: `branch` → `eligible_trials`; series `experiment` | 18 |
 | B2 | `/body` | available | `line`: `frequency_hz` → `median_psd`; series `channel`; facet `experiment` | 1614 |
 | B3 | `/body` | available | `scatter`: `heart_rate_bpm` → `rmssd_ms`; series `experiment` | 466 |
@@ -79,7 +79,7 @@ The original presentation/booklet and its linked InDesign graphics are sources o
 | Legacy chart idea | Current placement and correction |
 | --- | --- |
 | Objective, subjective and fused density fields and target vectors | R3 and B8; show all three, matched axes and contributing cohorts. Fusion is retained rather than appendix-only. |
-| Age, gender and sleep violins | S5/R9 per-person dots; five/six/ten people do not justify smoothed group densities. |
+| Age, gender and sleep violins or per-person dots | Characteristics are published as a cohort aggregate only (participant privacy); five/six/ten people do not justify group densities. |
 | Average ECG spectrum | B3 HR, valid HRV and R-peak examples; ECG spectrum may appear as methodological trace, not primary outcome. |
 | EEG spectrum and band balance | B2 with review-approved QC and units. |
 | Heart rate versus HRV | B3 only where both valid, with independent counts. |
