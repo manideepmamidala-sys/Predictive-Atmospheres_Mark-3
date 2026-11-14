@@ -17,6 +17,71 @@
       "reason": "participant privacy: per-trial self-reported sleep hours keyed by participant code",
       "custody": "retained privately by the study owner; not redistributed",
       "public_replacement": "same path with the 'Sleep Hours' column removed; all other fields unchanged; sleep summarised in data/metadata/participant_summary.csv"
+    },
+    {
+      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Arousal Distribution - Age.png",
+      "sha256": "3bccd43f213a38b67a9b10bb4c9c2328d47f8931d87bd2bd6ebae702f71257d0",
+      "size_bytes": 42693,
+      "reason": "participant privacy: legacy plot of trial-level valence/arousal split by age bracket, gender or sleep bracket; points could be matched to per-code trial values published in bundle.json",
+      "custody": "retained privately by the study owner (thesis archive); not redistributed",
+      "public_replacement": "none; aggregate cohort description in data/metadata/participant_summary.csv"
+    },
+    {
+      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Arousal Distribution - Gender.png",
+      "sha256": "cfb1fa290c1015e5e177397003b2536fa9c9ebe0be629c1a81444cd7291e2603",
+      "size_bytes": 40876,
+      "reason": "participant privacy: legacy plot of trial-level valence/arousal split by age bracket, gender or sleep bracket; points could be matched to per-code trial values published in bundle.json",
+      "custody": "retained privately by the study owner (thesis archive); not redistributed",
+      "public_replacement": "none; aggregate cohort description in data/metadata/participant_summary.csv"
+    },
+    {
+      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Arousal Distribution - Sleep.png",
+      "sha256": "0cb866f786485c2ea1e55da3ff45e4bdd77777eaaf2aca204af412f048eedadd",
+      "size_bytes": 38413,
+      "reason": "participant privacy: legacy plot of trial-level valence/arousal split by age bracket, gender or sleep bracket; points could be matched to per-code trial values published in bundle.json",
+      "custody": "retained privately by the study owner (thesis archive); not redistributed",
+      "public_replacement": "none; aggregate cohort description in data/metadata/participant_summary.csv"
+    },
+    {
+      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Valence Distribution - Age.png",
+      "sha256": "e731660015077bc479d93729b2c15f2f9905650fa573048e5db7c9cfbfe50ea4",
+      "size_bytes": 43788,
+      "reason": "participant privacy: legacy plot of trial-level valence/arousal split by age bracket, gender or sleep bracket; points could be matched to per-code trial values published in bundle.json",
+      "custody": "retained privately by the study owner (thesis archive); not redistributed",
+      "public_replacement": "none; aggregate cohort description in data/metadata/participant_summary.csv"
+    },
+    {
+      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Valence Distribution - Gender.png",
+      "sha256": "06b4eff6dfd13bea560c7a46312d185478ed9350420dea2e0d4f75fc9674a009",
+      "size_bytes": 40602,
+      "reason": "participant privacy: legacy plot of trial-level valence/arousal split by age bracket, gender or sleep bracket; points could be matched to per-code trial values published in bundle.json",
+      "custody": "retained privately by the study owner (thesis archive); not redistributed",
+      "public_replacement": "none; aggregate cohort description in data/metadata/participant_summary.csv"
+    },
+    {
+      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Valence Distribution - Sleep.png",
+      "sha256": "134fe5b4c6305e4ad7cd880766b7e47e4af4c583f74d44a0ccfe258b9521b814",
+      "size_bytes": 40359,
+      "reason": "participant privacy: legacy plot of trial-level valence/arousal split by age bracket, gender or sleep bracket; points could be matched to per-code trial values published in bundle.json",
+      "custody": "retained privately by the study owner (thesis archive); not redistributed",
+      "public_replacement": "none; aggregate cohort description in data/metadata/participant_summary.csv"
+    }
+  ],
+  "public_derivatives": [
+    {
+      "path": "data/metadata/participant_summary.csv",
+      "status": "derived_aggregate",
+      "derived_from": [
+        "data/metadata/Subject Data.csv",
+        "data/metadata/experiment_03_biometric data.csv"
+      ]
+    },
+    {
+      "path": "data/metadata/experiment_03_biometric data.csv",
+      "status": "modified_for_privacy",
+      "derived_from": [
+        "data/metadata/experiment_03_biometric data.csv"
+      ]
     }
   ]
 }

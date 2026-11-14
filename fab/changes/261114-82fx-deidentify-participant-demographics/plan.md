@@ -92,6 +92,23 @@ Regeneration SHALL NOT alter the raw-signal artifacts the CP-B ledger pins (`sig
 - **WHEN** they look for participant characteristics
 - **THEN** they find the aggregate and the withholding rationale, not per-person values
 
+### Data: Review rework (owner decision after review)
+
+#### R11: Legacy demographic plots are withheld
+The six legacy plots under `docs/history/legacy-site-assets/FINDINGS/Demographic Insights/` (valence/arousal by age, gender and sleep) SHALL be removed from the public tree, with their original sha256/size recorded in `data/withheld-sources.json`. They show trial-level points split by gender, age bracket and sleep bracket, which could be matched against per-code trial values published in `bundle.json`.
+
+- **GIVEN** the public tree
+- **WHEN** listing `docs/history/legacy-site-assets/FINDINGS/`
+- **THEN** no `Demographic Insights` plots remain
+- **AND** `withheld-sources.json` lists all six with their checksums
+
+#### R12: Derived and modified sources are distinguishable in the inventory
+`data/source-inventory.json` entries for `data/metadata/participant_summary.csv` and the privacy-modified `experiment_03_biometric data.csv` SHALL carry a `status` (`derived_aggregate` and `modified_for_privacy` respectively) and a `withheld_sources` pointer. The status is declared in `data/withheld-sources.json` (`public_derivatives`) and emitted by `scripts/build_source_manifest.py`. Unmarked entries remain unchanged originals.
+
+- **GIVEN** `python3 scripts/build_source_manifest.py --check`
+- **WHEN** it runs
+- **THEN** it passes, and the two entries carry their status
+
 ### Non-Goals
 - Rewriting git history to purge old values: owner decision, out of scope.
 - Redeploying the Vercel website: a separate, owner-approved step after merge.
@@ -138,6 +155,13 @@ Regeneration SHALL NOT alter the raw-signal artifacts the CP-B ledger pins (`sig
 
 - [x] T013 Update `docs/data_card.md` and `docs/research/analysis-catalogue.md` (S5/R9 rows; the age/gender/sleep violins rationale) <!-- R10 -->
 
+### Phase 5: Review rework
+
+- [x] T014 `git rm` the six `Demographic Insights` PNGs; add them to `data/withheld-sources.json` (sha256/size from origin/main), plus a `public_derivatives` list for the two R12 files <!-- R11 -->
+- [x] T015 `scripts/build_source_manifest.py`: emit `status` and `withheld_sources` for the `public_derivatives` paths; regenerate the inventory and manifest; `--check` passes; add a test in `backend/tests/test_exports.py` <!-- R12 -->
+- [x] T016 Update the docs that count legacy images (data card) and mention the withheld plots <!-- R11 -->
+- [x] T017 Rerun `make pipeline` (pinned env; the null guard forces a fresh 1,000-draw run); verify the CP-B pinned artifacts and null draws are identical; then run `make lint test site` <!-- R12 -->
+
 ## Execution Order
 
 - T001 and T002 come before T010, because the manifest must reflect the final data.
@@ -157,6 +181,10 @@ Regeneration SHALL NOT alter the raw-signal artifacts the CP-B ledger pins (`sig
 - [x] A-007 R7: S5/R9 rows contain no age, gender or per-person sleep; R9 has no `participant_id`
 - [x] A-008 R9: the Explore people table has three columns and renders the aggregate sentence from `cohort`
 - [x] A-009 R10: the data card and catalogue describe aggregate-only demographics and the withheld originals
+
+- [x] A-018 R11: the six legacy demographic PNGs are absent, and `withheld-sources.json` records them with correct checksums
+- [x] A-019 R12: inventory entries for the two derived/modified files carry `status` and `withheld_sources`; the manifest `--check` passes
+- [x] A-020 R12: the pipeline reruns cleanly; CP-B pinned artifacts and null draws are unchanged
 
 ### Behavioral Correctness
 
@@ -215,3 +243,4 @@ Regeneration SHALL NOT alter the raw-signal artifacts the CP-B ledger pins (`sig
 - **Semantic artifact diff** (volatile hash/time keys ignored): substantive changes only in `analysis/S5.json`, `analysis/R9.json`, `people.json` and `bundle.json`. The model binary is unchanged; `artifacts/model/metadata.json` differs only in `base_git_revision` and the manifest hash.
 - **Checks:** `make lint test site` passed except one Playwright assertion that depended on the removed gender column. That test was updated and its spec passes 3/3. A privacy sweep of artifacts, data, frontend and docs found no participant code paired with age, gender, occupation or sleep.
 - **Housekeeping:** screenshots re-captured by the Playwright run were restored, and the intermediate `model_null_checkpoint.json` was removed.
+- **Rework (R11–R12):** the six legacy demographic plots are withheld, and the inventory marks derived/modified files. The pipeline was rerun because the manifest change trips the null guard. CP-B pinned artifacts are byte-identical, the 1,000 null draws and observed folds are identical, and the semantic artifact diff shows provenance hashes only. Backend tests: 129 passed. The single failure is `test_config.py`, which asserts `AGENTS.md` exists; that file was deleted locally by the owner (not part of this change). Frontend: 32/32. Site build is OK.

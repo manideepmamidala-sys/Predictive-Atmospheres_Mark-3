@@ -8,7 +8,7 @@
       "Acquisition sample rate, amplitude units and reference wiring are unconfirmed.",
       "Constructed affect axes are hypotheses, not validated emotion measurements."
     ],
-    "manifest_sha256": "c68f23d0da99f87c75717d02d2501b313975beb135c2cfbf6c283fcab5d725c0",
+    "manifest_sha256": "56accb95e2ab498e99d5f143ee027de2f37b0e71d3ad48ef0605867756eec09e",
     "analysis_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac"
   },
   "model": {
@@ -124,7 +124,7 @@
         "Constructed affect targets: training-fold population median/MAD component calibration, then tanh mapping."
       ],
       "provenance": {
-        "dataset_manifest_sha256": "c68f23d0da99f87c75717d02d2501b313975beb135c2cfbf6c283fcab5d725c0",
+        "dataset_manifest_sha256": "56accb95e2ab498e99d5f143ee027de2f37b0e71d3ad48ef0605867756eec09e",
         "analysis_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
         "code_tree_sha256": "a61397465f189802236bef4a1d63c1f4a501d90cad9fe8a3d4021fdcea4bda89",
         "decisions_sha256": "51e8722479eaa7c724fbd22b88f83a4a50da64e0c7b5e5c8b1689036b878a180",

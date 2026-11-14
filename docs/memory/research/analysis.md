@@ -32,7 +32,7 @@ The prespecified learning curve evaluates all 455 unique training-room subsets a
 
 ### Research catalogue
 
-`artifacts/results/analysis/` holds 28 validated products: S1–S5, R1–R9, B1–B8, P1–P5 and Methods. Twenty-seven are available; P4 explicitly reports unavailability for feature importance under a constant selected model. Product envelopes include question, method, sample counts, units, caveats, status and source/method provenance. Methods exposes 22 approved settings, ten already-computed fusion-weight sensitivity summaries, CP-B review evidence and eight pinned references. The browser renders these products without recomputing statistical results.
+`artifacts/results/analysis/` holds 28 validated products: S1–S5, R1–R9, B1–B8, P1–P5 and Methods. S5 reports per-code participation counts without characteristics, and R9 is an experiment × axis aggregate with the cohort Experiment 3 sleep summary; no product carries per-person age, gender or sleep. Twenty-seven are available; P4 explicitly reports unavailability for feature importance under a constant selected model. Product envelopes include question, method, sample counts, units, caveats, status and source/method provenance. Methods exposes 22 approved settings, ten already-computed fusion-weight sensitivity summaries, CP-B review evidence and eight pinned references. The browser renders these products without recomputing statistical results.
 
 ## Design Decisions
 

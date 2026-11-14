@@ -15,6 +15,7 @@ GROUPS = (
     ("legacy_site_asset", "docs/history/legacy-site-assets"),
 )
 INVENTORY = ROOT / "data/source-inventory.json"
+WITHHELD = ROOT / "data/withheld-sources.json"
 MANIFEST = ROOT / "data/MANIFEST.sha256"
 
 
@@ -26,13 +27,30 @@ def digest(path: Path) -> str:
     return sha.hexdigest()
 
 
+def public_derivatives() -> dict[str, str]:
+    """Paths published as privacy derivatives of withheld originals, keyed to their status."""
+    if not WITHHELD.is_file():
+        return {}
+    declared = json.loads(WITHHELD.read_text()).get("public_derivatives", [])
+    return {item["path"]: item["status"] for item in declared}
+
+
 def build() -> tuple[str, str, list[dict]]:
     entries = []
+    derived = public_derivatives()
     for role, directory in GROUPS:
         source = ROOT / directory
         for path in sorted(p for p in source.rglob("*") if p.is_file()):
-            entries.append({"role": role, "path": path.relative_to(ROOT).as_posix(),
-                            "size_bytes": path.stat().st_size, "sha256": digest(path)})
+            relative = path.relative_to(ROOT).as_posix()
+            entry = {"role": role, "path": relative,
+                     "size_bytes": path.stat().st_size, "sha256": digest(path)}
+            if relative in derived:
+                entry["status"] = derived[relative]
+                entry["withheld_sources"] = WITHHELD.relative_to(ROOT).as_posix()
+            entries.append(entry)
+    missing = set(derived) - {entry["path"] for entry in entries}
+    if missing:
+        raise SystemExit(f"declared public derivatives are not retained sources: {sorted(missing)}")
     inventory = json.dumps({"schema_version": "2.0.0", "entries": entries}, indent=2) + "\n"
     manifest = "".join(f"{entry['sha256']}  {entry['path']}\n" for entry in entries)
     return inventory, manifest, entries

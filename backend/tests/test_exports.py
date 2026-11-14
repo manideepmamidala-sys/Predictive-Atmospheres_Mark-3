@@ -439,3 +439,20 @@ def test_generated_products_publish_no_per_person_characteristics():
                for row in r9["chart"]["rows"])
     e2_rows = [row for row in r9["chart"]["rows"] if row["experiment"] == 2]
     assert e2_rows and all(row["sleep_hours_mean"] is None for row in e2_rows)
+
+
+def test_withheld_sources_and_public_derivatives_are_declared():
+    import json
+
+    from pa.config import ROOT
+
+    withheld = json.loads((ROOT / "data/withheld-sources.json").read_text())
+    for entry in withheld["entries"]:
+        assert not (ROOT / entry["path"]).exists() or entry["path"] in {
+            item["path"] for item in withheld["public_derivatives"]}
+        assert len(entry["sha256"]) == 64 and entry["size_bytes"] > 0
+    inventory = json.loads((ROOT / "data/source-inventory.json").read_text())
+    status = {entry["path"]: entry.get("status") for entry in inventory["entries"]}
+    for item in withheld["public_derivatives"]:
+        assert status[item["path"]] == item["status"]
+    assert not any("Demographic Insights" in path for path in status)
