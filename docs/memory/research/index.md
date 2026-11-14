@@ -9,4 +9,4 @@
 | File | Description |
 |------|-------------|
 | [analysis](analysis.md) | Approved v1.2 conditional signal analysis, reviewed component eligibility, constructed affect, complete catalogue and baseline-only grouped model evidence. |
-| [protocol](protocol.md) | Observed pilot sources, investigator-reported acquisition and ratings, historical thesis claims, conditional timebase and delegated signal-review provenance. |
+| [protocol](protocol.md) | Observed pilot sources, investigator-reported acquisition and ratings, historical thesis claims, conditional timebase and delegated signal-review provenance, and aggregate-only participant characteristics with withheld per-person originals. |
