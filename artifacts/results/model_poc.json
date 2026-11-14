@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "method_version": "1.2.0",
   "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
-  "source_manifest_sha256": "c68f23d0da99f87c75717d02d2501b313975beb135c2cfbf6c283fcab5d725c0",
+  "source_manifest_sha256": "56accb95e2ab498e99d5f143ee027de2f37b0e71d3ad48ef0605867756eec09e",
   "model_status": "baseline_only",
   "final_candidate": {
     "name": "dummy_mean"
@@ -428,10 +428,10 @@
     "self_report_comparator.json": "888d7337705387d1dd3f304470fb7cdf0f4dfef5831194eeab6a5e41548f4f0e",
     "rating_research.json": "e82b6a6d1c6d68e43f28759d8389db77ea78f79f3679533b7ecacd7ab4f0e30f",
     "validity.json": "19d1b30ad08f3d3a5e8529a94e1dea0cd8ffed30bb3447ba1447b3380a5dda5d",
-    "model_null.json": "fc8bee7549f8237ab43c971e2b6514434db57f14b4d71b34a6a4d4d4c05ccf94",
+    "model_null.json": "f5163be18d55b32569f18184e8481a795fa22e96c5bbbdd1b205f5a77c4539f8",
     "model_learning_curve.json": "b00a155aaf03926063110c6c61d1a5127d5c911466659095b4d57493b4e9da83",
-    "artifacts/model/metadata.json": "597a5fd2bb7afc7ba91ac4dbaa228df38775e6e9c7ffb406729deca1a30953e3",
-    "data/MANIFEST.sha256": "c68f23d0da99f87c75717d02d2501b313975beb135c2cfbf6c283fcab5d725c0"
+    "artifacts/model/metadata.json": "b3e8d25b5e8683d7067d4e79bd4a4a055562fdf4e99f070374983765706f54e7",
+    "data/MANIFEST.sha256": "56accb95e2ab498e99d5f143ee027de2f37b0e71d3ad48ef0605867756eec09e"
   },
   "source_artifacts_digest_rule": "Canonical sorted JSON; omit only wall-clock run timing in model_null/model_learning_curve and checkout revision/status in model metadata."
 }

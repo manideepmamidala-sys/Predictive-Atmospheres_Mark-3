@@ -989,7 +989,9 @@
       "role": "metadata",
       "path": "data/metadata/experiment_03_biometric data.csv",
       "size_bytes": 3395,
-      "sha256": "e9d25732389c6288b2fd27fca9661012d99805a232b3735a167956e2f89dde6d"
+      "sha256": "e9d25732389c6288b2fd27fca9661012d99805a232b3735a167956e2f89dde6d",
+      "status": "modified_for_privacy",
+      "withheld_sources": "data/withheld-sources.json"
     },
     {
       "role": "metadata",
@@ -1001,7 +1003,9 @@
       "role": "metadata",
       "path": "data/metadata/participant_summary.csv",
       "size_bytes": 189,
-      "sha256": "d538e03b03f3d74f82e1225cbb1348c5af71b92da66550eab86395bf9a28312c"
+      "sha256": "d538e03b03f3d74f82e1225cbb1348c5af71b92da66550eab86395bf9a28312c",
+      "status": "derived_aggregate",
+      "withheld_sources": "data/withheld-sources.json"
     },
     {
       "role": "room_render",
@@ -1224,42 +1228,6 @@
       "path": "docs/history/legacy-site-assets/FINDINGS/Affective Fusion/Target (Fused).png",
       "size_bytes": 117510,
       "sha256": "6450f42e58c8424d61f0263b8216f77248b0e9d6099089530845eaedbb16b744"
-    },
-    {
-      "role": "legacy_site_asset",
-      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Arousal Distribution - Age.png",
-      "size_bytes": 42693,
-      "sha256": "3bccd43f213a38b67a9b10bb4c9c2328d47f8931d87bd2bd6ebae702f71257d0"
-    },
-    {
-      "role": "legacy_site_asset",
-      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Arousal Distribution - Gender.png",
-      "size_bytes": 40876,
-      "sha256": "cfb1fa290c1015e5e177397003b2536fa9c9ebe0be629c1a81444cd7291e2603"
-    },
-    {
-      "role": "legacy_site_asset",
-      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Arousal Distribution - Sleep.png",
-      "size_bytes": 38413,
-      "sha256": "0cb866f786485c2ea1e55da3ff45e4bdd77777eaaf2aca204af412f048eedadd"
-    },
-    {
-      "role": "legacy_site_asset",
-      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Valence Distribution - Age.png",
-      "size_bytes": 43788,
-      "sha256": "e731660015077bc479d93729b2c15f2f9905650fa573048e5db7c9cfbfe50ea4"
-    },
-    {
-      "role": "legacy_site_asset",
-      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Valence Distribution - Gender.png",
-      "size_bytes": 40602,
-      "sha256": "06b4eff6dfd13bea560c7a46312d185478ed9350420dea2e0d4f75fc9674a009"
-    },
-    {
-      "role": "legacy_site_asset",
-      "path": "docs/history/legacy-site-assets/FINDINGS/Demographic Insights/Valence Distribution - Sleep.png",
-      "size_bytes": 40359,
-      "sha256": "134fe5b4c6305e4ad7cd880766b7e47e4af4c583f74d44a0ccfe258b9521b814"
     },
     {
       "role": "legacy_site_asset",
