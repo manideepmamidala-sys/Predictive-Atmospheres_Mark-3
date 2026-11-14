@@ -19,7 +19,7 @@ ROOM_UNITS = {"length": "m", "width": "m", "height": "m", "num_doors": "count",
               "walkable_floor_area": "m²"}
 
 
-def study_products(source: dict, spatial: list[dict], demographics: dict[str, dict]) -> dict:
+def study_products(source: dict, spatial: list[dict]) -> dict:
     trials = source["trials"]
     sample = counts(trials)
     outcome = {}
@@ -132,19 +132,18 @@ def study_products(source: dict, spatial: list[dict], demographics: dict[str, di
         per_person[(row["experiment"], row["participant_id"])].append(row)
     people = []
     for (experiment, participant), own in sorted(per_person.items()):
-        details = demographics.get(participant, {})
         people.append({"experiment": experiment, "participant_id": participant,
-                       "age": details.get("age"), "gender": details.get("gender"),
                        "trial_count": len(own),
                        "room_count": len({row["room_id"] for row in own}),
                        "complete_fusion_count": sum(row["construction"]["cohort"] ==
                                                     "complete_fusion" for row in own)})
     outcome["S5"] = product("S5", question="Who contributed to each experiment?",
         takeaway=f"{len({row['participant_id'] for row in trials})} source people contributed, with repeated exposure across experiments.",
-        method="One observed dot per participant and experiment, from source demographic and trial metadata.",
-        rows=people, x="age", y="trial_count", series="experiment", chart_type="scatter",
-        x_label="Age", y_label="Source trials", sample=sample, source=source,
-        caveats=["Age/gender are descriptive; small cells do not support subgroup inference.",
+        method="One observed dot per participant code and experiment, from source trial metadata.",
+        rows=people, x="experiment", y="trial_count", series="experiment", chart_type="scatter",
+        x_label="Experiment", y_label="Source trials", sample=sample, source=source,
+        caveats=[("Participant characteristics are published only as a cohort aggregate; "
+                  "per-person age, gender and sleep are withheld for privacy."),
                  "The same participant may appear in more than one experiment."],
-        units={"age": "years", "trial_count": "trials"})
+        units={"trial_count": "trials"})
     return outcome

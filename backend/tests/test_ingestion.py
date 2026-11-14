@@ -8,8 +8,6 @@ def test_original_ratings_and_missingness():
     assert len(trials) == 160 and len(rooms) == 30
     assert len({t.subject_id for t in trials}) == 10
     assert trials[0].comfort == 0.4 and trials[0].self_valence is None
-    assert trials[0].sleep_hours is None
-    assert next(t for t in trials if t.experiment == 2).sleep_hours is None
     assert next(t for t in trials if t.experiment == 3).self_valence == 0.85
     assert rooms[0]["cct"] is None and rooms[0]["num_doors"] is None
     assert next(r for r in rooms if r["experiment"] == 2)["walkable_floor_area"] is None

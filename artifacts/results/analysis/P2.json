@@ -25,8 +25,8 @@
   "provenance": {
     "method_version": "1.2.0",
     "approved_spec_sha256": "51c01ef6ccdf2f4318ac786d1bb39afeb1aa2bcf3bc93039479a4ed2454603ac",
-    "source_manifest_sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7",
-    "generated_at_utc": "2026-10-10T16:03:37+00:00"
+    "source_manifest_sha256": "c68f23d0da99f87c75717d02d2501b313975beb135c2cfbf6c283fcab5d725c0",
+    "generated_at_utc": "2026-11-14T10:24:17+00:00"
   },
   "availability_reason": null,
   "chart": {

@@ -287,10 +287,6 @@ class PersonExperimentRecord(StrictModel):
     valid_fused: int = Field(ge=0)
     mean_valence: float | None = Field(default=None, allow_inf_nan=False)
     mean_arousal: float | None = Field(default=None, allow_inf_nan=False)
-    sleep_hours: float | None = Field(default=None, allow_inf_nan=False)
-    sleep_min_hours: float | None = Field(default=None, allow_inf_nan=False)
-    sleep_max_hours: float | None = Field(default=None, allow_inf_nan=False)
-    sleep_observations: int = Field(ge=0)
 
 
 class PersonRecord(StrictModel):
@@ -300,10 +296,23 @@ class PersonRecord(StrictModel):
     valid_fused: int = Field(ge=0)
     mean_valence: float | None = Field(default=None, allow_inf_nan=False)
     mean_arousal: float | None = Field(default=None, allow_inf_nan=False)
-    age: float | None = Field(default=None, allow_inf_nan=False)
-    gender: str | None = None
-    sleep_hours: float | None = Field(default=None, allow_inf_nan=False)
     by_experiment: list[PersonExperimentRecord] = Field(default_factory=list)
+
+
+class CohortSummary(StrictModel):
+    """Aggregate participant description; per-person demographics and sleep are withheld."""
+
+    participants: int = Field(ge=0)
+    age_min: float = Field(allow_inf_nan=False)
+    age_max: float = Field(allow_inf_nan=False)
+    age_mean: float = Field(allow_inf_nan=False)
+    female: int = Field(ge=0)
+    male: int = Field(ge=0)
+    occupation: str
+    e3_sleep_trials: int = Field(ge=0)
+    e3_sleep_hours_mean: float = Field(allow_inf_nan=False)
+    e3_sleep_hours_min: float = Field(allow_inf_nan=False)
+    e3_sleep_hours_max: float = Field(allow_inf_nan=False)
 
 
 class DisagreementRecord(StrictModel):
@@ -379,6 +388,7 @@ class AffectExport(ExportBase):
 
 class PeopleExport(ExportBase):
     people: list[PersonRecord]
+    cohort: CohortSummary
 
 
 class ModelExport(ExportBase):
@@ -392,4 +402,5 @@ class ResearchBundle(ExportBase):
     sensitivity: list[SensitivityRecord]
     disagreement: list[DisagreementRecord] = Field(default_factory=list)
     people: list[PersonRecord]
+    cohort: CohortSummary
     model: ModelRecord

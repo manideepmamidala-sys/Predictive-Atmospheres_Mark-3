@@ -14,14 +14,14 @@
     "backend/src/pa/modeling/nulls.py": "57dd7a8b1c54d35c949a9e95cb7cd36e5e5013b0e21061ffc901b059d3fbbb23",
     "artifacts/results/affect_detail.json": "ddc2b2765bd7d5c1cc90e07f3c637446384f0165377326f58d735fbca81e0de7",
     "artifacts/results/qc_review.json": "41718a1d5204f6c195469aa5e45a6d500b8886eadeecb10f1187e293349de294",
-    "data/MANIFEST.sha256": "699304722ad8b215d71b71787a6e43366ac03b4a799009e49adc296217dae1d7"
+    "data/MANIFEST.sha256": "c68f23d0da99f87c75717d02d2501b313975beb135c2cfbf6c283fcab5d725c0"
   },
   "dependency_sha256": {
     "backend/src/pa/modeling/train.py": "7b049b3d85cbec417881cfb0d0b54978d8459624f8e54aed729b779f7a116457",
     "backend/src/pa/modeling/predict.py": "95b5884190fbd06f13e6fe5798a9caea7fe875cab0684bbb53a84dc80dcc7368",
     "backend/src/pa/features/builder.py": "8cf157e1be883ff3bf85c817bd3a01f7366952f4153e4d5d371ea6f2a8a61e18",
     "backend/src/pa/features/schema.py": "9689dc9800495baffd9bea4daacfeebb53e11c5c0a558d1dce9ea44ffd55e944",
-    "backend/src/pa/io/metadata.py": "99ff15415e13ee180b68500c77f2db338c2f9d9189882b25fa01fb15face4d59",
+    "backend/src/pa/io/metadata.py": "787e5e4eb67cb3eedd534c9d124e9923f1c494d0e9dae72a4730d5be252ed517",
     "backend/pyproject.toml": "4b3d4aaf61cccac7851253b5f578c6072c3faeb543e7768b4d09e6cadc06a63c",
     "backend/uv.lock": "b477770af8fc9cfbecc7c9a78e6c5f98736ebd4c25c6bf32a3c1341753ab7f44"
   }

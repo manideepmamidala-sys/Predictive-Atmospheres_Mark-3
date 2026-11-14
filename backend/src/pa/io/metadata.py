@@ -55,7 +55,6 @@ class Trial:
     comfort: float | None
     self_valence: float | None
     self_arousal: float | None
-    sleep_hours: float | None
     rating_provenance: str
 
 def load_trials(metadata_dir: Path = DATA / "metadata") -> list[Trial]:
@@ -78,7 +77,6 @@ def load_trials(metadata_dir: Path = DATA / "metadata") -> list[Trial]:
                 experiment=experiment, subject_id=row["Subject_ID"], room_id=row["Room_ID"],
                 eeg_filename=row["EEG_Filename"], logged_duration_s=duration,
                 comfort=comfort, self_valence=valence, self_arousal=arousal,
-                sleep_hours=_number(row.get("Sleep Hours", "")) if experiment == 3 else None,
                 rating_provenance=("transformed_comfort_0_10" if experiment == 1 else
                                    "transformed_separate_axes_0_10" if experiment == 2 else
                                    "transformed_direction_intensity_0_10"),
@@ -89,18 +87,52 @@ def load_trials(metadata_dir: Path = DATA / "metadata") -> list[Trial]:
     return trials
 
 
-def load_demographics(metadata_dir: Path = DATA / "metadata") -> dict[str, dict]:
-    """Map source participant IDs exactly; reject ambiguous or invalid supplied rows."""
-    records: dict[str, dict] = {}
-    for row in _rows(metadata_dir / "Subject Data.csv"):
-        participant_id = row.get("Subject_ID", "")
-        if not participant_id or participant_id in records:
-            raise ValueError("missing or duplicate Subject_ID in demographic metadata")
-        age = _number(row.get("age", ""))
-        if age is not None and age < 0:
-            raise ValueError(f"negative age for {participant_id}")
-        records[participant_id] = {"age": age, "gender": row.get("gender") or None}
-    return records
+SUMMARY_COUNTS = ("participants", "female", "male", "e3_sleep_trials")
+SUMMARY_RANGES = (("age_min", "age_mean", "age_max"),
+                  ("e3_sleep_hours_min", "e3_sleep_hours_mean", "e3_sleep_hours_max"))
+
+
+@dataclass(frozen=True)
+class ParticipantSummary:
+    """Cohort-level participant description; per-person originals are withheld for privacy."""
+
+    participants: int
+    age_min: float
+    age_max: float
+    age_mean: float
+    female: int
+    male: int
+    occupation: str
+    e3_sleep_trials: int
+    e3_sleep_hours_mean: float
+    e3_sleep_hours_min: float
+    e3_sleep_hours_max: float
+
+
+def load_participant_summary(metadata_dir: Path = DATA / "metadata") -> ParticipantSummary:
+    """Read the single aggregate cohort row; reject incomplete or inconsistent values."""
+    rows = [row for row in _rows(metadata_dir / "participant_summary.csv") if row.get("scope") == "all"]
+    if len(rows) != 1:
+        raise ValueError("participant summary must contain exactly one 'all' scope row")
+    row = rows[0]
+    values: dict[str, float] = {}
+    for key in (*SUMMARY_COUNTS, *(name for group in SUMMARY_RANGES for name in group)):
+        number = _number(row.get(key, ""))
+        if number is None or number < 0:
+            raise ValueError(f"missing or negative participant summary value: {key}")
+        values[key] = number
+    if any(not values[key].is_integer() for key in SUMMARY_COUNTS):
+        raise ValueError("participant summary counts must be whole numbers")
+    if values["female"] + values["male"] > values["participants"]:
+        raise ValueError("participant summary gender counts exceed participants")
+    for low, mean, high in SUMMARY_RANGES:
+        if not values[low] <= values[mean] <= values[high]:
+            raise ValueError(f"participant summary range is inconsistent: {low}..{high}")
+    if not row.get("occupation"):
+        raise ValueError("missing participant summary occupation")
+    return ParticipantSummary(
+        occupation=row["occupation"],
+        **{key: int(value) if key in SUMMARY_COUNTS else value for key, value in values.items()})
 
 
 def load_rooms(metadata_dir: Path = DATA / "metadata") -> list[dict]:

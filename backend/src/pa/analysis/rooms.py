@@ -1,4 +1,4 @@
-"""Lighting, function, E1 comfort and participant-characteristic products R6–R9."""
+"""Lighting, function, E1 comfort and aggregate participant products R6–R9."""
 
 from __future__ import annotations
 
@@ -8,13 +8,11 @@ import numpy as np
 from scipy.stats import spearmanr
 
 from pa.analysis.catalogue import counts, product
-from pa.io.metadata import Trial
+from pa.io.metadata import ParticipantSummary
 
 
-def room_products(source: dict, spatial: list[dict], metadata: list[Trial],
-                  demographics: dict[str, dict]) -> dict:
+def room_products(source: dict, spatial: list[dict], cohort: ParticipantSummary) -> dict:
     by_room = {row["room_id"]: row for row in spatial}
-    by_trial = {f"E{row.experiment}:{row.subject_id}:{row.room_id}": row for row in metadata}
     trials = source["trials"]
     output = {}
 
@@ -134,33 +132,38 @@ def room_products(source: dict, spatial: list[dict], metadata: list[Trial],
         units={"floor_area": "m²", "volume": "m³",
                "height": "m", "comfort": "transformed source scale −1 to 1"})
 
-    by_person = defaultdict(list)
+    by_experiment = defaultdict(list)
     for row in trials:
         if row["experiment"] in (2, 3):
-            by_person[(row["experiment"], row["participant_id"])].append(row)
-    personal = []
-    for (experiment, person), own in sorted(by_person.items()):
-        trial_metadata = [by_trial[row["id"]] for row in own]
-        sleep = [row.sleep_hours for row in trial_metadata if row.sleep_hours is not None]
+            by_experiment[row["experiment"]].append(row)
+    aggregate = []
+    for experiment, own in sorted(by_experiment.items()):
+        sleep_known = experiment == 3
         for axis in ("valence", "arousal"):
             observed = [row["subjective"][axis] for row in own if
                         row["subjective"][axis] is not None]
-            personal.append({"experiment": experiment, "participant_id": person,
-                             "axis": axis, "age": demographics.get(person, {}).get("age"),
-                             "gender": demographics.get(person, {}).get("gender"),
-                             "mean_sleep_hours": float(np.mean(sleep)) if sleep else None,
-                             "mean_rating": float(np.mean(observed)) if observed else None,
-                             "rating_trials": len(observed), "sleep_observations": len(sleep)})
-    output["R9"] = product("R9", question="What participant-characteristic and sleep patterns appear in reports?",
-        takeaway=(f"E3 records sleep for {len({row['participant_id'] for row in personal if row['experiment'] == 3 and row['mean_sleep_hours'] is not None})} "
-                  "people; E2 has no sleep observations. These profiles are descriptive only."),
-        method="Observed per-person/experiment mean rating, age, source gender and mean reported sleep hours; E2 sleep remains null.",
-        rows=personal, x="mean_sleep_hours", y="mean_rating", series="axis",
-        facet="experiment", chart_type="scatter", x_label="Mean reported sleep",
-        y_label="Mean signed report",
+            aggregate.append({
+                "experiment": experiment, "axis": axis,
+                "participants": len({row["participant_id"] for row in own}),
+                "rating_trials": len(observed),
+                "mean_rating": float(np.mean(observed)) if observed else None,
+                "sleep_trials": cohort.e3_sleep_trials if sleep_known else None,
+                "sleep_hours_mean": cohort.e3_sleep_hours_mean if sleep_known else None,
+                "sleep_hours_min": cohort.e3_sleep_hours_min if sleep_known else None,
+                "sleep_hours_max": cohort.e3_sleep_hours_max if sleep_known else None})
+    output["R9"] = product("R9", question="Who took part, and how were reports distributed per experiment?",
+        takeaway=(f"{cohort.participants} participants ({cohort.occupation}), aged "
+                  f"{cohort.age_min:g}–{cohort.age_max:g}; E3 sleep was reported on "
+                  f"{cohort.e3_sleep_trials} trials (mean {cohort.e3_sleep_hours_mean:g} h). "
+                  "Characteristics are published in aggregate only."),
+        method=("Experiment-level participant counts and mean signed reports per axis, with the "
+                "cohort-level E3 sleep summary; no per-person characteristic or sleep value is published."),
+        rows=aggregate, x="experiment", y="mean_rating", series="axis",
+        chart_type="bar", x_label="Experiment", y_label="Mean signed report",
         sample=counts([row for row in trials if row["experiment"] in (2, 3)]), source=source,
-        caveats=["E2 sleep was not recorded; null does not mean zero sleep.",
+        caveats=["E2 sleep was not recorded; its sleep fields are null, not zero.",
+                 "Per-person age, gender and sleep are withheld for participant privacy.",
                  "Small overlapping cohorts cannot support demographic or sleep effect claims."],
-        units={"mean_sleep_hours": "hours", "age": "years",
+        units={"sleep_hours_mean": "hours", "sleep_hours_min": "hours", "sleep_hours_max": "hours",
                "mean_rating": "signed source scale −1 to 1"})
     return output

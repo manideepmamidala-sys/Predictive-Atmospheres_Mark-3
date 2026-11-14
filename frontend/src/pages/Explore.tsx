@@ -354,6 +354,21 @@ export default function Explore() {
                 {room !== "all" &&
                   `The room filter selects people exposed to ${room}; summary metrics still cover the whole selected experiment, not just that room.`}
               </p>
+              {data && (
+                <p className="small-text" data-testid="cohort-summary">
+                  {data.cohort.participants} participants, all{" "}
+                  {data.cohort.occupation.toLowerCase()}s, aged{" "}
+                  {data.cohort.age_min}–{data.cohort.age_max} (mean{" "}
+                  {data.cohort.age_mean.toFixed(1)}); {data.cohort.female} women,{" "}
+                  {data.cohort.male} men. Experiment 3 sleep (
+                  {data.cohort.e3_sleep_trials} trials): mean{" "}
+                  {data.cohort.e3_sleep_hours_mean} h, range{" "}
+                  {data.cohort.e3_sleep_hours_min.toFixed(1)}–
+                  {data.cohort.e3_sleep_hours_max.toFixed(1)} h. Participant
+                  characteristics are published in aggregate only; per-person
+                  age, gender and sleep are withheld for privacy.
+                </p>
+              )}
               <div className="table-wrap">
                 <table className="data-table">
                   <caption>
@@ -365,9 +380,6 @@ export default function Explore() {
                       <th scope="col">Participant</th>
                       <th scope="col">Trials</th>
                       <th scope="col">Complete fusion</th>
-                      <th scope="col">Age</th>
-                      <th scope="col">Reported gender</th>
-                      <th scope="col">Sleep (h)</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -383,13 +395,6 @@ export default function Explore() {
                           <th scope="row">{item.id}</th>
                           <td>{summary.trials}</td>
                           <td>{summary.valid_fused}</td>
-                          <td>
-                            <Value value={item.age} />
-                          </td>
-                          <td>{item.gender || "Unavailable"}</td>
-                          <td>
-                            <Value value={summary.sleep_hours} />
-                          </td>
                         </tr>
                       );
                     })}

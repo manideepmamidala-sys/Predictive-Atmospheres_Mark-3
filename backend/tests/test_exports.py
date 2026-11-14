@@ -76,6 +76,7 @@ def test_six_products_write_one_valid_bundle(tmp_path):
     from pa.results.export import write_products
     from pa.results.schemas import (
         AffectExport,
+        CohortSummary,
         ModelExport,
         ModelRecord,
         PeopleExport,
@@ -93,7 +94,10 @@ def test_six_products_write_one_valid_bundle(tmp_path):
         "rooms": RoomsExport(provenance=provenance, rooms=[]),
         "signals": SignalsExport(provenance=provenance, trials=[]),
         "affect": AffectExport(provenance=provenance, sensitivity=[]),
-        "people": PeopleExport(provenance=provenance, people=[]),
+        "people": PeopleExport(provenance=provenance, people=[], cohort=CohortSummary(
+            participants=0, age_min=0, age_max=0, age_mean=0, female=0, male=0,
+            occupation="none", e3_sleep_trials=0, e3_sleep_hours_mean=0,
+            e3_sleep_hours_min=0, e3_sleep_hours_max=0)),
         "model": ModelExport(provenance=provenance, model=ModelRecord(
             status="unavailable", explanation="fixture", metrics=[])),
     }
@@ -274,12 +278,12 @@ def test_browser_products_keep_unavailable_science_explicit(tmp_path):
     import json
 
     from pa.affect.run import construct_affect_detail
-    from pa.io.metadata import Trial
+    from pa.io.metadata import ParticipantSummary, Trial
     from pa.results.build import build_products
     from pa.results.export import write_products
     from pa.results.schemas import ModelRecord
 
-    trial = Trial(1, "P1", "R1", "fixture.csv", 60, 0.2, None, None, None,
+    trial = Trial(1, "P1", "R1", "fixture.csv", 60, 0.2, None, None,
                   "synthetic_test_fixture")
     signal = {"id": "E1:P1:R1", "experiment": 1, "participant_id": "P1", "room_id": "R1",
               "sample_count": 30000, "primary_rate_hz": 500,
@@ -298,7 +302,11 @@ def test_browser_products_keep_unavailable_science_explicit(tmp_path):
     products = build_products([trial], spatial, [signal], affect,
                               ModelRecord(status="unavailable", explanation="No valid model fixture",
                                           metrics=[]),
-                              demographics={"P1": {"age": 26, "gender": "Female"}})
+                              participant_summary=ParticipantSummary(
+                                  participants=1, age_min=26, age_max=26, age_mean=26,
+                                  female=1, male=0, occupation="Architect", e3_sleep_trials=0,
+                                  e3_sleep_hours_mean=0, e3_sleep_hours_min=0,
+                                  e3_sleep_hours_max=0))
     write_products(products, tmp_path)
     bundle = json.loads((tmp_path / "bundle.json").read_text())
     signals_export = json.loads((tmp_path / "signals.json").read_text())
@@ -308,38 +316,64 @@ def test_browser_products_keep_unavailable_science_explicit(tmp_path):
     assert len(signals_export["trials"][0]["eeg"]["raw"]) == 100
     assert bundle["trials"][0]["eeg"] is None
     assert bundle["people"][0]["mean_valence"] is None
-    assert bundle["people"][0]["age"] == 26
-    assert bundle["people"][0]["gender"] == "Female"
+    assert not {"age", "gender", "sleep_hours"} & bundle["people"][0].keys()
     assert bundle["people"][0]["by_experiment"] == [{
         "experiment": 1, "trials": 1, "valid_fused": 0,
-        "mean_valence": None, "mean_arousal": None,
-        "sleep_hours": None, "sleep_min_hours": None,
-        "sleep_max_hours": None, "sleep_observations": 0}]
+        "mean_valence": None, "mean_arousal": None}]
+    assert bundle["cohort"]["participants"] == 1 and bundle["cohort"]["female"] == 1
     assert all(row["n"] == 0 for row in bundle["disagreement"])
     assert bundle["model"]["status"] == "unavailable"
 
 
-def test_source_demographics_and_sleep_are_preserved_by_experiment():
-    from pa.io.metadata import load_demographics, load_trials
+SUMMARY_HEADER = ("scope,participants,age_min,age_max,age_mean,female,male,occupation,"
+                  "e3_sleep_trials,e3_sleep_hours_mean,e3_sleep_hours_min,e3_sleep_hours_max\n")
 
-    demographics = load_demographics()
+
+def test_participant_summary_is_aggregate_and_matches_source_participants():
+    from pa.io.metadata import load_participant_summary, load_trials
+
+    summary = load_participant_summary()
     trials = load_trials()
-    assert demographics["Subj_B"] == {"age": 26.0, "gender": "Female"}
-    assert {trial.subject_id for trial in trials} <= demographics.keys()
-    assert sum(trial.sleep_hours is not None for trial in trials if trial.experiment == 3) == 60
-    assert all(trial.sleep_hours is None for trial in trials if trial.experiment in (1, 2))
+    assert (summary.participants, summary.female, summary.male) == (10, 5, 5)
+    assert (summary.age_min, summary.age_mean, summary.age_max) == (25, 26.0, 28)
+    assert (summary.e3_sleep_trials, summary.e3_sleep_hours_mean) == (60, 6.75)
+    assert len({trial.subject_id for trial in trials}) == summary.participants
+    assert not hasattr(trials[0], "sleep_hours")
 
 
-@pytest.mark.parametrize("rows", [
-    "Subject_ID,age,gender,occupation\nP1,20,Female,\nP1,21,Female,\n",
-    "Subject_ID,age,gender,occupation\nP1,-2,Female,\n",
+def test_public_metadata_contains_no_per_person_demographics_or_sleep():
+    from pa.config import DATA
+
+    metadata = DATA / "metadata"
+    assert not (metadata / "Subject Data.csv").exists()
+    for path in metadata.glob("*.csv"):
+        header = path.read_text(encoding="utf-8-sig").splitlines()[0].lower()
+        if "subject_id" in header:
+            assert not {"age", "gender", "occupation", "sleep hours"} & {
+                column.strip() for column in header.split(",")}, path.name
+
+
+@pytest.mark.parametrize("row", [
+    "all,10,25,28,26,6,5,Architect,60,6.75,3,8.5\n",
+    "all,10,25,28,30,5,5,Architect,60,6.75,3,8.5\n",
+    "all,-1,25,28,26,5,5,Architect,60,6.75,3,8.5\n",
+    "all,10,25,28,26,5,5,,60,6.75,3,8.5\n",
+    "all,10,25,28,26,5,5,Architect,60,6.75,9,8.5\n",
 ])
-def test_demographic_reader_rejects_ambiguous_or_invalid_rows(tmp_path, rows):
-    from pa.io.metadata import load_demographics
+def test_participant_summary_reader_rejects_inconsistent_rows(tmp_path, row):
+    from pa.io.metadata import load_participant_summary
 
-    (tmp_path / "Subject Data.csv").write_text(rows)
+    (tmp_path / "participant_summary.csv").write_text(SUMMARY_HEADER + row)
     with pytest.raises(ValueError):
-        load_demographics(tmp_path)
+        load_participant_summary(tmp_path)
+
+
+def test_participant_summary_reader_rejects_missing_column(tmp_path):
+    from pa.io.metadata import load_participant_summary
+
+    (tmp_path / "participant_summary.csv").write_text("scope,participants\nall,10\n")
+    with pytest.raises(ValueError):
+        load_participant_summary(tmp_path)
 
 
 def test_generated_participant_summaries_and_disagreement_match_source_scope():
@@ -357,7 +391,6 @@ def test_generated_participant_summaries_and_disagreement_match_source_scope():
             assert scope["trials"] == len(rows)
             assert scope["valid_fused"] == sum(row["construction"]["cohort"] ==
                                                 "complete_fusion" for row in rows)
-            assert scope["sleep_observations"] == (len(rows) if scope["experiment"] == 3 else 0)
     subj_m_e1 = next(item for item in people["Subj_M"]["by_experiment"]
                      if item["experiment"] == 1)
     assert (subj_m_e1["trials"], subj_m_e1["valid_fused"],
@@ -386,3 +419,23 @@ def test_generated_participant_summaries_and_disagreement_match_source_scope():
                row["reviewed_eligibility"]["ecg_hr"] for row in e3_b)
     assert all(item["n"] == 10 for item in bundle["sensitivity"]
                if item["participant_id"] == "Subj_B" and item["experiment"] == 3)
+
+
+def test_generated_products_publish_no_per_person_characteristics():
+    import json
+
+    from pa.config import RESULTS
+
+    forbidden = {"age", "gender", "sleep_hours", "mean_sleep_hours", "sleep_observations"}
+    bundle = json.loads((RESULTS / "bundle.json").read_text())
+    for person in bundle["people"]:
+        assert not forbidden & person.keys()
+        assert all(not forbidden & scope.keys() for scope in person["by_experiment"])
+    assert bundle["cohort"]["participants"] == len(bundle["people"])
+    s5 = json.loads((RESULTS / "analysis" / "S5.json").read_text())
+    assert all(not forbidden & row.keys() for row in s5["chart"]["rows"])
+    r9 = json.loads((RESULTS / "analysis" / "R9.json").read_text())
+    assert all("participant_id" not in row and not forbidden & row.keys()
+               for row in r9["chart"]["rows"])
+    e2_rows = [row for row in r9["chart"]["rows"] if row["experiment"] == 2]
+    assert e2_rows and all(row["sleep_hours_mean"] is None for row in e2_rows)

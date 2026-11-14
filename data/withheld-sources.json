@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Original source files withheld from the public repository for participant privacy. Checksums let an auditor holding the originals verify them; the owner retains the originals privately and does not redistribute them.",
+  "entries": [
+    {
+      "path": "data/metadata/Subject Data.csv",
+      "sha256": "98d2e507028f24dda1b5d0a6c91f24ba80035f28730665acd04513e22120c85e",
+      "size_bytes": 293,
+      "reason": "participant privacy: per-person age, gender and occupation keyed by participant code",
+      "custody": "retained privately by the study owner; not redistributed",
+      "public_replacement": "data/metadata/participant_summary.csv (cohort aggregate only)"
+    },
+    {
+      "path": "data/metadata/experiment_03_biometric data.csv",
+      "sha256": "0012d8d3a57c7152b7de6bc8fe2ee30f9afd34a0bc3e4c2cc2ef06cdbec42d9c",
+      "size_bytes": 3592,
+      "reason": "participant privacy: per-trial self-reported sleep hours keyed by participant code",
+      "custody": "retained privately by the study owner; not redistributed",
+      "public_replacement": "same path with the 'Sleep Hours' column removed; all other fields unchanged; sleep summarised in data/metadata/participant_summary.csv"
+    }
+  ]
+}
