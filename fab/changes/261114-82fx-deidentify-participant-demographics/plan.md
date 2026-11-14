@@ -182,9 +182,9 @@ The six legacy plots under `docs/history/legacy-site-assets/FINDINGS/Demographic
 - [x] A-008 R9: the Explore people table has three columns and renders the aggregate sentence from `cohort`
 - [x] A-009 R10: the data card and catalogue describe aggregate-only demographics and the withheld originals
 
-- [ ] A-018 R11: the six legacy demographic PNGs are absent, and `withheld-sources.json` records them with correct checksums
-- [ ] A-019 R12: inventory entries for the two derived/modified files carry `status` and `withheld_sources`; the manifest `--check` passes
-- [ ] A-020 R12: the pipeline reruns cleanly; CP-B pinned artifacts and null draws are unchanged
+- [x] A-018 R11: the six legacy demographic PNGs are absent, and `withheld-sources.json` records them with correct checksums
+- [x] A-019 R12: inventory entries for the two derived/modified files carry `status` and `withheld_sources`; the manifest `--check` passes
+- [x] A-020 R12: the pipeline reruns cleanly; CP-B pinned artifacts and null draws are unchanged
 
 ### Behavioral Correctness
 

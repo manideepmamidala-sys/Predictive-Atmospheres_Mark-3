@@ -1,6 +1,6 @@
 ---
 type: memory
-description: "Observed pilot sources, investigator-reported acquisition and ratings, historical thesis claims, conditional timebase and delegated signal-review provenance."
+description: "Observed pilot sources, investigator-reported acquisition and ratings, historical thesis claims, conditional timebase and delegated signal-review provenance, and aggregate-only participant characteristics with withheld per-person originals."
 ---
 # Protocol and Source Provenance
 
@@ -8,7 +8,7 @@ description: "Observed pilot sources, investigator-reported acquisition and rati
 
 ## Overview
 
-The pilot has 160 room-viewing recordings across three experiments, ten distinct source subject IDs and thirty room IDs. The retained canonical source set contains 160 recordings, seven metadata CSVs, thirty Lumion renders and 116 historical site assets, all checksum-addressed in `data/MANIFEST.sha256`. Source files, investigator report, historical thesis statements, analysis assumptions and derived products carry distinct authority. The [data card](../../data_card.md), [acquisition record](../../protocol/acquisition.md) and [thesis context](../../research/thesis-source-context.md) detail that provenance.
+The pilot has 160 room-viewing recordings across three experiments, ten distinct source subject IDs and thirty room IDs. The retained canonical source set contains 160 recordings, seven metadata CSVs, thirty Lumion renders and 110 historical site assets, all checksum-addressed in `data/MANIFEST.sha256`. Per-person participant originals (age, gender, occupation, per-trial sleep) and six legacy demographic plots are withheld from the public tree for participant privacy; `data/withheld-sources.json` records their original checksums and sizes. Source files, investigator report, historical thesis statements, analysis assumptions and derived products carry distinct authority. The [data card](../../data_card.md), [acquisition record](../../protocol/acquisition.md) and [thesis context](../../research/thesis-source-context.md) detail that provenance.
 
 ## Requirements
 
@@ -20,7 +20,7 @@ Source CSVs contain `Counter,Channel1,Channel2,Channel3` without timestamps or p
 
 ### Ratings and supplied room fields
 
-Experiment 1 records signed comfort and has no valence/arousal rating. Experiments 2 and 3 have signed valence/arousal values but use different investigator-reported response procedures; original forms and conversion sheets are unavailable, so measurement equivalence is unresolved. Experiment 3 supplies sleep observations on its sixty trial rows. Age and gender map to the ten source IDs; participant names are not mapped to recordings. Missing values stay missing. See [rating provenance](../../protocol/ratings.md).
+Experiment 1 records signed comfort and has no valence/arousal rating. Experiments 2 and 3 have signed valence/arousal values but use different investigator-reported response procedures; original forms and conversion sheets are unavailable, so measurement equivalence is unresolved. Participant characteristics are public only as a cohort aggregate in `data/metadata/participant_summary.csv`: ten participants, all architects, aged 25–28 (mean 26.0), five women and five men, and Experiment 3 sleep self-reported on sixty trial rows (mean 6.75 h, range 3.0–8.5 h). No public file links a participant code to age, gender, occupation or sleep, and participant names are not mapped to recordings. Missing values stay missing. See [rating provenance](../../protocol/ratings.md).
 
 Grasshopper/Ladybug/Honeybee supplied spatial and lighting values, but those calculations were not calibrated to headset exposure. Door and window areas are totals, not per-opening areas. Room renders map by filename stem; top-eye extraction from stacked stereo images is an inferred presentation convention. See [spatial provenance](../../protocol/spatial-provenance.md).
 
@@ -45,3 +45,10 @@ Approved CP-B AI reviewers inspected flagged raw traces and spectra and recorded
 **Why**: Inspectable evidence can guide eligibility while preserving who reviewed it and what remains unresolved.
 **Rejected**: Promoting a flag without a supported disposition or calling delegated AI review personal owner signoff.
 *Introduced by*: 261010-tadj-research-atlas-design-studio
+
+### Aggregate-only participant characteristics
+
+**Decision**: Publish participant characteristics only as one cohort row, and withhold per-person originals with recorded checksums.
+**Why**: The participants are the owner's classmates. Per-code age, gender or sleep could re-identify them and link them to biometric recordings, and the consent basis covers anonymised data only. Recorded checksums keep the withheld originals verifiable (preserve source evidence).
+**Rejected**: Keeping per-person values public; overwriting originals in place without provenance; per-experiment demographic cells of five or six people.
+*Introduced by*: 261114-82fx-deidentify-participant-demographics

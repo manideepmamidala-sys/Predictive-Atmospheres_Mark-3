@@ -7,15 +7,15 @@ issues: []
 progress:
     intake: done
     apply: done
-    review: active
-    hydrate: pending
+    review: done
+    hydrate: active
     ship: pending
     review-pr: pending
 plan:
     generated: true
     task_count: 17
     acceptance_count: 20
-    acceptance_completed: 17
+    acceptance_completed: 20
 confidence:
     certain: 4
     confident: 6
@@ -31,8 +31,8 @@ confidence:
 stage_metrics:
     intake: {started_at: "2026-11-14T08:41:44Z", driver: fab-new, iterations: 1, completed_at: "2026-11-14T08:44:39Z"}
     apply: {started_at: "2026-11-14T10:45:48Z", driver: fab-continue, iterations: 2, completed_at: "2026-11-14T15:16:50Z"}
-    review: {started_at: "2026-11-14T15:16:50Z", driver: fab-continue, iterations: 2}
-    hydrate: {iterations: 1}
+    review: {started_at: "2026-11-14T15:16:50Z", driver: fab-continue, iterations: 2, completed_at: "2026-11-14T15:18:29Z"}
+    hydrate: {started_at: "2026-11-14T15:18:29Z", driver: fab-continue, iterations: 2}
 prs: []
 change_type_source: explicit
 base_branch: main
@@ -46,6 +46,7 @@ true_impact:
         net: 0
     computed_at: "2026-11-14T15:16:50Z"
     computed_at_stage: apply
+summary: Participant characteristics are published as a cohort aggregate only; per-person originals and legacy demographic plots are withheld with recorded checksums
 # base_branch: written by /git-branch or /fab-new when the change's branch is created (no placeholder here).
 # true_impact: lazily created on first stage-finish that computes it (no placeholder here).
-last_updated: 2026-11-14T15:16:50Z
+last_updated: 2026-11-14T15:18:56Z
