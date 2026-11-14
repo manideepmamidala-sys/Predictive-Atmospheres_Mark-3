@@ -148,41 +148,41 @@ Regeneration SHALL NOT alter the raw-signal artifacts the CP-B ledger pins (`sig
 
 ### Functional Completeness
 
-- [ ] A-001 R1: `Subject Data.csv` is absent; the E3 CSV has no `Sleep Hours` header; all 60 E3 trials keep identical non-sleep values
-- [ ] A-002 R2: `data/withheld-sources.json` lists both originals with the exact sha256/size from R2
-- [ ] A-003 R3: `participant_summary.csv` contains exactly the R3 row
-- [ ] A-004 R4: `build_source_manifest.py --check` passes
-- [ ] A-005 R5: `load_participant_summary` exists and validates; `load_demographics` and `Trial.sleep_hours` are gone
-- [ ] A-006 R6: `people.json` and `bundle.json` have no age, gender or sleep keys on persons; `cohort` matches R3
-- [ ] A-007 R7: S5/R9 rows contain no age, gender or per-person sleep; R9 has no `participant_id`
-- [ ] A-008 R9: the Explore people table has three columns and renders the aggregate sentence from `cohort`
-- [ ] A-009 R10: the data card and catalogue describe aggregate-only demographics and the withheld originals
+- [x] A-001 R1: `Subject Data.csv` is absent; the E3 CSV has no `Sleep Hours` header; all 60 E3 trials keep identical non-sleep values
+- [x] A-002 R2: `data/withheld-sources.json` lists both originals with the exact sha256/size from R2
+- [x] A-003 R3: `participant_summary.csv` contains exactly the R3 row
+- [x] A-004 R4: `build_source_manifest.py --check` passes
+- [x] A-005 R5: `load_participant_summary` exists and validates; `load_demographics` and `Trial.sleep_hours` are gone
+- [x] A-006 R6: `people.json` and `bundle.json` have no age, gender or sleep keys on persons; `cohort` matches R3
+- [x] A-007 R7: S5/R9 rows contain no age, gender or per-person sleep; R9 has no `participant_id`
+- [x] A-008 R9: the Explore people table has three columns and renders the aggregate sentence from `cohort`
+- [x] A-009 R10: the data card and catalogue describe aggregate-only demographics and the withheld originals
 
 ### Behavioral Correctness
 
-- [ ] A-010 R8: `signals_detail.json` and `timebase.json` are byte-identical to the pre-change versions; the pipeline completes without a CP-B hash error
+- [x] A-010 R8: `signals_detail.json` and `timebase.json` are byte-identical to the pre-change versions; the pipeline completes without a CP-B hash error
 
 ### Removal Verification
 
-- [ ] A-011 R1: a repository grep (excluding `fab/` and `.git`) finds no per-code age, gender or sleep values in data, artifacts, frontend sources/fixtures or docs
+- [x] A-011 R1: a repository grep (excluding `fab/` and `.git`) finds no per-code age, gender or sleep values in data, artifacts, frontend sources/fixtures or docs
 
 ### Scenario Coverage
 
-- [ ] A-012 R5: tests cover the valid summary and invalid summaries (negative count, min > max, missing column)
+- [x] A-012 R5: tests cover the valid summary and invalid summaries (negative count, min > max, missing column)
 
 ### Edge Cases & Error Handling
 
-- [ ] A-013 R7: R9 E2 rows carry null sleep fields with an explanatory caveat, not zeros
+- [x] A-013 R7: R9 E2 rows carry null sleep fields with an explanatory caveat, not zeros
 
 ### Code Quality
 
-- [ ] A-014 Pattern consistency: new code follows the naming and structural patterns of surrounding code
-- [ ] A-015 No unnecessary duplication: existing utilities (`_rows`, `_number`, `product`, `counts`) are reused
-- [ ] A-016 Unavailable values are explicit: sleep is null with a reason, not a default
+- [x] A-014 Pattern consistency: new code follows the naming and structural patterns of surrounding code
+- [x] A-015 No unnecessary duplication: existing utilities (`_rows`, `_number`, `product`, `counts`) are reused
+- [x] A-016 Unavailable values are explicit: sleep is null with a reason, not a default
 
 ### Security
 
-- [ ] A-017 R1: no participant-identifying attribute remains linkable to a participant code in any published file
+- [x] A-017 R1: no participant-identifying attribute remains linkable to a participant code in any published file
 
 ## Notes
 
@@ -190,6 +190,11 @@ Regeneration SHALL NOT alter the raw-signal artifacts the CP-B ledger pins (`sig
 - All acceptance items must pass before `/fab-continue` (hydrate)
 - If an item is not applicable, mark checked and prefix with **N/A**: `- [x] A-NNN **N/A**: {reason}`
 - The owner approved implementing in this Claude session (Opus 5.5) instead of the configured Codex `gpt-6-sol` apply profile, which this harness cannot dispatch.
+
+## Deletion Candidates
+
+- `docs/history/legacy-site-assets/FINDINGS/Demographic Insights/*.png` (6 files) — legacy per-trial age/gender/sleep violin plots now contradict the aggregate-only policy (data card, analysis-catalogue violins row); owner decision whether to withhold them like the CSV originals (they are inventoried `legacy_site_asset` sources).
+- `backend/src/pa/results/build.py` `build_products(... participant_summary=None)` fallback to `load_participant_summary()` — the only production caller always passes the summary; the implicit file read in a pure builder could be dropped by making the parameter required.
 
 ## Assumptions
 

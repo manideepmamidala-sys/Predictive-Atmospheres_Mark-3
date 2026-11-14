@@ -54,7 +54,7 @@ These are the generated v1.2 product contracts in `artifacts/results/analysis/in
 | R6 | `/rooms` | available | `scatter`: `illuminance` → `rating`; series `axis`; facet `experiment` | 230 |
 | R7 | `/rooms` | available | `scatter`: `space_type` → `mean_rating`; series `kind`; facet `axis` | 130 |
 | R8 | `/rooms` | available | `scatter`: `floor_area` → `comfort`; series `participant_id` | 50 |
-| R9 | `/rooms` | available | `bar`: `experiment` → `mean_rating`; series `axis` | 22 |
+| R9 | `/rooms` | available | `bar`: `experiment` → `mean_rating`; series `axis` | 4 |
 | B1 | `/body` | available | `bar`: `branch` → `eligible_trials`; series `experiment` | 18 |
 | B2 | `/body` | available | `line`: `frequency_hz` → `median_psd`; series `channel`; facet `experiment` | 1614 |
 | B3 | `/body` | available | `scatter`: `heart_rate_bpm` → `rmssd_ms`; series `experiment` | 466 |
